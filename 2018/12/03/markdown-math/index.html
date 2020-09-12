@@ -245,14 +245,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -266,12 +266,11 @@
       
         <p>前言: 因为最近经常用到markdown写数学公式，每次都查感觉有点啰嗦，所以做个简单小结，把平常用的做个记录。这个博客根据平时自己常用到的进行动态增加。</p>
 <a id="more"></a>
-
 <ul>
-<li><input checked="" disabled="" type="checkbox"> 2019-01-18: hexo更换渲染引擎，详见下文</li>
-<li><input checked="" disabled="" type="checkbox"> 2018-12-27: 使用<a target="_blank" rel="noopener" href="https://katex.org/docs/supported.html">Katex</a></li>
-<li><input checked="" disabled="" type="checkbox"> 2018-12-27：<a target="_blank" rel="noopener" href="http://www.mohu.org/info/symbols/symbols.htm">一份不太简单的LATEX2e介绍</a></li>
-<li><input checked="" disabled="" type="checkbox"> 2019-05-24: \mathop {argmin}_{a} $\mathop {argmin} _{a}$</li>
+<li>[x] 2019-01-18: hexo更换渲染引擎，详见下文</li>
+<li>[x] 2018-12-27: 使用<a target="_blank" rel="noopener" href="https://katex.org/docs/supported.html">Katex</a></li>
+<li>[x] 2018-12-27：<a target="_blank" rel="noopener" href="http://www.mohu.org/info/symbols/symbols.htm">一份不太简单的LATEX2e介绍</a></li>
+<li>[x] 2019-05-24: \mathop {argmin}_{a} $\mathop {argmin} _{a}$</li>
 </ul>
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://wangcong.info/article/MarkdownWithMath.html">https://wangcong.info/article/MarkdownWithMath.html</a></p>
@@ -281,194 +280,205 @@
 <h1 id="1-公式使用参考"><a href="#1-公式使用参考" class="headerlink" title="1. 公式使用参考"></a>1. 公式使用参考</h1><h2 id="1-1-插入公式"><a href="#1-1-插入公式" class="headerlink" title="1.1 插入公式"></a>1.1 插入公式</h2><p>插入公式分为行中公式，独立公式和自动编号公式</p>
 <p>1.行中公式 $ a=b $</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> 数学公式 $</span></span><br></pre></td></tr></table></figure>
-
-<p>2.独立公式 $$ a=b $$</p>
+<p>2.独立公式 <script type="math/tex">a=b</script></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">$ 数学公式 $$</span></span><br></pre></td></tr></table></figure>
-
-<p>3.编号公式<br>$$ a=b \tag {1} $$</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">$ 数学公式 \tag &#123;1&#125; $$</span></span><br></pre></td></tr></table></figure>
-
+<p>3.编号公式</p>
+<script type="math/tex; mode=display">a=b \tag {1}</script><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">$ 数学公式 \tag &#123;1&#125; $$</span></span><br></pre></td></tr></table></figure>
 <p>由公式$(1)$可以得出结论</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由公式$(1)$可以得出结论</span><br></pre></td></tr></table></figure>
-
-<p>4.自动编号公式<br>自动编号公式在github上显示不出来，原则上是可以的，推荐使用手动编号。<br>$$<br>\begin{equation}<br>x^n+y^n=z^n<br>\label{eq:afa}<br>\end{equation}<br>$$</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;equation&#125;</span><br><span class="line">数学公式</span><br><span class="line">\label&#123;eq:当前公式名&#125;</span><br><span class="line">\end&#123;equation&#125;</span><br></pre></td></tr></table></figure>
-
+<p>4.自动编号公式<br>自动编号公式在github上显示不出来，原则上是可以的，推荐使用手动编号。</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+x^n+y^n=z^n
+\label{eq:afa}
+\end{equation}</script><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;equation&#125;</span><br><span class="line">数学公式</span><br><span class="line">\label&#123;eq:当前公式名&#125;</span><br><span class="line">\end&#123;equation&#125;</span><br></pre></td></tr></table></figure>
 <p>5.自动编号公式的引用方法</p>
-<p>在公式 $$\eqref{eq:wwqr}$$ 中，我们看到了这个被自动编号的公式。<br>貌似没有成功</p>
+<p>在公式 <script type="math/tex">\eqref{eq:wwqr}</script> 中，我们看到了这个被自动编号的公式。<br>貌似没有成功</p>
 <p>6.单个公式换行</p>
-<p>单个公式很长的时候需要换行，但仅允许生成一个编号时，可以用split标签包围公式代码，在需要转行的地方使用\，每行需要使用1个&amp;来标识对齐的位置，结束后可使用\tag{…}标签编号。</p>
-<p>$$<br>\begin{split}<br>a &amp;= b \<br>c &amp;= d \<br>e &amp;= f<br>\end{split}\tag{1.2}<br>$$</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br><span class="line">\begin&#123;split&#125;</span><br><span class="line">a &amp;= b \\</span><br><span class="line">c &amp;= d \\</span><br><span class="line">e &amp;= f </span><br><span class="line">\end&#123;split&#125;\tag&#123;1.3&#125;</span><br><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br></pre></td></tr></table></figure>
-
+<p>单个公式很长的时候需要换行，但仅允许生成一个编号时，可以用split标签包围公式代码，在需要转行的地方使用\\，每行需要使用1个&amp;来标识对齐的位置，结束后可使用\tag{…}标签编号。</p>
+<script type="math/tex; mode=display">
+\begin{split}
+a &= b \\
+c &= d \\
+e &= f 
+\end{split}\tag{1.2}</script><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br><span class="line">\begin&#123;split&#125;</span><br><span class="line">a &amp;= b \\</span><br><span class="line">c &amp;= d \\</span><br><span class="line">e &amp;= f </span><br><span class="line">\end&#123;split&#125;\tag&#123;1.3&#125;</span><br><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br></pre></td></tr></table></figure>
 <p>7.多行的独立公式</p>
-<p>有时候需要罗列多个公式，可以用eqnarray*标签包围公式代码，在需要转行的地方使用\，每行需要使用2个&amp;来标识对齐位置，两个&amp;…&amp;号之间的是公式间对齐的位置，每行公式后可使用\tag{…}标签编号：</p>
+<p>有时候需要罗列多个公式，可以用eqnarray*标签包围公式代码，在需要转行的地方使用\\，每行需要使用2个&amp;来标识对齐位置，两个&amp;…&amp;号之间的是公式间对齐的位置，每行公式后可使用\tag{…}标签编号：</p>
 <p>github貌似对于多行公式显示不出来。</p>
-<p>$$\begin{eqnarray*}<br>x^n+y^n &amp;=&amp; z^n \tag{1.4} \<br>x+y &amp;=&amp; z \tag{1.5}<br>\end{eqnarray*}$$</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br><span class="line">\begin&#123;eqnarray*&#125;</span><br><span class="line">x^n+y^n &amp;=&amp; z^n \tag&#123;1.4&#125; \\</span><br><span class="line">x+y &amp;=&amp; z \tag&#123;1.5&#125;</span><br><span class="line">\end&#123;eqnarray*&#125;</span><br><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2-符号"><a href="#1-2-符号" class="headerlink" title="1.2 符号"></a>1.2 符号</h2><table>
+<script type="math/tex; mode=display">\begin{eqnarray*}
+x^n+y^n &=& z^n \tag{1.4} \\
+x+y &=& z \tag{1.5}
+\end{eqnarray*}</script><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br><span class="line">\begin&#123;eqnarray*&#125;</span><br><span class="line">x^n+y^n &amp;=&amp; z^n \tag&#123;1.4&#125; \\</span><br><span class="line">x+y &amp;=&amp; z \tag&#123;1.5&#125;</span><br><span class="line">\end&#123;eqnarray*&#125;</span><br><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-2-符号"><a href="#1-2-符号" class="headerlink" title="1.2 符号"></a>1.2 符号</h2><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">输入</th>
-<th align="center">显示</th>
-<th align="center">输入</th>
-<th align="center">显示</th>
+<th style="text-align:center">输入</th>
+<th style="text-align:center">显示</th>
+<th style="text-align:center">输入</th>
+<th style="text-align:center">显示</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">x^y</td>
-<td align="center">$x^y$</td>
-<td align="center">x_y</td>
-<td align="center">$x_y$</td>
+<tbody>
+<tr>
+<td style="text-align:center">x^y</td>
+<td style="text-align:center">$x^y$</td>
+<td style="text-align:center">x_y</td>
+<td style="text-align:center">$x_y$</td>
 </tr>
 <tr>
-<td align="center">\sideset{^1_2}{^3_4}\bigotimes</td>
-<td align="center">$\sideset{^1_2}{^3_4}\bigotimes$</td>
-<td align="center">\langle</td>
-<td align="center">&lt;</td>
+<td style="text-align:center">\sideset{\^1_2}{\^3_4}\bigotimes</td>
+<td style="text-align:center">$\sideset{^1_2}{^3_4}\bigotimes$</td>
+<td style="text-align:center">\langle</td>
+<td style="text-align:center">&lt;</td>
 </tr>
 <tr>
-<td align="center">\lceil</td>
-<td align="center">$\lceil$</td>
-<td align="center">\rceil</td>
-<td align="center">$\rceil$</td>
+<td style="text-align:center">\lceil</td>
+<td style="text-align:center">$\lceil$</td>
+<td style="text-align:center">\rceil</td>
+<td style="text-align:center">$\rceil$</td>
 </tr>
 <tr>
-<td align="center">\lfloor</td>
-<td align="center">$\lfloor$</td>
-<td align="center">\frac{a}{b}</td>
-<td align="center">$\frac{a}{b}$</td>
+<td style="text-align:center">\lfloor</td>
+<td style="text-align:center">$\lfloor$</td>
+<td style="text-align:center">\frac{a}{b}</td>
+<td style="text-align:center">$\frac{a}{b}$</td>
 </tr>
 <tr>
-<td align="center">\sqrt[2]{3}</td>
-<td align="center">$\sqrt[2]{3}$</td>
-<td align="center">\alpha,\gamma</td>
-<td align="center">$\alpha$ $\gamma$</td>
+<td style="text-align:center">\sqrt[2]{3}</td>
+<td style="text-align:center">$\sqrt[2]{3}$</td>
+<td style="text-align:center">\alpha,\gamma</td>
+<td style="text-align:center">$\alpha$ $\gamma$</td>
 </tr>
 <tr>
-<td align="center">\frac{a}{b}</td>
-<td align="center">$\frac{a}{b}$</td>
-<td align="center">\sum_{n=1}^N{3n}</td>
-<td align="center">$\sum_{n=1}^N{3n}$</td>
+<td style="text-align:center">\frac{a}{b}</td>
+<td style="text-align:center">$\frac{a}{b}$</td>
+<td style="text-align:center">\sum_{n=1}^N{3n}</td>
+<td style="text-align:center">$\sum_{n=1}^N{3n}$</td>
 </tr>
 <tr>
-<td align="center">\prod_{n=1}^N{3n}</td>
-<td align="center">$\prod_{n=1}^N{3n}$</td>
-<td align="center">\sqrt[2]{5}</td>
-<td align="center">$\sqrt[2]{5}$</td>
+<td style="text-align:center">\prod_{n=1}^N{3n}</td>
+<td style="text-align:center">$\prod_{n=1}^N{3n}$</td>
+<td style="text-align:center">\sqrt[2]{5}</td>
+<td style="text-align:center">$\sqrt[2]{5}$</td>
 </tr>
 <tr>
-<td align="center">\int^5_1{f(x)}{\rm d}x</td>
-<td align="center">$\int^5_1{f(x)}{\rm d}x$</td>
-<td align="center">\iint^5_1{f(x)}{\rm d}x</td>
-<td align="center">$\iint^5_1{f(x)}{\rm d}x$</td>
+<td style="text-align:center">\int^5_1{f(x)}{\rm d}x</td>
+<td style="text-align:center">$\int^5_1{f(x)}{\rm d}x$</td>
+<td style="text-align:center">\iint^5_1{f(x)}{\rm d}x</td>
+<td style="text-align:center">$\iint^5_1{f(x)}{\rm d}x$</td>
 </tr>
 <tr>
-<td align="center">+\infty</td>
-<td align="center">$+\infty$</td>
-<td align="center">-\infty</td>
-<td align="center">$-\infty$</td>
+<td style="text-align:center">+\infty</td>
+<td style="text-align:center">$+\infty$</td>
+<td style="text-align:center">-\infty</td>
+<td style="text-align:center">$-\infty$</td>
 </tr>
 <tr>
-<td align="center">\lim_{n\rightarrow+\infty} n</td>
-<td align="center">$\lim_{n\rightarrow+\infty} n$</td>
-<td align="center">\in</td>
-<td align="center">$\in$</td>
+<td style="text-align:center">\lim_{n\rightarrow+\infty} n</td>
+<td style="text-align:center">$\lim_{n\rightarrow+\infty} n$</td>
+<td style="text-align:center">\in</td>
+<td style="text-align:center">$\in$</td>
 </tr>
 <tr>
-<td align="center">\geq,\leq</td>
-<td align="center">$\geq,\leq$</td>
-<td align="center">\subset,\supset</td>
-<td align="center">$\subset,\supset$</td>
+<td style="text-align:center">\geq\,\leq</td>
+<td style="text-align:center">$\geq,\leq$</td>
+<td style="text-align:center">\subset,\supset</td>
+<td style="text-align:center">$\subset,\supset$</td>
 </tr>
 <tr>
-<td align="center">\pm,\cdot</td>
-<td align="center">$\pm,\cdot$</td>
-<td align="center">\times,\div</td>
-<td align="center">$\times,\div$</td>
+<td style="text-align:center">\pm,\cdot</td>
+<td style="text-align:center">$\pm,\cdot$</td>
+<td style="text-align:center">\times,\div</td>
+<td style="text-align:center">$\times,\div$</td>
 </tr>
 <tr>
-<td align="center">\not=,\not&lt;</td>
-<td align="center">$\not=,\not&lt;$</td>
-<td align="center">\not\supset</td>
-<td align="center">$\not\supset$</td>
+<td style="text-align:center">\not=,\not&lt;</td>
+<td style="text-align:center">$\not=,\not&lt;$</td>
+<td style="text-align:center">\not\supset</td>
+<td style="text-align:center">$\not\supset$</td>
 </tr>
 <tr>
-<td align="center">\log_2{18}</td>
-<td align="center">$\log_2{18}$</td>
-<td align="center">\parallel</td>
-<td align="center">$\parallel$</td>
+<td style="text-align:center">\log_2{18}</td>
+<td style="text-align:center">$\log_2{18}$</td>
+<td style="text-align:center">\parallel</td>
+<td style="text-align:center">$\parallel$</td>
 </tr>
 <tr>
-<td align="center">\sum_{n=1}^N{n}</td>
-<td align="center">$\sum_{n=1}^N{n}$</td>
-<td align="center">\prod{n}</td>
-<td align="center">$\prod{n}$</td>
+<td style="text-align:center">\sum_{n=1}^N{n}</td>
+<td style="text-align:center">$\sum_{n=1}^N{n}$</td>
+<td style="text-align:center">\prod{n}</td>
+<td style="text-align:center">$\prod{n}$</td>
 </tr>
 <tr>
-<td align="center">\pm,\cdot,\times,\div</td>
-<td align="center">$\pm,\cdot,\times,\div$</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center">\pm,\cdot,\times,\div</td>
+<td style="text-align:center">$\pm,\cdot,\times,\div$</td>
 </tr>
-</tbody></table>
-<h2 id="1-3-希腊字母"><a href="#1-3-希腊字母" class="headerlink" title="1.3 希腊字母"></a>1.3 希腊字母</h2><table>
+</tbody>
+</table>
+</div>
+<h2 id="1-3-希腊字母"><a href="#1-3-希腊字母" class="headerlink" title="1.3 希腊字母"></a>1.3 希腊字母</h2><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">输入</th>
-<th align="center">显示</th>
-<th align="center">输入</th>
-<th align="center">显示</th>
+<th style="text-align:center">输入</th>
+<th style="text-align:center">显示</th>
+<th style="text-align:center">输入</th>
+<th style="text-align:center">显示</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">\alpha,\beta,\gamma</td>
-<td align="center">$\alpha,\beta,\gamma$</td>
-<td align="center">\delta,\epsilon, \varepsilon</td>
-<td align="center">$\delta,\epsilon, \varepsilon$</td>
+<tbody>
+<tr>
+<td style="text-align:center">\alpha,\beta,\gamma</td>
+<td style="text-align:center">$\alpha,\beta,\gamma$</td>
+<td style="text-align:center">\delta,\epsilon, \varepsilon</td>
+<td style="text-align:center">$\delta,\epsilon, \varepsilon$</td>
 </tr>
 <tr>
-<td align="center">\theta,\lambda,\mu</td>
-<td align="center">$\theta,\lambda,\mu$</td>
-<td align="center">\phi,\varphi,\sigma</td>
-<td align="center">$\phi,\varphi,\sigma$</td>
+<td style="text-align:center">\theta,\lambda,\mu</td>
+<td style="text-align:center">$\theta,\lambda,\mu$</td>
+<td style="text-align:center">\phi,\varphi,\sigma</td>
+<td style="text-align:center">$\phi,\varphi,\sigma$</td>
 </tr>
 <tr>
-<td align="center">\Sigma</td>
-<td align="center">$\Sigma$</td>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center">\Sigma</td>
+<td style="text-align:center">$\Sigma$</td>
 </tr>
-</tbody></table>
-<h2 id="1-4-空心字母与Fraktur字母"><a href="#1-4-空心字母与Fraktur字母" class="headerlink" title="1.4 空心字母与Fraktur字母"></a>1.4 空心字母与Fraktur字母</h2><table>
+</tbody>
+</table>
+</div>
+<h2 id="1-4-空心字母与Fraktur字母"><a href="#1-4-空心字母与Fraktur字母" class="headerlink" title="1.4 空心字母与Fraktur字母"></a>1.4 空心字母与Fraktur字母</h2><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">输入</th>
-<th align="center">显示</th>
-<th align="center">输入</th>
-<th align="center">显示</th>
+<th style="text-align:center">输入</th>
+<th style="text-align:center">显示</th>
+<th style="text-align:center">输入</th>
+<th style="text-align:center">显示</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">\mathbb{A}</td>
-<td align="center">$\mathbb{A}$</td>
-<td align="center">\mathfrak{B}</td>
-<td align="center">$\mathfrak{B}$</td>
+<tbody>
+<tr>
+<td style="text-align:center">\mathbb{A}</td>
+<td style="text-align:center">$\mathbb{A}$</td>
+<td style="text-align:center">\mathfrak{B}</td>
+<td style="text-align:center">$\mathfrak{B}$</td>
 </tr>
-</tbody></table>
-<h2 id="1-5-分段函数"><a href="#1-5-分段函数" class="headerlink" title="1.5 分段函数"></a>1.5 分段函数</h2><p>$$<br>P_{r-j}=<br> \begin{cases}<br>   0 &amp;\mbox{if $r-j$ is odd}\<br>   r!,(-1)^{(r-j)/2} &amp;\mbox{if $r-j$ is even}<br>   \end{cases}<br>$$</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br><span class="line">P_&#123;r-j&#125;=</span><br><span class="line"> \begin&#123;cases&#125;</span><br><span class="line">   0 &amp;\mbox&#123;if $r-j$ is odd&#125;\\</span><br><span class="line">   r!\,(-1)^&#123;(r-j)/2&#125; &amp;\mbox&#123;if $r-j$ is even&#125;</span><br><span class="line">   \end&#123;cases&#125;</span><br><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br></pre></td></tr></table></figure>
-
+</tbody>
+</table>
+</div>
+<h2 id="1-5-分段函数"><a href="#1-5-分段函数" class="headerlink" title="1.5 分段函数"></a>1.5 分段函数</h2><script type="math/tex; mode=display">
+P_{r-j}=
+ \begin{cases}
+   0 &\mbox{if $r-j$ is odd}\\
+   r!\,(-1)^{(r-j)/2} &\mbox{if $r-j$ is even}
+   \end{cases}</script><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br><span class="line">P_&#123;r-j&#125;=</span><br><span class="line"> \begin&#123;cases&#125;</span><br><span class="line">   0 &amp;\mbox&#123;if $r-j$ is odd&#125;\\</span><br><span class="line">   r!\,(-1)^&#123;(r-j)/2&#125; &amp;\mbox&#123;if $r-j$ is even&#125;</span><br><span class="line">   \end&#123;cases&#125;</span><br><span class="line"><span class="meta">$</span><span class="bash">$</span></span><br></pre></td></tr></table></figure>
 <h2 id="1-6-多行对齐公式"><a href="#1-6-多行对齐公式" class="headerlink" title="1.6 多行对齐公式"></a>1.6 多行对齐公式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;align&#125;</span><br><span class="line">h(x) =&amp; \frac&#123;<span class="number">1</span>&#125;&#123;\int_xt(x)\mathrm&#123;d&#125;x&#125; \tag&#123;<span class="number">1</span>&#125;\\</span><br><span class="line">f(x) =&amp; \frac&#123;<span class="number">1</span>&#125;&#123;\int_x\eta(x)\mathrm&#123;d&#125;x&#125;g(x)\tag&#123;<span class="number">2</span>&#125;</span><br><span class="line">\end&#123;align&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
-
 <h1 id="2-LaTex公式渲染引擎"><a href="#2-LaTex公式渲染引擎" class="headerlink" title="2. LaTex公式渲染引擎"></a>2. LaTex公式渲染引擎</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a9f26f4cd4e6">https://www.jianshu.com/p/a9f26f4cd4e6</a></p>
 <p>针对Hexo渲染LaTex公式的时候，下划线总是容易被渲染成斜体，所以更换Hexo默认的Markdown渲染引擎。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
-
 <p>更换渲染引擎只能保证块内公式的下划线的问题，对于行内公式，需要修改\node_modules\kramed\lib\rules\inline.js。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//  em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span><br><span class="line">  em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span><br></pre></td></tr></table></figure>
-
 <p>对于两个连续的花括号，需要中间加个空格。</p>
 <p>对于2019-01-18之前已经发过的博客文章，如公式不进行主动修复。</p>
 
@@ -633,13 +643,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

@@ -249,14 +249,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>4.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -273,7 +273,6 @@
 <li>code: <a target="_blank" rel="noopener" href="https://github.com/csmliu/STGAN">tensorflow</a>, <a target="_blank" rel="noopener" href="https://github.com/bluestyle97/STGAN-pytorch">pytorch</a></li>
 </ul>
 <a id="more"></a>
-
 <ul>
 <li>reference: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.09020">CVPR2018_StarGAN：StarGAN Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation</a></li>
 <li>code: <a target="_blank" rel="noopener" href="https://github.com/yunjey/StarGAN">pytorch</a></li>
@@ -282,7 +281,6 @@
 </ul>
 <p>这也是一篇做GAN的文章，根据论文的叙述，一直和 StarGAN, AttGAN 做对比。我只看过 StarGANs，没有看过 AttGAN.</p>
 <!--more-->
-
 <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>作者首先发现了 skip connection 和 target attribute vector 的缺点: skip connection 对重建有用，但是对于 attribute manipulation 有害，target attribute vector 对重建有害。</p>
 <p>作者提出自己的创新点时论据很充分。</p>
 <p>作者在使用GAN时，发现 skip connection 可以提高重建图片质量(图片属性和生成图片属性一致时)(reconstruction)，但是会减弱属性变化的程度(图片属性和生成图片不一致时)(attribute manipulation)。</p>
@@ -298,41 +296,45 @@
 <li>z针对skip connection, 使用 <strong>selective transfer units</strong>，同时提高输入属性的影响力和图片质量</li>
 </ul>
 <h2 id="2-Proposed-Method"><a href="#2-Proposed-Method" class="headerlink" title="2. Proposed Method"></a>2. Proposed Method</h2>
-
 <h3 id="2-1-Limitation-of-Skip-Connection-in-AttGAN"><a href="#2-1-Limitation-of-Skip-Connection-in-AttGAN" class="headerlink" title="2.1 Limitation of Skip Connection in AttGAN"></a>2.1 Limitation of Skip Connection in AttGAN</h3><img src="/2019/05/27/STGAN/AttGAN1.png" class="" title="AttGAN">
-
 <p>可以看出，增加 skip connections 有益于重建图像(图片属性和生成属性一致)(reconstruction)，但是，会生成其他属性的图片时的精度会降低(图片属性和生成属性不一致)(attribute manipulation ability)。主要原因是直接 concatenates encoder and decoder features.</p>
 <p>作者为了解决这个问题，使用 selective transfer units to adaptively transform encoder features guided by attributes to be changed.</p>
 <h3 id="2-2-Taking-Difference-Attribute-Vector-as-Input"><a href="#2-2-Taking-Difference-Attribute-Vector-as-Input" class="headerlink" title="2.2 Taking Difference Attribute Vector as Input"></a>2.2 Taking Difference Attribute Vector as Input</h3><img src="/2019/05/27/STGAN/reconstruction.png" class="" title="reconstruction">
-
 <p>StarGAN and AttGAN 是把 target attribute vector $att_t$ 做为输入，作者通过观察 StarGAN and AttGAN 的重建图片，发现 attribute vector 会对重建图片有害。其实也不难理解，要想不发生变换，最好是 x0，但是 attribute vector 肯定不是0，卷积层也不可能是0，自然 attribute vector 会改变生成的图片，尤其是重建图片，因为此时是希望完全不变的，要求更高一些。</p>
 <p>作者针对 target attribute vector 的缺点提出 difference attribute vector。</p>
-<p>$$att_{diff}=att_t-att_s$$</p>
-<h3 id="2-3-Selective-Transfer-Units-STU"><a href="#2-3-Selective-Transfer-Units-STU" class="headerlink" title="2.3 Selective Transfer Units(STU)"></a>2.3 Selective Transfer Units(STU)</h3><p>作者使用修改版的 GRU 来建立 STUs 作为 skip connection.</p>
+<script type="math/tex; mode=display">att_{diff}=att_t-att_s</script><h3 id="2-3-Selective-Transfer-Units-STU"><a href="#2-3-Selective-Transfer-Units-STU" class="headerlink" title="2.3 Selective Transfer Units(STU)"></a>2.3 Selective Transfer Units(STU)</h3><p>作者使用修改版的 GRU 来建立 STUs 作为 skip connection.</p>
 
-
-<p>设第 $l$ 层的 encoder feature 表示为 $f_{enc}^l$，第 $l+1$ 层的 hidden state 为 $s^{l+1}$，从而有下述方程，更新 hidden state $s^l$ 和 transformed encoder feature $f_t^l$:<br>$$\begin{aligned}<br>\hat{s}^{l+1}&amp;=W_{t<em>T}[s^{l+1}, att_{diff}]\<br>r^l &amp;= \sigma(W_r * [f_{enc}^l, \hat{s}^{l+1}])\<br>z^l &amp;= \sigma(W_z * [f_{enc}^l, \hat{s}^{l+1}])\<br>s^l&amp;=r^l\circ \hat{s}^{l+1}\<br>\hat{f}_t^l &amp;= tanh(W_h</em>[f_{enc}^l, s^l])\<br>f_t^l &amp;= (1-z^l)\circ\hat{s}^{l+1}+z^l\circ \hat{f}_t^l<br>\end{aligned}$$<br>其中 $[\cdot ,\cdot]$ 表示 concatenation operation，$*T$ 表示 transposed convolution.</p>
+<p>设第 $l$ 层的 encoder feature 表示为 $f_{enc}^l$，第 $l+1$ 层的 hidden state 为 $s^{l+1}$，从而有下述方程，更新 hidden state $s^l$ 和 transformed encoder feature $f_t^l$:</p>
+<script type="math/tex; mode=display">\begin{aligned}
+\hat{s}^{l+1}&=W_{t*T}[s^{l+1}, att_{diff}]\\
+r^l &= \sigma(W_r * [f_{enc}^l, \hat{s}^{l+1}])\\
+z^l &= \sigma(W_z * [f_{enc}^l, \hat{s}^{l+1}])\\
+s^l&=r^l\circ \hat{s}^{l+1}\\
+\hat{f}_t^l &= tanh(W_h*[f_{enc}^l, s^l])\\
+f_t^l &= (1-z^l)\circ\hat{s}^{l+1}+z^l\circ \hat{f}_t^l
+\end{aligned}</script><p>其中 $[\cdot ,\cdot]$ 表示 concatenation operation，$*T$ 表示 transposed convolution.</p>
 <p>$*$ 表示 convolution operation，$\circ$ 表示 entry-wise product，$\sigma(\cdot)$ 表示 sigmoid function.</p>
 <p>看着很像常规意义上的 LSTM 的方程，但是自己在这方面接触比较少。所以简单地记录下GRU的原始公式。</p>
 <img src="/2019/05/27/STGAN/GRU1.png" class="" title="GRU">
-
 <p>两者的公式基本上是一致的，但是不太懂其原理或者可以达到的效果。另外其含义也发生了一些变化，主要是 GRU 中，$f_t^l$ 是 output of hidden state，作者把 $s^l$ 作为 output of hidden state，$f_t^l$ 作为 output of transformed encoder feature。</p>
 <p>不懂。但我觉得能提出这个，就很厉害。</p>
 <h3 id="2-4-Network-Architecture"><a href="#2-4-Network-Architecture" class="headerlink" title="2.4 Network Architecture"></a>2.4 Network Architecture</h3><p>STGAN 分为两部分: generator G and discriminator D.</p>
-<p>G: $G_{enc}$ and $G_{dec}$，都分别有5个卷积操作。STU应用在前四个 encoder layers,即<br>$$(f_t^l, s^l)=G_{st}^l(f_{enc}^l, s^{l+1}, att_{diff})$$</p>
-<p>D: $D_{adv}$ and $D_{att}$. $D_{adv}$ and $D_{att}$ 共享前五个卷积层，分别有两个全连接层用于预测。</p>
-<h3 id="2-5-Loss-Functions"><a href="#2-5-Loss-Functions" class="headerlink" title="2.5 Loss Functions"></a>2.5 Loss Functions</h3><p>第一步: 给定一张图片 $x$，可以得到 encoder features:<br>$$f=\lbrace f_{enc}^1, f_{enc}^2,…, f_{enc}^5 \rbrace=G_{enc}(x)$$<br>第二步: 进而通过 STUs 得到 transform encoder features:<br>$$(f_t^l, s^l)=G_{st}^l(f_{enc}^l, s^{l+1}, att_{diff})$$<br>其中，不同的 STU 之间不共享参数。<br>即：<br>$$f_t=\lbrace f_t^1, f_t^2, f_t^3, f_t^4 \rbrace $$<br>第三步: 得到结果,<br>$$\hat{y}=G_{dec}(f_{enc}^5, f_t)$$<br>即:<br>$$\hat{y}=G(x, att_{diff})$$</p>
-<p><strong>Reconstruction loss</strong>:<br>$$L_{rec}=\parallel x-G(x,0) \parallel_1$$</p>
-<p><strong>Adversarial loss</strong>:<br>$$\max_{D_{adv}} L_{D_{adv}} = \mathbb{E}<em>x D _{adv}(x)-\mathbb{E} _{\hat{y}} D _{adv}(\hat{y})+\lambda \mathbb{E} [ (\parallel \nabla _{\hat{x}} D _{adv}(\hat{x}) \parallel_2 -1)^2 ]$$<br>$$\max</em>{G} L_{G_{adv}} = \mathbb{E}_{x, att _{diff}} D _{adv}(G(x, att _{diff})) $$</p>
-<p>其中 $\hat{x}$ 表示真和生成图片的线性插值，在 StarGAN 中也见到过。</p>
+<p>G: $G_{enc}$ and $G_{dec}$，都分别有5个卷积操作。STU应用在前四个 encoder layers,即 </p>
+<script type="math/tex; mode=display">(f_t^l, s^l)=G_{st}^l(f_{enc}^l, s^{l+1}, att_{diff})</script><p>D: $D_{adv}$ and $D_{att}$. $D_{adv}$ and $D_{att}$ 共享前五个卷积层，分别有两个全连接层用于预测。</p>
+<h3 id="2-5-Loss-Functions"><a href="#2-5-Loss-Functions" class="headerlink" title="2.5 Loss Functions"></a>2.5 Loss Functions</h3><p>第一步: 给定一张图片 $x$，可以得到 encoder features:</p>
+<script type="math/tex; mode=display">f=\lbrace f_{enc}^1, f_{enc}^2,..., f_{enc}^5 \rbrace=G_{enc}(x)</script><p>第二步: 进而通过 STUs 得到 transform encoder features:</p>
+<script type="math/tex; mode=display">(f_t^l, s^l)=G_{st}^l(f_{enc}^l, s^{l+1}, att_{diff})</script><p>其中，不同的 STU 之间不共享参数。<br>即：</p>
+<script type="math/tex; mode=display">f_t=\lbrace f_t^1, f_t^2, f_t^3, f_t^4 \rbrace</script><p>第三步: 得到结果,</p>
+<script type="math/tex; mode=display">\hat{y}=G_{dec}(f_{enc}^5, f_t)</script><p>即:</p>
+<script type="math/tex; mode=display">\hat{y}=G(x, att_{diff})</script><p><strong>Reconstruction loss</strong>:</p>
+<script type="math/tex; mode=display">L_{rec}=\parallel x-G(x,0) \parallel_1</script><p><strong>Adversarial loss</strong>:</p>
+<script type="math/tex; mode=display">\max_{D_{adv}} L_{D_{adv}} = \mathbb{E}_x D _{adv}(x)-\mathbb{E} _{\hat{y}} D _{adv}(\hat{y})+\lambda \mathbb{E} [ (\parallel \nabla _{\hat{x}} D _{adv}(\hat{x}) \parallel_2 -1)^2 ]</script><script type="math/tex; mode=display">\max_{G} L_{G_{adv}} = \mathbb{E}_{x, att _{diff}} D _{adv}(G(x, att _{diff}))</script><p>其中 $\hat{x}$ 表示真和生成图片的线性插值，在 StarGAN 中也见到过。</p>
 <p><strong>Attribute manipulation loss</strong>:</p>
-<p>$$L_{D_{att}}=- \sum <em>{i=1}^c[ att_s^{(i)}\log D_{att}^{(i)}(x)+(1-att_s^{(i)})\log (1-D_{att}^{(i)}(x)) ]$$<br>$$L</em>{G_{att}}=- \sum _{i=1}^c[ att_t^{(i)}\log D_{att}^{(i)}(\hat{y})+(1-att_s^{(i)})\log (1-D_{att}^{(i)}(\hat{y})) ]$$</p>
-<p>这里应该只是一个简单的分类器。</p>
+<script type="math/tex; mode=display">L_{D_{att}}=- \sum _{i=1}^c[ att_s^{(i)}\log D_{att}^{(i)}(x)+(1-att_s^{(i)})\log (1-D_{att}^{(i)}(x)) ]</script><script type="math/tex; mode=display">L_{G_{att}}=- \sum _{i=1}^c[ att_t^{(i)}\log D_{att}^{(i)}(\hat{y})+(1-att_s^{(i)})\log (1-D_{att}^{(i)}(\hat{y})) ]</script><p>这里应该只是一个简单的分类器。</p>
 <p>Question: 为什么还会有第二项？</p>
-<p><strong>Model Objective</strong>:<br>$$\min_D L_D= -L_{D_{adv}} + \lambda_1 L_{D_{att}}$$<br>$$\min_G L_G= -L_{G_{adv}} + \lambda_2 L_{G_{att}} + \lambda_3 L_{rec} $$</p>
-<h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><p>结果很棒，在真实性和分类准确率上都要比其它的GAN好很多。</p>
+<p><strong>Model Objective</strong>:</p>
+<script type="math/tex; mode=display">\min_D L_D= -L_{D_{adv}} + \lambda_1 L_{D_{att}}</script><script type="math/tex; mode=display">\min_G L_G= -L_{G_{adv}} + \lambda_2 L_{G_{att}} + \lambda_3 L_{rec}</script><h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><p>结果很棒，在真实性和分类准确率上都要比其它的GAN好很多。</p>
 <h2 id="5-Ablation-Study"><a href="#5-Ablation-Study" class="headerlink" title="5. Ablation Study"></a>5. Ablation Study</h2><img src="/2019/05/27/STGAN/ablation_study.png" class="" title="ablation study">
-
 <ul>
 <li>STGAN: original STGAN</li>
 <li>STGAN-dst: target attribute vector, not difference attribute vector</li>
@@ -507,13 +509,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

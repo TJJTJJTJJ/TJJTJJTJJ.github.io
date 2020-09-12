@@ -238,14 +238,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -257,21 +257,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这是一篇关于tensorflow的博客，这里面很多东西都是很杂碎的，不在此做处理，等积累的多了，理解才能正确。</p>
-<a id="more"></a>
-
-
-
+        <p>这是一篇关于tensorflow的博客，这里面很多东西都是很杂碎的，不在此做处理，等积累的多了，理解才能正确。<br><a id="more"></a></p>
 <p>TensorFlow入门教程</p>
 <p>1.TensorFlow深度学习应用实践<br>评价不好</p>
-<ol start="2">
-<li><p>TensorFlow：实战Google深度学习框架（第2版） </p>
+<ol>
+<li><p>TensorFlow：实战Google深度学习框架（第2版）<br>8.6分，可以用来实践</p>
 </li>
-<li><p>6分，可以用来实践</p>
-</li>
-<li><p>Tensorflow：实战Google深度学习框架 </p>
-</li>
-<li><p>4分</p>
+<li><p>Tensorflow：实战Google深度学习框架<br>8.4分</p>
 </li>
 </ol>
 <p>4.莫烦的tensorlfow教程<br><a target="_blank" rel="noopener" href="https://github.com/MorvanZhou">https://github.com/MorvanZhou</a><br>适合实践</p>
@@ -279,12 +271,8 @@
 <p>6.官网API<br><a target="_blank" rel="noopener" href="https://tensorflow.google.cn/api_docs/python/tf">https://tensorflow.google.cn/api_docs/python/tf</a></p>
 <p>7.深度学习之TensorFlow入门、原理与进阶实战<br>7.6分<br>22章，内容更加详实，偏向理论，可以用来只看不实践</p>
 <p>8.TensorFlow实战<br>7.3分<br>适合看看，内容不深，实践性不强，理论也很浅<br>在github上也没有代码</p>
-<p>不应该总是要求全部，所以应该这样的顺序来学习<br>先学：TensorFlow：实战Google深度学习框架（第2版）<br>再学：莫烦：<a target="_blank" rel="noopener" href="https://github.com/MorvanZhou+%E7%BD%91%E9%A1%B5%E7%9A%84%E6%95%99%E7%A8%8B">https://github.com/MorvanZhou+网页的教程</a><br>基本就可以了。</p>
+<p>不应该总是要求全部，所以应该这样的顺序来学习<br>先学：TensorFlow：实战Google深度学习框架（第2版）<br>再学：莫烦：<a target="_blank" rel="noopener" href="https://github.com/MorvanZhou+网页的教程">https://github.com/MorvanZhou+网页的教程</a><br>基本就可以了。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">print(a.graph == tf.get_default_graph())</span><br><span class="line">tf.get_variable() name 必须双引号</span><br><span class="line"></span><br><span class="line">name的作用  https://blog.csdn.net/xiaohuihui1994/article/details/<span class="number">81022043</span></span><br><span class="line"></span><br><span class="line">可以理解成sess需要指定，不能自动加入</span><br><span class="line">.run,.eval能执行的两种方式</span><br><span class="line"><span class="keyword">with</span> tf.Session(graph=g1) <span class="keyword">as</span> sess:</span><br><span class="line">    tf.global_variables_initializer().run()</span><br><span class="line">或者</span><br><span class="line">sess = tf.Session()</span><br><span class="line">tf.global_variables_initializer().run(session=sess)</span><br><span class="line">或者</span><br><span class="line">sess = tf.InteractiveSession() <span class="comment"># 会自动注册为默认会话</span></span><br><span class="line">result.eval()</span><br><span class="line">或者</span><br><span class="line">sess = tf.Session()</span><br><span class="line"><span class="keyword">with</span> sess.as_default():</span><br><span class="line">    result.eval()</span><br><span class="line"></span><br><span class="line"><span class="comment">####</span></span><br><span class="line">初始化</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">w1.initializer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">『TensorFlow』使用集合collection控制variables</span><br><span class="line">https://www.cnblogs.com/hellcat/p/<span class="number">9006904.</span>html</span><br><span class="line"></span><br><span class="line">collection</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">g1 = tf.Graph()</span><br><span class="line"><span class="keyword">with</span> g1.as_default():</span><br><span class="line">    v = tf.get_variable(<span class="string">&quot;v&quot;</span>, [<span class="number">1</span>], initializer = tf.zeros_initializer()) <span class="comment"># 设置初始值为0</span></span><br><span class="line">    gv= tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES <span class="comment"># gv = tf.global_variables()</span></span><br><span class="line">    <span class="keyword">for</span> var <span class="keyword">in</span> gv:</span><br><span class="line">        print(var)</span><br><span class="line"></span><br><span class="line">现在有了几个概念需要理清楚：</span><br><span class="line">计算图： 不同计算图中的变量是独立的</span><br><span class="line">collection： 不同类型的variable放在不同的collection中，主要是tf.GraphKeys.GLOBAL_VARIABLES和tf.GraphKeys.TRAINABLE_VARIABLES</span><br><span class="line">会话： 会话需要与计算图相连接，完成相应计算图的执行，一个会话对应一个计算图及其执行结果</span><br><span class="line"></span><br><span class="line">tf.add_to_collection</span><br><span class="line">https://www.jianshu.com/p/<span class="number">6612</span>f368e8f4</span><br><span class="line"></span><br><span class="line">这样就不需要传入weighs和biases，这里的reuse实现了定义和使用的一体化，不需要专门对weights定义和调用。</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inference</span>(<span class="params">input_tensor, reuse=False</span>):</span></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">&#x27;layer1&#x27;</span>, reuse=reuse):</span><br><span class="line">        weights = tf.get_variable(<span class="string">&quot;weights&quot;</span>)</span><br><span class="line">        biases = tf.get_variable(<span class="string">&quot;biases&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">&#x27;layer2&#x27;</span>, reuse=reuse):</span><br><span class="line">        weights = tf.get_variable(<span class="string">&quot;weights&quot;</span>)</span><br><span class="line">        biases = tf.get_variable(<span class="string">&quot;biases&quot;</span>)</span><br><span class="line"></span><br><span class="line">TFRecord数据格式</span><br><span class="line">https://blog.csdn.net/u012759136/article/details/<span class="number">52232266</span></span><br></pre></td></tr></table></figure>
-
-
-
-
 
     </div>
 
@@ -445,13 +433,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

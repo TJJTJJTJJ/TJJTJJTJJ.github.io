@@ -251,14 +251,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -277,10 +277,9 @@
 </ul>
 <p>开源代码中称之为 insightface，思路简单，效果却很好，并且与其他变种做了详尽的对比。(这篇论文原名是ArcFace，但是由于与虹软重名，后改名为Insight Face)</p>
 <a id="more"></a>
-
 <p>帝国理工学院博士生，CVPR17, 18, 19 都有他的文章，牛逼。</p>
 <p>此外，他们在ICCV 2019 举办了 Lightweight Face Recognition Challenge Workshop(LFR19) ，LFR19 是第一个强调“轻量级推理” 和“可重现系统” 的人脸识别比赛。竞赛于 4 月 25 日~7 月 10 日进行，比赛结果将于 10 月 28 日在韩国首尔举办的 ICCV 2019 会议上进行公布，欢迎前往<a target="_blank" rel="noopener" href="https://ibug.doc.ic.ac.uk/resources/lightweight-face-recognition-challenge-workshop/">比赛主页</a>了解详细规则.</p>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p><a target="_blank" rel="noopener" href="https://www.wengbi.com/thread_68343_1.html">腾讯AI lab CVPR paper把玩：cosFace、ArcFace–additive margin softmax</a></p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p><a target="_blank" rel="noopener" href="https://www.wengbi.com/thread_68343_1.html">腾讯AI lab CVPR paper把玩：cosFace、ArcFace—additive margin softmax</a></p>
 <blockquote>
 <p>深度学习界从开始到现在，所有的论文基本就干了两件事情，一、发现一个牛逼的网络结构，提高了网络的表达能力；二、发现了一个好玩的损失函数，提升了模型的鲁棒性和精度。人脸识别的优化方向就两个，一是不断增大不同人之间的距离，二是不断降低一个人不同人脸照片之间的距离。 center loss 和 tripleloss都是干这个事情。但他们损失函数的根基还是softmax的交叉熵.</p>
 </blockquote>
@@ -289,14 +288,9 @@
 <li>softmax: angular margin penalty: Sphereface, CosFace, ArcFace</li>
 </ul>
 <img src="/2019/05/30/ArcFace/network.png" class="" title="network">
-
-<h2 id="2-Proposed-Approach"><a href="#2-Proposed-Approach" class="headerlink" title="2. Proposed Approach"></a>2. Proposed Approach</h2><h3 id="2-1-ArcFace"><a href="#2-1-ArcFace" class="headerlink" title="2.1 ArcFace"></a>2.1 ArcFace</h3><p>$$L_1=-\frac{1}{N} \sum_{i=1}^N \log \frac{e^{W_{y_i}^T x_i+b_{y_i}}}{\sum_{j=1}^n e^{W_j^T x_i+b_j}}$$</p>
-<p>令 $b_j=0, \parallel W_j \parallel=1, \parallel x_i \parallel=s, W_j^T x_i=s \cos \theta_j$</p>
-<p>$$L_2=-\frac{1}{N} \sum_{i=1}^N \log \frac{e^{s \cos \theta_{y_i}}}{e^{s \cos \theta_{y_i}}+\sum_{j=1,j\not =y_i}^n e^{s \cos \theta_j}}$$</p>
-<p>angular margin penalty:</p>
-<p>$$L_3=-\frac{1}{N} \sum_{i=1}^N \log \frac{e^{s \cos (\theta_{y_i}+m)}}{e^{s \cos (\theta_{y_i}+m)}+\sum_{j=1,j\not =y_i}^n e^{s \cos \theta_j}}$$</p>
-<img src="/2019/05/30/ArcFace/softmax_ArcFace.png" class="" title="softmax and ArcFace">
-
+<h2 id="2-Proposed-Approach"><a href="#2-Proposed-Approach" class="headerlink" title="2. Proposed Approach"></a>2. Proposed Approach</h2><h3 id="2-1-ArcFace"><a href="#2-1-ArcFace" class="headerlink" title="2.1 ArcFace"></a>2.1 ArcFace</h3><script type="math/tex; mode=display">L_1=-\frac{1}{N} \sum_{i=1}^N \log \frac{e^{W_{y_i}^T x_i+b_{y_i}}}{\sum_{j=1}^n e^{W_j^T x_i+b_j}}</script><p>令 $b_j=0, \parallel W_j \parallel=1, \parallel x_i \parallel=s, W_j^T x_i=s \cos \theta_j$</p>
+<script type="math/tex; mode=display">L_2=-\frac{1}{N} \sum_{i=1}^N \log \frac{e^{s \cos \theta_{y_i}}}{e^{s \cos \theta_{y_i}}+\sum_{j=1,j\not =y_i}^n e^{s \cos \theta_j}}</script><p>angular margin penalty:</p>
+<script type="math/tex; mode=display">L_3=-\frac{1}{N} \sum_{i=1}^N \log \frac{e^{s \cos (\theta_{y_i}+m)}}{e^{s \cos (\theta_{y_i}+m)}+\sum_{j=1,j\not =y_i}^n e^{s \cos \theta_j}}</script><img src="/2019/05/30/ArcFace/softmax_ArcFace.png" class="" title="softmax and ArcFace">
 <h3 id="2-2-Comparison-with-SphereFace-and-CosFace"><a href="#2-2-Comparison-with-SphereFace-and-CosFace" class="headerlink" title="2.2 Comparison with SphereFace and CosFace"></a>2.2 Comparison with SphereFace and CosFace</h3><ul>
 <li>SphereFace: multiplicative angular margin $m_1$</li>
 <li>ArcFace: additive angular margin $m_2$</li>
@@ -304,13 +298,10 @@
 </ul>
 <p><strong>补充</strong>：按照作者的说法，ArcFace 相当于融合了 softmax 和 triplet，形成了 image-to-class 的 margin 损失，softmax 是 image-to-class 损失， triplet 是 image-to-image 的 margin 损失。</p>
 <img src="/2019/05/30/ArcFace/target_logit_analysis.png" class="" title="target logit analysis">
-
 <img src="/2019/05/30/ArcFace/decision_margin.png" class="" title="decision margin">
-
 <p>各种实验结果也证明了这个损失很强。</p>
 <p><strong>补充</strong>：作者在直播中还提到了 RetinaFace Face Detector，他也参加了一些比赛，结果也说明了他们提出的整体框架效果很好。</p>
 <img src="/2019/05/30/ArcFace/RetinaFace.png" class="" title="RetinaFace">
-
 <p>自己标了1w多张人脸的五点图，大佬大佬。</p>
 
     </div>
@@ -474,13 +465,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

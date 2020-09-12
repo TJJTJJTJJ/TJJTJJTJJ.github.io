@@ -244,14 +244,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -263,13 +263,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>pytorch-optim</p>
-<a id="more"></a>
+        <p>pytorch-optim<br><a id="more"></a></p>
 <h1 id="optim的学习率设置问题"><a href="#optim的学习率设置问题" class="headerlink" title="optim的学习率设置问题"></a>optim的学习率设置问题</h1><h2 id="1-不同的学习率"><a href="#1-不同的学习率" class="headerlink" title="1.不同的学习率"></a>1.不同的学习率</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一种</span></span><br><span class="line">optimizer = t.optim.Adam(model.parameters(), lr = <span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二种</span></span><br><span class="line">optim_group = [&#123;<span class="string">&#x27;params&#x27;</span>:model.net1.parameters(),<span class="string">&#x27;lr&#x27;</span>:<span class="number">0.4</span>&#125;,</span><br><span class="line">       &#123;<span class="string">&#x27;params&#x27;</span>:model.net2.parameters(),<span class="string">&#x27;lr&#x27;</span>:<span class="number">0.1</span>&#125;]</span><br><span class="line">optimizer = t.optim.Adam(optim_group,lr=<span class="number">0.04</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第三种</span></span><br><span class="line">ignored_params = list(map(id, model.model.fc.parameters() )) </span><br><span class="line">               + list(map(id, model.classifier.parameters() ))</span><br><span class="line">base_params = filter(<span class="keyword">lambda</span> p: id(p) <span class="keyword">not</span> <span class="keyword">in</span> ignored_params, model.parameters())</span><br><span class="line">optimizer_ft = optim.SGD([</span><br><span class="line">     &#123;<span class="string">&#x27;params&#x27;</span>: base_params, <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.01</span>&#125;,</span><br><span class="line">     &#123;<span class="string">&#x27;params&#x27;</span>: model.model.fc.parameters(), <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.1</span>&#125;,</span><br><span class="line">     &#123;<span class="string">&#x27;params&#x27;</span>: model.classifier.parameters(), <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.1</span>&#125;</span><br><span class="line"> ], weight_decay=<span class="number">5e-4</span>, momentum=<span class="number">0.9</span>, nesterov=<span class="literal">True</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <hr>
 <h2 id="2-学习率衰减"><a href="#2-学习率衰减" class="headerlink" title="2. 学习率衰减"></a>2. 学习率衰减</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=<span class="number">40</span>, gamma=<span class="number">0.1</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_model</span>(<span class="params">model, criterion, optimizer, scheduler, num_epochs=<span class="number">25</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">        scheduler.step()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> dataloaders[phase]:</span><br><span class="line">            optimizer.zero_grad()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h2 id="3-iterools-chain"><a href="#3-iterools-chain" class="headerlink" title="3. iterools.chain"></a>3. iterools.chain</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># initialize optimizers</span></span><br><span class="line">self.optimizer_G = torch.optim.Adam(filter(<span class="keyword">lambda</span> p: p.requires_grad, itertools.chain(self.netG_A.parameters(), self.netG_B.parameters())), lr=opt.lr, betas=(opt.beta1, <span class="number">0.999</span>))</span><br><span class="line">self.optimizer_D = torch.optim.Adam(filter(<span class="keyword">lambda</span> p: p.requires_grad, itertools.chain(self.netD_A.parameters(), self.netD_B.parameters())), lr=opt.lr, betas=(opt.beta1, <span class="number">0.999</span>))</span><br><span class="line">self.optimizers = []</span><br><span class="line">self.optimizers.append(self.optimizer_G)</span><br><span class="line">self.optimizers.append(self.optimizer_D)</span><br></pre></td></tr></table></figure>
     </div>
 
@@ -431,13 +428,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

@@ -245,14 +245,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -267,7 +267,6 @@
         <h1 id="1-本地部署ShareLatex"><a href="#1-本地部署ShareLatex" class="headerlink" title="1. 本地部署ShareLatex"></a>1. 本地部署ShareLatex</h1><p>本地部署ShareLatex</p>
 <p>假设从裸机Ubuntu开始</p>
 <a id="more"></a>
-
 <h1 id="2-Docker安装"><a href="#2-Docker安装" class="headerlink" title="2. Docker安装"></a>2. Docker安装</h1><ol>
 <li>docker</li>
 <li>docker-compose</li>
@@ -275,31 +274,21 @@
 <p>官网链接：</p>
 <p><a target="_blank" rel="noopener" href="https://docs.docker.com/install/linux/docker-ce/ubuntu/">docker</a><br><a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/#install-compose">docker-compose</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker</span></span><br><span class="line">mkdir docker</span><br><span class="line"><span class="built_in">cd</span> docker</span><br><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line">sudo sh get-docker.sh</span><br><span class="line">sudo gpasswd -a <span class="variable">$USER</span> docker</span><br><span class="line">newgrp docker</span><br><span class="line">sudo service docker restart <span class="comment"># 或者 当前用户退出重新登录</span></span><br><span class="line"><span class="comment"># docker-compose</span></span><br><span class="line">sudo curl -L <span class="string">&quot;https://github.com/docker/compose/releases/download/1.25.0/docker-compose-<span class="subst">$(uname -s)</span>-<span class="subst">$(uname -m)</span>&quot;</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
-
 <h1 id="3-安装并配置ShareLatex"><a href="#3-安装并配置ShareLatex" class="headerlink" title="3. 安装并配置ShareLatex"></a>3. 安装并配置ShareLatex</h1><p><a target="_blank" rel="noopener" href="https://github.com/overleaf/overleaf/wiki/Quick-Start-Guide#using-a-compose-file">ShareLatex</a></p>
 <h1 id="3-1-拉取最新的-ShareLatex-镜像"><a href="#3-1-拉取最新的-ShareLatex-镜像" class="headerlink" title="3.1 拉取最新的 ShareLatex 镜像"></a>3.1 拉取最新的 ShareLatex 镜像</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sharelatex/sharelatex</span><br></pre></td></tr></table></figure>
-
 <h1 id="3-2-下载docker-compose-yml文件，并进行配置"><a href="#3-2-下载docker-compose-yml文件，并进行配置" class="headerlink" title="3.2 下载docker-compose.yml文件，并进行配置"></a>3.2 下载docker-compose.yml文件，并进行配置</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/sharelatex</span><br><span class="line"><span class="built_in">cd</span> ~/sharelatex                <span class="comment"># 进入sharelatex文件夹</span></span><br><span class="line">wget https://raw.githubusercontent.com/sharelatex/sharelatex/master/docker-compose.yml                      <span class="comment"># 下载官方的docker-compose.yml配置文件</span></span><br><span class="line">sudo vim docker-compose.yml     <span class="comment"># 使用vi修改配置文件</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 避免端口重复</span></span><br><span class="line">ports:</span><br><span class="line">	- 5000:80</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改本地挂载目录</span></span><br><span class="line">volumes:</span><br><span class="line">	- /home/docker/sharelatex:/var/lib/sharelatex</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推荐尝试下</span></span><br><span class="line">environment:</span><br><span class="line">    SHARELATEX_SITE_URL: http://xxx.xxx.xxx.xxx:5000/</span><br><span class="line">    SHARELATEX_EMAIL_FROM_ADDRESS: xxx@xxxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面选项设置ShareLaTeX的显示样式(可选)</span></span><br><span class="line">SHARELATEX_APP_NAME: Our ShareLaTeX</span><br><span class="line">SHARELATEX_NAV_TITLE: Our ShareLaTeX Instance</span><br><span class="line"><span class="comment"># SHARELATEX_HEADER_IMAGE_URL: http://somewhere.com/mylogo.png</span></span><br><span class="line">SHARELATEX_LEFT_FOOTER: <span class="string">&#x27;[&#123;&quot;text&quot;: &quot;Powered by &lt;a href=&quot;https://www.sharelatex.com&quot;&gt;ShareLaTeX&lt;/a&gt; 2016&quot;&#125;,&#123;&quot;text&quot;: &quot;Another page I want to link to can be found &lt;a href=&quot;here&quot;&gt;here&lt;/a&gt;&quot;&#125; ]&#x27;</span></span><br><span class="line">SHARELATEX_RIGHT_FOOTER: <span class="string">&#x27;[&#123;&quot;text&quot;: &quot;Hello I am on the Right&quot;&#125; ]&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改mongo和redis的本地挂载目录</span></span><br><span class="line"><span class="comment"># mongo</span></span><br><span class="line">volumes:</span><br><span class="line">	- /home/docker/mongo_data:/data/db</span><br><span class="line"><span class="comment"># redis</span></span><br><span class="line">volumes:</span><br><span class="line">	- /home/docker/redis_data:/data</span><br></pre></td></tr></table></figure>
-
 <h2 id="3-3-创建并运行ShareLaTeX容器，启动后不要着急进入网站"><a href="#3-3-创建并运行ShareLaTeX容器，启动后不要着急进入网站" class="headerlink" title="3.3 创建并运行ShareLaTeX容器，启动后不要着急进入网站"></a>3.3 创建并运行ShareLaTeX容器，启动后不要着急进入网站</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在sharelatex目录下</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
 <h2 id="3-4-升级并安装完整版texlive"><a href="#3-4-升级并安装完整版texlive" class="headerlink" title="3.4 升级并安装完整版texlive"></a>3.4 升级并安装完整版texlive</h2><p>非完整版的texlive不支持识别.ins文件，只能识别.cls文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器的命令行（sharelatex容器本质上是一个Ubuntu）</span></span><br><span class="line">$ docker <span class="built_in">exec</span> -it sharelatex bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入texlive默认安装目录</span></span><br><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/texlive</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载并运行升级脚本</span></span><br><span class="line">$ wget http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh</span><br><span class="line">$ sh update-tlmgr-latest.sh -- --upgrade</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更换texlive的下载源，例如国内的清华源</span></span><br><span class="line">$ tlmgr option repository https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级tlmgr</span></span><br><span class="line">$ tlmgr update --self --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完整版texlive（漫长的等待，不要让shell断开）</span></span><br><span class="line">$ tlmgr install scheme-full</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推出sharelatex的命令行界面，并重启sharelatex容器</span></span><br><span class="line">$ <span class="built_in">exit</span></span><br><span class="line">$ docker restart sharelatex</span><br></pre></td></tr></table></figure>
-
 <h2 id="3-5-取消-recaptcha"><a href="#3-5-取消-recaptcha" class="headerlink" title="3.5 取消 recaptcha"></a>3.5 取消 recaptcha</h2><p>2020-01-15，这一版的sharelatex没有使用最新的web，所以默认开启 recaptcha，需要手动取消。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it sharelatex bash</span><br><span class="line">vim /var/www/sharelatex/web/config/settings.defaults.coffee</span><br><span class="line"></span><br><span class="line">    472         <span class="comment"># recaptcha:</span></span><br><span class="line">    473         <span class="comment">#       disabled:</span></span><br><span class="line">    474         <span class="comment">#               invite: true</span></span><br><span class="line">    475         <span class="comment">#               register: true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">docker restart sharelatex</span><br></pre></td></tr></table></figure>
-
 <h2 id="3-6-使用ShareLatex"><a href="#3-6-使用ShareLatex" class="headerlink" title="3.6 使用ShareLatex"></a>3.6 使用ShareLatex</h2><p>设置 admin user：进入浏览器访问 <a target="_blank" rel="noopener" href="http://localhost:5000/launchpad">http://localhost:5000/launchpad</a><br>或者</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> sharelatex /bin/bash -c <span class="string">&quot;cd /var/www/sharelatex; grunt user:create-admin --email=joe@example.com&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>其他用户 <a target="_blank" rel="noopener" href="http://localhost:5000/">http://localhost:5000</a></p>
+<p>其他用户 <a target="_blank" rel="noopener" href="http://localhost:5000">http://localhost:5000</a></p>
 <p>在浏览器中编译时发现没有.cls文件无法编译</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">latex elsarticle.ins</span><br></pre></td></tr></table></figure>
-
 <h2 id="3-7-如果安装中出错，则删除容器重新安装"><a href="#3-7-如果安装中出错，则删除容器重新安装" class="headerlink" title="3.7 如果安装中出错，则删除容器重新安装"></a>3.7 如果安装中出错，则删除容器重新安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br><span class="line">docker rm -f 容器ID</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">docker rm -f $(docker ps -q) <span class="comment"># 全部删除</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="4-参考链接"><a href="#4-参考链接" class="headerlink" title="4. 参考链接"></a>4. 参考链接</h1><p><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/2019/10/16/5da6231405e85/">https://www.dazhuanlan.com/2019/10/16/5da6231405e85/</a><br><a target="_blank" rel="noopener" href="https://haoyu.love/blog640.html">本地部署 ShareLatex</a></p>
 
     </div>
@@ -460,13 +449,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

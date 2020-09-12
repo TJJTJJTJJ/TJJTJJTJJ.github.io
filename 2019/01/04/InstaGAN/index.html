@@ -265,14 +265,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>17k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>15 分钟</span>
             </span>
 
         </div>
@@ -286,14 +286,11 @@
       
         <p>实例转换</p>
 <a id="more"></a>
-
 <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1812.10889.pdf">InstaGAN Instance-aware image-to-image translation</a></p>
 <p>Sangwoo Mo, Minsu Cho, Jinwoo Shin</p>
 <p>github: <a target="_blank" rel="noopener" href="https://github.com/sangwoomo/instagan">https://github.com/sangwoomo/instagan</a></p>
 <p>project: <a target="_blank" rel="noopener" href="https://openreview.net/forum?id=ryxwJhC9YX">https://openreview.net/forum?id=ryxwJhC9YX</a></p>
-<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p><img src="./InstaGAN/InstaGAN1.png" alt="Tranlation results"></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN1.png" class="" title="Tranlation results">
-
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p><img src="./InstaGAN/InstaGAN1.png" alt="Tranlation results"><br><img src="/2019/01/04/InstaGAN/InstaGAN1.png" class="" title="Tranlation results"></p>
 <p>整体分为三部分:</p>
 <ol>
 <li>an instance-augmented neural architecture</li>
@@ -306,134 +303,137 @@
 <li>a sequential mini-batch inference/training technique: translating the mini-batches of instance attributes sequentially</li>
 </ul>
 <h1 id="2-InstaGAN"><a href="#2-InstaGAN" class="headerlink" title="2. InstaGAN"></a>2. InstaGAN</h1><p>符号说明：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">符号</th>
-<th align="center">说明</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$\mathcal{X}$, $\mathcal{Y}$</td>
-<td align="center">image domain</td>
+<tbody>
+<tr>
+<td style="text-align:center">$\mathcal{X}$, $\mathcal{Y}$</td>
+<td style="text-align:center">image domain</td>
 </tr>
 <tr>
-<td align="center">$\mathcal{A}, \mathcal{B}$</td>
-<td align="center">a space of set of instance attributes</td>
+<td style="text-align:center">$\mathcal{A}, \mathcal{B}$</td>
+<td style="text-align:center">a space of set of instance attributes</td>
 </tr>
 <tr>
-<td align="center">$\boldsymbol{a} = \lbrace a_i \rbrace _{i=1}^N $</td>
-<td align="center">set of instance attributes</td>
+<td style="text-align:center">$\boldsymbol{a} = \lbrace a_i \rbrace _{i=1}^N $</td>
+<td style="text-align:center">set of instance attributes</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center">instance segmentation mask</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">instance segmentation mask</td>
 </tr>
 <tr>
-<td align="center">$G_{XY}:\mathcal{X}-&gt;\mathcal{Y}, G_{YX}:\mathcal{Y}-&gt;\mathcal{X}$</td>
-<td align="center">tranlation function</td>
+<td style="text-align:center">$G_{XY}:\mathcal{X}-&gt;\mathcal{Y}, G_{YX}:\mathcal{Y}-&gt;\mathcal{X}$</td>
+<td style="text-align:center">tranlation function</td>
 </tr>
-</tbody></table>
-<h2 id="2-1-InstaGAN-architecture"><a href="#2-1-InstaGAN-architecture" class="headerlink" title="2.1 InstaGAN architecture"></a>2.1 InstaGAN architecture</h2><p><img src="./InstaGAN/InstaGAN2.png" alt="InstaGAN architecture"></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN2.png" class="" title="InstaGAN architecture">
-
+</tbody>
+</table>
+</div>
+<h2 id="2-1-InstaGAN-architecture"><a href="#2-1-InstaGAN-architecture" class="headerlink" title="2.1 InstaGAN architecture"></a>2.1 InstaGAN architecture</h2><p><img src="./InstaGAN/InstaGAN2.png" alt="InstaGAN architecture"><br><img src="/2019/01/04/InstaGAN/InstaGAN2.png" class="" title="InstaGAN architecture"></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">符号</th>
-<th align="center">说明</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$f_{GX}$</td>
-<td align="center">image feature extractor</td>
+<tbody>
+<tr>
+<td style="text-align:center">$f_{GX}$</td>
+<td style="text-align:center">image feature extractor</td>
 </tr>
 <tr>
-<td align="center">$f_{GA}$</td>
-<td align="center">attribute feature extractor</td>
+<td style="text-align:center">$f_{GA}$</td>
+<td style="text-align:center">attribute feature extractor</td>
 </tr>
 <tr>
-<td align="center">$H_{GX}(x,a)=[f_{GX}(x);\sum_{i=1}^Nf_{GA}(a_i)]$</td>
-<td align="center">image representation</td>
+<td style="text-align:center">$H_{GX}(x,a)=[f_{GX}(x);\sum_{i=1}^Nf_{GA}(a_i)]$</td>
+<td style="text-align:center">image representation</td>
 </tr>
 <tr>
-<td align="center">$H_{GA}^n(x,a)=[f_{GX}(x);\sum_{i=1}^Nf_{GA}(a_i);f_{GA}(a_n)]$</td>
-<td align="center">image representation</td>
+<td style="text-align:center">$H_{GA}^n(x,a)=[f_{GX}(x);\sum_{i=1}^Nf_{GA}(a_i);f_{GA}(a_n)]$</td>
+<td style="text-align:center">image representation</td>
 </tr>
 <tr>
-<td align="center">$h_{DX}(x,a)=[f_{DX}(x);\sum_{i=1}^Nf_{DA}(a_i)]$</td>
-<td align="center">image representation for discriminator</td>
+<td style="text-align:center">$h_{DX}(x,a)=[f_{DX}(x);\sum_{i=1}^Nf_{DA}(a_i)]$</td>
+<td style="text-align:center">image representation for discriminator</td>
 </tr>
 <tr>
-<td align="center">$f_{GX},f_{GA},f_{DX},f_{DA},g_{GX},G_{GA},G_{DX}$</td>
-<td align="center"></td>
+<td style="text-align:center">$f_{GX},f_{GA},f_{DX},f_{DA},g_{GX},G_{GA},G_{DX}$</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">$(x,a)-&gt;(y’,b’)$</td>
-<td align="center"></td>
+<td style="text-align:center">$(x,a)-&gt;(y’,b’)$</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">$(y,b)-&gt;(x’,a’)$</td>
-<td align="center"></td>
+<td style="text-align:center">$(y,b)-&gt;(x’,a’)$</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>作者为了能实现mask顺序不变性，采用相加的方式</strong>。</p>
 <h2 id="2-2-Training-loss"><a href="#2-2-Training-loss" class="headerlink" title="2.2 Training loss"></a>2.2 Training loss</h2><ol>
 <li><strong>domain loss</strong>: GAN loss</li>
 <li><strong>content loss</strong>: cycle-consistency loss and identity mapping loss and context preserving loss</li>
 </ol>
-<p><strong>LSGAN</strong>: 判断图片是原始的还是生成的<br>$$L_{LSGAN}=(D_X(x,a)-1)^2+(D_X(G_{YX}(y,b)))^2+(D_Y(y,b)-1)^2+(D_Y(G_{XY}(y,b)))^2$$</p>
-<p><strong>cycle-consistency loss</strong>: 循环一致性<br>$$L_{cyc}=\parallel G_{YX}(G_{XY}(x,a))-(x,a) \parallel _1+\parallel G_{XY}(G_{YX}(y,b))-(y,b) \parallel _1$$</p>
-<p><strong>identity mapping loss</strong>: 恒等映射<br>$$L_{idt}=\parallel G_{XY}(y,b)-(y,b) \parallel _1 + \parallel G_{YX}(x,a)-(x,a) \parallel _1$$</p>
-<p><strong>context preserving loss</strong>: 保留背景<br>$$L_{ctx}=\parallel w(a,b’)\odot(x-y’) \parallel _1 + \parallel w(b,a’)\odot(y-x’) \parallel _1 $$<br>其中，$w(a,b’), w(b,a’)$表示在原图片和生成图片都是背景的位置的权重是1.</p>
-<p><strong>Total loss</strong>:<br>$$<br>\begin{align}<br>L_{InstaGAN}&amp;=L_{LSGAN} + \lambda_{cyc} L_{cyc}+ \lambda_{idt} L_{idt}+ \lambda_{ctx} L_{ctx} \<br>&amp;=L_{LSGAN}+L_{content}<br>\end{align}<br>$$</p>
-<h2 id="2-3-sequential-mini-batch-translation"><a href="#2-3-sequential-mini-batch-translation" class="headerlink" title="2.3 sequential mini-batch translation"></a>2.3 sequential mini-batch translation</h2><p>考虑到在图片上的实例可能很多，而GPU的所需空间随之线性增长，可能不符合现实情况，所以需要考虑在图片上可以转化一小部分实例。</p>
-<p><img src="./InstaGAN/InstaGAN3.png" alt="sequential mini-batch translation"></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN3.png" class="" title="sequential mini-batch translation">
-
+<p><strong>LSGAN</strong>: 判断图片是原始的还是生成的</p>
+<script type="math/tex; mode=display">L_{LSGAN}=(D_X(x,a)-1)^2+(D_X(G_{YX}(y,b)))^2+(D_Y(y,b)-1)^2+(D_Y(G_{XY}(y,b)))^2</script><p><strong>cycle-consistency loss</strong>: 循环一致性</p>
+<script type="math/tex; mode=display">L_{cyc}=\parallel G_{YX}(G_{XY}(x,a))-(x,a) \parallel \_1+\parallel G_{XY}(G_{YX}(y,b))-(y,b) \parallel _1</script><p><strong>identity mapping loss</strong>: 恒等映射</p>
+<script type="math/tex; mode=display">L_{idt}=\parallel G_{XY}(y,b)-(y,b) \parallel \_1 + \parallel G_{YX}(x,a)-(x,a) \parallel _1</script><p><strong>context preserving loss</strong>: 保留背景</p>
+<script type="math/tex; mode=display">L_{ctx}=\parallel w(a,b')\odot(x-y') \parallel _1 + \parallel w(b,a')\odot(y-x') \parallel _1</script><p>其中，$w(a,b’), w(b,a’)$表示在原图片和生成图片都是背景的位置的权重是1.</p>
+<p><strong>Total loss</strong>:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L_{InstaGAN}&=L_{LSGAN} + \lambda_{cyc} L_{cyc}+ \lambda_{idt} L_{idt}+ \lambda_{ctx} L_{ctx} \\
+&=L_{LSGAN}+L_{content}
+\end{align}</script><h2 id="2-3-sequential-mini-batch-translation"><a href="#2-3-sequential-mini-batch-translation" class="headerlink" title="2.3 sequential mini-batch translation"></a>2.3 sequential mini-batch translation</h2><p>考虑到在图片上的实例可能很多，而GPU的所需空间随之线性增长，可能不符合现实情况，所以需要考虑在图片上可以转化一小部分实例。</p>
+<p><img src="./InstaGAN/InstaGAN3.png" alt="sequential mini-batch translation"><br><img src="/2019/01/04/InstaGAN/InstaGAN3.png" class="" title="sequential mini-batch translation"></p>
 <p>符号说明：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">符号</th>
-<th align="center">说明</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$a=\cup_{i=1}^Ma_i$</td>
-<td align="center">divide the set of instance masks a into mini-batch $a_1,a_2,…,a_M$</td>
+<tbody>
+<tr>
+<td style="text-align:center">$a=\cup_{i=1}^Ma_i$</td>
+<td style="text-align:center">divide the set of instance masks a into mini-batch $a_1,a_2,…,a_M$</td>
 </tr>
 <tr>
-<td align="center">$(x_m, a_m)-&gt;(y’_m, b’_m) or (x_{m+1}, a_{m+1})$</td>
-<td align="center">mini-batch translation</td>
+<td style="text-align:center">$(x_m, a_m)-&gt;(y’_m, b’_m) or (x_{m+1}, a_{m+1})$</td>
+<td style="text-align:center">mini-batch translation</td>
 </tr>
 <tr>
-<td align="center">$(y’_m, b’_{1:m})=(y’_m, \cup_{i=1}^m b’_i)$</td>
-<td align="center">用于判断真假</td>
+<td style="text-align:center">$(y’_m, b’_{1:m})=(y’_m, \cup_{i=1}^m b’_i)$</td>
+<td style="text-align:center">用于判断真假</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>在这种情况下，不同的损失函数作用的范围发生改变，第m次时，content loss作用在$(x_m, a_m), (y’_m, b’_m)$，domain loss 作用在$(x,a), (y’_m, b’_{1:m})$，即</p>
-<p>$$L_{InstaGAN-SM}=\sum_{m=1}^M \lbrace L_{LSGAN}((x,a),(y’<em>m, b’</em>{1:m}))+L_{content}((x_m, a_m),(y’<em>m, b’<em>m)) \rbrace$$<br>$$L</em>{content}=\lambda</em>{cyc} L_{cyc}+\lambda_{idt} L_{idt}+\lambda_{ctx} L_{ctx}$$</p>
-<ul>
+<script type="math/tex; mode=display">L_{InstaGAN-SM}=\sum_{m=1}^M \lbrace L_{LSGAN}((x,a),(y'_m, b'_{1:m}))+L_{content}((x_m, a_m),(y'_m, b'_m)) \rbrace</script><script type="math/tex; mode=display">L_{content}=\lambda_{cyc} L_{cyc}+\lambda_{idt} L_{idt}+\lambda_{ctx} L_{ctx}</script><ul>
 <li>每m个迭代detach一次，来使用固定大小的GPU。</li>
 <li>划分mini-batch的原则：size of instances, 由大到小</li>
 </ul>
-<h1 id="3-experimental-results"><a href="#3-experimental-results" class="headerlink" title="3. experimental results"></a>3. experimental results</h1><h2 id="3-1-image-to-image-translation-results"><a href="#3-1-image-to-image-translation-results" class="headerlink" title="3.1 image-to-image translation results"></a>3.1 image-to-image translation results</h2><p><img src="./InstaGAN/InstaGAN4.png" alt="translation results"></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN4.png" class="" title="translation results">
-
+<h1 id="3-experimental-results"><a href="#3-experimental-results" class="headerlink" title="3. experimental results"></a>3. experimental results</h1><h2 id="3-1-image-to-image-translation-results"><a href="#3-1-image-to-image-translation-results" class="headerlink" title="3.1 image-to-image translation results"></a>3.1 image-to-image translation results</h2><p><img src="./InstaGAN/InstaGAN4.png" alt="translation results"><br><img src="/2019/01/04/InstaGAN/InstaGAN4.png" class="" title="translation results"></p>
 <p>通过上述结果的展示，我可以认为在这方面InstaGAN要比CycleGAN的效果更好，更能得到想要的指定的结果。</p>
-<p><img src="./InstaGAN/InstaGAN5.png" alt="results of translation "></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN5.png" class="" title="results of translation">
-
+<p><img src="./InstaGAN/InstaGAN5.png" alt="results of translation "><br><img src="/2019/01/04/InstaGAN/InstaGAN5.png" class="" title="results of translation"></p>
 <p>第一个结果表明可以通过控制掩码来控制生成的图片。</p>
 <p>第二个结果表明可以使用预测的掩码进行转换图片，从而减少获取掩码的成本。</p>
-<h2 id="3-2-ablation-study"><a href="#3-2-ablation-study" class="headerlink" title="3.2 ablation study"></a>3.2 ablation study</h2><p><img src="./InstaGAN/InstaGAN6.png" alt="ablation study"></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN6.png" class="" title="ablation study">
-
+<h2 id="3-2-ablation-study"><a href="#3-2-ablation-study" class="headerlink" title="3.2 ablation study"></a>3.2 ablation study</h2><p><img src="./InstaGAN/InstaGAN6.png" alt="ablation study"><br><img src="/2019/01/04/InstaGAN/InstaGAN6.png" class="" title="ablation study"></p>
 <p>Fig.9 主要使研究作者提出的三部分功能的作用，instance mask，损失函数，mini-batch的影响，从效果上看，还是最后一张图片效果更好一些。</p>
-<p><img src="./InstaGAN/InstaGAN7.png" alt="ablation  study on the effects of the sequential mini-batch inference/training technique "></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN7.png" class="" title="ablation study on the effects of the sequential mini-batch inference&#x2F;training technique">
-
+<p><img src="./InstaGAN/InstaGAN7.png" alt="ablation  study on the effects of the sequential mini-batch inference/training technique "><br><img src="/2019/01/04/InstaGAN/InstaGAN7.png" class="" title="ablation study on the effects of the sequential mini-batch inference&#x2F;training technique"></p>
 <p>Fig.10分别表示在training和inference中使用one-step还是sequential方法，我觉得都差不多，但是对于有限的GPU是个很好的方法。</p>
 <h1 id="4-Appendix"><a href="#4-Appendix" class="headerlink" title="4. Appendix"></a>4. Appendix</h1><h2 id="4-1-architecture-details"><a href="#4-1-architecture-details" class="headerlink" title="4.1 architecture details"></a>4.1 architecture details</h2><blockquote>
 <p>PatchGAN discriminator is composed of 5 convolutional layers, including normalization and non-linearity layers. We used the first 3 convolution layers for feature extractors, and the last 2 convolution layers for classifier.</p>
@@ -446,80 +446,62 @@
 <li>learning rate: 0.0002 for G, 0.0001 for D, 前m个epoch保持不变，后n个epoch线性衰减为0.不同的数据集的m和n不同</li>
 <li>size对于不同的数据集也不同。</li>
 </ul>
-<h2 id="4-3-trend-of-translation-results"><a href="#4-3-trend-of-translation-results" class="headerlink" title="4.3 trend of translation results"></a>4.3 trend of translation results</h2><p><img src="./InstaGAN/InstaGAN8.png" alt="trend of translation results"></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN8.png" class="" title="trend of translation results">
-
+<h2 id="4-3-trend-of-translation-results"><a href="#4-3-trend-of-translation-results" class="headerlink" title="4.3 trend of translation results"></a>4.3 trend of translation results</h2><p><img src="./InstaGAN/InstaGAN8.png" alt="trend of translation results"><br><img src="/2019/01/04/InstaGAN/InstaGAN8.png" class="" title="trend of translation results"></p>
 <h2 id="4-4-其他"><a href="#4-4-其他" class="headerlink" title="4.4 其他"></a>4.4 其他</h2><p>我觉得这是相当于对于CycleGAN，加上了指向性生成，不再是单独地生成目标域风格的图片，而是对指定区域生成目标域风格的图片。</p>
 <p>刚刚想到一个问题，InstaGAN可以生成指定形状的图片，但是对于同一形状的不同物体，比如生成红色的裙子和黑色的裙子这样子的任务，可能不行。</p>
-<h2 id="4-5-video-translation-results"><a href="#4-5-video-translation-results" class="headerlink" title="4.5 video translation results"></a>4.5 video translation results</h2><p><img src="./InstaGAN/InstaGAN9.png" alt="video translation results"></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN9.png" class="" title="video translation results">
-
+<h2 id="4-5-video-translation-results"><a href="#4-5-video-translation-results" class="headerlink" title="4.5 video translation results"></a>4.5 video translation results</h2><p><img src="./InstaGAN/InstaGAN9.png" alt="video translation results"><br><img src="/2019/01/04/InstaGAN/InstaGAN9.png" class="" title="video translation results"></p>
 <p>作者使用pix2pix作为分割。</p>
 <p>感觉在视频上，裤子换成裙子后，能保持所有帧的裙子都是一样的，说明转换的稳定性很好。</p>
 <h1 id="5-code"><a href="#5-code" class="headerlink" title="5. code"></a>5. code</h1><p>看细节还是需要看代码的实现过程。</p>
-<h2 id="5-1-文件目录"><a href="#5-1-文件目录" class="headerlink" title="5.1 文件目录"></a>5.1 文件目录</h2><p><img src="./InstaGAN/InstaGAN10.png" alt="文件目录"></p>
-<img src="/2019/01/04/InstaGAN/InstaGAN10.png" class="" title="文件目录">
-
+<h2 id="5-1-文件目录"><a href="#5-1-文件目录" class="headerlink" title="5.1 文件目录"></a>5.1 文件目录</h2><p><img src="./InstaGAN/InstaGAN10.png" alt="文件目录"><br><img src="/2019/01/04/InstaGAN/InstaGAN10.png" class="" title="文件目录"></p>
 <p>通过文件组织，可以发现cycleGAN尽可能地考虑了可扩展性。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">|-- LICENSE</span><br><span class="line">|-- README.md</span><br><span class="line">|-- data</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- aligned_dataset.py</span><br><span class="line">|   |-- base_data_loader.py</span><br><span class="line">|   |-- base_dataset.py</span><br><span class="line">|   |-- image_folder.py</span><br><span class="line">|   |-- single_dataset.py</span><br><span class="line">|   |-- unaligned_dataset.py</span><br><span class="line">|   `-- unaligned_seg_dataset.py</span><br><span class="line">|-- datasets</span><br><span class="line">|   |-- combine_A_and_B.py</span><br><span class="line">|   |-- download_coco.sh</span><br><span class="line">|   |-- download_cyclegan_dataset.sh</span><br><span class="line">|   |-- download_pix2pix_dataset.sh</span><br><span class="line">|   |-- generate_ccp_dataset.py</span><br><span class="line">|   |-- generate_coco_dataset.py</span><br><span class="line">|   |-- generate_mhp_dataset.py</span><br><span class="line">|   |-- make_dataset_aligned.py</span><br><span class="line">|   |-- pants2skirt_mhp</span><br><span class="line">|-- docs</span><br><span class="line">|   `-- more_results.md</span><br><span class="line">|-- environment.yml</span><br><span class="line">|-- models</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- base_model.py</span><br><span class="line">|   |-- cycle_gan_model.py</span><br><span class="line">|   |-- insta_gan_model.py</span><br><span class="line">|   |-- networks.py</span><br><span class="line">|   |-- pix2pix_model.py</span><br><span class="line">|   `-- test_model.py</span><br><span class="line">|-- options</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- base_options.py</span><br><span class="line">|   |-- test_options.py</span><br><span class="line">|   `-- train_options.py</span><br><span class="line">|-- requirements.txt</span><br><span class="line">|-- scripts</span><br><span class="line">|   |-- conda_deps.sh</span><br><span class="line">|   |-- download_cyclegan_model.sh</span><br><span class="line">|   |-- download_pix2pix_model.sh</span><br><span class="line">|   |-- install_deps.sh</span><br><span class="line">|   |-- test_before_push.py</span><br><span class="line">|   |-- test_cyclegan.sh</span><br><span class="line">|   |-- test_pix2pix.sh</span><br><span class="line">|   |-- test_single.sh</span><br><span class="line">|   |-- train_cyclegan.sh</span><br><span class="line">|   `-- train_pix2pix.sh</span><br><span class="line">|-- test.py</span><br><span class="line">|-- train.py</span><br><span class="line">`-- util</span><br><span class="line">    |-- __init__.py</span><br><span class="line">    |-- get_data.py</span><br><span class="line">    |-- html.py</span><br><span class="line">    |-- image_pool.py</span><br><span class="line">    |-- util.py</span><br><span class="line">    `-- visualizer.py</span><br></pre></td></tr></table></figure>
-
 <h2 id="5-2-seg"><a href="#5-2-seg" class="headerlink" title="5.2 seg"></a>5.2 seg</h2><p>从下面的代码可以看出，需要读取固定数量的instance的segmentation。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># self.max_instances = 20</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_segs</span>(<span class="params">self, seg_path, seed</span>):</span></span><br><span class="line">  segs = list()</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(self.max_instances):</span><br><span class="line">    path = seg_path.replace(<span class="string">&#x27;.png&#x27;</span>, <span class="string">&#x27;_&#123;&#125;.png&#x27;</span>.format(i))</span><br><span class="line">    <span class="keyword">if</span> os.path.isfile(path):</span><br><span class="line">      seg = Image.open(path).convert(<span class="string">&#x27;L&#x27;</span>)</span><br><span class="line">      seg = self.fixed_transform(seg, seed)</span><br><span class="line">      segs.append(seg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      segs.append(-torch.ones(segs[<span class="number">0</span>].size()))</span><br><span class="line">  <span class="keyword">return</span> torch.cat(segs)</span><br></pre></td></tr></table></figure>
-
-<p><strong>备注</strong>: 原始图片transforms之后,0<del>1变成了-1</del>1; 分割图片transforms之后-1表示背景,取值-1~1,这也是为什么补充的时候用-1补充的原因.</p>
+<p><strong>备注</strong>: 原始图片transforms之后,0~1变成了-1~1; 分割图片transforms之后-1表示背景,取值-1~1,这也是为什么补充的时候用-1补充的原因.</p>
 <h2 id="5-3-generator"><a href="#5-3-generator" class="headerlink" title="5.3 generator"></a>5.3 generator</h2><blockquote>
 <p>ResNet generator is composed of downsampling blocks, residual blocks, and upsampling blocks. We used downsampling blocks and residual blocks for encoders, and used upsampling blocks for generators.</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResnetSetGenerator</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_nc=<span class="number">3</span>, output_nc=<span class="number">3</span>, ngf=<span class="number">64</span>, norm_layer=nn.InstanceNorm2d, use_dropout=False, n_blocks=<span class="number">9</span>, padding_type=<span class="string">&#x27;reflect&#x27;</span></span>):</span></span><br><span class="line">        <span class="keyword">assert</span> (n_blocks &gt;= <span class="number">0</span>)</span><br><span class="line">        super(ResnetSetGenerator, self).__init__()</span><br><span class="line">        self.input_nc = input_nc</span><br><span class="line">        self.output_nc = output_nc</span><br><span class="line">        self.ngf = ngf</span><br><span class="line">        <span class="keyword">if</span> type(norm_layer) == functools.partial:</span><br><span class="line">            use_bias = norm_layer.func == nn.InstanceNorm2d</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            use_bias = norm_layer == nn.InstanceNorm2d</span><br><span class="line"></span><br><span class="line">        n_downsampling = <span class="number">2</span></span><br><span class="line">        self.encoder_img = self.get_encoder(input_nc, n_downsampling, ngf, norm_layer, use_dropout, n_blocks, padding_type, use_bias)</span><br><span class="line">        self.encoder_seg = self.get_encoder(<span class="number">1</span>, n_downsampling, ngf, norm_layer, use_dropout, n_blocks, padding_type, use_bias)</span><br><span class="line">        self.decoder_img = self.get_decoder(output_nc, n_downsampling, <span class="number">2</span> * ngf, norm_layer, use_bias)  <span class="comment"># 2*ngf</span></span><br><span class="line">        self.decoder_seg = self.get_decoder(<span class="number">1</span>, n_downsampling, <span class="number">3</span> * ngf, norm_layer, use_bias)  <span class="comment"># 3*ngf</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_encoder</span>(<span class="params">self, input_nc, n_downsampling, ngf, norm_layer, use_dropout, n_blocks, padding_type, use_bias</span>):</span></span><br><span class="line">        model = [nn.ReflectionPad2d(<span class="number">3</span>),</span><br><span class="line">                 nn.Conv2d(input_nc, ngf, kernel_size=<span class="number">7</span>, padding=<span class="number">0</span>, bias=use_bias),</span><br><span class="line">                 norm_layer(ngf),</span><br><span class="line">                 nn.ReLU(<span class="literal">True</span>)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n_downsampling):</span><br><span class="line">            mult = <span class="number">2</span> ** i</span><br><span class="line">            model += [nn.Conv2d(ngf * mult, ngf * mult * <span class="number">2</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>, bias=use_bias),</span><br><span class="line">                      norm_layer(ngf * mult * <span class="number">2</span>),</span><br><span class="line">                      nn.ReLU(<span class="literal">True</span>)]</span><br><span class="line"></span><br><span class="line">        mult = <span class="number">2</span> ** n_downsampling</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n_blocks):</span><br><span class="line">            model += [ResnetBlock(ngf * mult, padding_type=padding_type, norm_layer=norm_layer, use_dropout=use_dropout, use_bias=use_bias)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*model)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_decoder</span>(<span class="params">self, output_nc, n_downsampling, ngf, norm_layer, use_bias</span>):</span></span><br><span class="line">        model = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n_downsampling):</span><br><span class="line">            mult = <span class="number">2</span>**(n_downsampling - i)</span><br><span class="line">            model += [nn.ConvTranspose2d(ngf * mult, int(ngf * mult / <span class="number">2</span>), kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>, output_padding=<span class="number">1</span>, bias=use_bias),</span><br><span class="line">                      norm_layer(int(ngf * mult / <span class="number">2</span>)),</span><br><span class="line">                      nn.ReLU(<span class="literal">True</span>)]</span><br><span class="line">        model += [nn.ReflectionPad2d(<span class="number">3</span>)]</span><br><span class="line">        model += [nn.Conv2d(ngf, output_nc, kernel_size=<span class="number">7</span>, padding=<span class="number">0</span>)]</span><br><span class="line">        model += [nn.Tanh()]</span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*model)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, inp</span>):</span></span><br><span class="line">        <span class="comment"># split data</span></span><br><span class="line">        img = inp[:, :self.input_nc, :, :]  <span class="comment"># (B, CX, W, H)</span></span><br><span class="line">        segs = inp[:, self.input_nc:, :, :]  <span class="comment"># (B, CA, W, H)</span></span><br><span class="line">        mean = (segs + <span class="number">1</span>).mean(<span class="number">0</span>).mean(<span class="number">-1</span>).mean(<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">if</span> mean.sum() == <span class="number">0</span>:</span><br><span class="line">            mean[<span class="number">0</span>] = <span class="number">1</span>  <span class="comment"># forward at least one segmentation</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># run encoder</span></span><br><span class="line">        enc_img = self.encoder_img(img)</span><br><span class="line">        enc_segs = list()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(segs.size(<span class="number">1</span>)): <span class="comment"># 第i个instance</span></span><br><span class="line">            <span class="keyword">if</span> mean[i] &gt; <span class="number">0</span>:  <span class="comment"># skip empty segmentation</span></span><br><span class="line">                seg = segs[:, i, :, :].unsqueeze(<span class="number">1</span>)</span><br><span class="line">                enc_segs.append(self.encoder_seg(seg))</span><br><span class="line">        enc_segs = torch.cat(enc_segs)</span><br><span class="line">        enc_segs_sum = torch.sum(enc_segs, dim=<span class="number">0</span>, keepdim=<span class="literal">True</span>)  <span class="comment"># aggregated set feature</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># run decoder</span></span><br><span class="line">        feat = torch.cat([enc_img, enc_segs_sum], dim=<span class="number">1</span>)</span><br><span class="line">        out = [self.decoder_img(feat)]</span><br><span class="line">        idx = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(segs.size(<span class="number">1</span>)):</span><br><span class="line">            <span class="keyword">if</span> mean[i] &gt; <span class="number">0</span>:</span><br><span class="line">                enc_seg = enc_segs[idx].unsqueeze(<span class="number">0</span>)  <span class="comment"># (1, ngf, w, h)</span></span><br><span class="line">                idx += <span class="number">1</span>  <span class="comment"># move to next index</span></span><br><span class="line">                feat = torch.cat([enc_seg, enc_img, enc_segs_sum], dim=<span class="number">1</span>)</span><br><span class="line">                out += [self.decoder_seg(feat)]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                out += [segs[:, i, :, :].unsqueeze(<span class="number">1</span>)]  <span class="comment"># skip empty segmentation</span></span><br><span class="line">        <span class="keyword">return</span> torch.cat(out, dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h2 id="5-4-Discriminator"><a href="#5-4-Discriminator" class="headerlink" title="5.4 Discriminator"></a>5.4 Discriminator</h2><blockquote>
 <p>On the other hand, PatchGAN discriminator is composed of 5 convolutional layers, including normalization and non-linearity layers. We used the first 3 convolution layers for feature extractors, and the last 2 convolution layers for classifier.</p>
 <p>In addition, we observed that applying Spectral Normalization (SN) (Miyato et al., 2018) for discriminators significantly improve the performance, although we used LSGAN (Mao et al., 2017), while the original motivation of SN was to enforce Lipschitz condition to match with the theory of WGAN (Arjovsky et al., 2017; Gulrajani et al., 2017).</p>
 </blockquote>
 <ul>
-<li><input checked="" disabled="" type="checkbox"> SpectralNorm 这个是怎么运行的？ <a target="_blank" rel="noopener" href="http://www.twistedwg.com/2018/10/13/SNGAN.html">http://www.twistedwg.com/2018/10/13/SNGAN.html</a></li>
+<li>[x] SpectralNorm 这个是怎么运行的？ <a target="_blank" rel="noopener" href="http://www.twistedwg.com/2018/10/13/SNGAN.html">http://www.twistedwg.com/2018/10/13/SNGAN.html</a></li>
 </ul>
 <p>虽然还是没有太搞懂其原理，但大致清楚了，是求矩阵的谱范数，因为难以求解，便用迭代的方式计算u、v。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define spectral normalization layer</span></span><br><span class="line"><span class="comment"># Code from Christian Cosgrove&#x27;s repository</span></span><br><span class="line"><span class="comment"># https://github.com/christiancosgrove/pytorch-spectral-normalization-gan/blob/master/spectral_normalization.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">l2normalize</span>(<span class="params">v, eps=<span class="number">1e-12</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> v / (v.norm() + eps)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpectralNorm</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, module, name=<span class="string">&#x27;weight&#x27;</span>, power_iterations=<span class="number">1</span></span>):</span></span><br><span class="line">        super(SpectralNorm, self).__init__()</span><br><span class="line">        self.module = module</span><br><span class="line">        self.name = name</span><br><span class="line">        self.power_iterations = power_iterations</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self._made_params():</span><br><span class="line">            self._make_params()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_update_u_v</span>(<span class="params">self</span>):</span></span><br><span class="line">        u = getattr(self.module, self.name + <span class="string">&quot;_u&quot;</span>)</span><br><span class="line">        v = getattr(self.module, self.name + <span class="string">&quot;_v&quot;</span>)</span><br><span class="line">        w = getattr(self.module, self.name + <span class="string">&quot;_bar&quot;</span>)</span><br><span class="line"></span><br><span class="line">        height = w.data.shape[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(self.power_iterations):</span><br><span class="line">            v.data = l2normalize(torch.mv(torch.t(w.view(height, <span class="number">-1</span>).data), u.data))</span><br><span class="line">            u.data = l2normalize(torch.mv(w.view(height, <span class="number">-1</span>).data, v.data))</span><br><span class="line"></span><br><span class="line">        sigma = u.dot(w.view(height, <span class="number">-1</span>).mv(v))</span><br><span class="line">        setattr(self.module, self.name, w / sigma.expand_as(w))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_made_params</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            u = getattr(self.module, self.name + <span class="string">&quot;_u&quot;</span>)</span><br><span class="line">            v = getattr(self.module, self.name + <span class="string">&quot;_v&quot;</span>)</span><br><span class="line">            w = getattr(self.module, self.name + <span class="string">&quot;_bar&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_make_params</span>(<span class="params">self</span>):</span></span><br><span class="line">        w = getattr(self.module, self.name) <span class="comment"># shape: (64,3,4,4)</span></span><br><span class="line"></span><br><span class="line">        height = w.data.shape[<span class="number">0</span>]  <span class="comment"># int 64</span></span><br><span class="line">        width = w.view(height, <span class="number">-1</span>).data.shape[<span class="number">1</span>] <span class="comment"># int 48</span></span><br><span class="line"></span><br><span class="line">        u = nn.Parameter(w.data.new(height).normal_(<span class="number">0</span>, <span class="number">1</span>), requires_grad=<span class="literal">False</span>) <span class="comment"># shape (64)</span></span><br><span class="line">        v = nn.Parameter(w.data.new(width).normal_(<span class="number">0</span>, <span class="number">1</span>), requires_grad=<span class="literal">False</span>) <span class="comment"># shape (48)</span></span><br><span class="line">        u.data = l2normalize(u.data) </span><br><span class="line">        v.data = l2normalize(v.data)</span><br><span class="line">        w_bar = nn.Parameter(w.data)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">del</span> self.module._parameters[self.name]</span><br><span class="line"></span><br><span class="line">        self.module.register_parameter(self.name + <span class="string">&quot;_u&quot;</span>, u)</span><br><span class="line">        self.module.register_parameter(self.name + <span class="string">&quot;_v&quot;</span>, v)</span><br><span class="line">        self.module.register_parameter(self.name + <span class="string">&quot;_bar&quot;</span>, w_bar)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, *args</span>):</span></span><br><span class="line">        self._update_u_v()</span><br><span class="line">        <span class="keyword">return</span> self.module.forward(*args)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NLayerSetDiscriminator</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_nc, ndf=<span class="number">64</span>, n_layers=<span class="number">3</span>, norm_layer=nn.BatchNorm2d, use_sigmoid=False</span>):</span></span><br><span class="line">        super(NLayerSetDiscriminator, self).__init__()</span><br><span class="line">        self.input_nc = input_nc</span><br><span class="line">        <span class="keyword">if</span> type(norm_layer) == functools.partial:</span><br><span class="line">            use_bias = norm_layer.func == nn.InstanceNorm2d</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            use_bias = norm_layer == nn.InstanceNorm2d</span><br><span class="line"></span><br><span class="line">        kw = <span class="number">4</span></span><br><span class="line">        padw = <span class="number">1</span></span><br><span class="line">        self.feature_img = self.get_feature_extractor(input_nc, ndf, n_layers, kw, padw, norm_layer, use_bias)</span><br><span class="line">        self.feature_seg = self.get_feature_extractor(<span class="number">1</span>, ndf, n_layers, kw, padw, norm_layer, use_bias)</span><br><span class="line">        self.classifier = self.get_classifier(<span class="number">2</span> * ndf, n_layers, kw, padw, norm_layer, use_sigmoid)  <span class="comment"># 2*ndf</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_feature_extractor</span>(<span class="params">self, input_nc, ndf, n_layers, kw, padw, norm_layer, use_bias</span>):</span></span><br><span class="line">        model = [</span><br><span class="line">            <span class="comment"># Use spectral normalization</span></span><br><span class="line">            SpectralNorm(nn.Conv2d(input_nc, ndf, kernel_size=kw, stride=<span class="number">2</span>, padding=padw)),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>, <span class="literal">True</span>)</span><br><span class="line">        ]</span><br><span class="line">        nf_mult = <span class="number">1</span></span><br><span class="line">        nf_mult_prev = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">1</span>, n_layers):</span><br><span class="line">            nf_mult_prev = nf_mult</span><br><span class="line">            nf_mult = min(<span class="number">2</span> ** n, <span class="number">8</span>)</span><br><span class="line">            model += [</span><br><span class="line">                <span class="comment"># Use spectral normalization</span></span><br><span class="line">                SpectralNorm(nn.Conv2d(ndf * nf_mult_prev, ndf * nf_mult, kernel_size=kw, stride=<span class="number">2</span>, padding=padw, bias=use_bias)),</span><br><span class="line">                norm_layer(ndf * nf_mult),</span><br><span class="line">                nn.LeakyReLU(<span class="number">0.2</span>, <span class="literal">True</span>)</span><br><span class="line">            ]</span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*model)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_classifier</span>(<span class="params">self, ndf, n_layers, kw, padw, norm_layer, use_sigmoid</span>):</span></span><br><span class="line">        nf_mult_prev = min(<span class="number">2</span> ** (n_layers<span class="number">-1</span>), <span class="number">8</span>)</span><br><span class="line">        nf_mult = min(<span class="number">2</span> ** n_layers, <span class="number">8</span>)</span><br><span class="line">        model = [</span><br><span class="line">            <span class="comment"># Use spectral normalization</span></span><br><span class="line">            SpectralNorm(nn.Conv2d(ndf * nf_mult_prev, ndf * nf_mult, kernel_size=kw, stride=<span class="number">1</span>, padding=padw)),</span><br><span class="line">            norm_layer(ndf * nf_mult),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>, <span class="literal">True</span>)</span><br><span class="line">        ]</span><br><span class="line">        <span class="comment"># Use spectral normalization</span></span><br><span class="line">        model += [SpectralNorm(nn.Conv2d(ndf * nf_mult, <span class="number">1</span>, kernel_size=kw, stride=<span class="number">1</span>, padding=padw))]</span><br><span class="line">        <span class="keyword">if</span> use_sigmoid:</span><br><span class="line">            model += [nn.Sigmoid()]</span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*model)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, inp</span>):</span></span><br><span class="line">        <span class="comment"># split data</span></span><br><span class="line">        img = inp[:, :self.input_nc, :, :]  <span class="comment"># (B, CX, W, H)</span></span><br><span class="line">        segs = inp[:, self.input_nc:, :, :]  <span class="comment"># (B, CA, W, H)</span></span><br><span class="line">        mean = (segs + <span class="number">1</span>).mean(<span class="number">0</span>).mean(<span class="number">-1</span>).mean(<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">if</span> mean.sum() == <span class="number">0</span>:</span><br><span class="line">            mean[<span class="number">0</span>] = <span class="number">1</span>  <span class="comment"># forward at least one segmentation</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># run feature extractor</span></span><br><span class="line">        feat_img = self.feature_img(img)</span><br><span class="line">        feat_segs = list()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(segs.size(<span class="number">1</span>)):  <span class="comment"># 第i个instance</span></span><br><span class="line">            <span class="keyword">if</span> mean[i] &gt; <span class="number">0</span>:  <span class="comment"># skip empty segmentation</span></span><br><span class="line">                seg = segs[:, i, :, :].unsqueeze(<span class="number">1</span>)</span><br><span class="line">                feat_segs.append(self.feature_seg(seg))</span><br><span class="line">        feat_segs_sum = torch.sum(torch.stack(feat_segs), dim=<span class="number">0</span>)  <span class="comment"># aggregated set feature</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># run classifier</span></span><br><span class="line">        feat = torch.cat([feat_img, feat_segs_sum], dim=<span class="number">1</span>)</span><br><span class="line">        out = self.classifier(feat)</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h2 id="5-5-model-的输入"><a href="#5-5-model-的输入" class="headerlink" title="5.5 model 的输入"></a>5.5 model 的输入</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_input</span>(<span class="params">self, input</span>):</span></span><br><span class="line">    AtoB = self.opt.direction == <span class="string">&#x27;AtoB&#x27;</span></span><br><span class="line">    self.real_A_img = input[<span class="string">&#x27;A&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;B&#x27;</span>].to(self.device)</span><br><span class="line">    self.real_B_img = input[<span class="string">&#x27;B&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;A&#x27;</span>].to(self.device)</span><br><span class="line">    real_A_segs = input[<span class="string">&#x27;A_segs&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;B_segs&#x27;</span>]</span><br><span class="line">    real_B_segs = input[<span class="string">&#x27;B_segs&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;A_segs&#x27;</span>]</span><br><span class="line">    self.real_A_segs = self.select_masks(real_A_segs).to(self.device)  <span class="comment"># shape:(1,4,240,160)</span></span><br><span class="line">    self.real_B_segs = self.select_masks(real_B_segs).to(self.device)</span><br><span class="line">    self.real_A = torch.cat([self.real_A_img, self.real_A_segs], dim=<span class="number">1</span>) <span class="comment"># shape:(1,7,240,160)</span></span><br><span class="line">    self.real_B = torch.cat([self.real_B_img, self.real_B_segs], dim=<span class="number">1</span>)</span><br><span class="line">    self.real_A_seg = self.merge_masks(self.real_A_segs)  <span class="comment"># merged mask</span></span><br><span class="line">    self.real_B_seg = self.merge_masks(self.real_B_segs)  <span class="comment"># merged mask</span></span><br><span class="line">    self.image_paths = input[<span class="string">&#x27;A_paths&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;B_paths&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
 <p>前面说过，每次都生成20个mask，不足用-1补充，在输入网络时，只取面积最大的4个mask，然后对这4个进行或者从高到低排序或者随机排序。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ins_max = 4</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select_masks_random</span>(<span class="params">self, segs_batch</span>):</span></span><br><span class="line">  <span class="string">&quot;&quot;&quot;Select masks in random order&quot;&quot;&quot;</span></span><br><span class="line">  ret = list()</span><br><span class="line">  <span class="keyword">for</span> segs <span class="keyword">in</span> segs_batch:</span><br><span class="line">    mean = (segs + <span class="number">1</span>).mean(<span class="number">-1</span>).mean(<span class="number">-1</span>)</span><br><span class="line">    m, i = mean.topk(self.opt.ins_max)</span><br><span class="line">    num = min(len(mean.nonzero()), self.opt.ins_max)</span><br><span class="line">    reorder = np.concatenate((np.random.permutation(num), np.arange(num, self.opt.ins_max)))</span><br><span class="line">    ret.append(segs[i[reorder], :, :])</span><br><span class="line">  <span class="keyword">return</span> torch.stack(ret)</span><br></pre></td></tr></table></figure>
-
 <p>这里的mask的合并没有太看懂，是为了去除(-1,1)之外的数字吗？</p>
 <p>跑了代码,觉得是的,或许是担心有其他干扰因素吧,反正剩下的都是-1~1之间的数字.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_masks</span>(<span class="params">self, segs</span>):</span></span><br><span class="line">  <span class="string">&quot;&quot;&quot;Merge masks (B, N, W, H) -&gt; (B, 1, W, H)&quot;&quot;&quot;</span></span><br><span class="line">  ret = torch.sum((segs + <span class="number">1</span>)/<span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)  <span class="comment"># (B, 1, W, H)</span></span><br><span class="line">  <span class="keyword">return</span> ret.clamp(max=<span class="number">1</span>, min=<span class="number">0</span>) * <span class="number">2</span> - <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li><input disabled="" type="checkbox"> 这一步的意义是什么？？</li>
+<li>[ ] 这一步的意义是什么？？</li>
 </ul>
 <p>理解了，如果图片中没有instance，那么就不用进行下一步的转换了。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">self.forward_A = (self.real_A_seg_sng + <span class="number">1</span>).sum() &gt; <span class="number">0</span>  <span class="comment"># check if there are remaining instances</span></span><br><span class="line">self.forward_B = (self.real_B_seg_sng + <span class="number">1</span>).sum() &gt; <span class="number">0</span>  <span class="comment"># check if there are remaining instances</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><input checked="" disabled="" type="checkbox"> fake_B_mul的意义是什么？</li>
+<li>[x] fake_B_mul的意义是什么？</li>
 </ul>
 <p>因为在sequential mini-batch translation中，GAN_loss是全局的，所以每次需要把之前的fake_B_seg_sng保存起来一起计算，因此每次的临时的self.fake_B_mul，而self.fake_B_seg_list保存是mini-batch计算得到的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> self.forward_A:</span><br><span class="line">    self.real_A_sng = torch.cat([self.real_A_img_sng, self.real_A_seg_sng], dim=<span class="number">1</span>)</span><br><span class="line">    self.fake_B_sng = self.netG_A(self.real_A_sng)</span><br><span class="line">    self.rec_A_sng = self.netG_B(self.fake_B_sng)</span><br><span class="line"></span><br><span class="line">    self.fake_B_img_sng, self.fake_B_seg_sng = self.split(self.fake_B_sng)</span><br><span class="line">    self.rec_A_img_sng, self.rec_A_seg_sng = self.split(self.rec_A_sng)</span><br><span class="line">    fake_B_seg_list = self.fake_B_seg_list + [self.fake_B_seg_sng]  <span class="comment"># not detach</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(self.ins_iter - idx - <span class="number">1</span>):</span><br><span class="line">        fake_B_seg_list.append(empty)</span><br><span class="line"></span><br><span class="line">    self.fake_B_seg_mul = torch.cat(fake_B_seg_list, dim=<span class="number">1</span>)</span><br><span class="line">    self.fake_B_mul = torch.cat([self.fake_B_img_sng, self.fake_B_seg_mul], dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><input checked="" disabled="" type="checkbox"> 怎么选取的背景</li>
+<li>[x] 怎么选取的背景</li>
 </ul>
 <p>只要在A中且在B中都是背景的则都算是背景，否则只要有instance的区域不为背景。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_masks</span>(<span class="params">self, segs</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Merge masks (B, N, W, H) -&gt; (B, 1, W, H)&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># segs: shape(1,4,240,260)， 取值(-1~1) 训练集A中有两个instance，训练集B中有两个instance，</span></span><br><span class="line">    ret = torch.sum((segs + <span class="number">1</span>)/<span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)  <span class="comment"># (B, 1, W, H)</span></span><br><span class="line">    <span class="keyword">return</span> ret.clamp(max=<span class="number">1</span>, min=<span class="number">0</span>) * <span class="number">2</span> - <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_masks</span>(<span class="params">self, segs</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Merge masks (B, N, W, H) -&gt; (B, 1, W, H)&quot;&quot;&quot;</span></span><br><span class="line">    ret = torch.sum((segs + <span class="number">1</span>)/<span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)  <span class="comment"># (B, 1, W, H)</span></span><br><span class="line">    <span class="keyword">return</span> ret.clamp(max=<span class="number">1</span>, min=<span class="number">0</span>) * <span class="number">2</span> - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_weight_for_ctx</span>(<span class="params">self, x, y</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Get weight for context preserving loss&quot;&quot;&quot;</span></span><br><span class="line">    z = self.merge_masks(torch.cat([x, y], dim=<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">1</span> - z) / <span class="number">2</span>  <span class="comment"># [-1,1] -&gt; [1,0]</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><input disabled="" type="checkbox"> 这里的empty的作用是什么</li>
+<li>[ ] 这里的empty的作用是什么</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">empty = -torch.ones(self.real_A_seg_sng.size()).to(self.device)</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p><input disabled="" type="checkbox">  pix2pix 是怎么预测mask的，需要提前训练吗，数据集怎么提供？如果可以直接用，那么是否可以直接实现行人重识别的换人？</p>
+<li><p>[ ] pix2pix 是怎么预测mask的，需要提前训练吗，数据集怎么提供？如果可以直接用，那么是否可以直接实现行人重识别的换人？</p>
 </li>
-<li><p><input checked="" disabled="" type="checkbox">  论文+代码，共4天</p>
+<li><p>[x] 论文+代码，共4天</p>
 </li>
 </ul>
 
@@ -683,13 +665,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

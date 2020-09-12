@@ -248,14 +248,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>3.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -275,7 +275,6 @@
 <li>project: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54576174">https://zhuanlan.zhihu.com/p/54576174</a></li>
 </ul>
 <a id="more"></a>
-
 <p>关于这篇文章的作者也多提几句。</p>
 <p>关于行人重识别(person re-ID)，我看到的多是<strong>悉尼科技大学的郑良团队</strong>，所以简单介绍一下郑良团队的成员。</p>
 <ul>
@@ -295,7 +294,6 @@
 <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>person re-ID 有监督模型，半监督模型。作者采用的是 one-shot image-based setting，也就是每个行人只有一个样例。</p>
 <p>具体来说，作者将数据集分为三部分：labeled data, selected pseudo-labeled data and index-labeled data，其中 labeled data 和 selected pseudo-labeled data 用分类损失，index-labeled data 用 exclusive loss。exclusive loss 的目标是尽可能地使图片之间都离得比较远。</p>
 <img src="/2019/03/27/One-Example-reID/join_training_procedure.png" class="" title="join training procedure">
-
 <p>作者主要的<strong>改进点</strong>在于提出了 <strong>exclusive loss</strong> 和 label estimation</p>
 <p>作者的另一篇相关文章是在视频上做的</p>
 <ul>
@@ -303,7 +301,7 @@
 <li>知乎: <a target="_blank" rel="noopener" href="https://www.leiphone.com/news/201806/o8a3H5um1H2zXrof.html">https://www.leiphone.com/news/201806/o8a3H5um1H2zXrof.html</a></li>
 <li>code: <a target="_blank" rel="noopener" href="https://github.com/Yu-Wu/Exploit-Unknown-Gradually">https://github.com/Yu-Wu/Exploit-Unknown-Gradually</a></li>
 </ul>
-<h1 id="2-The-progressive-model"><a href="#2-The-progressive-model" class="headerlink" title="2. The progressive model"></a>2. The progressive model</h1><h2 id="2-1-Framework-overview"><a href="#2-1-Framework-overview" class="headerlink" title="2.1 Framework overview"></a>2.1 Framework overview</h2><p>训练模型分为两步：在三个数据集上训练CNN模型–&gt;在 unlabeled data 上选择一些数据放到 pseudo-labeled data 上。</p>
+<h1 id="2-The-progressive-model"><a href="#2-The-progressive-model" class="headerlink" title="2. The progressive model"></a>2. The progressive model</h1><h2 id="2-1-Framework-overview"><a href="#2-1-Framework-overview" class="headerlink" title="2.1 Framework overview"></a>2.1 Framework overview</h2><p>训练模型分为两步：在三个数据集上训练CNN模型—&gt;在 unlabeled data 上选择一些数据放到 pseudo-labeled data 上。</p>
 <h2 id="2-2-Preliminaries"><a href="#2-2-Preliminaries" class="headerlink" title="2.2 Preliminaries"></a>2.2 Preliminaries</h2><ul>
 <li>labeled data set $\mathcal{L}$</li>
 <li>unlabeled data set $\mathcal{U}$</li>
@@ -317,32 +315,28 @@
 </li>
 </ul>
 <h2 id="2-3-The-joint-learning-method"><a href="#2-3-The-joint-learning-method" class="headerlink" title="2.3 The joint learning method"></a>2.3 The joint learning method</h2><p><strong>The Exclusive Loss</strong>: index-labeled data set $\mathcal{M}^t$,</p>
-<p>$$\max \limits_{\theta}\parallel \phi(\theta;x_i) - \phi(\theta;x_j)\parallel$$</p>
-<p>令$||v_i||=\tilde{\phi}(\theta;x_i)$是$x_i$的归一化后的特征，因此可以将最大化欧氏距离近似为最小化cos距离。</p>
+<script type="math/tex; mode=display">\max \limits_{\theta}\parallel \phi(\theta;x_i) - \phi(\theta;x_j)\parallel</script><p>令$||v_i||=\tilde{\phi}(\theta;x_i)$是$x_i$的归一化后的特征，因此可以将最大化欧氏距离近似为最小化cos距离。</p>
 <ul>
 <li><strong>这个公式没有推导出来，还在询问作者的答案</strong>.</li>
 <li>在<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1604.01850.pdf">Joint Detection and Identification Feature Learning for Person Search</a>看到了类似的公式，并且有了新理解，在下面补充。</li>
 </ul>
-<p>$$l(V)=-log \frac{exp(v_i^T\tilde{\phi}(x_i)/\tau)}{\sum_{j=1}^{|M^t|}exp(v_j^T\tilde{\phi}(x_i)/\tau)}$$</p>
-<p>其中，V是所有数据的归一化特征，更高的$\tau$导致softer probability distribution.在更新时，先计算当前数据与所有数据的cos距离，在反向传播时，$v_i=1\2*(v_i+\tilde{\phi}(x_i)$并且归一化。</p>
+<script type="math/tex; mode=display">l(V)=-log \frac{exp(v_i^T\tilde{\phi}(x_i)/\tau)}{\sum_{j=1}^{|M^t|}exp(v_j^T\tilde{\phi}(x_i)/\tau)}</script><p>其中，V是所有数据的归一化特征，更高的$\tau$导致softer probability distribution.在更新时，先计算当前数据与所有数据的cos距离，在反向传播时，$v_i=1\2*(v_i+\tilde{\phi}(x_i)$并且归一化。</p>
 <p><strong>The cross-entropy loss</strong>:labeled data set $\mathcal{L}$ and pseudo-labeled data set $\mathcal{S}^t$</p>
 <p>不再陈述</p>
 <p><strong>The total loss</strong>:</p>
-<p>$$\min \lambda l(\mathcal{L}) + \lambda l(\mathcal{S}^t) + (1-\lambda) l(V)(\mathcal{M}^t)$$</p>
-<h2 id="2-4-The-effective-sampling-criterion"><a href="#2-4-The-effective-sampling-criterion" class="headerlink" title="2.4 The effective sampling criterion"></a>2.4 The effective sampling criterion</h2><p>没有采用分类损失，而是利用最近邻赋予假标签并且假标签的真实性为与最近邻真值的距离，每次取$m_t = m_{t-1}+p\cdot n_u$</p>
+<script type="math/tex; mode=display">\min \lambda l(\mathcal{L}) + \lambda l(\mathcal{S}^t) + (1-\lambda) l(V)(\mathcal{M}^t)</script><h2 id="2-4-The-effective-sampling-criterion"><a href="#2-4-The-effective-sampling-criterion" class="headerlink" title="2.4 The effective sampling criterion"></a>2.4 The effective sampling criterion</h2><p>没有采用分类损失，而是利用最近邻赋予假标签并且假标签的真实性为与最近邻真值的距离，每次取$m_t = m_{t-1}+p\cdot n_u$</p>
 <p>验证集是另外一个re-ID的训练集。</p>
 <p>整体算法如下：</p>
 <img src="/2019/03/27/One-Example-reID/Algorithm.png" class="" title="algorithm">
-
 <h2 id="2-5-补充公式"><a href="#2-5-补充公式" class="headerlink" title="2.5 补充公式"></a>2.5 补充公式</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1604.01850.pdf">Joint Detection and Identification Feature Learning for Person Search</a></p>
-<p>定义：n个数据，每个数据表示成向量，即L-2归一化向量$V={v_i}_{i=1}^{n}$，则新向量$x$属于$v_i$类的概率定义为:<br>$$p_i=\frac{exp(v_i^Tx/\tau)}{\sum_{j=1}^{n}exp(v_i^Tx/\tau)}$$<br>其中，$\tau$更高，概率分布更平缓，设为0.1.</p>
+<p>定义：n个数据，每个数据表示成向量，即L-2归一化向量$V=\{v_i\}_{i=1}^{n}$，则新向量$x$属于$v_i$类的概率定义为:</p>
+<script type="math/tex; mode=display">p_i=\frac{exp(v_i^Tx/\tau)}{\sum_{j=1}^{n}exp(v_i^Tx/\tau)}</script><p>其中，$\tau$更高，概率分布更平缓，设为0.1.</p>
 <p>这里有两种含义。</p>
 <p>第一种，$v_i$有标签，但$V$的类别多，属于同一类的数据较少，$x$不属于$V$，$x$有标签t，那么n个数据的概率最大值为x的标签，目标应该是最大化x属于t类的概率，其目的是为了分类更加准确。</p>
 <p>第二种，$v_i$没有标签，$x=v_k$属于$V$，目标是最大化x属于第k个元素的概率，最大也就是1，此时$x=v_k$与其他向量$v_j$都正交，其目的是为了令各个向量都离得比较远，也就是作者的目的。作者这里没有用正交来做损失函数，而是用了softmax，很厉害。</p>
 <h1 id="3-code"><a href="#3-code" class="headerlink" title="3. code"></a>3. code</h1><h2 id="3-1-数据集加载"><a href="#3-1-数据集加载" class="headerlink" title="3.1 数据集加载"></a>3.1 数据集加载</h2><p>两个文件 ./reid/datasets/duke.py ./reid/utils/data/dataset.py</p>
 <p>./reid/datasets/duke.py</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Duke</span>(<span class="params">Dataset</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">download</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="comment"># 预处理数据集,使其变成统一形式,从而使用load进行加载</span></span><br></pre></td></tr></table></figure>
-
 <p>./reid/utils/data/dataset.py</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dataset</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load</span>(<span class="params">self, verbose=True</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_check_integrity</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="comment"># 检查文件的完整性 images  meta.json splits.json</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
     </div>
@@ -506,13 +500,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

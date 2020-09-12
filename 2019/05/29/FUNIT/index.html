@@ -250,14 +250,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -277,16 +277,13 @@
 <p>这篇文章和郑哲东的 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.07223">Joint Discriminative and Generative Learning for Person Re-identification</a> 这篇文章看着有点像，果然是高手的思路都是相同的。不对，两个都是 NVIDIA 的，哈哈哈。</p>
 <p>这篇文章思路奇特，实现简单。</p>
 <a id="more"></a>
-
 <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>传统的 GAN 在训练阶段需要 many images in both source and target classes (其中 source 提供 content, target 提供 classes)(这里的 content 可以粗略的理解成形态或者表情或者属性或者姿势这种与类别无关的内容，classes 表示与类别相关的内容)，并且测试图片需要来自训练时所使用的 source and target classes.而作者提出的方法在训练阶段需要很少的 images in both source and target classes 并且测试时可以提供训练未曾见到过的 target classes.</p>
 <p>其基本假设是当人类见到 new object (target class) 时，可以根据以往的经验推断出它的其他形态，比如曾经见过猫的站立和趴着的状态，见到老虎时，能自动脑补出老虎站立和趴着的状态。</p>
 <p>Question: 如果见过猫的站立和趴着的状态，看到蛇会咋想，蛇没有站或者趴这种说法，这种转换会考虑到这种情况吗？还是会生成一个站着的蛇？哈哈哈？</p>
 <p>Question: 测试时如果把 target dataset 作为 content image，不知道会是什么效果。</p>
 <p>Question: 作者是否隐藏了一个假设：content image 提供的信息或者属性是所有 object 都共享的？</p>
 <img src="/2019/05/29/FUNIT/example.png" class="" title="example">
-
 <h2 id="2-Few-shot-Unsupervised-Image-Translation"><a href="#2-Few-shot-Unsupervised-Image-Translation" class="headerlink" title="2. Few-shot Unsupervised Image Translation"></a>2. Few-shot Unsupervised Image Translation</h2><img src="/2019/05/29/FUNIT/network.png" class="" title="network">
-
 <p>明确几个相关定义：</p>
 <ul>
 <li>数据集一共分为两个：source dataset (source class images), target dataset (target class images), 训练时只使用 source dataset, 测试时使用 source dataset 和 target dataset。</li>
@@ -294,8 +291,7 @@
 <li>模型在训练时，content image 和 class image 都来自 source dataset，在测试时，content image 来自 source dataset，class image 来自 target dataset.</li>
 </ul>
 <p>generator G 的输入是 一张 content image $x$ and a set of K class images $\lbrace y_1,…,y_k \rbrace$, 从而得到输出图片 $\bar{x}$:</p>
-<p>$$\bar{x}=G(x, \lbrace y_1,…,y_k \rbrace)$$</p>
-<p>其中，content image 属于 object class $c_x$，K 张 class images 属于 object class $c_y$，一般情况下，K 比较小并且 $c_x$ 不等于 $c_y$，称 G 为 few-shot image translator.得到的结果在外形看更像 $c_y$，在姿势等方面更像 $c_x$.</p>
+<script type="math/tex; mode=display">\bar{x}=G(x, \lbrace y_1,...,y_k \rbrace)</script><p>其中，content image 属于 object class $c_x$，K 张 class images 属于 object class $c_y$，一般情况下，K 比较小并且 $c_x$ 不等于 $c_y$，称 G 为 few-shot image translator.得到的结果在外形看更像 $c_y$，在姿势等方面更像 $c_x$.</p>
 <p>令 $\mathbb{S}$ and $\mathbb{T}$ 表示 the set of source classes and the set of target classes.在训练阶段，随机从 $\mathbb{S}$ 中选取两类图片 $c_x, c_y \in \mathbb{S}$ 输入 G，在测试时，class image 选自 $\mathbb{T}$，content image 选自 $\mathbb{S}$.</p>
 <h3 id="2-1-Few-shot-Image-Translator"><a href="#2-1-Few-shot-Image-Translator" class="headerlink" title="2.1 Few-shot Image Translator"></a>2.1 Few-shot Image Translator</h3><ul>
 <li>G: generator, consists of a content encoder $E_x$, a class encoder $E_y$, and a decoder $F_x$</li>
@@ -314,14 +310,11 @@
 </ul>
 <p>Question: 这种设置分类器的方法倒是没想过，不知道作者的思路由来，感觉这种多个二分类器要比多分类器更容易扩展，如果多一个类别，可以在不改变原有分类器的情况下加一个即可，但是多分类器的话需要全部替换</p>
 <h3 id="2-3-Learning"><a href="#2-3-Learning" class="headerlink" title="2.3 Learning"></a>2.3 Learning</h3><p><strong>GAN loss</strong>:</p>
-<p>$$L_{GAN}(G,D)=E_x[-\log D^{c_x}(x)]+E_{x,\lbrace y_1,…,y_k \rbrace}[\log (1-D^{c_y}(\bar{x}))]$$</p>
-<p><strong>content reconstruction loss</strong>:</p>
-<p>$$L_{R}(G)=E_x[\parallel x-G(x, \lbrace x \rbrace ) \parallel]$$</p>
-<p>Question: 这个损失是为了约束 $\bar{x}$ 与 $x$ 相似吗？</p>
+<script type="math/tex; mode=display">L_{GAN}(G,D)=E_x[-\log D^{c_x}(x)]+E_{x,\lbrace y_1,...,y_k \rbrace}[\log (1-D^{c_y}(\bar{x}))]</script><p><strong>content reconstruction loss</strong>:</p>
+<script type="math/tex; mode=display">L_{R}(G)=E_x[\parallel x-G(x, \lbrace x \rbrace ) \parallel]</script><p>Question: 这个损失是为了约束 $\bar{x}$ 与 $x$ 相似吗？</p>
 <p><strong>feature matching loss</strong>:</p>
 <p>记 $D_f$ 为 feature extractor, 即移除 D 的分类器。</p>
-<p>$$L_F(G)=E_{x,\lbrace y_1,…,y_k \rbrace}[ \parallel D_f(\bar{x}-\sum _k \frac{D_f(y_k)}{K}) \parallel _1^1] $$</p>
-<p>Question: 按理来说，通过分类损失就已经可以约束 $\bar{x}$ 和 $\lbrace y_1,…,y_k \rbrace$ 相似了，再加上 feature matching 的效果更明显吗？</p>
+<script type="math/tex; mode=display">L_F(G)=E_{x,\lbrace y_1,...,y_k \rbrace}[ \parallel D_f(\bar{x}-\sum _k \frac{D_f(y_k)}{K}) \parallel _1^1]</script><p>Question: 按理来说，通过分类损失就已经可以约束 $\bar{x}$ 和 $\lbrace y_1,…,y_k \rbrace$ 相似了，再加上 feature matching 的效果更明显吗？</p>
 <p>Question: 是怎么约束 $\bar{x}$ 与 $x$ 在姿势等方面相似的？</p>
 <h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><p>训练时 $K=1$，测试时 $K=1, 5, 10, 15, 20$</p>
 <p><strong>Baseline</strong>: 作者把 target class image 在训练阶段是否出现划分为 fair (unavailable) and unfair (available)</p>
@@ -330,7 +323,6 @@
 <li>Unfair: StarGAN-Unfair-K, CycleGAN-Unfair-K, UNIT-Unfair-K, MUNIT-Unfair-K</li>
 </ul>
 <img src="/2019/05/29/FUNIT/visual_comparison.png" class="" title="visual comparison">
-
 <p>至于关于 GAN 的其他指标，则不列了，一是肯定效果好，二是自己也不是特别懂这些指标的意义和难度。</p>
 <p>训练时 source classes 越多，效果越好。</p>
 <p>在跨物种时，效果也会很差，只能改变 content image 的颜色。其类别没有发生变化。</p>
@@ -497,13 +489,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

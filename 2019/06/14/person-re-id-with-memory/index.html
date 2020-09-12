@@ -244,14 +244,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>998</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -271,30 +271,21 @@
 <li>ECN: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.01990">CVPR2019_Invariance Matters Exemplar Memory for Domain Adaptive Person Re-identification</a></li>
 </ul>
 <a id="more"></a>
-
 <h2 id="2-memory-的建立"><a href="#2-memory-的建立" class="headerlink" title="2. memory 的建立"></a>2. memory 的建立</h2><img src="/2019/06/14/person-re-id-with-memory/OIM_network.png" class="" title="OIM network">
-
 <img src="/2019/06/14/person-re-id-with-memory/DIMN_network.png" class="" title="DIMN network">
-
 <img src="/2019/06/14/person-re-id-with-memory/MAR_network.png" class="" title="MAR network">
-
 <img src="/2019/06/14/person-re-id-with-memory/ECN_network.png" class="" title="ECN network">
-
 <p>通过对比网络结构图可以看出，几种方法各有不同。</p>
 <p>OIM(单数据集): 以 id 为索引，更新方式：running average，存储的是特征</p>
 <p>DIMN: 以 id 为索引，更新方式：running average，存储的是经过线性变化的特征</p>
 <p>MAR: 以 agent 的形式存在，更新方式：reference agent learning，存储的是特征</p>
 <p>ECN: 以 index 为索引，更新方式：running average，存储的是特征</p>
 <h2 id="3-memory-的使用"><a href="#3-memory-的使用" class="headerlink" title="3. memory 的使用"></a>3. memory 的使用</h2><p>OIM:</p>
-<p>$$p_i = \frac{\exp(v_i^T x/\tau)}{\sum_{j=1}^L \exp(v_j^T x/\tau)+ \sum_{k=1}^Q \exp(u_k^T x/\tau)}$$</p>
-<p>DIMN:</p>
+<script type="math/tex; mode=display">p_i = \frac{\exp(v_i^T x/\tau)}{\sum_{j=1}^L \exp(v_j^T x/\tau)+ \sum_{k=1}^Q \exp(u_k^T x/\tau)}</script><p>DIMN:</p>
 <p>memory 中的特征是另一张图片的特征，而不是这个公式中$x_i$的特征。</p>
-<p>$$L_{mat}=\sum_{i=1}^{C_b} Cross_Entropy(y_i, Softmax(\hat{W}g_{\phi}(x_i)))$$</p>
-<p>MAR:</p>
-<p>$$L_{AL}=\sum_k -\log l(f(z_k), {a_i})^{(w_k)}=\sum_k -\log \frac{\exp(a_{w_k}^T f(z_k))}{\sum_j \exp(a_j^T f(z_k))} $$</p>
-<p>ECN:</p>
-<p>$$q_i=\frac{exp(z_i/T)}{\sum_j exp(z_j/T)}$$</p>
-
+<script type="math/tex; mode=display">L_{mat}=\sum_{i=1}^{C_b} Cross\_Entropy(y_i, Softmax(\hat{W}g_{\phi}(x_i)))</script><p>MAR:</p>
+<script type="math/tex; mode=display">L_{AL}=\sum_k -\log l(f(z_k), {a_i})^{(w_k)}=\sum_k -\log \frac{\exp(a_{w_k}^T f(z_k))}{\sum_j \exp(a_j^T f(z_k))}</script><p>ECN:</p>
+<script type="math/tex; mode=display">q_i=\frac{exp(z_i/T)}{\sum_j exp(z_j/T)}</script>
     </div>
 
     
@@ -456,13 +447,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

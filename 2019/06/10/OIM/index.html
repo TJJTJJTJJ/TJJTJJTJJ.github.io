@@ -253,14 +253,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>5.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -274,22 +274,19 @@
       
         <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
 <li>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1604.01850">CVPR2017_Joint Detection and Identification Feature Learning for Person Search</a></li>
-<li>code: <a target="_blank" rel="noopener" href="https://github.com/ShuangLI59/person_search">caffe</a>, [pytorch][<a target="_blank" rel="noopener" href="https://github.com/Cysu/open-reid]">https://github.com/Cysu/open-reid]</a></li>
+<li>code: <a target="_blank" rel="noopener" href="https://github.com/ShuangLI59/person_search">caffe</a>, [pytorch][<a target="_blank" rel="noopener" href="https://github.com/Cysu/open-reid">https://github.com/Cysu/open-reid</a>]</li>
 <li>project: <a target="_blank" rel="noopener" href="http://www.ee.cuhk.edu.hk/~xgwang/PS/dataset.html">End-to-End Deep Learning for Person Search</a></li>
 <li>memory: OIM, DIMN, MAR, ECN</li>
 </ul>
 <a id="more"></a>
-
 <p>1作: <a target="_blank" rel="noopener" href="http://www.mit.edu/~lishuang/">Shuang Li</a>，跟过汤晓鸥。</p>
 <p>这一篇文章之前就已经看过了，这次的主要目的是 memory 的使用，因为看到 memory 在 ECN、DIMN 中都有使用，所以看看大家都是怎么用的。</p>
 <p>作者提出 <strong>Online Instance Matching (OIM)</strong> loss function 来融合 pedestrian detection and person re-id.</p>
 <p>作者提出了新的数据集，18184 张图片，8432 个行人，96143 个行人框。</p>
 <p>作者重新定义了 test 的过程。在传统的 test 过程中，gallery 中的图片是已经裁剪好的单个行人图片，作者定义 gallery 中的图片是未经裁剪、有多个行人的图片，需要匹配是哪张图片的哪个行人。</p>
 <img src="/2019/06/10/OIM/person_search.png" class="" title="person search">
-
 <p>CNN 由两部分组成，给定一张 gallery image, a pedestrian proposal net 用于生成行人的 bounding boxes, 更偏向于召回率而不是精确度, 然后 a identification net 用于提取相应的特征。</p>
 <h2 id="3-Method"><a href="#3-Method" class="headerlink" title="3. Method"></a>3. Method</h2><img src="/2019/06/10/OIM/framework.png" class="" title="framework">
-
 <ul>
 <li>a pedestrian proposal net</li>
 <li>a identification net</li>
@@ -297,18 +294,13 @@
 <h3 id="3-1-Online-Instance-Matching-Loss"><a href="#3-1-Online-Instance-Matching-Loss" class="headerlink" title="3.1 Online Instance Matching Loss"></a>3.1 Online Instance Matching Loss</h3><p>a pedestrian proposal net 共检测出三类：labeled identities, unlabeled identities, background clutter. 这里只考虑 labeled identities and unlabeled identities.</p>
 <p>假设 a labeled identity $x\in R^D$，其中 $D$ 表示特征维度，作者建立了一个 <strong>lookup table (LUT)</strong> $V\in R^{D\times L}$ 来储存所有的 feature of all labeled identities，前向传播过程中，计算 cos 距离 $V^T x$，反向传播时 $v_t \gets \gamma v_t (1-\gamma) x$，其中 $\gamma\in [0, 1]$, 并进行归一化。这个过程和 ECN 基本一样。</p>
 <img src="/2019/06/10/OIM/LUT.png" class="" title="LUT">
-
 <p>对于 a unlabeled identites，使用 <strong>a circular queue</strong> $U\in R^{D\times Q}$ 来储存 the features of unlabeed identites that appear in recent mini-batches，其中 $Q$ 表示　queue size. 前向传播时，计算 cos 距离 $V^T x$，反向传播时，弹出 queue 顶端的 features，插入当前 batch 的特征。</p>
 <p>通过上面两个结构，作者重新定义了 $x$ 属于某类的概率:</p>
-<p>$$p_i = \frac{\exp(v_i^T x/\tau)}{\sum_{j=1}^L \exp(v_j^T x/\tau)+ \sum_{k=1}^Q \exp(u_k^T x/\tau)}$$</p>
-<p>其中，更高的 $\tau$ 导致更平缓的分布。</p>
-<p>$$q_i = \frac{\exp(u_i^T x/\tau)}{\sum_{j=1}^L \exp(v_j^T x/\tau)+ \sum_{k=1}^Q \exp(u_k^T x/\tau)}$$</p>
-<p>损失函数为:</p>
-<p>$$L = E_x [-\log p_t]$$</p>
-<p>我觉得作者这里写错了，但无伤大雅。</p>
+<script type="math/tex; mode=display">p_i = \frac{\exp(v_i^T x/\tau)}{\sum_{j=1}^L \exp(v_j^T x/\tau)+ \sum_{k=1}^Q \exp(u_k^T x/\tau)}</script><p>其中，更高的 $\tau$ 导致更平缓的分布。</p>
+<script type="math/tex; mode=display">q_i = \frac{\exp(u_i^T x/\tau)}{\sum_{j=1}^L \exp(v_j^T x/\tau)+ \sum_{k=1}^Q \exp(u_k^T x/\tau)}</script><p>损失函数为:</p>
+<script type="math/tex; mode=display">L = E_x [-\log p_t]</script><p>我觉得作者这里写错了，但无伤大雅。</p>
 <p>其对 $x$ 的反向推导很有意思，是：</p>
-<p>$$\frac{\partial L}{\partial x}=-\frac{1}{\tau}[ v_t-\sum_{j=1}^L p_j v_t-\sum_{k=1}^Q q_k u_k ]$$</p>
-<p>后面会补充整个推导过程</p>
+<script type="math/tex; mode=display">\frac{\partial L}{\partial x}=-\frac{1}{\tau}[ v_t-\sum_{j=1}^L p_j v_t-\sum_{k=1}^Q q_k u_k ]</script><p>后面会补充整个推导过程</p>
 <p><strong>Why not Softmax loss</strong>: 作者不使用 Softmax loss 有两个方面的原因：第一个原因不是很理解，不是很赞同，第二个原因是 unkown identities 没有 label.</p>
 <p><strong>Scalability</strong>: 随着 id 的增加，分母的计算时间会成为瓶颈，所以采用 sub-sampling 的方法计算，具体见下文</p>
 <p>除此之外，OIM loss 看似和 Softmax 相似，但是OIM loss是非参数的，缺点是容易过拟合，L2-normalized 能减少过拟合。</p>
@@ -316,36 +308,32 @@
 <p>2019-06-12: ICCV 2019 三个 WR, 凉凉。</p>
 <p><strong>补充反向传播推导过程</strong>：</p>
 <p>第一步：假设只有两个变量，很容易就可以推导到多个变量，令</p>
-<p>$$f_1=\frac{e^{x_1}}{e^{x_1}+e^{x_2}}, f_2=\frac{e^{x_2}}{e^{x_1}+e^{x_2}} $$</p>
-<p>不能随便地使用$f_1+f_2=1$，则</p>
-<p>$$\frac{\partial f_1}{\partial x_1} = \frac{e^{x_1}(e^{x_1}+e^{x_2})-e^{x_1} e^{x_1}}{(e^{x_1}+e^{x_2})^2}=f_1-(f_1)^2$$</p>
-<p>$$\frac{\partial f_1}{\partial x_2} = -e^{x_1} \frac{e^{x_2}}{(e^{x_1}+e^{x_2})^2}=-f_1 \cdot f_2$$</p>
-<p>第二步：令 $x_1=v_1 x, x_2=v_2 x$:</p>
-<p>$$f_1=\frac{e^{v_1 x}}{e^{v_1 x}+e^{v_2 x}}, f_2=\frac{e^{v_2 x}}{e^{v_1 x}+e^{v_2 x}}$$</p>
-<p>则</p>
-<p>$$\frac{\partial f_1}{\partial x} = \frac{\partial f_1}{\partial x_1} \frac{\partial x_1}{\partial x} + \frac{\partial f_1}{\partial x_2} \frac{\partial x_2}{\partial x}=(f_1-(f_1)^2)v_1 + (-f_1 \cdot f_2)v_2 $$</p>
-<p>$$\frac{\partial f_1}{\partial v_1} = \frac{\partial f_1}{\partial x_1} \frac{\partial x_1}{\partial v_1}=(f_1-(f_1)^2)x$$</p>
-<p>$$\frac{\partial f_1}{\partial v_2} = \frac{\partial f_1}{\partial x_2} \frac{\partial x_2}{\partial v_2}= (-f_1 \cdot f_2)x $$</p>
-<p>第三步：计算损失函数，假设最优值是第一个， $L=-\log(f_1)$</p>
-<p>$$<br>\begin{aligned}<br>\frac{\partial L}{\partial x} &amp;= \frac{\partial L}{\partial f_1} \frac{\partial f_1}{\partial x} \<br>&amp;= - \frac{1}{f_1} \cdot ((f_1-(f_1)^2)v_1 + (-f_1 \cdot f_2)v_2) \<br>&amp;= (1-f_1) v_1 - f_2 v_2 \<br>&amp;= v_1 - (f_1 v_1 + v_2 v_2)<br>\end{aligned}<br>$$</p>
-<p>$$\frac{\partial L}{\partial v_1} = \frac{\partial L}{\partial f_1} \frac{\partial f_1}{\partial v_1}=-(1-f_1)x$$</p>
-<p>$$\frac{\partial L}{\partial v_2} = \frac{\partial L}{\partial f_1} \frac{\partial f_1}{\partial v_2}= f_2 x $$</p>
-<p>第四步：推广到多个变量$v_1, v_2, v_3…$</p>
-<p>$$<br>\begin{aligned}<br>\frac{\partial L}{\partial x} &amp;= v1-(\sum_i v_i x) \<br>\frac{\partial L}{\partial v_1} &amp;= -(1-f_1)x \<br>\frac{\partial L}{\partial v_2} &amp;= f_2 x \<br>\frac{\partial L}{\partial v_3} &amp;= f_3 x<br>\end{aligned}<br>$$</p>
-<h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><h3 id="4-1-Effectiveness-of-Online-Instance-Matching"><a href="#4-1-Effectiveness-of-Online-Instance-Matching" class="headerlink" title="4.1 Effectiveness of Online Instance Matching"></a>4.1 Effectiveness of Online Instance Matching</h3><img src="/2019/06/10/OIM/OIM_Softmax.png" class="" title="comparisons between the OIM and Softmax loss">
-
+<script type="math/tex; mode=display">f_1=\frac{e^{x_1}}{e^{x_1}+e^{x_2}}, f_2=\frac{e^{x_2}}{e^{x_1}+e^{x_2}}</script><p>不能随便地使用$f_1+f_2=1$，则</p>
+<script type="math/tex; mode=display">\frac{\partial f_1}{\partial x_1} = \frac{e^{x_1}(e^{x_1}+e^{x_2})-e^{x_1} e^{x_1}}{(e^{x_1}+e^{x_2})^2}=f_1-(f_1)^2</script><script type="math/tex; mode=display">\frac{\partial f_1}{\partial x_2} = -e^{x_1} \frac{e^{x_2}}{(e^{x_1}+e^{x_2})^2}=-f_1 \cdot f_2</script><p>第二步：令 $x_1=v_1 x, x_2=v_2 x$:</p>
+<script type="math/tex; mode=display">f_1=\frac{e^{v_1 x}}{e^{v_1 x}+e^{v_2 x}}, f_2=\frac{e^{v_2 x}}{e^{v_1 x}+e^{v_2 x}}</script><p>则</p>
+<script type="math/tex; mode=display">\frac{\partial f_1}{\partial x} = \frac{\partial f_1}{\partial x_1} \frac{\partial x_1}{\partial x} + \frac{\partial f_1}{\partial x_2} \frac{\partial x_2}{\partial x}=(f_1-(f_1)^2)v_1 + (-f_1 \cdot f_2)v_2</script><script type="math/tex; mode=display">\frac{\partial f_1}{\partial v_1} = \frac{\partial f_1}{\partial x_1} \frac{\partial x_1}{\partial v_1}=(f_1-(f_1)^2)x</script><script type="math/tex; mode=display">\frac{\partial f_1}{\partial v_2} = \frac{\partial f_1}{\partial x_2} \frac{\partial x_2}{\partial v_2}= (-f_1 \cdot f_2)x</script><p>第三步：计算损失函数，假设最优值是第一个， $L=-\log(f_1)$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial L}{\partial x} &= \frac{\partial L}{\partial f_1} \frac{\partial f_1}{\partial x} \\
+&= - \frac{1}{f_1} \cdot ((f_1-(f_1)^2)v_1 + (-f_1 \cdot f_2)v_2) \\
+&= (1-f_1) v_1 - f_2 v_2 \\
+&= v_1 - (f_1 v_1 + v_2 v_2)
+\end{aligned}</script><script type="math/tex; mode=display">\frac{\partial L}{\partial v_1} = \frac{\partial L}{\partial f_1} \frac{\partial f_1}{\partial v_1}=-(1-f_1)x</script><script type="math/tex; mode=display">\frac{\partial L}{\partial v_2} = \frac{\partial L}{\partial f_1} \frac{\partial f_1}{\partial v_2}= f_2 x</script><p>第四步：推广到多个变量$v_1, v_2, v_3…$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial L}{\partial x} &= v1-(\sum_i v_i x) \\
+\frac{\partial L}{\partial v_1} &= -(1-f_1)x \\
+\frac{\partial L}{\partial v_2} &= f_2 x \\
+\frac{\partial L}{\partial v_3} &= f_3 x
+\end{aligned}</script><h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><h3 id="4-1-Effectiveness-of-Online-Instance-Matching"><a href="#4-1-Effectiveness-of-Online-Instance-Matching" class="headerlink" title="4.1 Effectiveness of Online Instance Matching"></a>4.1 Effectiveness of Online Instance Matching</h3><img src="/2019/06/10/OIM/OIM_Softmax.png" class="" title="comparisons between the OIM and Softmax loss">
 <img src="/2019/06/10/OIM/Softmax_OIM.png" class="" title="Softmax OIM for standard person re-id task">
-
 <p><strong>Sub-sampling the identities</strong>:</p>
 <img src="/2019/06/10/OIM/sub_sampling.png" class="" title="sub-sampling">
-
 <p>当 sub-sampling 的 size 更小的时候，最终性能差不多，但是收敛速度更快，说明了作者提出的方法能有效地处理大规模数据集。</p>
 <p><strong>Low-dimensional subspace</strong>: 作者对比了 128, 256, 512, 1024， 2048-dimention，发现原始的 2048 维特征得到结果不如其他。</p>
 <img src="/2019/06/10/OIM/low_dimensional_subspace.png" class="" title="low dimensional subspace">
-
 <h2 id="5-code"><a href="#5-code" class="headerlink" title="5. code"></a>5. code</h2><p>从 open-reid 中只能看到 LUT 的代码，可以看出来，这个代码和 ECN 的代码可以说是一样，牛逼啊。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn, autograd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OIM</span>(<span class="params">autograd.Function</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, lut, momentum=<span class="number">0.5</span></span>):</span></span><br><span class="line">        super(OIM, self).__init__()</span><br><span class="line">        self.lut = lut</span><br><span class="line">        self.momentum = momentum</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, inputs, targets</span>):</span></span><br><span class="line">        self.save_for_backward(inputs, targets)</span><br><span class="line">        outputs = inputs.mm(self.lut.t())</span><br><span class="line">        <span class="keyword">return</span> outputs</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span>(<span class="params">self, grad_outputs</span>):</span></span><br><span class="line">        inputs, targets = self.saved_tensors</span><br><span class="line">        grad_inputs = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> self.needs_input_grad[<span class="number">0</span>]:</span><br><span class="line">            grad_inputs = grad_outputs.mm(self.lut)</span><br><span class="line">        <span class="keyword">for</span> x, y <span class="keyword">in</span> zip(inputs, targets):</span><br><span class="line">            self.lut[y] = self.momentum * self.lut[y] + (<span class="number">1.</span> - self.momentum) * x</span><br><span class="line">            self.lut[y] /= self.lut[y].norm()</span><br><span class="line">        <span class="keyword">return</span> grad_inputs, <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">oim</span>(<span class="params">inputs, targets, lut, momentum=<span class="number">0.5</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> OIM(lut, momentum=momentum)(inputs, targets)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OIMLoss</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, num_features, num_classes, scalar=<span class="number">1.0</span>, momentum=<span class="number">0.5</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 weight=None, size_average=True</span>):</span></span><br><span class="line">        super(OIMLoss, self).__init__()</span><br><span class="line">        self.num_features = num_features</span><br><span class="line">        self.num_classes = num_classes</span><br><span class="line">        self.momentum = momentum</span><br><span class="line">        self.scalar = scalar <span class="comment"># Temperature</span></span><br><span class="line">        self.weight = weight</span><br><span class="line">        self.size_average = size_average</span><br><span class="line">        <span class="comment"># ECN 这里用的 nn.Parapmeter</span></span><br><span class="line">        self.register_buffer(<span class="string">&#x27;lut&#x27;</span>, torch.zeros(num_classes, num_features))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, inputs, targets</span>):</span></span><br><span class="line">        inputs = oim(inputs, targets, self.lut, momentum=self.momentum)</span><br><span class="line">        inputs *= self.scalar</span><br><span class="line">        loss = F.cross_entropy(inputs, targets, weight=self.weight,</span><br><span class="line">                               size_average=self.size_average)</span><br><span class="line">        <span class="keyword">return</span> loss, inputs</span><br></pre></td></tr></table></figure>
-
 <p>这里我有点晕，简单理一理。</p>
 <p>第一，定义 operation: $output =  F (input, target;\theta)$。因为 LUT 的前向传播和反向传播不同于一般的 operation，所以需要重新定义 operation，手动实现前向传播和反向传播，前向传播需要 lut, inputs，反向传播对 inputs 求导和 利用 target 对 lut 的更新。</p>
 <p>第二，定义损失函数 Loss. 这个 OIMLoss 用了一个层来包装整个 operation 和 变量，方便管理。</p>
@@ -511,13 +499,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

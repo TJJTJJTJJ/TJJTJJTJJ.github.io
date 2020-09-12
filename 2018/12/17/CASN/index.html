@@ -259,14 +259,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -281,16 +281,13 @@
         <p>CASN: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.07487">Re-Identification with Consistent Attentive Siamese Networks</a></p>
 <p>Meng Zheng, Srikrishna Karanam, Ziyan Wu, and Richard J. Radke</p>
 <a id="more"></a>
-
 <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>这篇论文；</p>
 <ul>
 <li>采用了Grad-CAM作为attention机制</li>
 <li>attention consistency: 采用Siamese-Net来使同一个人的attention位置是一样的</li>
 </ul>
 <h1 id="2-The-Consistent-Attentive-Siamese-Network"><a href="#2-The-Consistent-Attentive-Siamese-Network" class="headerlink" title="2. The Consistent Attentive Siamese Network"></a>2. The Consistent Attentive Siamese Network</h1><p>整体网络架构如图所示：</p>
-<p><img src="./CASN/CASN1.png" alt="CASN的整体网络架构"></p>
-<img src="/2018/12/17/CASN/CASN1.png" class="" title="CASN的整体网络架构">
-
+<p><img src="./CASN/CASN1.png" alt="CASN的整体网络架构"><br><img src="/2018/12/17/CASN/CASN1.png" class="" title="CASN的整体网络架构"></p>
 <ul>
 <li>整体网络架构以IDE为基准网络，分为两部分:</li>
 <li><ul>
@@ -304,21 +301,21 @@
 <li>Identification 和 Siamese 的特征提取网络共享，不同的只是fc层</li>
 </ul>
 <h2 id="2-1-The-Identification-Module"><a href="#2-1-The-Identification-Module" class="headerlink" title="2.1 The Identification Module"></a>2.1 The Identification Module</h2><p>通过<a target="_blank" rel="noopener" href="https://tjjtjjtjj.github.io/2018/12/14/Grad-CAM/#more">Grad-CAM</a>的学习，已经知道了Grad-CAM的作用。</p>
-<p><strong>Identification loss:</strong><br>$$L_{ide}=-\sum_{n=1}^N log \frac{exp(y_{c_n})}{\sum_j exp(y_j)}$$</p>
-<p>Identification loss 更偏向于不同行人之间的判别信息。</p>
-<p><strong>Identification attention loss:</strong><br>$$L_{ia}=\overline{y_{c_n}}$$</p>
-<p>其中，给定一张图片$I_n$和类别$c_n$，Grad-CAM得到attention map $M_n$，做归一化操作，令$\Sigma(M_n)=sigmoid(\alpha(M_n-\beta))$，从而得到去掉attention区域的新图片$\overline{I_n}=I_n*(1-\Sigma(M_n))$，$\overline{y_{c_n}}$是$\overline{I_n}$的预测值。</p>
+<p><strong>Identification loss:</strong></p>
+<script type="math/tex; mode=display">L_{ide}=-\sum_{n=1}^N log \frac{exp(y_{c_n})}{\sum_j exp(y_j)}</script><p>Identification loss 更偏向于不同行人之间的判别信息。</p>
+<p><strong>Identification attention loss:</strong></p>
+<script type="math/tex; mode=display">L_{ia}=\overline{y_{c_n}}</script><p>其中，给定一张图片$I_n$和类别$c_n$，Grad-CAM得到attention map $M_n$，做归一化操作，令$\Sigma(M_n)=sigmoid(\alpha(M_n-\beta))$，从而得到去掉attention区域的新图片$\overline{I_n}=I_n*(1-\Sigma(M_n))$，$\overline{y_{c_n}}$是$\overline{I_n}$的预测值。</p>
 <p>Identification attention loss 更偏向于行人的全部信息。</p>
 <p>我的理解是$\overline{I_n}$中尽可能包含少的ID信息，所以预测出是$c_n$的概率更小，得到的attention区域尽可能地包括全部信息。</p>
-<p><strong>两种loss的效果对比图</strong><br><img src="./CASN/CASN2.png" alt="两种loss的效果对比图"></p>
-<img src="/2018/12/17/CASN/CASN2.png" class="" title="两种loss的效果对比图">
-
-<h2 id="2-2-The-Siamese-Module"><a href="#2-2-The-Siamese-Module" class="headerlink" title="2.2 The Siamese Module"></a>2.2 The Siamese Module</h2><p>Siamese Module 结构图<br><img src="./CASN/CASN3.png" alt="Siamese Module 结构图"></p>
-<img src="/2018/12/17/CASN/CASN3.png" class="" title="Siamese Module 结构图">
-
-<p><strong>Siamese loss</strong><br>$$L_{bce}=-\sum_p log(\frac{exp(z_{c_p})}{exp(z_0)+exp(z_1)})$$</p>
-<p><strong>Siamese attention loss</strong><br>$$\alpha_i=<br>\begin{cases}<br>1, \mbox{if} f_i^-&gt;0 \<br>0, otherwise<br>\end{cases}<br>$$<br>$$s_1=&lt;\alpha, f_1&gt;, s_2=&lt;\alpha, f_2&gt;(dot products)$$<br>$$\alpha_1^k=GAP(\frac{\partial s_1}{\partial A_1}), \alpha_2^k=GAP(\frac{\partial s_2}{\partial A_2}) \tag{5}$$<br>$$M_1=ReLU(\sum_k \alpha_1^k A_1^k),M_2=ReLU(\sum_k \alpha_2^k A_2^k)$$<br>$$L_{sa}=L_{bce}+\alpha \parallel M_{m1}^{resize}-M_{m2}^{resize} \parallel _2$$<br>$$\alpha=0.2$$</p>
-<p>其中，$M_{m1}$是$M_1$中超过阈值t的元素，$M_{m1}^{resize}$是$M_{m1}$resize成相同大小的元素，主要是为了解决对齐问题。</p>
+<p><strong>两种loss的效果对比图</strong><br><img src="./CASN/CASN2.png" alt="两种loss的效果对比图"><br><img src="/2018/12/17/CASN/CASN2.png" class="" title="两种loss的效果对比图"></p>
+<h2 id="2-2-The-Siamese-Module"><a href="#2-2-The-Siamese-Module" class="headerlink" title="2.2 The Siamese Module"></a>2.2 The Siamese Module</h2><p>Siamese Module 结构图<br><img src="./CASN/CASN3.png" alt="Siamese Module 结构图"><br><img src="/2018/12/17/CASN/CASN3.png" class="" title="Siamese Module 结构图"></p>
+<p><strong>Siamese loss</strong></p>
+<script type="math/tex; mode=display">L_{bce}=-\sum_p log(\frac{exp(z_{c_p})}{exp(z_0)+exp(z_1)})</script><p><strong>Siamese attention loss</strong></p>
+<script type="math/tex; mode=display">\alpha_i=
+\begin{cases}
+1, \mbox{if} f_i^->0 \\
+0, otherwise
+\end{cases}</script><script type="math/tex; mode=display">s_1=<\alpha, f_1>, s_2=<\alpha, f_2>(dot products)</script><script type="math/tex; mode=display">\alpha_1^k=GAP(\frac{\partial s_1}{\partial A_1}), \alpha_2^k=GAP(\frac{\partial s_2}{\partial A_2}) \tag{5}</script><script type="math/tex; mode=display">M_1=ReLU(\sum_k \alpha_1^k A_1^k),M_2=ReLU(\sum_k \alpha_2^k A_2^k)</script><script type="math/tex; mode=display">L_{sa}=L_{bce}+\alpha \parallel M_{m1}^{resize}-M_{m2}^{resize} \parallel _2</script><script type="math/tex; mode=display">\alpha=0.2</script><p>其中，$M_{m1}$是$M_1$中超过阈值t的元素，$M_{m1}^{resize}$是$M_{m1}$resize成相同大小的元素，主要是为了解决对齐问题。</p>
 <p>通过与作者的沟通，作者认为$s_1$表示了$f_1$中对 BCE prediction 有用的信息。但是我没有见过这么表示对预测有用的信息的方法，之前只见过通过类别进行反向传播的(Grad-CAM)，但是作者这么坚持，说明应该是有效的。</p>
 <blockquote>
 <ol>
@@ -326,11 +323,9 @@
 <li>s1 is not I1’s class. We here call s1 the importance score, which collect scores for every neuron which contributes to BCE prediction.</li>
 </ol>
 </blockquote>
-<h2 id="2-3-Overall-Design-of-the-CASN"><a href="#2-3-Overall-Design-of-the-CASN" class="headerlink" title="2.3 Overall Design of the CASN"></a>2.3 Overall Design of the CASN</h2><p>CASN的整体架构<br><img src="./CASN/CASN4.png" alt="CASN的整体架构"></p>
-<img src="/2018/12/17/CASN/CASN4.png" class="" title="CASN的整体架构">
-
-<p><strong>The overall loss</strong><br>$$L=L_{ide}+\lambda_1 L_{ia}+\lambda_2 L_{sa}$$</p>
-<h3 id="3-Experiments-and-Results"><a href="#3-Experiments-and-Results" class="headerlink" title="3. Experiments and Results"></a>3. Experiments and Results</h3><h4 id="Implementation-Details"><a href="#Implementation-Details" class="headerlink" title="Implementation Details"></a>Implementation Details</h4><ul>
+<h2 id="2-3-Overall-Design-of-the-CASN"><a href="#2-3-Overall-Design-of-the-CASN" class="headerlink" title="2.3 Overall Design of the CASN"></a>2.3 Overall Design of the CASN</h2><p>CASN的整体架构<br><img src="./CASN/CASN4.png" alt="CASN的整体架构"><br><img src="/2018/12/17/CASN/CASN4.png" class="" title="CASN的整体架构"></p>
+<p><strong>The overall loss</strong></p>
+<script type="math/tex; mode=display">L=L_{ide}+\lambda_1 L_{ia}+\lambda_2 L_{sa}</script><h3 id="3-Experiments-and-Results"><a href="#3-Experiments-and-Results" class="headerlink" title="3. Experiments and Results"></a>3. Experiments and Results</h3><h4 id="Implementation-Details"><a href="#Implementation-Details" class="headerlink" title="Implementation Details"></a>Implementation Details</h4><ul>
 <li>input: 288x144</li>
 <li>SGD: momentum=0.9</li>
 <li>lr=0.03</li>
@@ -340,12 +335,8 @@
 <li>batch=16</li>
 <li>test:  we send the query and gallery as pair inputs to obtain attention maps $\parallel M_{m1}^{resize}-M_{m2}^{resize} \parallel _2$</li>
 </ul>
-<h4 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h4><p><img src="./CASN/CASN5.png" alt="Results"></p>
-<img src="/2018/12/17/CASN/CASN5.png" class="" title="Results">
-
-<p><img src="./CASN/CASN6.png" alt="Ablation Study"></p>
-<img src="/2018/12/17/CASN/CASN6.png" class="" title="Ablation Study">
-
+<h4 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h4><p><img src="./CASN/CASN5.png" alt="Results"><br><img src="/2018/12/17/CASN/CASN5.png" class="" title="Results"></p>
+<p><img src="./CASN/CASN6.png" alt="Ablation Study"><br><img src="/2018/12/17/CASN/CASN6.png" class="" title="Ablation Study"></p>
 <p>通过 Ablation Study , 对比CASN(IDE)、PCB，可以看出IA或者SA的作用和简单地分成6块达到的效果是类似的，这是不是说明了这种attention机制没有很大的作用，或者说分成6块就已经是一种很好的attention机制。</p>
 <p>另外，+IA、+SA、CASN的对比，感觉IA或者SA一种机制就已经足够了，两者达到的效果是一样的，只使用一种就可以了。</p>
 <h3 id="4-Others"><a href="#4-Others" class="headerlink" title="4. Others"></a>4. Others</h3><p>这篇论文不懂的地方：</p>
@@ -523,13 +514,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

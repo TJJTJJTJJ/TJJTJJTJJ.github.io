@@ -298,14 +298,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>19k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>18 分钟</span>
             </span>
 
         </div>
@@ -318,28 +318,24 @@
 
       
         <h1 id="transfer-learning"><a href="#transfer-learning" class="headerlink" title="transfer learning"></a>transfer learning</h1><a id="more"></a>
-
 <p>这个博客主要是因为最近看了几篇关于无监督迁移学习在行人重识别领域的论文，发现隔了几天，自己对论文就忘记得差不多了，所以对论文的关键内容做个简单记录。</p>
 <p>参考链接: <a target="_blank" rel="noopener" href="https://github.com/layumi/DukeMTMC-reID_evaluation/blob/master/State-of-the-art/README.md">Transfer Learning</a></p>
 <p>因为在某些情况下，图片或者公式无法正常显示，所以，我基本会同步到我的博客<br><a target="_blank" rel="noopener" href="https://tjjtjjtjj.github.io/2018/11/29/person-reid-transfer-learning/#more">https://tjjtjjtjj.github.io/2018/11/29/person-reid-transfer-learning/#more</a></p>
 <p>现有方法在transfer learning方向的性能对比</p>
-<p><img src="./pic/transfer/transfer.png" alt="transfer learning"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/transfer.png" class="" title="transfer learning">
+<p><img src="./pic/transfer/transfer.png" alt="transfer learning"><br><img src="/2018/11/29/person-reid-transfer-learning/transfer.png" class="" title="transfer learning"></p>
 <hr>
 <h2 id="1-ARN"><a href="#1-ARN" class="headerlink" title="1. ARN"></a>1. ARN</h2><p><a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w6/Li_Adaptation_and_Re-Identification_CVPR_2018_paper.pdf">Adaptation and Re-Identification Network: An Unsupervised Deep Transfer Learning Approach to Person Re-Identification</a></p>
 <p>Yu-Jhe Li, Fu-En Yang, Yen-Cheng Liu, Yu-Ying Yeh, Xiaofei Du, and Yu-Chiang Frank Wang, CVPR 2018 Workshop</p>
 <p>这篇论文主要分离了数据集的特有特征和行人特征，从而使不同数据集的行人特征投射到统一特征空间中。</p>
 <p>作者是台湾人，没有公布代码。有其他人复现了<a target="_blank" rel="noopener" href="https://github.com/huanghoujing/ARN">代码</a>，但是效果很差。</p>
 <p>我下一步也会尝试复现一下。</p>
-<h3 id="1-1-网络架构"><a href="#1-1-网络架构" class="headerlink" title="1.1 网络架构"></a>1.1 网络架构</h3><p><img src="./pic/ARN/ARN.png" alt="ARN的网络架构"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/ARN.png" class="" title="ARN的网络架构">
-
+<h3 id="1-1-网络架构"><a href="#1-1-网络架构" class="headerlink" title="1.1 网络架构"></a>1.1 网络架构</h3><p><img src="./pic/ARN/ARN.png" alt="ARN的网络架构"><br><img src="/2018/11/29/person-reid-transfer-learning/ARN.png" class="" title="ARN的网络架构"></p>
 <p>根据作者的描述，</p>
 <ul>
 <li>$E_I$是resnet50的前四个layer,输入是3X256X256,输出$X^s$是2048X7X7</li>
 <li>$E_T,E_C,E_S$,是相同的网络架构，来自FCN的三层，通过查阅FCN的网络设置，初步猜想是FCN的conv6，conv7，conv8，相应的Decoder暂时按照反卷积来设置。这一部分还需要参考FCN的网络设置。</li>
 <li>$E_T,E_C,E_S$ conv6:7X7X2048,relu6,drop6(0.5),conv7:1X1X2048,relu6,drop6(0.5),conv8:1X1X2048,至于conv6,7的bn和conv8的bn，relu要不要，还需要实验的验证</li>
-<li>在FCN中，逆卷积的使用方式是 deconv(k=64, s=32, p=0)+crop(offset=19)，参考资料:<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22976342?utm_source=tuicool&utm_medium=referral">FCN学习:Semantic Segmentation</a>,<a target="_blank" rel="noopener" href="https://blog.csdn.net/zlrai5895/article/details/80473814">经典网络复现系列（一）：FCN</a></li>
+<li>在FCN中，逆卷积的使用方式是 deconv(k=64, s=32, p=0)+crop(offset=19)，参考资料:<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22976342?utm_source=tuicool&amp;utm_medium=referral">FCN学习:Semantic Segmentation</a>,<a target="_blank" rel="noopener" href="https://blog.csdn.net/zlrai5895/article/details/80473814">经典网络复现系列（一）：FCN</a></li>
 <li>反卷积的时候一般都是k=2n, s=n,</li>
 <li>参考FCN和pytorch的入门与实践第六章的生成器，我们的Decoder使用deconv(k=1,s=1), deconv(k=1, s=1), deconv(k=7, s=1)</li>
 <li>encoder和decoder都使用bn和relu</li>
@@ -347,13 +343,13 @@
 <li>学习率，$E_I=10^{-7}, E_T E_C E_S D_C = 10^{-3}, C_S = 2*10^{-3}  $，并且在前几个epoch只更新$E_I$</li>
 <li>优化器：SGD</li>
 </ul>
-<h3 id="1-2-损失函数"><a href="#1-2-损失函数" class="headerlink" title="1.2 损失函数"></a>1.2 损失函数</h3><p>分类损失<br>$$L_{class}=-\sum_{i=1}^{N_s}y_i^s.log\hat{y}_i^s \tag {1}$$</p>
-<p>对比损失<br>$$L_{ctrs}=\sum_{i,j}{\lambda}(e_{c,i}^s-e_{c,j}^s)^2+ ({1-\lambda}) [max(0, m-(e_{c,i}^s-e_{c,j}^s))]^2 \tag {2}$$</p>
-<p>重构误差<br>$$ L_{rec} = \sum_{i=1}^{N_s} ||X_i^s-\hat{X_i^s}||^2 + \sum_{i=1}^{N_t} ||X_i^t-\hat{X_i^t}||^2 \tag 3 $$</p>
-<p>差别损失<br>$$ L_{diff} = || {H_c^s}^T H_p^s ||_F^2 + || {H_c^t}^T H_p^t ||_F^2 \tag 4 $$</p>
-<p>总损失<br>$$ L_{total} = L_{class} + \alpha L_{ctrs} + \beta L_{rec} + \gamma L_{diff} \tag {5} $$</p>
-<p>其中<br>$$ \alpha=0.01, \beta= 2.0, \gamma=1500 $$</p>
-<h3 id="1-3-模块分析"><a href="#1-3-模块分析" class="headerlink" title="1.3 模块分析"></a>1.3 模块分析</h3><p>三个模块:</p>
+<h3 id="1-2-损失函数"><a href="#1-2-损失函数" class="headerlink" title="1.2 损失函数"></a>1.2 损失函数</h3><p>分类损失</p>
+<script type="math/tex; mode=display">L_{class}=-\sum_{i=1}^{N_s}y_i^s.log\hat{y}_i^s \tag {1}</script><p>对比损失</p>
+<script type="math/tex; mode=display">L_{ctrs}=\sum_{i,j}{\lambda}(e_{c,i}^s-e_{c,j}^s)^2+ ({1-\lambda}) [max(0, m-(e_{c,i}^s-e_{c,j}^s))]^2 \tag {2}</script><p>重构误差</p>
+<script type="math/tex; mode=display">L_{rec} = \sum_{i=1}^{N_s} ||X_i^s-\hat{X_i^s}||^2 + \sum_{i=1}^{N_t} ||X_i^t-\hat{X_i^t}||^2 \tag 3</script><p>差别损失</p>
+<script type="math/tex; mode=display">L_{diff} = || {H_c^s}^T H_p^s ||_F^2 + || {H_c^t}^T H_p^t ||_F^2 \tag 4</script><p>总损失</p>
+<script type="math/tex; mode=display">L_{total} = L_{class} + \alpha L_{ctrs} + \beta L_{rec} + \gamma L_{diff} \tag {5}</script><p>其中</p>
+<script type="math/tex; mode=display">\alpha=0.01, \beta= 2.0, \gamma=1500</script><h3 id="1-3-模块分析"><a href="#1-3-模块分析" class="headerlink" title="1.3 模块分析"></a>1.3 模块分析</h3><p>三个模块:</p>
 <ol>
 <li><strong>$ L_{rec} $</strong></li>
 <li><strong>$ L_{class} $和$ L_{ctrs} $</strong></li>
@@ -363,109 +359,121 @@
 <p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hijack00/article/details/52238549">深度学习中的“重构”</a></p>
 <p>作者在这里提示，当只有重构损失函数的时候，应该保持$E_I$不更新，只更新$E_C$.</p>
 <p>S: Market, T: Duke; S: Duke, T: Market</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">method</th>
-<th align="center">rank-1</th>
-<th align="center">mAP</th>
-<th align="center">rank-1</th>
-<th align="center">mAP</th>
+<th style="text-align:center">method</th>
+<th style="text-align:center">rank-1</th>
+<th style="text-align:center">mAP</th>
+<th style="text-align:center">rank-1</th>
+<th style="text-align:center">mAP</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$L_{rec}$</td>
-<td align="center">44.5</td>
-<td align="center">20.3</td>
-<td align="center">31.2</td>
-<td align="center">18.4</td>
+<tbody>
+<tr>
+<td style="text-align:center">$L_{rec}$</td>
+<td style="text-align:center">44.5</td>
+<td style="text-align:center">20.3</td>
+<td style="text-align:center">31.2</td>
+<td style="text-align:center">18.4</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="1-3-2-监督-L-rec-L-class-和-L-ctrs"><a href="#1-3-2-监督-L-rec-L-class-和-L-ctrs" class="headerlink" title="1.3.2 监督$ L_{rec} $, $ L_{class} $和$ L_{ctrs} $"></a>1.3.2 监督$ L_{rec} $, $ L_{class} $和$ L_{ctrs} $</h4><p>半监督和监督</p>
 <p>监督损失使得共享空间捕获到行人语义信息。</p>
 <p>S: Market, T: Duke; S: Duke, T: Market</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">method</th>
-<th align="center">rank-1</th>
-<th align="center">mAP</th>
-<th align="center">rank-1</th>
-<th align="center">mAP</th>
+<th style="text-align:center">method</th>
+<th style="text-align:center">rank-1</th>
+<th style="text-align:center">mAP</th>
+<th style="text-align:center">rank-1</th>
+<th style="text-align:center">mAP</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">w/o $ L_{class} $, $ L_{ctrs} $</td>
-<td align="center">52.2</td>
-<td align="center">23.7</td>
-<td align="center">36.7</td>
-<td align="center">19.6</td>
+<tbody>
+<tr>
+<td style="text-align:center">w/o $ L_{class} $, $ L_{ctrs} $</td>
+<td style="text-align:center">52.2</td>
+<td style="text-align:center">23.7</td>
+<td style="text-align:center">36.7</td>
+<td style="text-align:center">19.6</td>
 </tr>
 <tr>
-<td align="center">w $ L_{class} $, $ L_{ctrs} $</td>
-<td align="center">70.3</td>
-<td align="center">39.4</td>
-<td align="center">60.2</td>
-<td align="center">33.4</td>
+<td style="text-align:center">w $ L_{class} $, $ L_{ctrs} $</td>
+<td style="text-align:center">70.3</td>
+<td style="text-align:center">39.4</td>
+<td style="text-align:center">60.2</td>
+<td style="text-align:center">33.4</td>
 </tr>
 <tr>
-<td align="center">$L_{rec}$</td>
-<td align="center">44.5</td>
-<td align="center">20.3</td>
-<td align="center">31.2</td>
-<td align="center">18.4</td>
+<td style="text-align:center">$L_{rec}$</td>
+<td style="text-align:center">44.5</td>
+<td style="text-align:center">20.3</td>
+<td style="text-align:center">31.2</td>
+<td style="text-align:center">18.4</td>
 </tr>
 <tr>
-<td align="center">$L_{rec}$, $ L_{class} $和$ L_{ctrs} $</td>
-<td align="center">60.5</td>
-<td align="center">28.7</td>
-<td align="center">48.4</td>
-<td align="center">26.8</td>
+<td style="text-align:center">$L_{rec}$, $ L_{class} $和$ L_{ctrs} $</td>
+<td style="text-align:center">60.5</td>
+<td style="text-align:center">28.7</td>
+<td style="text-align:center">48.4</td>
+<td style="text-align:center">26.8</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="1-3-3-无监督-L-rec-E-T-和-E-S"><a href="#1-3-3-无监督-L-rec-E-T-和-E-S" class="headerlink" title="1.3.3 无监督$ L_{rec} $, $ E_T $和$ E_S $"></a>1.3.3 无监督$ L_{rec} $, $ E_T $和$ E_S $</h4><p>特有特征的提取是为了去除共享空间的噪声。</p>
 <p>假设共享空间存在，且特有特征空间存在，如果没有特有特征的提取，那么得到的行人特征或多或少地都会包含特征空间的基向量。</p>
 <p>当然，这里也隐含了一些假设，共享空间和特有空间一定是线性无关的。空间的基向量是2048维。</p>
 <p>S: Market, T: Duke; S: Duke, T: Market</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">method</th>
-<th align="center">rank-1</th>
-<th align="center">mAP</th>
-<th align="center">rank-1</th>
-<th align="center">mAP</th>
+<th style="text-align:center">method</th>
+<th style="text-align:center">rank-1</th>
+<th style="text-align:center">mAP</th>
+<th style="text-align:center">rank-1</th>
+<th style="text-align:center">mAP</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">w/o  $ E_T $, $ E_S $</td>
-<td align="center">60.5</td>
-<td align="center">28.7</td>
-<td align="center">48.4</td>
-<td align="center">26.8</td>
+<tbody>
+<tr>
+<td style="text-align:center">w/o  $ E_T $, $ E_S $</td>
+<td style="text-align:center">60.5</td>
+<td style="text-align:center">28.7</td>
+<td style="text-align:center">48.4</td>
+<td style="text-align:center">26.8</td>
 </tr>
 <tr>
-<td align="center">w $ L_{class} $, $ L_{ctrs} $</td>
-<td align="center">70.3</td>
-<td align="center">39.4</td>
-<td align="center">60.2</td>
-<td align="center">33.4</td>
+<td style="text-align:center">w $ L_{class} $, $ L_{ctrs} $</td>
+<td style="text-align:center">70.3</td>
+<td style="text-align:center">39.4</td>
+<td style="text-align:center">60.2</td>
+<td style="text-align:center">33.4</td>
 </tr>
 <tr>
-<td align="center">$L_{rec}$</td>
-<td align="center">44.5</td>
-<td align="center">20.3</td>
-<td align="center">31.2</td>
-<td align="center">18.4</td>
+<td style="text-align:center">$L_{rec}$</td>
+<td style="text-align:center">44.5</td>
+<td style="text-align:center">20.3</td>
+<td style="text-align:center">31.2</td>
+<td style="text-align:center">18.4</td>
 </tr>
 <tr>
-<td align="center">$ L_{rec} $, $ E_T $和$ E_S $</td>
-<td align="center">52.2</td>
-<td align="center">23.7</td>
-<td align="center">36.7</td>
-<td align="center">19.6</td>
+<td style="text-align:center">$ L_{rec} $, $ E_T $和$ E_S $</td>
+<td style="text-align:center">52.2</td>
+<td style="text-align:center">23.7</td>
+<td style="text-align:center">36.7</td>
+<td style="text-align:center">19.6</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <hr>
 <h2 id="2-HHL"><a href="#2-HHL" class="headerlink" title="2. HHL"></a>2. HHL</h2><p><a target="_blank" rel="noopener" href="https://github.com/zhunzhong07/zhunzhong07.github.io/blob/master/paper/HHL.pdf">Generalizing A Person Retrieval Model Hetero- and Homogeneously</a></p>
 <p>Zhun Zhong, Liang Zheng, Shaozi Li, Yi Yang, ECCV 2018</p>
@@ -484,20 +492,18 @@
 </ol>
 <p>数据集之间的三元组损失有把不同数据集的行人特征映射到同一特征空间的效果。</p>
 <p>创新点在于使用straGAN和复杂的三元组损失。</p>
-<h3 id="2-1-网络架构"><a href="#2-1-网络架构" class="headerlink" title="2.1 网络架构"></a>2.1 网络架构</h3><p><img src="./pic/HHL/HHL.png" alt="HHL的网络架构"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/HHL.png" class="" title="HHL的网络架构">
-
+<h3 id="2-1-网络架构"><a href="#2-1-网络架构" class="headerlink" title="2.1 网络架构"></a>2.1 网络架构</h3><p><img src="./pic/HHL/HHL.png" alt="HHL的网络架构"><br><img src="/2018/11/29/person-reid-transfer-learning/HHL.png" class="" title="HHL的网络架构"></p>
 <p>网络的简要介绍</p>
 <ul>
 <li>CNN是resnet50，网络包括两个分支，一个计算源数据集的分类损失，一个计算相似度学习的triplet损失。</li>
-<li>FC-2014的组成：linear(2048，1024)–&gt;bn(1024)–&gt;relu–&gt;dropout(0.5),相当于一个embedding。</li>
+<li>FC-2014的组成：linear(2048，1024)—&gt;bn(1024)—&gt;relu—&gt;dropout(0.5),相当于一个embedding。</li>
 <li>FC-#ID是linear(1024,751), FC-128是linear(1024, 128), 两个分支的具体情况是：</li>
 <li><ul>
-<li>x1–&gt;linear(2048, 1024)–&gt;x2–&gt;bn(1024)–&gt;x3–&gt;relu–&gt;x4–&gt;dropout(0.5)–&gt;x5–&gt;linear(102, 751)–&gt;x6</li>
+<li>x1—&gt;linear(2048, 1024)—&gt;x2—&gt;bn(1024)—&gt;x3—&gt;relu—&gt;x4—&gt;dropout(0.5)—&gt;x5—&gt;linear(102, 751)—&gt;x6</li>
 </ul>
 </li>
 <li><ul>
-<li>x1–&gt;linear(2048, 1024)–&gt;x2–&gt;bn(1024)–&gt;x3–&gt;relu–&gt;x4–&gt;linear(1024, 128)</li>
+<li>x1—&gt;linear(2048, 1024)—&gt;x2—&gt;bn(1024)—&gt;x3—&gt;relu—&gt;x4—&gt;linear(1024, 128)</li>
 </ul>
 </li>
 <li>网络的triplet损失是Batch Hard Triplet Loss</li>
@@ -507,53 +513,52 @@
 <li>关于StarGAN待自己复现之后再做进一步解释，现在只复现过StyleGAN。</li>
 <li>triplet损失的margin=0.3</li>
 </ul>
-<h3 id="2-2-损失函数"><a href="#2-2-损失函数" class="headerlink" title="2.2 损失函数"></a>2.2 损失函数</h3><p>分类损失<br>$$L_{cross}=-\sum_{i=1}^{N_s}y_i^s.log\hat{y}_i^s$$</p>
-<p>triplet损失<br>$$L_T=\sum_{x_a, x_p, x_n}[D_{x_a, x_p}+m-D_{x_a, x_n}]_+$$</p>
-<p>相机不变性的triplet损失</p>
+<h3 id="2-2-损失函数"><a href="#2-2-损失函数" class="headerlink" title="2.2 损失函数"></a>2.2 损失函数</h3><p>分类损失</p>
+<script type="math/tex; mode=display">L_{cross}=-\sum_{i=1}^{N_s}y_i^s.log\hat{y}_i^s</script><p>triplet损失</p>
+<script type="math/tex; mode=display">L_T=\sum_{x_a, x_p, x_n}[D_{x_a, x_p}+m-D_{x_a, x_n}]_+</script><p>相机不变性的triplet损失</p>
 <p>目标域中一张原始图片作为anchor，StarGAN图片为positive，其他图片为negative</p>
-<p>$$L_C=L_T((x_t^i)^{n_t}\bigcup(x_{t^*}^i)^{n_t^*})$$</p>
-<p>域不变性的triplet损失</p>
+<script type="math/tex; mode=display">L_C=L_T((x_t^i)^{n_t}\bigcup(x_{t^\*}^i)^{n_t^*})</script><p>域不变性的triplet损失</p>
 <p>源域中一张图片为anchor，同一id的其他图片作为positive，目标域的任一图片为negative</p>
-<p>$$L_D=L_T((x_s^i)^{n_s}\bigcup(x_t^i)^{n_t})$$</p>
-<p>相机不变性和域不变性的triplet损失</p>
+<script type="math/tex; mode=display">L_D=L_T((x_s^i)^{n_s}\bigcup(x_t^i)^{n_t})</script><p>相机不变性和域不变性的triplet损失</p>
 <p>是将相机不变性和域不变性合为一体，源域的positive不变，negative为源域的其他图片和目标域的图片，目标域的positive不变，negative为源域的图片和目标域的其他行人图片</p>
-<p>$$L_{CD}=L_T((x_s^i)^{n_s}\bigcup(x_t^i)^{n_t}\bigcup(x_{t*}^i)^{n_t^*})$$</p>
-<p>总损失：<br>$$L_{HHL}=L_{cross}+\beta*L_{CD}$$</p>
-<p>其中：<br>$$\beta=0.5$$</p>
-<h3 id="2-3-模块分析"><a href="#2-3-模块分析" class="headerlink" title="2.3 模块分析"></a>2.3 模块分析</h3><ol>
+<script type="math/tex; mode=display">L_{CD}=L_T((x_s^i)^{n_s}\bigcup(x_t^i)^{n_t}\bigcup(x_{t*}^i)^{n_t^*})</script><p>总损失：</p>
+<script type="math/tex; mode=display">L_{HHL}=L_{cross}+\beta*L_{CD}</script><p>其中：</p>
+<script type="math/tex; mode=display">\beta=0.5</script><h3 id="2-3-模块分析"><a href="#2-3-模块分析" class="headerlink" title="2.3 模块分析"></a>2.3 模块分析</h3><ol>
 <li><strong>starGAN</strong></li>
 <li><strong>sample方法</strong></li>
 </ol>
 <h4 id="2-3-1-starGAN"><a href="#2-3-1-starGAN" class="headerlink" title="2.3.1 starGAN"></a>2.3.1 starGAN</h4><p>在源数据集上训练，在目标数据集上测试不同图像增强方法下的图片距离，通过表格可以得出，预训练的模型对于目标数据集的随机翻转等等有很好的鲁棒性，但是，对于不同摄像头的同一个人，其距离还是很大。因此，利用StarGAN和相机不变性的triplet损失来减少由于摄像头带来的偏差。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">Source</th>
-<th align="center">Target</th>
-<th align="center">Random Crop</th>
-<th align="center">Random Flip</th>
-<th align="center">CamStyle Transfer</th>
+<th style="text-align:center">Source</th>
+<th style="text-align:center">Target</th>
+<th style="text-align:center">Random Crop</th>
+<th style="text-align:center">Random Flip</th>
+<th style="text-align:center">CamStyle Transfer</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">Duke</td>
-<td align="center">Market</td>
-<td align="center">0.049</td>
-<td align="center">0.034</td>
-<td align="center">0.485</td>
+<tbody>
+<tr>
+<td style="text-align:center">Duke</td>
+<td style="text-align:center">Market</td>
+<td style="text-align:center">0.049</td>
+<td style="text-align:center">0.034</td>
+<td style="text-align:center">0.485</td>
 </tr>
 <tr>
-<td align="center">Market</td>
-<td align="center">Duke</td>
-<td align="center">0.059</td>
-<td align="center">0.044</td>
-<td align="center">0.614</td>
+<td style="text-align:center">Market</td>
+<td style="text-align:center">Duke</td>
+<td style="text-align:center">0.059</td>
+<td style="text-align:center">0.044</td>
+<td style="text-align:center">0.614</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="2-3-2-sample方法"><a href="#2-3-2-sample方法" class="headerlink" title="2.3.2 sample方法"></a>2.3.2 sample方法</h4><p>对于目标域的取样方法，对比了三种方法的性能，分别是随机取样、聚类取样、有监督取样，通过下图可以看出，这三种方法的性能是一样的，最后，作者给的代码是随机取样。</p>
-<p><img src="./pic/HHL/HHL2.png" alt="sample"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/HHL2.png" class="" title="sample">
-
+<p><img src="./pic/HHL/HHL2.png" alt="sample"><br><img src="/2018/11/29/person-reid-transfer-learning/HHL2.png" class="" title="sample"></p>
 <h3 id="2-4-实验设置"><a href="#2-4-实验设置" class="headerlink" title="2.4 实验设置"></a>2.4 实验设置</h3><h4 id="2-4-1-Camera-style-transfer-model：StarGAN"><a href="#2-4-1-Camera-style-transfer-model：StarGAN" class="headerlink" title="2.4.1 Camera style transfer model：StarGAN"></a>2.4.1 Camera style transfer model：StarGAN</h4><p>使用StarGAN进行对于摄像头风格转化。</p>
 <ul>
 <li>2 conv + 6 residual + 2 transposed</li>
@@ -576,13 +581,9 @@
 <li>triplet loss的权重$\beta$</li>
 <li>一个batch中目标域上$n_t$的个数</li>
 </ul>
-<h4 id="2-5-1-参数的设置-beta"><a href="#2-5-1-参数的设置-beta" class="headerlink" title="2.5.1 参数的设置$\beta$"></a>2.5.1 参数的设置$\beta$</h4><p><img src="./pic/HHL/HHL3.png" alt="$\beta$参数的设置"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/HHL3.png" class="" title="$\beta$参数的设置">
-
+<h4 id="2-5-1-参数的设置-beta"><a href="#2-5-1-参数的设置-beta" class="headerlink" title="2.5.1 参数的设置$\beta$"></a>2.5.1 参数的设置$\beta$</h4><p><img src="./pic/HHL/HHL3.png" alt="$\beta$参数的设置"><br><img src="/2018/11/29/person-reid-transfer-learning/HHL3.png" class="" title="$\beta$参数的设置"></p>
 <p>$\beta$应该设置成0.4-0.8</p>
-<h4 id="2-5-2-参数的设置-n-t"><a href="#2-5-2-参数的设置-n-t" class="headerlink" title="2.5.2 参数的设置$n_t$"></a>2.5.2 参数的设置$n_t$</h4><p><img src="./pic/HHL/HHL4.png" alt="$n_t$参数的设置"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/HHL4.png" class="" title="$n_t$参数的设置">
-
+<h4 id="2-5-2-参数的设置-n-t"><a href="#2-5-2-参数的设置-n-t" class="headerlink" title="2.5.2 参数的设置$n_t$"></a>2.5.2 参数的设置$n_t$</h4><p><img src="./pic/HHL/HHL4.png" alt="$n_t$参数的设置"><br><img src="/2018/11/29/person-reid-transfer-learning/HHL4.png" class="" title="$n_t$参数的设置"></p>
 <p>$n_t$在当前设置(源域上对于IDE为128，对于tripletloss是64)下，应该$n_t&gt;16$</p>
 <p>通过上述参数的设置，结合自己实验时的错误，不妨这么理解，在固定mini-batch=128的情况下</p>
 <ul>
@@ -590,9 +591,7 @@
 <li>然后引入目标域的triplet_loss，并且要先考虑只有目标域的性能，再考虑结合的性能，每次都需要重新考虑$\beta$和batch的大小</li>
 <li>这么一想，这篇论文做的实验还是很多的。</li>
 </ul>
-<h3 id="2-6-实验结果"><a href="#2-6-实验结果" class="headerlink" title="2.6 实验结果"></a>2.6 实验结果</h3><p><img src="./pic/HHL/HHL5.png" alt="实验结果"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/HHL5.png" class="" title="实验结果">
-
+<h3 id="2-6-实验结果"><a href="#2-6-实验结果" class="headerlink" title="2.6 实验结果"></a>2.6 实验结果</h3><p><img src="./pic/HHL/HHL5.png" alt="实验结果"><br><img src="/2018/11/29/person-reid-transfer-learning/HHL5.png" class="" title="实验结果"></p>
 <p>通过结果我们看出来，其实提升的效果主要来源于$L_C$，说明预训练的模型对于目标域不同摄像头的图片鲁棒性很差。</p>
 <p>是否说明预训练的模型只学习到了源数据集的跨摄像头的不变行人特征，而对于目标域的摄像头下的不同风格很敏感，而对目标域的同一摄像头下的行人特征很鲁棒。</p>
 <p>$L_T$的提升效果很小是否可以说明目标数据集与源数据集的行人特征空间本身就已经很好地重合了，假如tripl_loss真得具有将不同数据集的行人特征映射到同一特征空间的效果的话。</p>
@@ -619,17 +618,11 @@
 <p>自己对代码的分析<a target="_blank" rel="noopener" href="https://tjjtjjtjj.github.io/2018/11/19/cycleGAN/#more">https://tjjtjjtjj.github.io/2018/11/19/cycleGAN/#more</a></p>
 <h3 id="3-1-前言"><a href="#3-1-前言" class="headerlink" title="3.1 前言"></a>3.1 前言</h3><p>一般的无监督迁移方法都是假设源域和目标域上有相同ID的图片，不太适用于跨数据集的行人重识别。</p>
 <h3 id="3-2-网络架构"><a href="#3-2-网络架构" class="headerlink" title="3.2 网络架构"></a>3.2 网络架构</h3><p>GAN网络</p>
-<p><img src="./pic/SPGAN/SPGAN1.png" alt="SPGAN"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/SPGAN1.png" class="" title="SPGAN">
-
+<p><img src="./pic/SPGAN/SPGAN1.png" alt="SPGAN"><br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN1.png" class="" title="SPGAN"></p>
 <p>LMP网络</p>
-<p><img src="./pic/SPGAN/SPGAN3.png" alt="LMP"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/SPGAN3.png" class="" title="LMP">
-
+<p><img src="./pic/SPGAN/SPGAN3.png" alt="LMP"><br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN3.png" class="" title="LMP"></p>
 <p>行人重识别整体网络</p>
-<p><img src="./pic/SPGAN/SPGAN2.png" alt="SPGAN"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/SPGAN2.png" class="" title="SPGAN">
-
+<p><img src="./pic/SPGAN/SPGAN2.png" alt="SPGAN"><br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN2.png" class="" title="SPGAN"></p>
 <p>网络的简要介绍</p>
 <ul>
 <li>整理网络由两部分组成，第一部分是SPGAN，第二部分是常见的行人重识别网络的修改版LMP，重点是第一部分。</li>
@@ -642,9 +635,10 @@
 <li>LMP网络直接generated domain上训练。</li>
 <li>在论文的tabel2的注释中，可以看到是分成了7份，与PCB的6份差不多。</li>
 </ul>
-<h3 id="3-3-损失函数"><a href="#3-3-损失函数" class="headerlink" title="3.3 损失函数"></a>3.3 损失函数</h3><h4 id="3-3-1-CycleGAN"><a href="#3-3-1-CycleGAN" class="headerlink" title="3.3.1 CycleGAN"></a>3.3.1 CycleGAN</h4><p>$$L_{T_{adv}}(G,D_T,p_x,p_y)=E_{y\sim p_y}[(D_T(y)-1)^2]+E_{x\sim p_x}[(D_T(G(x))-1)^2]$$<br>$$L_{S_{adv}}(F,D_S,p_x,p_y)=E_{x\sim p_x}[(D_S(x)-1)^2]+E_{y\sim p_y}[(D_S(F(y)))^2]$$<br>$$L_{cyc}(G,F)=E_{x\sim p_x}\parallel F(G(x))-x \parallel_1+E_{y\sim p_y}\parallel G(F(y))-y\parallel_1$$<br>$$L_{ide}(G,F,p_x,p_y)=E_{x\sim p_x}\parallel F(x)-x\parallel_1+E_{y\sim p_y}\parallel G(y)-y\parallel_1$$</p>
-<h4 id="3-3-2-SPGAN"><a href="#3-3-2-SPGAN" class="headerlink" title="3.3.2 SPGAN"></a>3.3.2 SPGAN</h4><p>Siameses Net:<br>$$L_{con}(i,x_1,x_2)=(1-i)(max(0,m-d))^2+id^2$$<br>其中，$m\in [0,2]$，$d=1-cos(\theta)\in [0,2]$表示归一化后的欧式距离.正样本是$x_S$和$G(x_S)$或者$x_T$和$F(x_T)$,负样本是$G(x_S)$和$x_T$或者$F(x_T)$和$x_S$。</p>
-<p>Overall objective loss:<br>$$L_{sp}=L_{T_{adv}}+L_{S_{adv}}+\lambda_1 L_{cyc}+\lambda_2 L_{ide}+\lambda_3 L_{con}$$<br>其中，$\lambda_1=10，\lambda_2=5，\lambda_3=2, m=2$</p>
+<h3 id="3-3-损失函数"><a href="#3-3-损失函数" class="headerlink" title="3.3 损失函数"></a>3.3 损失函数</h3><h4 id="3-3-1-CycleGAN"><a href="#3-3-1-CycleGAN" class="headerlink" title="3.3.1 CycleGAN"></a>3.3.1 CycleGAN</h4><script type="math/tex; mode=display">L_{T_{adv}}(G,D_T,p_x,p_y)=E_{y\sim p_y}[(D_T(y)-1)^2]+E_{x\sim p_x}[(D_T(G(x))-1)^2]</script><script type="math/tex; mode=display">L_{S_{adv}}(F,D_S,p_x,p_y)=E_{x\sim p_x}[(D_S(x)-1)^2]+E_{y\sim p_y}[(D_S(F(y)))^2]</script><script type="math/tex; mode=display">L_{cyc}(G,F)=E_{x\sim p_x}\parallel F(G(x))-x \parallel_1+E_{y\sim p_y}\parallel G(F(y))-y\parallel_1</script><script type="math/tex; mode=display">L_{ide}(G,F,p_x,p_y)=E_{x\sim p_x}\parallel F(x)-x\parallel_1+E_{y\sim p_y}\parallel G(y)-y\parallel_1</script><h4 id="3-3-2-SPGAN"><a href="#3-3-2-SPGAN" class="headerlink" title="3.3.2 SPGAN"></a>3.3.2 SPGAN</h4><p>Siameses Net:</p>
+<script type="math/tex; mode=display">L_{con}(i,x_1,x_2)=(1-i)(max(0,m-d))^2+id^2</script><p>其中，$m\in [0,2]$，$d=1-cos(\theta)\in [0,2]$表示归一化后的欧式距离.正样本是$x_S$和$G(x_S)$或者$x_T$和$F(x_T)$,负样本是$G(x_S)$和$x_T$或者$F(x_T)$和$x_S$。</p>
+<p>Overall objective loss:</p>
+<script type="math/tex; mode=display">L_{sp}=L_{T_{adv}}+L_{S_{adv}}+\lambda_1 L_{cyc}+\lambda_2 L_{ide}+\lambda_3 L_{con}</script><p>其中，$\lambda_1=10，\lambda_2=5，\lambda_3=2, m=2$</p>
 <h4 id="3-3-3-行人重识别网络"><a href="#3-3-3-行人重识别网络" class="headerlink" title="3.3.3 行人重识别网络"></a>3.3.3 行人重识别网络</h4><p>以resnet50为基础网络，和PCB类似，分割成两块。</p>
 <h3 id="3-4-实验设置"><a href="#3-4-实验设置" class="headerlink" title="3.4 实验设置"></a>3.4 实验设置</h3><h4 id="3-4-1-SPGAN"><a href="#3-4-1-SPGAN" class="headerlink" title="3.4.1 SPGAN"></a>3.4.1 SPGAN</h4><p>SPGAN的整体训练过程与CycleGAN基本是一致的，建议先参考CycleGAN，再学习SPGAN。</p>
 <p>$\lambda_1=10，\lambda_2=5，\lambda_3=2, m=2$，学习率为0.0002，batch=1，total_epoch=5</p>
@@ -658,31 +652,20 @@
 <p>输入预处理：随机左右翻转、resize(286)、crop(256)、img/127.5-1。</p>
 <p>激活函数全部使用leak_relu(0.2)，没有使用bn</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">metric_net</span>(<span class="params">img, scope, df_dim=<span class="number">64</span>, reuse=False, train=True</span>):</span></span><br><span class="line"></span><br><span class="line">    bn = functools.partial(slim.batch_norm, scale=<span class="literal">True</span>, is_training=train,</span><br><span class="line">                           decay=<span class="number">0.9</span>, epsilon=<span class="number">1e-5</span>, updates_collections=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(scope + <span class="string">&#x27;_discriminator&#x27;</span>, reuse=reuse):</span><br><span class="line">        h0 = lrelu(conv(img, df_dim, <span class="number">4</span>, <span class="number">2</span>, scope=<span class="string">&#x27;h0_conv&#x27;</span>))    <span class="comment"># h0 is (128 x 128 x df_dim)</span></span><br><span class="line">        pool1 = Mpool(h0, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">&#x27;VALID&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        h1 = lrelu(conv(pool1, df_dim * <span class="number">2</span>, <span class="number">4</span>, <span class="number">2</span>, scope=<span class="string">&#x27;h1_conv&#x27;</span>))  <span class="comment"># h1 is (32 x 32 x df_dim*2)</span></span><br><span class="line">        pool2 = Mpool(h1, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">&#x27;VALID&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        h2 = lrelu(conv(pool2, df_dim * <span class="number">4</span>, <span class="number">4</span>, <span class="number">2</span>, scope=<span class="string">&#x27;h2_conv&#x27;</span>))  <span class="comment"># h2 is (8 x 8 x df_dim*4)</span></span><br><span class="line">        pool3 = Mpool(h2, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">&#x27;VALID&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        h3 = lrelu(conv(pool3, df_dim * <span class="number">8</span>, <span class="number">4</span>, <span class="number">2</span>, scope=<span class="string">&#x27;h3_conv&#x27;</span>))  <span class="comment"># h3 is (2 x 2 x df_dim*4)</span></span><br><span class="line">        pool4 = Mpool(h3, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">&#x27;VALID&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        shape = pool4.get_shape()</span><br><span class="line">        flatten_shape = shape[<span class="number">1</span>].value * shape[<span class="number">2</span>].value * shape[<span class="number">3</span>].value</span><br><span class="line">        h3_reshape = tf.reshape(pool4, [<span class="number">-1</span>, flatten_shape], name = <span class="string">&#x27;h3_reshape&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        fc1 = lrelu(FC(h3_reshape, df_dim*<span class="number">2</span>, scope=<span class="string">&#x27;fc1&#x27;</span>))</span><br><span class="line">        dropout_fc1 = slim.dropout(fc1, <span class="number">0.5</span>, scope=<span class="string">&#x27;dropout_fc1&#x27;</span>)  </span><br><span class="line">        net = FC(dropout_fc1, df_dim, scope=<span class="string">&#x27;fc2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#print_activations(net)</span></span><br><span class="line">        <span class="comment">#print_activations(pool4)</span></span><br><span class="line">        <span class="keyword">return</span> net</span><br></pre></td></tr></table></figure>
-
 <h4 id="3-4-2-LMP"><a href="#3-4-2-LMP" class="headerlink" title="3.4.2 LMP"></a>3.4.2 LMP</h4><p>batch_size=16, total_epoch=50, SGD, momentum=0.9, gamma=0.1, lr_ini=0.001, decay to 0.0001 after 40 epochs.</p>
 <p>这部分的设置和IDE基本类似。</p>
-<h3 id="3-5-对比实验"><a href="#3-5-对比实验" class="headerlink" title="3.5 对比实验"></a>3.5 对比实验</h3><h4 id="模块的对比实验"><a href="#模块的对比实验" class="headerlink" title="模块的对比实验"></a>模块的对比实验</h4><p><img src="./pic/SPGAN/SPGAN4.png" alt="对比实验"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/SPGAN4.png" class="" title="对比实验">
-
-<p><img src="./pic/SPGAN/SPGAN8.png" alt="生成效果"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/SPGAN8.png" class="" title="生成效果">
-
+<h3 id="3-5-对比实验"><a href="#3-5-对比实验" class="headerlink" title="3.5 对比实验"></a>3.5 对比实验</h3><h4 id="模块的对比实验"><a href="#模块的对比实验" class="headerlink" title="模块的对比实验"></a>模块的对比实验</h4><p><img src="./pic/SPGAN/SPGAN4.png" alt="对比实验"><br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN4.png" class="" title="对比实验"></p>
+<p><img src="./pic/SPGAN/SPGAN8.png" alt="生成效果"><br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN8.png" class="" title="生成效果"></p>
 <p>通过对比实验可以看到，以mAP为指标，CycleGAN增加了3个点，SiaNet(m=2)增加了3个点，LMP增加了4个点。说明作者尝试的3个模块都在一定程度上起到了作用。但是个人感觉还是差点什么。比如，为什么会有效？</p>
 <p>假设目标都是为了使源域与目标域的行人特征映射到同一特征空间。这里的CycleGAN做到了这一点。LMP可以认为是加在哪里都有效的一种方式。那SiaNet其实更像是在保证生成的图片不仅要保留源图片的内容，更要保留源图片的行人特征。这种保留是以一种隐空间的形式在保存，而不是明显的分类损失这样子。</p>
 <p>$\lambda_3 $对比实验</p>
-<p><img src="./pic/SPGAN/SPGAN5.png" alt="$\lambda_3 $对比实验"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/SPGAN5.png" class="" title="$\lambda_3 $对比实验">
-
+<p><img src="./pic/SPGAN/SPGAN5.png" alt="$\lambda_3 $对比实验"><br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN5.png" class="" title="$\lambda_3 $对比实验"></p>
 <p>pool 和 part的对比实验</p>
-<p><img src="./pic/SPGAN/SPGAN6.png" alt="pool 和 part的对比实验"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/SPGAN6.png" class="" title="pool 和 part的对比实验">
-
+<p><img src="./pic/SPGAN/SPGAN6.png" alt="pool 和 part的对比实验"><br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN6.png" class="" title="pool 和 part的对比实验"></p>
 <p>也就是说，pool的方式和parts的取法是实验得到的，不是凭空想出来的。</p>
 <p>通过上述实验超参数的设置对比实验，与HHL论文比较，都是固定其他，变化一个参数，然后选取最优的参数，是基于局部最优就是全局最优的思想。感觉到作者的实验做得很足。</p>
 <p>不同base model的对比实验</p>
-<p><img src="./pic/SPGAN/SPGAN7.png" alt="不同base model的对比实验"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/SPGAN7.png" class="" title="不同base model的对比实验">
-
+<p><img src="./pic/SPGAN/SPGAN7.png" alt="不同base model的对比实验"><br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN7.png" class="" title="不同base model的对比实验"></p>
 <h3 id="附录-1"><a href="#附录-1" class="headerlink" title="附录"></a>附录</h3><h4 id="IDE-and-IDE"><a href="#IDE-and-IDE" class="headerlink" title="IDE and $IDE^+$"></a>IDE and $IDE^+$</h4><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1604.02531.pdf">IDE</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/zhunzhong07/IDE-baseline-Market-1501">https://github.com/zhunzhong07/IDE-baseline-Market-1501</a></p>
 <blockquote>
@@ -695,13 +678,9 @@
 <p>resnet50(layer4)+avgpool+Linear(2048,512)+bn1d(512)+LeakReLU(0.1)+Dropout(0.5)+Linear(512, num_class)</p>
 <p>区别在于训练时bn层是否更新：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># model.model = resnet50(layer4)+avgpool+Linear(2048,512)+bn1d(512)+LeakReLU(0.1)+Dropout(0.5)</span></span><br><span class="line"><span class="comment"># model.classifier = Linear(512, num_class)</span></span><br><span class="line"><span class="comment"># IDE</span></span><br><span class="line"><span class="keyword">for</span> phase <span class="keyword">in</span> [<span class="string">&#x27;train&#x27;</span>, <span class="string">&#x27;val&#x27;</span>]:</span><br><span class="line">    <span class="keyword">if</span> phase == <span class="string">&#x27;train&#x27;</span>:</span><br><span class="line">        scheduler.step()</span><br><span class="line">        model.train(<span class="literal">True</span>)  <span class="comment"># Set model to training mode</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        model.train(<span class="literal">False</span>)  <span class="comment"># Set model to evaluate mode</span></span><br><span class="line"><span class="comment"># IDE+</span></span><br><span class="line"><span class="keyword">for</span> phase <span class="keyword">in</span> [<span class="string">&#x27;train&#x27;</span>, <span class="string">&#x27;val&#x27;</span>]:</span><br><span class="line">    <span class="keyword">if</span> phase == <span class="string">&#x27;train&#x27;</span>:</span><br><span class="line">        scheduler.step()</span><br><span class="line">        model.eval()  <span class="comment"># Fix BN of ResNet50</span></span><br><span class="line">        model.model.fc.train(<span class="literal">True</span>)</span><br><span class="line">        model.classifier.train(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        model.train(<span class="literal">False</span>)  <span class="comment"># Set model to evaluate mode</span></span><br></pre></td></tr></table></figure>
-
 <h5 id="新增-2018-12-17"><a href="#新增-2018-12-17" class="headerlink" title="新增 2018-12-17"></a>新增 2018-12-17</h5><p>参考论文: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.07487">Re-Identification with Consistent Attentive Siamese Networks</a></p>
-<p>IDE的网络架构<br><img src="./person-reid-transfer-learning/SPGAN9.png" alt="IDE的网络架构"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/SPGAN9.png" class="" title="IDE的网络架构">
-
+<p>IDE的网络架构<br><img src="./person-reid-transfer-learning/SPGAN9.png" alt="IDE的网络架构"><br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN9.png" class="" title="IDE的网络架构"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一般情况下，cut_at_pooling=False，num_features=256, has_embedding为true</span></span><br><span class="line"><span class="comment"># 一般情况下，新增了feat、feat_bn、relu、drop、classifier</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResNet</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    __factory = &#123;</span><br><span class="line">        <span class="number">18</span>: torchvision.models.resnet18,</span><br><span class="line">        <span class="number">34</span>: torchvision.models.resnet34,</span><br><span class="line">        <span class="number">50</span>: torchvision.models.resnet50,</span><br><span class="line">        <span class="number">101</span>: torchvision.models.resnet101,</span><br><span class="line">        <span class="number">152</span>: torchvision.models.resnet152,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, depth, pretrained=True, cut_at_pooling=False,</span></span></span><br><span class="line"><span class="function"><span class="params">                 num_features=<span class="number">0</span>, norm=False, dropout=<span class="number">0</span>, num_classes=<span class="number">0</span>, triplet_features=<span class="number">0</span></span>):</span></span><br><span class="line">        super(ResNet, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.depth = depth</span><br><span class="line">        self.pretrained = pretrained</span><br><span class="line">        self.cut_at_pooling = cut_at_pooling</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Construct base (pretrained) resnet</span></span><br><span class="line">        <span class="keyword">if</span> depth <span class="keyword">not</span> <span class="keyword">in</span> ResNet.__factory:</span><br><span class="line">            <span class="keyword">raise</span> KeyError(<span class="string">&quot;Unsupported depth:&quot;</span>, depth)</span><br><span class="line">        self.base = ResNet.__factory[depth](pretrained=pretrained)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.cut_at_pooling:</span><br><span class="line">            self.num_features = num_features</span><br><span class="line">            self.norm = norm</span><br><span class="line">            self.dropout = dropout</span><br><span class="line">            self.has_embedding = num_features &gt; <span class="number">0</span></span><br><span class="line">            self.num_classes = num_classes</span><br><span class="line">            self.triplet_features = triplet_features</span><br><span class="line">            out_planes = self.base.fc.in_features</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Append new layers</span></span><br><span class="line">            <span class="keyword">if</span> self.has_embedding:</span><br><span class="line">                self.feat = nn.Linear(out_planes, self.num_features)</span><br><span class="line">                self.feat_bn = nn.BatchNorm1d(self.num_features)</span><br><span class="line">                init.kaiming_normal_(self.feat.weight, mode=<span class="string">&#x27;fan_out&#x27;</span>)</span><br><span class="line">                init.constant_(self.feat.bias, <span class="number">0</span>)</span><br><span class="line">                init.constant_(self.feat_bn.weight, <span class="number">1</span>)</span><br><span class="line">                init.constant_(self.feat_bn.bias, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># Change the num_features to CNN output channels</span></span><br><span class="line">                self.num_features = out_planes</span><br><span class="line">            <span class="keyword">if</span> self.dropout &gt; <span class="number">0</span>:</span><br><span class="line">                self.drop = nn.Dropout(self.dropout)</span><br><span class="line">            <span class="keyword">if</span> self.num_classes &gt; <span class="number">0</span>:</span><br><span class="line">                self.classifier = nn.Linear(self.num_features, self.num_classes)</span><br><span class="line">                init.normal_(self.classifier.weight, std=<span class="number">0.001</span>)</span><br><span class="line">                init.constant_(self.classifier.bias, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> self.triplet_features &gt; <span class="number">0</span>:</span><br><span class="line">                self.triplet = nn.Linear(self.num_features, self.triplet_features)</span><br><span class="line">                init.normal_(self.triplet.weight, std=<span class="number">0.001</span>)</span><br><span class="line">                init.constant_(self.triplet.bias, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.pretrained:</span><br><span class="line">            self.reset_params()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x, output_feature=None</span>):</span></span><br><span class="line">        <span class="keyword">for</span> name, module <span class="keyword">in</span> self.base._modules.items():</span><br><span class="line">            <span class="keyword">if</span> name == <span class="string">&#x27;avgpool&#x27;</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            x = module(x)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.cut_at_pooling:</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">        x = F.avg_pool2d(x, x.size()[<span class="number">2</span>:])</span><br><span class="line">        x = x.view(x.size(<span class="number">0</span>), <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> output_feature == <span class="string">&#x27;pool5&#x27;</span>:</span><br><span class="line">            x = F.normalize(x)</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line">        <span class="keyword">if</span> self.has_embedding:</span><br><span class="line">            x = self.feat(x)</span><br><span class="line">            x = self.feat_bn(x)</span><br><span class="line">        <span class="keyword">if</span> self.norm:</span><br><span class="line">            x = F.normalize(x)</span><br><span class="line">        <span class="keyword">elif</span> self.has_embedding:</span><br><span class="line">            x = F.relu(x)</span><br><span class="line">        <span class="comment"># triplet feature</span></span><br><span class="line">        <span class="keyword">if</span> self.triplet_features &gt; <span class="number">0</span>:</span><br><span class="line">            x_triplet = self.triplet(x)</span><br><span class="line">        <span class="keyword">if</span> self.dropout &gt; <span class="number">0</span>:</span><br><span class="line">            x = self.drop(x)</span><br><span class="line">        <span class="keyword">if</span> self.num_classes &gt; <span class="number">0</span>:</span><br><span class="line">            x_class = self.classifier(x)</span><br><span class="line">        <span class="comment"># two outputs</span></span><br><span class="line">        <span class="keyword">if</span> self.triplet_features &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> x_class, x_triplet</span><br><span class="line">        <span class="keyword">return</span> x_class</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reset_params</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> self.modules():</span><br><span class="line">            <span class="keyword">if</span> isinstance(m, nn.Conv2d):</span><br><span class="line">                init.kaiming_normal(m.weight, mode=<span class="string">&#x27;fan_out&#x27;</span>)</span><br><span class="line">                <span class="keyword">if</span> m.bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    init.constant(m.bias, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">elif</span> isinstance(m, nn.BatchNorm2d):</span><br><span class="line">                init.constant(m.weight, <span class="number">1</span>)</span><br><span class="line">                init.constant(m.bias, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">elif</span> isinstance(m, nn.Linear):</span><br><span class="line">                init.normal(m.weight, std=<span class="number">0.001</span>)</span><br><span class="line">                <span class="keyword">if</span> m.bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    init.constant(m.bias, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h4 id="Caffe-and-pytorch"><a href="#Caffe-and-pytorch" class="headerlink" title="Caffe and pytorch"></a>Caffe and pytorch</h4><p><a target="_blank" rel="noopener" href="https://github.com/Simon4Yan/Learning-via-Translation/issues/1">Caffe和pytorch中的bn层的计算方式不一样。</a></p>
 <p>在caffe中，bn层在训练时是eval状态，也是只使用Imagenet的mean和variance</p>
 <blockquote>
@@ -710,33 +689,29 @@
 <p>在pytorch中，bn层在训练时如果设置成eval装填，才可以达到caffe的精度。</p>
 <h4 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a>疑惑</h4><p>IDE和IDE+的效果区别为什么会这么大?</p>
 <h3 id="下一步工作-1"><a href="#下一步工作-1" class="headerlink" title="下一步工作"></a>下一步工作</h3><ul>
-<li><input checked="" disabled="" type="checkbox"> 已经理解源代码</li>
+<li>[x] 已经理解源代码</li>
 </ul>
 <p>尝试在pytorch上复现结果，现在根据作者提供的代码，感觉并不是很难。主要是SPGAN。</p>
 <hr>
 <h2 id="4-基于GAN的类似论文"><a href="#4-基于GAN的类似论文" class="headerlink" title="4. 基于GAN的类似论文"></a>4. 基于GAN的类似论文</h2><p>类似的采取GAN做person-reid方向的论文还有好多，上面两篇是现在最新的，下面就简单地介绍几篇类似的文章，其中涉及到的原理和前文提到的GAN的方法类似。</p>
 <h3 id="4-1-PTGAN"><a href="#4-1-PTGAN" class="headerlink" title="4.1 PTGAN"></a>4.1 PTGAN</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1711.08565.pdf">Person Transfer GAN to Bridge Domain Gap for Person Re-Identification</a></p>
 <p>Longhui Wei1, Shiliang Zhang1, Wen Gao1, Qi Tian</p>
-<p>这篇论文对Cycle-GAN进行了改进，保留ID信息的损失函数如下：<br>$$L_{ID}=E_{a \sim p_{data}(a)} [||(G(a)-a) \odot M(a)||<em>2] + E</em>{b \sim p_{data}(b)} [||(F(b)-b) \odot M(b)||_2]$$</p>
-<p>其中，$M(b)$表示使用PSPNet分割后的结果。</p>
+<p>这篇论文对Cycle-GAN进行了改进，保留ID信息的损失函数如下：</p>
+<script type="math/tex; mode=display">L_{ID}=E_{a \sim p_{data}(a)} [||(G(a)-a) \odot M(a)||_2] + E_{b \sim p_{data}(b)} [||(F(b)-b) \odot M(b)||_2]</script><p>其中，$M(b)$表示使用PSPNet分割后的结果。</p>
 <p>转化效果如下图所示</p>
-<p><img src="./pic/PTGAN/PTGAN.png" alt="PTGAN的转化效果"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/PTGAN.png" class="" title="PTGAN的转化效果">
-
+<p><img src="./pic/PTGAN/PTGAN.png" alt="PTGAN的转化效果"><br><img src="/2018/11/29/person-reid-transfer-learning/PTGAN.png" class="" title="PTGAN的转化效果"></p>
 <p>这里的Cycle-Gan生成图片的效果和SPGAN生成的效果还是有一些区别的，不是很理解。</p>
 <p>其他的不是本次的重点，不做介绍。</p>
 <h3 id="4-2-DCGAN-CNN"><a href="#4-2-DCGAN-CNN" class="headerlink" title="4.2 DCGAN+CNN"></a>4.2 DCGAN+CNN</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1701.07717.pdf">Unlabeled Samples Generated by GAN Improve the Person Re-Identification Baseline in Vitro</a></p>
 <p>Zhedong Zheng Liang Zheng Yi Yang</p>
 <p>这篇论文主要是利用DCGAN生成新的数据集进行数据集扩充。</p>
 <p>网络架构如图所示：</p>
-<p><img src="./pic/DCGAN+CNN/DCGAN+CNN.png" alt="DCGAN+CNN的网络结构"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/DCGAN+CNN.png" class="" title="DCGAN+CNN的网络结构">
-
+<p><img src="./pic/DCGAN+CNN/DCGAN+CNN.png" alt="DCGAN+CNN的网络结构"><br><img src="/2018/11/29/person-reid-transfer-learning/DCGAN+CNN.png" class="" title="DCGAN+CNN的网络结构"></p>
 <p>生成效果图</p>
-<p><img src="./pic/DCGAN+CNN/DCGAN+CNN2.png" alt="生成效果图"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/DCGAN+CNN2.png" class="" title="生成效果图">
-
-<p>生成图片的标签LSRO<br>$$q_{LSR}=\begin{cases} \frac{\epsilon}{K},&amp;k\neq y\\<br>                        1-\epsilon+\frac{\epsilon}{K},&amp;k=y \end{cases}$$<br>$$l_{LSR}=-(1-\epsilon)log(p(y))-\frac{\epsilon}{K}\sum_{k=1}^{K}log(p(k))$$<br>$$q_{LSRO}=\frac{1}{K}$$<br>$$l_{LSRO}=-(1-Z)log(p(y))-\frac{Z}{K}\sum_{k=1}^Klog(p(k))$$<br>其中，真实图片的Z=0，生成图片的Z=1.</p>
+<p><img src="./pic/DCGAN+CNN/DCGAN+CNN2.png" alt="生成效果图"><br><img src="/2018/11/29/person-reid-transfer-learning/DCGAN+CNN2.png" class="" title="生成效果图"></p>
+<p>生成图片的标签LSRO</p>
+<script type="math/tex; mode=display">q_{LSR}=\begin{cases} \frac{\epsilon}{K},&k\neq y\\\\
+                        1-\epsilon+\frac{\epsilon}{K},&k=y \end{cases}</script><script type="math/tex; mode=display">l_{LSR}=-(1-\epsilon)log(p(y))-\frac{\epsilon}{K}\sum_{k=1}^{K}log(p(k))</script><script type="math/tex; mode=display">q_{LSRO}=\frac{1}{K}</script><script type="math/tex; mode=display">l_{LSRO}=-(1-Z)log(p(y))-\frac{Z}{K}\sum_{k=1}^Klog(p(k))</script><p>其中，真实图片的Z=0，生成图片的Z=1.</p>
 <h2 id="5-MMFA"><a href="#5-MMFA" class="headerlink" title="5. MMFA"></a>5. MMFA</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1807.01440.pdf">Multi-task Mid-level Feature Alignment Network for Unsupervised Cross-Dataset Person Re-Identification</a></p>
 <p>Shan Lin, Haoliang Li, Chang-Tsun Li, Alex Chichung Kot, BMVC 2018</p>
 <h3 id="5-1-前言"><a href="#5-1-前言" class="headerlink" title="5.1 前言"></a>5.1 前言</h3><p>其想法也是将源域与目标域映射到同一特征空间。创新点是：</p>
@@ -745,9 +720,7 @@
 <li>考虑了属性</li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a529975125/article/details/81176029">MMD的参考代码</a></p>
-<h3 id="5-2-网络架构"><a href="#5-2-网络架构" class="headerlink" title="5.2 网络架构"></a>5.2 网络架构</h3><p><img src="./pic/MMFA/MMFA.png" alt="MMFA的网络架构"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/MMFA.png" class="" title="MMFA的网络架构">
-
+<h3 id="5-2-网络架构"><a href="#5-2-网络架构" class="headerlink" title="5.2 网络架构"></a>5.2 网络架构</h3><p><img src="./pic/MMFA/MMFA.png" alt="MMFA的网络架构"><br><img src="/2018/11/29/person-reid-transfer-learning/MMFA.png" class="" title="MMFA的网络架构"></p>
 <p>网络架构的说明:</p>
 <ul>
 <li>每一个batch中包括$n_s$张源域图片，$n_t$张目标域图片。batch=32</li>
@@ -760,18 +733,18 @@
 <li>测试使用max pool的2048维向量的欧式距离</li>
 <li><a target="_blank" rel="noopener" href="http://www.liangzheng.org/Project/project_reid.html">Market</a>有27个<a target="_blank" rel="noopener" href="https://github.com/vana77/Market-1501_Attribute">属性</a>，<a target="_blank" rel="noopener" href="http://vision.cs.duke.edu/DukeMTMC/">Duke</a>有23个<a target="_blank" rel="noopener" href="https://github.com/vana77/DukeMTMC-attribute">属性</a></li>
 </ul>
-<h3 id="5-3-损失函数"><a href="#5-3-损失函数" class="headerlink" title="5.3 损失函数"></a>5.3 损失函数</h3><p>Identity Loss:<br>$$L_{id}=-\frac{1}{n_s}\sum_{i=1}^{n_S}log(p_{id}(h_{S,i}^{id},y_{S,i}))$$</p>
-<p>Attribute Loss:<br>$$L_{attr}=-\frac{1}{M}\frac{1}{n_S}\sum_{m=1}^{M}\sum_{i=1}^{n_S}(a_{S,i}^{m}\cdot log(p_{attr}(h_{S,i}^{attr_m}, m)) -\\<br>(1-a_{S,i}^{m})\cdot log(1-p_{attr}(h_{S,i}^{attr_m}, m)))$$</p>
-<p>Attribute Feature Adaptation<br>$$L_{AAL}=\frac{1}{M}\sum_{m=1}^{M}MMD(H_{S}^{attr_m}, H_{T}^{attr_m})^2\\<br>         =\frac{1}{M}\sum_{m=1}^{M}\parallel \frac{1}{n_S}\sum_{i=1}^{n_S}\phi(h_{S,i}^{attr_m}) - \frac{1}{n_T}\sum_{i=1}^{n_T}\phi(h_{T,j}^{attr_m}) \parallel _{H}^2 \\<br>         =\frac{1}{M}\sum_{m=1}^{M}[ \frac{1}{(n_S)^2}\sum_{i=1}^{n_S}\sum_{i’=1}^{n_S}k(h_{S,i}^{attr_m}, h_{S,i’}^{attr_m})\\<br>         +\frac{1}{(n_T)^2}\sum_{i=1}^{n_T}\sum_{i’=1}^{n_T}k(h_{T,i}^{attr_m}, h_{T,i’}^{attr_m})\\<br>         -\frac{2}{n_S\cdot n_T}\sum_{i=1}^{n_S}\sum_{j=1}^{n_T}k(h_{S,i}^{attr_m}, h_{T,j}^{attr_m})  ] $$</p>
-<p>$$k(h_{S,i}^{attr_m}, h_{T,j}^{attr_m})=exp(-\frac{1}{2\alpha}\parallel  h_{S,i}^{attr_m} - h_{T,j}^{attr_m}\parallel ^2)$$<br>$$\alpha=1,5,10$$</p>
-<p>Mid-level Deep Feature Adaptation<br>$$L_{MDAL}=MMD(H_S,H_T)^2$$</p>
-<p>Overall loss<br>$$L_{all}=L_{id}+\lambda_1 L_{attr}+\lambda_2 L_{AAL}+\lambda_3 L_{MDAL}$$<br>$$\lambda_1=0.1,\lambda_2=1,\lambda_3=1$$</p>
-<h3 id="5-4-实验分析"><a href="#5-4-实验分析" class="headerlink" title="5.4 实验分析"></a>5.4 实验分析</h3><h4 id="5-4-1-实验结果"><a href="#5-4-1-实验结果" class="headerlink" title="5.4.1 实验结果"></a>5.4.1 实验结果</h4><p><img src="./pic/MMFA/MMFA2.png" alt="实验结果"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/MMFA2.png" class="" title="实验结果">
-
-<h3 id="5-4-2-实验模块"><a href="#5-4-2-实验模块" class="headerlink" title="5.4.2 实验模块"></a>5.4.2 实验模块</h3><p>实验模块对比实验结果<br><img src="./pic/MMFA/MMFA3.png" alt="实验模块对比实验结果"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/MMFA3.png" class="" title="实验模块对比实验结果">
-
+<h3 id="5-3-损失函数"><a href="#5-3-损失函数" class="headerlink" title="5.3 损失函数"></a>5.3 损失函数</h3><p>Identity Loss:</p>
+<script type="math/tex; mode=display">L_{id}=-\frac{1}{n_s}\sum_{i=1}^{n_S}log(p_{id}(h_{S,i}^{id},y_{S,i}))</script><p>Attribute Loss:</p>
+<script type="math/tex; mode=display">L_{attr}=-\frac{1}{M}\frac{1}{n_S}\sum_{m=1}^{M}\sum_{i=1}^{n_S}(a_{S,i}^{m}\cdot log(p_{attr}(h_{S,i}^{attr_m}, m)) -\\\\
+(1-a_{S,i}^{m})\cdot log(1-p_{attr}(h_{S,i}^{attr_m}, m)))</script><p>Attribute Feature Adaptation</p>
+<script type="math/tex; mode=display">L_{AAL}=\frac{1}{M}\sum_{m=1}^{M}MMD(H_{S}^{attr_m}, H_{T}^{attr_m})^2\\\\
+         =\frac{1}{M}\sum_{m=1}^{M}\parallel \frac{1}{n_S}\sum_{i=1}^{n_S}\phi(h_{S,i}^{attr_m}) - \frac{1}{n_T}\sum_{i=1}^{n_T}\phi(h_{T,j}^{attr_m}) \parallel \_{H}^2 \\\\
+         =\frac{1}{M}\sum_{m=1}^{M}[ \frac{1}{(n_S)^2}\sum_{i=1}^{n_S}\sum_{i'=1}^{n_S}k(h_{S,i}^{attr_m}, h_{S,i'}^{attr_m})\\\\
+         +\frac{1}{(n_T)^2}\sum_{i=1}^{n_T}\sum_{i'=1}^{n_T}k(h_{T,i}^{attr_m}, h_{T,i'}^{attr_m})\\\\
+         -\frac{2}{n_S\cdot n_T}\sum_{i=1}^{n_S}\sum_{j=1}^{n_T}k(h_{S,i}^{attr_m}, h_{T,j}^{attr_m})  ]</script><script type="math/tex; mode=display">k(h_{S,i}^{attr_m}, h_{T,j}^{attr_m})=exp(-\frac{1}{2\alpha}\parallel  h_{S,i}^{attr_m} - h_{T,j}^{attr_m}\parallel ^2)</script><script type="math/tex; mode=display">\alpha=1,5,10</script><p>Mid-level Deep Feature Adaptation</p>
+<script type="math/tex; mode=display">L_{MDAL}=MMD(H_S,H_T)^2</script><p>Overall loss</p>
+<script type="math/tex; mode=display">L_{all}=L_{id}+\lambda_1 L_{attr}+\lambda_2 L_{AAL}+\lambda_3 L_{MDAL}</script><script type="math/tex; mode=display">\lambda_1=0.1,\lambda_2=1,\lambda_3=1</script><h3 id="5-4-实验分析"><a href="#5-4-实验分析" class="headerlink" title="5.4 实验分析"></a>5.4 实验分析</h3><h4 id="5-4-1-实验结果"><a href="#5-4-1-实验结果" class="headerlink" title="5.4.1 实验结果"></a>5.4.1 实验结果</h4><p><img src="./pic/MMFA/MMFA2.png" alt="实验结果"><br><img src="/2018/11/29/person-reid-transfer-learning/MMFA2.png" class="" title="实验结果"></p>
+<h3 id="5-4-2-实验模块"><a href="#5-4-2-实验模块" class="headerlink" title="5.4.2 实验模块"></a>5.4.2 实验模块</h3><p>实验模块对比实验结果<br><img src="./pic/MMFA/MMFA3.png" alt="实验模块对比实验结果"><br><img src="/2018/11/29/person-reid-transfer-learning/MMFA3.png" class="" title="实验模块对比实验结果"></p>
 <h3 id="5-5-附录"><a href="#5-5-附录" class="headerlink" title="5.5 附录"></a>5.5 附录</h3><p>通过实验结果可以看出，在MMFA模型中，ID+Mid-level Deep Feature Adaptation的贡献最大。</p>
 <p>下一步可以尝试考虑Mid-level Deep Feature Adaptation。</p>
 <p>作者把avg pool 换成max pool。</p>
@@ -782,13 +755,9 @@
 <li>根据属性和id的关系，提出了Identity Inferred Attribute Space。</li>
 </ul>
 <h3 id="6-2-网络架构"><a href="#6-2-网络架构" class="headerlink" title="6.2 网络架构"></a>6.2 网络架构</h3><p>Attribute-Identity Transferable Joint Learning</p>
-<p><img src="./pic/TJ-AIDL/TJ-AIDL.png" alt="TJ-AIDL的网络架构 "></p>
-<img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL.png" class="" title="TJ-AIDL的网络架构">
-
+<p><img src="./pic/TJ-AIDL/TJ-AIDL.png" alt="TJ-AIDL的网络架构 "><br><img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL.png" class="" title="TJ-AIDL的网络架构"></p>
 <p>Unsupervised Target Domain Adaptation</p>
-<p><img src="./pic/TJ-AIDL/TJ-AIDL2.png" alt="IJ-AIDL的部分网络架构详解"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL2.png" class="" title="IJ-AIDL的部分网络架构详解">
-
+<p><img src="./pic/TJ-AIDL/TJ-AIDL2.png" alt="IJ-AIDL的部分网络架构详解"><br><img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL2.png" class="" title="IJ-AIDL的部分网络架构详解"></p>
 <p>网络架构的简要说明：</p>
 <ul>
 <li>(a) Identity Branch</li>
@@ -813,21 +782,15 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="6-3-损失函数"><a href="#6-3-损失函数" class="headerlink" title="6.3 损失函数"></a>6.3 损失函数</h3><p>Identity Branch (a) softmax<br>$$L_{id}=-\frac{1}{n_{bs}}\sum_{i=1}^{n_{bs}}log(p_{id}(I_i^S,y_i^S)) \tag{1}$$</p>
-<p>Attribute Branch(b) sigmoid<br>$$L_{att}=-\frac{1}{n_{bs}}\sum_{i=1}^{n_{bs}}\sum_{j=1}^{m}(a_{i,j}log(p_{att}(I_i,j))+(1-a_{i,j})log(1-p_{att}(I_i,j))) \tag{2}$$</p>
-<p>Identity Inferred Attribute (IIA) space (c)<br>$$L_{rec}=\parallel x_{id}-f_{IIA}(x_{id}) \parallel ^2 \tag{3}$$<br>$$L_{ID-transfer}=\parallel e_{IIA}-\tilde{p}_{att} \parallel ^2 \tag{4}$$<br>$$L_{att,IIA}=-\frac{1}{n_{bs}}\sum_{i=1}^{n_{bs}}\sum_{j=1}^{m}(a_{i,j}log(p_{IIA}(I_i,j))+(1-a_{i,j})log(1-p_{IIA}(I_i,j))) \tag{5}$$<br>$$L_{IIA}=L_{att,IIA}+\lambda_1 L_{rec}+\lambda_2 L_{ID-transfer} \tag{6}$$<br>$$\lambda_1=10, \lambda_2=10$$</p>
-<p>Impact of IIA on Identity and Attribute Branches<br>$$L_{att-total}=L_{att}+\lambda_2 L_{ID-transfer} \tag{7}$$</p>
-<h3 id="6-4-训练与部署流程"><a href="#6-4-训练与部署流程" class="headerlink" title="6.4 训练与部署流程"></a>6.4 训练与部署流程</h3><p><img src="./pic/TJ-AIDL/TJ-AIDL3.png" alt="IJ-AIDL的训练与部署流程"></p>
-
-
-<h3 id="6-5-模块分析"><a href="#6-5-模块分析" class="headerlink" title="6.5 模块分析"></a>6.5 模块分析</h3><h4 id="6-5-1-ID和Attribute模块分析"><a href="#6-5-1-ID和Attribute模块分析" class="headerlink" title="6.5.1 ID和Attribute模块分析"></a>6.5.1 ID和Attribute模块分析</h4><p><img src="./pic/TJ-AIDL/TJ-AIDL4.png" alt="IJ-AIDL的ID和Attribute模块分析"></p>
-
-
+<h3 id="6-3-损失函数"><a href="#6-3-损失函数" class="headerlink" title="6.3 损失函数"></a>6.3 损失函数</h3><p>Identity Branch (a) softmax</p>
+<script type="math/tex; mode=display">L_{id}=-\frac{1}{n_{bs}}\sum_{i=1}^{n_{bs}}log(p_{id}(I_i^S,y_i^S)) \tag{1}</script><p>Attribute Branch(b) sigmoid</p>
+<script type="math/tex; mode=display">L_{att}=-\frac{1}{n_{bs}}\sum_{i=1}^{n_{bs}}\sum_{j=1}^{m}(a_{i,j}log(p_{att}(I_i,j))+(1-a_{i,j})log(1-p_{att}(I_i,j))) \tag{2}</script><p>Identity Inferred Attribute (IIA) space (c)</p>
+<script type="math/tex; mode=display">L_{rec}=\parallel x_{id}-f_{IIA}(x_{id}) \parallel ^2 \tag{3}</script><script type="math/tex; mode=display">L_{ID-transfer}=\parallel e_{IIA}-\tilde{p}\_{att} \parallel ^2 \tag{4}</script><script type="math/tex; mode=display">L_{att,IIA}=-\frac{1}{n_{bs}}\sum_{i=1}^{n_{bs}}\sum_{j=1}^{m}(a_{i,j}log(p_{IIA}(I_i,j))+(1-a_{i,j})log(1-p_{IIA}(I_i,j))) \tag{5}</script><script type="math/tex; mode=display">L_{IIA}=L_{att,IIA}+\lambda_1 L_{rec}+\lambda_2 L_{ID-transfer} \tag{6}</script><script type="math/tex; mode=display">\lambda_1=10, \lambda_2=10</script><p>Impact of IIA on Identity and Attribute Branches</p>
+<script type="math/tex; mode=display">L_{att-total}=L_{att}+\lambda_2 L_{ID-transfer} \tag{7}</script><h3 id="6-4-训练与部署流程"><a href="#6-4-训练与部署流程" class="headerlink" title="6.4 训练与部署流程"></a>6.4 训练与部署流程</h3><p><img src="./pic/TJ-AIDL/TJ-AIDL3.png" alt="IJ-AIDL的训练与部署流程"><br></p>
+<h3 id="6-5-模块分析"><a href="#6-5-模块分析" class="headerlink" title="6.5 模块分析"></a>6.5 模块分析</h3><h4 id="6-5-1-ID和Attribute模块分析"><a href="#6-5-1-ID和Attribute模块分析" class="headerlink" title="6.5.1 ID和Attribute模块分析"></a>6.5.1 ID和Attribute模块分析</h4><p><img src="./pic/TJ-AIDL/TJ-AIDL4.png" alt="IJ-AIDL的ID和Attribute模块分析"><br></p>
 <p>通过ID only的mAP和HHL的baseline，可以看出MobileNet和Resnet50对mAP的影响不受很大。</p>
 <p>另外，可以看出，依然是ID占据了很大比重。</p>
-<h4 id="6-5-2-Adapation的作用"><a href="#6-5-2-Adapation的作用" class="headerlink" title="6.5.2 Adapation的作用"></a>6.5.2 Adapation的作用</h4><p><img src="./pic/TJ-AIDL/TJ-AIDL5.png" alt="IJ-AIDL的Adapation的作用"></p>
-<img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL5.png" class="" title="IJ-AIDL的Adapation的作用">
-
+<h4 id="6-5-2-Adapation的作用"><a href="#6-5-2-Adapation的作用" class="headerlink" title="6.5.2 Adapation的作用"></a>6.5.2 Adapation的作用</h4><p><img src="./pic/TJ-AIDL/TJ-AIDL5.png" alt="IJ-AIDL的Adapation的作用"><br><img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL5.png" class="" title="IJ-AIDL的Adapation的作用"></p>
 <p>从表格中可以看出，Adaptation的作用很小。说明，预训练的模型已经很好地能保持属性的一致性，即不同角度得到的属性是一样的。</p>
 <h3 id="6-6-补充"><a href="#6-6-补充" class="headerlink" title="6.6 补充"></a>6.6 补充</h3><p>还是难以理解作者这么做的出发点，感觉有点凭空就设计出这么多损失函数，可能是哪里还缺点什么东西。</p>
 <p>训练更新的时候方程(7)的出现原因是什么？更新(6)的时候应该就已经对attr进行了影响吧？</p>
@@ -995,13 +958,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

@@ -246,14 +246,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>914</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -268,27 +268,20 @@
         <h1 id="learning-git"><a href="#learning-git" class="headerlink" title="learning git"></a>learning git</h1><a id="more"></a>
 <p>自己之前已经学过一次git了，但是最近在用的时候，仍然感觉不顺手，所以今天趁这个机会，再学一遍，这一次，以命令为主，以原理为辅。</p>
 <h2 id="初始化仓库"><a href="#初始化仓库" class="headerlink" title="初始化仓库"></a>初始化仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
-
 <h2 id="文件到Git仓库"><a href="#文件到Git仓库" class="headerlink" title="文件到Git仓库"></a>文件到Git仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git add readme.txt</span><br><span class="line">$ git commit -m <span class="string">&quot;wrote a readme file&quot;</span></span><br></pre></td></tr></table></figure>
 <h2 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
 <h2 id="查看修改内容"><a href="#查看修改内容" class="headerlink" title="查看修改内容"></a>查看修改内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff readme.txt</span><br></pre></td></tr></table></figure>
 <h2 id="查看提交日志"><a href="#查看提交日志" class="headerlink" title="查看提交日志"></a>查看提交日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
 <h2 id="版本回到过去和将来"><a href="#版本回到过去和将来" class="headerlink" title="版本回到过去和将来"></a>版本回到过去和将来</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回到过去</span></span><br><span class="line">git reset --hard HEAD^</span><br><span class="line"><span class="comment"># HEAD~100</span></span><br><span class="line"><span class="comment"># 此时git log已经没有了最新版本的提交信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 回到将来</span></span><br><span class="line">git reset --hard 1094a</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">git reflog <span class="comment"># 命令历史</span></span><br><span class="line">git reset --hard 1094a</span><br></pre></td></tr></table></figure>
-<p><img src="https://images2017.cnblogs.com/blog/63651/201709/63651-20170905212837976-775285128.png"></p>
+<p><img src="https://images2017.cnblogs.com/blog/63651/201709/63651-20170905212837976-775285128.png" alt=""></p>
 <h2 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时</span></span><br><span class="line">git checkout -- readme.txt</span><br><span class="line"><span class="comment"># 当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，</span></span><br><span class="line">git reset HEAD readme.txt</span><br><span class="line">git checkout -- readme.txt</span><br></pre></td></tr></table></figure>
 <h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm test.txt</span><br><span class="line">git commit -m <span class="string">&quot;remove&quot;</span></span><br></pre></td></tr></table></figure>
 <h2 id="远程仓库克隆"><a href="#远程仓库克隆" class="headerlink" title="远程仓库克隆"></a>远程仓库克隆</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:michaelliao/gitskills.git</span><br></pre></td></tr></table></figure>
-
 <h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git://不支持push</span></span><br><span class="line">git remote add origin git://github.com/TJJTJJTJJ/ticgit.git</span><br><span class="line"><span class="comment"># git@只是push</span></span><br><span class="line">git remote add origin git@github.com:TJJTJJTJJ/ticgit.git</span><br><span class="line"><span class="comment"># remove</span></span><br><span class="line">git remote remove origin</span><br></pre></td></tr></table></figure>
-
 <h2 id="查看远程版本"><a href="#查看远程版本" class="headerlink" title="查看远程版本"></a>查看远程版本</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
-
 <h2 id="提交到远程"><a href="#提交到远程" class="headerlink" title="提交到远程"></a>提交到远程</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-
 <h2 id="获取远程仓库内容"><a href="#获取远程仓库内容" class="headerlink" title="获取远程仓库内容"></a>获取远程仓库内容</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br><span class="line">git merge origin/master</span><br></pre></td></tr></table></figure>
-
 <h2 id="提交远程仓库"><a href="#提交远程仓库" class="headerlink" title="提交远程仓库"></a>提交远程仓库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-
 <p>暂时到这里，剩下的分支，自己暂时还不会用到，等用到了再去学就可以了。</p>
 
     </div>
@@ -451,13 +444,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

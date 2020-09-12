@@ -244,14 +244,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span></span>
+              <span>485</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>NaN:aN</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -264,145 +264,151 @@
 
       
         <h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><a id="more"></a>
-
 <p>参考资料：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://www.zsythink.net/archives/tag/%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f/">grep 正则表达式</a></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep sshd</span><br><span class="line">grep <span class="string">&quot;sshd&quot;</span></span><br><span class="line">grep <span class="string">&quot;\(sshd\)&quot;</span></span><br></pre></td></tr></table></figure>
-
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">符号</th>
-<th align="center">含义</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">^</td>
-<td align="center">行首</td>
+<tbody>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">行首</td>
 </tr>
 <tr>
-<td align="center">$</td>
-<td align="center">行尾</td>
+<td style="text-align:center">$</td>
+<td style="text-align:center">行尾</td>
 </tr>
 <tr>
-<td align="center">\b</td>
-<td align="center">词首或者词尾</td>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">词首或者词尾</td>
 </tr>
 <tr>
-<td align="center">&lt;</td>
-<td align="center">词首</td>
+<td style="text-align:center">\&lt;</td>
+<td style="text-align:center">词首</td>
 </tr>
 <tr>
-<td align="center">&gt;</td>
-<td align="center">词尾</td>
+<td style="text-align:center">></td>
+<td style="text-align:center">词尾</td>
 </tr>
 <tr>
-<td align="center">\B</td>
-<td align="center">非单词边界</td>
+<td style="text-align:center">\B</td>
+<td style="text-align:center">非单词边界</td>
 </tr>
 <tr>
-<td align="center">{x}, {x,}</td>
-<td align="center">至少连续出现x次</td>
+<td style="text-align:center">\{x\}, \{x,\}</td>
+<td style="text-align:center">至少连续出现x次</td>
 </tr>
 <tr>
-<td align="center">{, y}</td>
-<td align="center">至多连续出现y次</td>
+<td style="text-align:center">\{, y\}</td>
+<td style="text-align:center">至多连续出现y次</td>
 </tr>
 <tr>
-<td align="center">{x, y}</td>
-<td align="center">至少连续出现x次，至多y次</td>
+<td style="text-align:center">\{x, y\}</td>
+<td style="text-align:center">至少连续出现x次，至多y次</td>
 </tr>
 <tr>
-<td align="center">*</td>
-<td align="center">之前的字符连续出现任意次数，包括0次</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">之前的字符连续出现任意次数，包括0次</td>
 </tr>
 <tr>
-<td align="center">.</td>
-<td align="center">任意字符，不包括换行符</td>
+<td style="text-align:center">.</td>
+<td style="text-align:center">任意字符，不包括换行符</td>
 </tr>
 <tr>
-<td align="center">.*</td>
-<td align="center">任意长度的任意字符</td>
+<td style="text-align:center">.*</td>
+<td style="text-align:center">任意长度的任意字符</td>
 </tr>
 <tr>
-<td align="center">?</td>
-<td align="center">之前的字符0次或者1次</td>
+<td style="text-align:center">\?</td>
+<td style="text-align:center">之前的字符0次或者1次</td>
 </tr>
 <tr>
-<td align="center">+</td>
-<td align="center">之前的字符至少1次</td>
+<td style="text-align:center">+</td>
+<td style="text-align:center">之前的字符至少1次</td>
 </tr>
 <tr>
-<td align="center">[abc]</td>
-<td align="center">指定范围内的任意单个字符</td>
+<td style="text-align:center">[abc]</td>
+<td style="text-align:center">指定范围内的任意单个字符</td>
 </tr>
 <tr>
-<td align="center">[^abc]</td>
-<td align="center">指定范围外的任意单个字符</td>
+<td style="text-align:center"><sup><a href="#fn_abc" id="reffn_abc">abc</a></sup></td>
+<td style="text-align:center">指定范围外的任意单个字符</td>
 </tr>
 <tr>
-<td align="center">()</td>
-<td align="center">分组，将分组内的字符作为一个整体处理</td>
+<td style="text-align:center">()</td>
+<td style="text-align:center">分组，将分组内的字符作为一个整体处理</td>
 </tr>
 <tr>
-<td align="center">\1</td>
-<td align="center">后向引用，引用第1个分组中的正则匹配到的结果</td>
+<td style="text-align:center">\1</td>
+<td style="text-align:center">后向引用，引用第1个分组中的正则匹配到的结果</td>
 </tr>
 <tr>
-<td align="center">\d, \D, \t, \s, \S</td>
-<td align="center">简写格式，需要结合选项 -P</td>
+<td style="text-align:center">\d, \D, \t, \s, \S</td>
+<td style="text-align:center">简写格式，需要结合选项 -P</td>
 </tr>
 <tr>
-<td align="center">\d, \D</td>
-<td align="center">单个0-9的数字，单个非数字字符</td>
+<td style="text-align:center">\d, \D</td>
+<td style="text-align:center">单个0-9的数字，单个非数字字符</td>
 </tr>
 <tr>
-<td align="center">\t</td>
-<td align="center">单个横向制表符，即tab</td>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">单个横向制表符，即tab</td>
 </tr>
 <tr>
-<td align="center">\s</td>
-<td align="center">单个空白字符，包括空格，tab</td>
+<td style="text-align:center">\s</td>
+<td style="text-align:center">单个空白字符，包括空格，tab</td>
 </tr>
 <tr>
-<td align="center">\S</td>
-<td align="center">匹配单个非空白字符</td>
+<td style="text-align:center">\S</td>
+<td style="text-align:center">匹配单个非空白字符</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">选项</th>
-<th align="center">含义</th>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">-A3</td>
-<td align="center">同时显示之后的3行，共显示4行</td>
+<tbody>
+<tr>
+<td style="text-align:center">-A3</td>
+<td style="text-align:center">同时显示之后的3行，共显示4行</td>
 </tr>
 <tr>
-<td align="center">-B3</td>
-<td align="center">同时显示之前的3行，共显示4行</td>
+<td style="text-align:center">-B3</td>
+<td style="text-align:center">同时显示之前的3行，共显示4行</td>
 </tr>
 <tr>
-<td align="center">-C3</td>
-<td align="center">同时显示之前之后的3行，共7行</td>
+<td style="text-align:center">-C3</td>
+<td style="text-align:center">同时显示之前之后的3行，共7行</td>
 </tr>
 <tr>
-<td align="center">-v</td>
-<td align="center">反向查找</td>
+<td style="text-align:center">-v</td>
+<td style="text-align:center">反向查找</td>
 </tr>
 <tr>
-<td align="center">-E</td>
-<td align="center">扩展正则表达式</td>
+<td style="text-align:center">-E</td>
+<td style="text-align:center">扩展正则表达式</td>
 </tr>
 <tr>
-<td align="center">-P</td>
-<td align="center">简写格式，兼容perl的正则表达式</td>
+<td style="text-align:center">-P</td>
+<td style="text-align:center">简写格式，兼容perl的正则表达式</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
     </div>
 
@@ -564,13 +570,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">NaNm</span>
+    <span title="站点总字数">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">NaN:aN</span>
+    <span title="站点阅读时长">7:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
