@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="1. eval">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch-2.0">
+<meta property="og:url" content="http://yoursite.com/2018/12/10/pytorch-2.0/index.html">
+<meta property="og:site_name" content="田佳杰">
+<meta property="og:description" content="1. eval">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-10T07:18:25.000Z">
+<meta property="article:modified_time" content="2018-12-23T14:47:18.685Z">
+<meta property="article:author" content="Jiajie Tian">
+<meta property="article:tag" content="pytorch">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/12/10/pytorch-2.0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>pytorch-2.0 | 田佳杰</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/TJJTJJTJJ/TJJTJJTJJ.github.io.git"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">田佳杰</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">代码的搬运工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/./about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/./archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-something">
+
+    <a href="/./test2/" rel="section"><i class="fa fa-something fa-fw"></i>测试</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/10/pytorch-2.0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiajie Tian">
+      <meta itemprop="description" content="记录一些学习到的东西和论文记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="田佳杰">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pytorch-2.0
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-10 15:18:25" itemprop="dateCreated datePublished" datetime="2018-12-10T15:18:25+08:00">2018-12-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-23 22:47:18" itemprop="dateModified" datetime="2018-12-23T22:47:18+08:00">2018-12-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pytorch/" itemprop="url" rel="index"><span itemprop="name">pytorch</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-eval"><a href="#1-eval" class="headerlink" title="1. eval"></a>1. eval</h1><a id="more"></a>
+<p>pytorch 的eval()只是改变一些模块的状态，并不影响backward过程。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012436149/article/details/78281553">https://blog.csdn.net/u012436149/article/details/78281553</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6cb1fd785540">https://www.jianshu.com/p/6cb1fd785540</a></p>
+<h1 id="2-扩展-torch-autograd"><a href="#2-扩展-torch-autograd" class="headerlink" title="2. 扩展 torch.autograd"></a>2. 扩展 torch.autograd</h1><p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/27783097">https://zhuanlan.zhihu.com/p/27783097</a></p>
+<p><a target="_blank" rel="noopener" href="https://pytorch-cn.readthedocs.io/zh/latest/notes/extending/">https://pytorch-cn.readthedocs.io/zh/latest/notes/extending/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Hungryof/article/details/78346304">https://blog.csdn.net/Hungryof/article/details/78346304</a></p>
+<h2 id="2-1-Function和Module的差异和应用场景"><a href="#2-1-Function和Module的差异和应用场景" class="headerlink" title="2.1 Function和Module的差异和应用场景"></a>2.1 Function和Module的差异和应用场景</h2><ul>
+<li>Function一般只定义一个操作，因为无法保存参数，例如激活函数、pool操作等；</li>
+<li>Module可以保存参数，适合于定义一个层</li>
+<li>Function需要定义三个方法：__init__, forward, backward;</li>
+<li>Module: 需要定义__init__和forward，而backward由自动求导构成；</li>
+<li>可以简单地认为，Module就是由Function构成的</li>
+<li>Module中不仅包括了Function，还包括了对应的参数、其他变量等等。</li>
+<li>Function: __init__ (optional) - 如果你的operation包含非Variable参数，那么就将其作为__init__的参数传入到operation中。例如：AddConstant Function加一个常数，Transpose Function需要指定哪两个维度需要交换。如果你的operation不需要额外的参数，你可以忽略__init__。</li>
+</ul>
+<h2 id="2-2-定义一个ReLU函数"><a href="#2-2-定义一个ReLU函数" class="headerlink" title="2.2 定义一个ReLU函数"></a>2.2 定义一个ReLU函数</h2><h3 id="2-2-1-定义一个ReLU函数"><a href="#2-2-1-定义一个ReLU函数" class="headerlink" title="2.2.1 定义一个ReLU函数"></a>2.2.1 定义一个ReLU函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyReLU</span>(<span class="params">torch.autograd.Function</span>):</span></span><br><span class="line">        <span class="comment"># 输入和输出相互对应</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, input_</span>):</span></span><br><span class="line">        <span class="comment"># 在forward中，需要定义MyReLU这个运算的forward计算过程</span></span><br><span class="line">        <span class="comment"># 同时可以保存任何在后向传播中需要使用的变量值</span></span><br><span class="line">        self.save_for_backward(input_)         <span class="comment"># 将输入保存起来，在backward时使用</span></span><br><span class="line">        output = input_.clamp(min=<span class="number">0</span>)               <span class="comment"># relu就是截断负数，让所有负数等于0</span></span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span>(<span class="params">self, grad_output</span>):</span></span><br><span class="line">        <span class="comment"># 根据BP算法的推导（链式法则），dloss / dx = (dloss / doutput) * (doutput / dx)</span></span><br><span class="line">        <span class="comment"># dloss / doutput就是输入的参数grad_output、</span></span><br><span class="line">        <span class="comment"># 因此只需求relu的导数，在乘以grad_output</span></span><br><span class="line">        input_, = self.saved_tensors</span><br><span class="line">        grad_input = grad_output.clone()</span><br><span class="line">        grad_input[input &lt; <span class="number">0</span>] = <span class="number">0</span>                <span class="comment"># 上诉计算的结果就是左式。即ReLU在反向传播中可以看做一个通道选择函数，所有未达到阈值（激活值&lt;0）的单元的梯度都为0</span></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GuidedBackpropReLU</span>(<span class="params">Function</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, input</span>):</span></span><br><span class="line">        positive_mask = (input &gt; <span class="number">0</span>).type_as(input)</span><br><span class="line">        output = torch.addcmul(torch.zeros(input.size()).type_as(input), input, positive_mask)</span><br><span class="line">        self.save_for_backward(input, output)</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span>(<span class="params">self, grad_output</span>):</span></span><br><span class="line">        input, output = self.saved_tensors</span><br><span class="line">        grad_input = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        positive_mask_1 = (input &gt; <span class="number">0</span>).type_as(grad_output)</span><br><span class="line">        positive_mask_2 = (grad_output &gt; <span class="number">0</span>).type_as(grad_output)</span><br><span class="line">        grad_input = torch.addcmul(torch.zeros(input.size()).type_as(input),</span><br><span class="line">                                   torch.addcmul(torch.zeros(input.size()).type_as(input), grad_output,</span><br><span class="line">                                                 positive_mask_1), positive_mask_2)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Inherit from Function</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Linear</span>(<span class="params">Function</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># bias is an optional argument</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, input, weight, bias=None</span>):</span></span><br><span class="line">        self.save_for_backward(input, weight, bias)</span><br><span class="line">        output = input.mm(weight.t())</span><br><span class="line">        <span class="keyword">if</span> bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            output += bias.unsqueeze(<span class="number">0</span>).expand_as(output)</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line">    <span class="comment"># This function has only a single output, so it gets only one gradient</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span>(<span class="params">self, grad_output</span>):</span></span><br><span class="line">        <span class="comment"># This is a pattern that is very convenient - at the top of backward</span></span><br><span class="line">        <span class="comment"># unpack saved_tensors and initialize all gradients w.r.t. inputs to</span></span><br><span class="line">        <span class="comment"># None. Thanks to the fact that additional trailing Nones are</span></span><br><span class="line">        <span class="comment"># ignored, the return statement is simple even when the function has</span></span><br><span class="line">        <span class="comment"># optional inputs.</span></span><br><span class="line">        input, weight, bias = self.saved_tensors</span><br><span class="line">        grad_input = grad_weight = grad_bias = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># These needs_input_grad checks are optional and there only to</span></span><br><span class="line">        <span class="comment"># improve efficiency. If you want to make your code simpler, you can</span></span><br><span class="line">        <span class="comment"># skip them. Returning gradients for inputs that don&#x27;t require it is</span></span><br><span class="line">        <span class="comment"># not an error.</span></span><br><span class="line">        <span class="keyword">if</span> self.needs_input_grad[<span class="number">0</span>]:</span><br><span class="line">            grad_input = grad_output.mm(weight)</span><br><span class="line">        <span class="keyword">if</span> self.needs_input_grad[<span class="number">1</span>]:</span><br><span class="line">            grad_weight = grad_output.t().mm(input)</span><br><span class="line">        <span class="keyword">if</span> bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.needs_input_grad[<span class="number">2</span>]:</span><br><span class="line">            grad_bias = grad_output.sum(<span class="number">0</span>).squeeze(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> grad_input, grad_weight, grad_bias</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-2-Wrap成一个ReLU函数"><a href="#2-2-2-Wrap成一个ReLU函数" class="headerlink" title="2.2.2 Wrap成一个ReLU函数"></a>2.2.2 Wrap成一个ReLU函数</h3><p>可以把刚刚自定义的ReLU类封装成一个函数，方便调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">relu</span>(<span class="params">input_</span>):</span></span><br><span class="line">    <span class="comment"># MyReLU()是创建一个MyReLU对象，</span></span><br><span class="line">    <span class="comment"># Function类利用了Python __call__操作，使得可以直接使用对象调用__call__制定的方法</span></span><br><span class="line">    <span class="comment"># __call__指定的方法是forward，因此下面这句MyReLU（）（input_）相当于</span></span><br><span class="line">    <span class="comment"># return MyReLU().forward(input_)</span></span><br><span class="line">    <span class="keyword">return</span> MyReLU()(input_)</span><br><span class="line">input_ = Variable(torch.linspace(<span class="number">-3</span>, <span class="number">3</span>, steps=<span class="number">5</span>))</span><br><span class="line"><span class="keyword">print</span> input_</span><br><span class="line"><span class="keyword">print</span> relu(input_)</span><br></pre></td></tr></table></figure>
+
+<p>在某些版本中，Function类的使用方法是.apply方法，其和__call__方法类似。</p>
+<p>在某些版本中，forward和backward方法需要是@staticmethod</p>
+<p>在某些版本中，forward中Variable参数会自动转为tensor，backward参数是Variable</p>
+<p>在某些版本中，forward和backward中self会写成ctx</p>
+<p>save_for_backward只能传入Variable或是Tensor的变量，如果是其他类型的，可以用self.xyz = xyz，使其在backward中可以用。</p>
+<h3 id="2-2-3-检查backward是否正确"><a href="#2-2-3-检查backward是否正确" class="headerlink" title="2.2.3 检查backward是否正确"></a>2.2.3 检查backward是否正确</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> gradcheck</span><br><span class="line"></span><br><span class="line"><span class="comment"># gradchek takes a tuple of tensor as input, check if your gradient</span></span><br><span class="line"><span class="comment"># evaluated with these tensors are close enough to numerical</span></span><br><span class="line"><span class="comment"># approximations and returns True if they all verify this condition.</span></span><br><span class="line">input = (Variable(torch.randn(<span class="number">20</span>,<span class="number">20</span>).double(), requires_grad=<span class="literal">True</span>),)</span><br><span class="line">test = gradcheck.gradcheck(Linear(), input, eps=<span class="number">1e-6</span>, atol=<span class="number">1e-4</span>)</span><br><span class="line">print(test)</span><br></pre></td></tr></table></figure>
+
+<p>备注：</p>
+<ul>
+<li>自动求导竟然是在backward的操作中创建的图！暂时没懂。</li>
+</ul>
+<h1 id="3-扩展torch-nn"><a href="#3-扩展torch-nn" class="headerlink" title="3. 扩展torch.nn"></a>3. 扩展torch.nn</h1><p>nn包括两种街扩-modules和functional版本。其中，functional版本已经在上面介绍过，不再重复，这一小节主要介绍modules。</p>
+<p>扩展module需要预先实现一个执行计算和梯度的Function。</p>
+<p>扩展module需要实现两个方法：</p>
+<ul>
+<li><p>__init__ (optional) - 输入参数，例如kernel sizes, numbers of features, 等等。同时初始化 parameters和buffers。</p>
+</li>
+<li><p>forward() - 实例化一个执行operation的Function，使用它执行operation。和functional wrapper(上面实现的那个简单的wrapper)十分类似。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Linear</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_features, output_features, bias=True</span>):</span></span><br><span class="line">        self.input_features = input_features</span><br><span class="line">        self.output_features = output_features</span><br><span class="line"></span><br><span class="line">        <span class="comment"># nn.Parameter is a special kind of Variable, that will get</span></span><br><span class="line">        <span class="comment"># automatically registered as Module&#x27;s parameter once it&#x27;s assigned</span></span><br><span class="line">        <span class="comment"># as an attribute. Parameters and buffers need to be registered, or</span></span><br><span class="line">        <span class="comment"># they won&#x27;t appear in .parameters() (doesn&#x27;t apply to buffers), and</span></span><br><span class="line">        <span class="comment"># won&#x27;t be converted when e.g. .cuda() is called. You can use</span></span><br><span class="line">        <span class="comment"># .register_buffer() to register buffers.</span></span><br><span class="line">        <span class="comment"># nn.Parameters can never be volatile and, different than Variables,</span></span><br><span class="line">        <span class="comment"># they require gradients by default.</span></span><br><span class="line">        self.weight = nn.Parameter(torch.Tensor(input_features, output_features))</span><br><span class="line">        <span class="keyword">if</span> bias:</span><br><span class="line">            self.bias = nn.Parameter(torch.Tensor(output_features))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># You should always register all possible parameters, but the</span></span><br><span class="line">            <span class="comment"># optional ones can be None if you want.</span></span><br><span class="line">            self.register_parameter(<span class="string">&#x27;bias&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Not a very smart way to initialize weights</span></span><br><span class="line">        self.weight.data.uniform_(<span class="number">-0.1</span>, <span class="number">0.1</span>)</span><br><span class="line">        <span class="keyword">if</span> bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.bias.data.uniform_(<span class="number">-0.1</span>, <span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, input</span>):</span></span><br><span class="line">        <span class="comment"># See the autograd section for explanation of what happens here.</span></span><br><span class="line">        <span class="keyword">return</span> Linear()(input, self.weight, self.bias)</span><br><span class="line">        <span class="comment">#注意这个Linear是之前实现过的Linear</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>parameter和buffer是一类特殊的Variable。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">self._parameters = OrderedDict()</span><br><span class="line">self._modules = OrderedDict()</span><br><span class="line">self._buffers = OrderedDict()</span><br><span class="line">self._backward_hooks = OrderedDict()</span><br><span class="line">self._forward_hooks = OrderedDict()</span><br><span class="line">self.training = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>_parameters: 是一个字典，保存的有：nn.Parameter()和register_parameter()，而nn.Linear(3,4)的parameter不会保存于此。</li>
+<li>_modules:nn.Linear(3,4)会保存于此。</li>
+<li>_buffers:register_buffer()会保存于此.</li>
+<li>named_parameters():会保存_parameters和_modules的parameters。</li>
+<li>__getattr__()方法会从_modules,_parameters和_buffers这三个字典中获取。</li>
+</ul>
+<h1 id="3-retain-graph-and-create-graph"><a href="#3-retain-graph-and-create-graph" class="headerlink" title="3. retain_graph and create_graph"></a>3. retain_graph and create_graph</h1><h2 id="3-1-retain-graph"><a href="#3-1-retain-graph" class="headerlink" title="3.1 retain_graph"></a>3.1 retain_graph</h2><p>retain_graph 是保存前向传播过程中的buffer。是因为如果有两个backward,那么需要retain_graph=true,因为默认一个前向对应一个反向,用于实现多次反向传播</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.ones(<span class="number">1</span>)</span><br><span class="line">b = torch.rand(<span class="number">1</span>, requires_grad=<span class="literal">True</span>)</span><br><span class="line">w = torch.rand(<span class="number">1</span>, requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = w * x</span><br><span class="line">z = y + b</span><br><span class="line">z2 = y-b</span><br><span class="line">z.backward()</span><br><span class="line">w.grad</span><br><span class="line"><span class="number">1</span></span><br><span class="line">z2.backward()</span><br><span class="line">RuntimeError: Trying to backward through the graph a second time, but the buffers have already been freed. Specify retain_graph=<span class="literal">True</span> when calling backward the first time.</span><br><span class="line">改为</span><br><span class="line">z.backward(retain_graph=<span class="literal">True</span>) <span class="comment"># 只能保证当前backward后的buffer不被清除.</span></span><br><span class="line">w.grad</span><br><span class="line"><span class="number">1</span></span><br><span class="line">z2.backward()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>发现一个神奇的操作,如果y=w+x,那么不需要retain_graph 也可以多次反向传播,说明问题出现在y上.当y中存储了buffer w或者x后,就需要retain_graph,反之,不需要也能多次反向传播.<br>但是现在找不到这个buffer保存在哪里</p>
+<h2 id="3-2-create-graph"><a href="#3-2-create-graph" class="headerlink" title="3.2 create_graph"></a>3.2 create_graph</h2><p>create_graph用于实现高阶导数,相当于对于叶子节点的导数dx与x是否建立计算图,即是否需要保存f’(x)作为一个计算图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.tensor([<span class="number">5.0</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = x ** <span class="number">2</span></span><br><span class="line">grad_x = torch.autograd.grad(y, x, create_graph=<span class="literal">True</span>)</span><br><span class="line">grad_x[<span class="number">0</span>].grad_fn</span><br><span class="line">&lt;MulBackward1 at <span class="number">0x7feb27c9e160</span>&gt;</span><br><span class="line">grad_grad_x = torch.autograd.grad(grad_x[<span class="number">0</span>], x)</span><br><span class="line">print(grad_grad_x[<span class="number">0</span>].grad_fn)</span><br><span class="line">grad_grad_grad_x = torch.autograd.grad(grad_grad_x, x)</span><br><span class="line">RuntimeError: element <span class="number">0</span> of tensors does <span class="keyword">not</span> require grad <span class="keyword">and</span> does <span class="keyword">not</span> have a grad_fn</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/pytorch/" rel="tag"># pytorch</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/10/SPGAN-tensorflow/" rel="prev" title="SPGAN-tensorflow">
+      <i class="fa fa-chevron-left"></i> SPGAN-tensorflow
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/11/RotationNet-paper/" rel="next" title="RotationNet-paper">
+      RotationNet-paper <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-eval"><span class="nav-number">1.</span> <span class="nav-text">1. eval</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%89%A9%E5%B1%95-torch-autograd"><span class="nav-number">2.</span> <span class="nav-text">2. 扩展 torch.autograd</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Function%E5%92%8CModule%E7%9A%84%E5%B7%AE%E5%BC%82%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Function和Module的差异和应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AAReLU%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 定义一个ReLU函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AAReLU%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 定义一个ReLU函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Wrap%E6%88%90%E4%B8%80%E4%B8%AAReLU%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 Wrap成一个ReLU函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-%E6%A3%80%E6%9F%A5backward%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.3 检查backward是否正确</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%89%A9%E5%B1%95torch-nn"><span class="nav-number">3.</span> <span class="nav-text">3. 扩展torch.nn</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-retain-graph-and-create-graph"><span class="nav-number">4.</span> <span class="nav-text">3. retain_graph and create_graph</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-retain-graph"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 retain_graph</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-create-graph"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 create_graph</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiajie Tian</p>
+  <div class="site-description" itemprop="description">记录一些学习到的东西和论文记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/./archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiajie Tian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

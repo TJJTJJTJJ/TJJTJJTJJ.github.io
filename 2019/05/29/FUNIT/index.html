@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="0. 前言 paper: FUNIT: Few-Shot Unsupervised Image-to-Image Translation code: code  代码还需要等段时间，才能下载到所有代码。 这篇文章和郑哲东的 Joint Discriminative and Generative Learning for Person Re-identification 这篇文章看着有点像，果然是高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FUNIT">
+<meta property="og:url" content="http://yoursite.com/2019/05/29/FUNIT/index.html">
+<meta property="og:site_name" content="田佳杰">
+<meta property="og:description" content="0. 前言 paper: FUNIT: Few-Shot Unsupervised Image-to-Image Translation code: code  代码还需要等段时间，才能下载到所有代码。 这篇文章和郑哲东的 Joint Discriminative and Generative Learning for Person Re-identification 这篇文章看着有点像，果然是高">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/29/FUNIT/example.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/29/FUNIT/network.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/29/FUNIT/visual_comparison.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/29/FUNIT/limitation.png">
+<meta property="article:published_time" content="2019-05-29T03:08:24.000Z">
+<meta property="article:modified_time" content="2019-05-30T06:21:58.515Z">
+<meta property="article:author" content="Jiajie Tian">
+<meta property="article:tag" content="GAN">
+<meta property="article:tag" content="few-shot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/29/FUNIT/example.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/05/29/FUNIT/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>FUNIT | 田佳杰</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/TJJTJJTJJ/TJJTJJTJJ.github.io.git"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">田佳杰</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">代码的搬运工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/./about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/./archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-something">
+
+    <a href="/./test2/" rel="section"><i class="fa fa-something fa-fw"></i>测试</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/FUNIT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiajie Tian">
+      <meta itemprop="description" content="记录一些学习到的东西和论文记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="田佳杰">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FUNIT
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-29 11:08:24" itemprop="dateCreated datePublished" datetime="2019-05-29T11:08:24+08:00">2019-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-05-30 14:21:58" itemprop="dateModified" datetime="2019-05-30T14:21:58+08:00">2019-05-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GAN/" itemprop="url" rel="index"><span itemprop="name">GAN</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1905.01723">FUNIT: Few-Shot Unsupervised Image-to-Image Translation</a></li>
+<li>code: <a target="_blank" rel="noopener" href="https://github.com/NVlabs/FUNIT">code</a></li>
+</ul>
+<p>代码还需要等段时间，才能下载到所有代码。</p>
+<p>这篇文章和郑哲东的 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.07223">Joint Discriminative and Generative Learning for Person Re-identification</a> 这篇文章看着有点像，果然是高手的思路都是相同的。不对，两个都是 NVIDIA 的，哈哈哈。</p>
+<p>这篇文章思路奇特，实现简单。</p>
+<a id="more"></a>
+
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>传统的 GAN 在训练阶段需要 many images in both source and target classes (其中 source 提供 content, target 提供 classes)(这里的 content 可以粗略的理解成形态或者表情或者属性或者姿势这种与类别无关的内容，classes 表示与类别相关的内容)，并且测试图片需要来自训练时所使用的 source and target classes.而作者提出的方法在训练阶段需要很少的 images in both source and target classes 并且测试时可以提供训练未曾见到过的 target classes.</p>
+<p>其基本假设是当人类见到 new object (target class) 时，可以根据以往的经验推断出它的其他形态，比如曾经见过猫的站立和趴着的状态，见到老虎时，能自动脑补出老虎站立和趴着的状态。</p>
+<p>Question: 如果见过猫的站立和趴着的状态，看到蛇会咋想，蛇没有站或者趴这种说法，这种转换会考虑到这种情况吗？还是会生成一个站着的蛇？哈哈哈？</p>
+<p>Question: 测试时如果把 target dataset 作为 content image，不知道会是什么效果。</p>
+<p>Question: 作者是否隐藏了一个假设：content image 提供的信息或者属性是所有 object 都共享的？</p>
+<img src="/2019/05/29/FUNIT/example.png" class="" title="example">
+
+<h2 id="2-Few-shot-Unsupervised-Image-Translation"><a href="#2-Few-shot-Unsupervised-Image-Translation" class="headerlink" title="2. Few-shot Unsupervised Image Translation"></a>2. Few-shot Unsupervised Image Translation</h2><img src="/2019/05/29/FUNIT/network.png" class="" title="network">
+
+<p>明确几个相关定义：</p>
+<ul>
+<li>数据集一共分为两个：source dataset (source class images), target dataset (target class images), 训练时只使用 source dataset, 测试时使用 source dataset 和 target dataset。</li>
+<li>对于模型而言，输入分为一张 content image 和多张 class image，content image 提供姿势等信息，class image 提供类别等信息.</li>
+<li>模型在训练时，content image 和 class image 都来自 source dataset，在测试时，content image 来自 source dataset，class image 来自 target dataset.</li>
+</ul>
+<p>generator G 的输入是 一张 content image $x$ and a set of K class images $\lbrace y_1,…,y_k \rbrace$, 从而得到输出图片 $\bar{x}$:</p>
+<p>$$\bar{x}=G(x, \lbrace y_1,…,y_k \rbrace)$$</p>
+<p>其中，content image 属于 object class $c_x$，K 张 class images 属于 object class $c_y$，一般情况下，K 比较小并且 $c_x$ 不等于 $c_y$，称 G 为 few-shot image translator.得到的结果在外形看更像 $c_y$，在姿势等方面更像 $c_x$.</p>
+<p>令 $\mathbb{S}$ and $\mathbb{T}$ 表示 the set of source classes and the set of target classes.在训练阶段，随机从 $\mathbb{S}$ 中选取两类图片 $c_x, c_y \in \mathbb{S}$ 输入 G，在测试时，class image 选自 $\mathbb{T}$，content image 选自 $\mathbb{S}$.</p>
+<h3 id="2-1-Few-shot-Image-Translator"><a href="#2-1-Few-shot-Image-Translator" class="headerlink" title="2.1 Few-shot Image Translator"></a>2.1 Few-shot Image Translator</h3><ul>
+<li>G: generator, consists of a content encoder $E_x$, a class encoder $E_y$, and a decoder $F_x$</li>
+<li>$E_x: x \to z_x$: class-invariant latent representation, determines the local structure</li>
+<li>$E_y: \lbrace y_1,…,y_k \rbrace \to z_y$: class-specific latent representation, control the global look, K 可大可小</li>
+<li>$F_x: (z_x, z_y)\to \bar{x}$</li>
+</ul>
+<h3 id="2-2-Multi-task-Adversarial-Discriminator"><a href="#2-2-Multi-task-Adversarial-Discriminator" class="headerlink" title="2.2 Multi-task Adversarial Discriminator"></a>2.2 Multi-task Adversarial Discriminator</h3><ul>
+<li>D: discriminator, multiple adversarial binary classification task</li>
+<li>D 输入是一张图片，得到 $|\mathbb{S}|$ 个输出</li>
+<li>当输入图片取自 real image of source class $c_x$，希望第 $c_x$ 个输出为真</li>
+<li>当输入图片取自 fake image of translation out $c_x$，希望第 $c_x$ 个输出为假</li>
+<li>属于 $c_x$ 类的图片预测为其他类 $(\mathbb{S}\setminus {c_x})$ 是真是假，则不关心</li>
+<li>更新 G 时，仅仅希望第 $c_x$ 个输出为假</li>
+<li>作者通过经验发现 $|\mathbb{S}|$ 个二分类器比一个 $|\mathbb{S}|$ 分类器得到的效果更好</li>
+</ul>
+<p>Question: 这种设置分类器的方法倒是没想过，不知道作者的思路由来，感觉这种多个二分类器要比多分类器更容易扩展，如果多一个类别，可以在不改变原有分类器的情况下加一个即可，但是多分类器的话需要全部替换</p>
+<h3 id="2-3-Learning"><a href="#2-3-Learning" class="headerlink" title="2.3 Learning"></a>2.3 Learning</h3><p><strong>GAN loss</strong>:</p>
+<p>$$L_{GAN}(G,D)=E_x[-\log D^{c_x}(x)]+E_{x,\lbrace y_1,…,y_k \rbrace}[\log (1-D^{c_y}(\bar{x}))]$$</p>
+<p><strong>content reconstruction loss</strong>:</p>
+<p>$$L_{R}(G)=E_x[\parallel x-G(x, \lbrace x \rbrace ) \parallel]$$</p>
+<p>Question: 这个损失是为了约束 $\bar{x}$ 与 $x$ 相似吗？</p>
+<p><strong>feature matching loss</strong>:</p>
+<p>记 $D_f$ 为 feature extractor, 即移除 D 的分类器。</p>
+<p>$$L_F(G)=E_{x,\lbrace y_1,…,y_k \rbrace}[ \parallel D_f(\bar{x}-\sum _k \frac{D_f(y_k)}{K}) \parallel _1^1] $$</p>
+<p>Question: 按理来说，通过分类损失就已经可以约束 $\bar{x}$ 和 $\lbrace y_1,…,y_k \rbrace$ 相似了，再加上 feature matching 的效果更明显吗？</p>
+<p>Question: 是怎么约束 $\bar{x}$ 与 $x$ 在姿势等方面相似的？</p>
+<h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><p>训练时 $K=1$，测试时 $K=1, 5, 10, 15, 20$</p>
+<p><strong>Baseline</strong>: 作者把 target class image 在训练阶段是否出现划分为 fair (unavailable) and unfair (available)</p>
+<ul>
+<li>Fair: StarGAN-Fair-K</li>
+<li>Unfair: StarGAN-Unfair-K, CycleGAN-Unfair-K, UNIT-Unfair-K, MUNIT-Unfair-K</li>
+</ul>
+<img src="/2019/05/29/FUNIT/visual_comparison.png" class="" title="visual comparison">
+
+<p>至于关于 GAN 的其他指标，则不列了，一是肯定效果好，二是自己也不是特别懂这些指标的意义和难度。</p>
+<p>训练时 source classes 越多，效果越好。</p>
+<p>在跨物种时，效果也会很差，只能改变 content image 的颜色。其类别没有发生变化。</p>
+<img src="/2019/05/29/FUNIT/limitation.png" class="" title="limitation">
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GAN/" rel="tag"># GAN</a>
+              <a href="/tags/few-shot/" rel="tag"># few-shot</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/27/STGAN/" rel="prev" title="STGAN">
+      <i class="fa fa-chevron-left"></i> STGAN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/30/ArcFace/" rel="next" title="ArcFace">
+      ArcFace <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Few-shot-Unsupervised-Image-Translation"><span class="nav-number">3.</span> <span class="nav-text">2. Few-shot Unsupervised Image Translation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Few-shot-Image-Translator"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Few-shot Image Translator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Multi-task-Adversarial-Discriminator"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Multi-task Adversarial Discriminator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Learning"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Learning</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Experiments"><span class="nav-number">4.</span> <span class="nav-text">4. Experiments</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiajie Tian</p>
+  <div class="site-description" itemprop="description">记录一些学习到的东西和论文记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/./archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiajie Tian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

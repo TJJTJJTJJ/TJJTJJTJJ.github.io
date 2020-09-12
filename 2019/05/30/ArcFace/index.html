@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="0. 前言 paper: CVPR2019_ArcFace: Additive Angular Margin Loss for Deep Face Recognition code: MXNet, pytorch, pytorch, tensorflow author: 邓健康  开源代码中称之为 insightface，思路简单，效果却很好，并且与其他变种做了详尽的对比。(这篇论文原名是ArcF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArcFace">
+<meta property="og:url" content="http://yoursite.com/2019/05/30/ArcFace/index.html">
+<meta property="og:site_name" content="田佳杰">
+<meta property="og:description" content="0. 前言 paper: CVPR2019_ArcFace: Additive Angular Margin Loss for Deep Face Recognition code: MXNet, pytorch, pytorch, tensorflow author: 邓健康  开源代码中称之为 insightface，思路简单，效果却很好，并且与其他变种做了详尽的对比。(这篇论文原名是ArcF">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/30/ArcFace/network.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/30/ArcFace/softmax_ArcFace.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/30/ArcFace/target_logit_analysis.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/30/ArcFace/decision_margin.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/30/ArcFace/RetinaFace.png">
+<meta property="article:published_time" content="2019-05-30T07:41:52.000Z">
+<meta property="article:modified_time" content="2019-05-31T02:20:55.383Z">
+<meta property="article:author" content="Jiajie Tian">
+<meta property="article:tag" content="face recognition">
+<meta property="article:tag" content="softmax">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/30/ArcFace/network.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/05/30/ArcFace/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ArcFace | 田佳杰</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/TJJTJJTJJ/TJJTJJTJJ.github.io.git"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">田佳杰</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">代码的搬运工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/./about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/./archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-something">
+
+    <a href="/./test2/" rel="section"><i class="fa fa-something fa-fw"></i>测试</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/ArcFace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiajie Tian">
+      <meta itemprop="description" content="记录一些学习到的东西和论文记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="田佳杰">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ArcFace
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-30 15:41:52" itemprop="dateCreated datePublished" datetime="2019-05-30T15:41:52+08:00">2019-05-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-05-31 10:20:55" itemprop="dateModified" datetime="2019-05-31T10:20:55+08:00">2019-05-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/face-recognition/" itemprop="url" rel="index"><span itemprop="name">face recognition</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1801.07698">CVPR2019_ArcFace: Additive Angular Margin Loss for Deep Face Recognition</a></li>
+<li>code: <a target="_blank" rel="noopener" href="https://github.com/deepinsight/insightface">MXNet</a>, <a target="_blank" rel="noopener" href="https://github.com/wujiyang/Face_Pytorch">pytorch</a>, <a target="_blank" rel="noopener" href="https://github.com/ronghuaiyang/arcface-pytorch">pytorch</a>, <a target="_blank" rel="noopener" href="https://github.com/luckycallor/InsightFace-tensorflow">tensorflow</a></li>
+<li>author: <a target="_blank" rel="noopener" href="https://ibug.doc.ic.ac.uk/people/jdeng">邓健康</a></li>
+</ul>
+<p>开源代码中称之为 insightface，思路简单，效果却很好，并且与其他变种做了详尽的对比。(这篇论文原名是ArcFace，但是由于与虹软重名，后改名为Insight Face)</p>
+<a id="more"></a>
+
+<p>帝国理工学院博士生，CVPR17, 18, 19 都有他的文章，牛逼。</p>
+<p>此外，他们在ICCV 2019 举办了 Lightweight Face Recognition Challenge Workshop(LFR19) ，LFR19 是第一个强调“轻量级推理” 和“可重现系统” 的人脸识别比赛。竞赛于 4 月 25 日~7 月 10 日进行，比赛结果将于 10 月 28 日在韩国首尔举办的 ICCV 2019 会议上进行公布，欢迎前往<a target="_blank" rel="noopener" href="https://ibug.doc.ic.ac.uk/resources/lightweight-face-recognition-challenge-workshop/">比赛主页</a>了解详细规则.</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p><a target="_blank" rel="noopener" href="https://www.wengbi.com/thread_68343_1.html">腾讯AI lab CVPR paper把玩：cosFace、ArcFace–additive margin softmax</a></p>
+<blockquote>
+<p>深度学习界从开始到现在，所有的论文基本就干了两件事情，一、发现一个牛逼的网络结构，提高了网络的表达能力；二、发现了一个好玩的损失函数，提升了模型的鲁棒性和精度。人脸识别的优化方向就两个，一是不断增大不同人之间的距离，二是不断降低一个人不同人脸照片之间的距离。 center loss 和 tripleloss都是干这个事情。但他们损失函数的根基还是softmax的交叉熵.</p>
+</blockquote>
+<ul>
+<li>主流: the softmax-loss-based methods and the triplet-loss-based methods</li>
+<li>softmax: angular margin penalty: Sphereface, CosFace, ArcFace</li>
+</ul>
+<img src="/2019/05/30/ArcFace/network.png" class="" title="network">
+
+<h2 id="2-Proposed-Approach"><a href="#2-Proposed-Approach" class="headerlink" title="2. Proposed Approach"></a>2. Proposed Approach</h2><h3 id="2-1-ArcFace"><a href="#2-1-ArcFace" class="headerlink" title="2.1 ArcFace"></a>2.1 ArcFace</h3><p>$$L_1=-\frac{1}{N} \sum_{i=1}^N \log \frac{e^{W_{y_i}^T x_i+b_{y_i}}}{\sum_{j=1}^n e^{W_j^T x_i+b_j}}$$</p>
+<p>令 $b_j=0, \parallel W_j \parallel=1, \parallel x_i \parallel=s, W_j^T x_i=s \cos \theta_j$</p>
+<p>$$L_2=-\frac{1}{N} \sum_{i=1}^N \log \frac{e^{s \cos \theta_{y_i}}}{e^{s \cos \theta_{y_i}}+\sum_{j=1,j\not =y_i}^n e^{s \cos \theta_j}}$$</p>
+<p>angular margin penalty:</p>
+<p>$$L_3=-\frac{1}{N} \sum_{i=1}^N \log \frac{e^{s \cos (\theta_{y_i}+m)}}{e^{s \cos (\theta_{y_i}+m)}+\sum_{j=1,j\not =y_i}^n e^{s \cos \theta_j}}$$</p>
+<img src="/2019/05/30/ArcFace/softmax_ArcFace.png" class="" title="softmax and ArcFace">
+
+<h3 id="2-2-Comparison-with-SphereFace-and-CosFace"><a href="#2-2-Comparison-with-SphereFace-and-CosFace" class="headerlink" title="2.2 Comparison with SphereFace and CosFace"></a>2.2 Comparison with SphereFace and CosFace</h3><ul>
+<li>SphereFace: multiplicative angular margin $m_1$</li>
+<li>ArcFace: additive angular margin $m_2$</li>
+<li>CosFace: additive cosine margin $m_3$</li>
+</ul>
+<p><strong>补充</strong>：按照作者的说法，ArcFace 相当于融合了 softmax 和 triplet，形成了 image-to-class 的 margin 损失，softmax 是 image-to-class 损失， triplet 是 image-to-image 的 margin 损失。</p>
+<img src="/2019/05/30/ArcFace/target_logit_analysis.png" class="" title="target logit analysis">
+
+<img src="/2019/05/30/ArcFace/decision_margin.png" class="" title="decision margin">
+
+<p>各种实验结果也证明了这个损失很强。</p>
+<p><strong>补充</strong>：作者在直播中还提到了 RetinaFace Face Detector，他也参加了一些比赛，结果也说明了他们提出的整体框架效果很好。</p>
+<img src="/2019/05/30/ArcFace/RetinaFace.png" class="" title="RetinaFace">
+
+<p>自己标了1w多张人脸的五点图，大佬大佬。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/face-recognition/" rel="tag"># face recognition</a>
+              <a href="/tags/softmax/" rel="tag"># softmax</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/29/FUNIT/" rel="prev" title="FUNIT">
+      <i class="fa fa-chevron-left"></i> FUNIT
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/03/DIMN/" rel="next" title="DIMN">
+      DIMN <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Proposed-Approach"><span class="nav-number">3.</span> <span class="nav-text">2. Proposed Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-ArcFace"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 ArcFace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Comparison-with-SphereFace-and-CosFace"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Comparison with SphereFace and CosFace</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiajie Tian</p>
+  <div class="site-description" itemprop="description">记录一些学习到的东西和论文记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/./archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiajie Tian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

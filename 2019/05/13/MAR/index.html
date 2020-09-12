@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="0. 前言 paper: CVPR2019 Unsupervised Person Re-identification by Soft Multilabel Learning code: pytorch 参考链接: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Thinker-pcw&#x2F;p&#x2F;10807681.html  出发点 Multi-label 很强，效果的确好，就是论文看得有点头晕，有些公">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MAR">
+<meta property="og:url" content="http://yoursite.com/2019/05/13/MAR/index.html">
+<meta property="og:site_name" content="田佳杰">
+<meta property="og:description" content="0. 前言 paper: CVPR2019 Unsupervised Person Re-identification by Soft Multilabel Learning code: pytorch 参考链接: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Thinker-pcw&#x2F;p&#x2F;10807681.html  出发点 Multi-label 很强，效果的确好，就是论文看得有点头晕，有些公">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/MAR/soft_multilabel_learning.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/MAR/network.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/MAR/soft_multilabel_guided_hard_negative_mining.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/MAR/comparison.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/13/MAR/Ablation.png">
+<meta property="article:published_time" content="2019-05-13T03:29:27.000Z">
+<meta property="article:modified_time" content="2019-05-15T10:48:41.828Z">
+<meta property="article:author" content="Jiajie Tian">
+<meta property="article:tag" content="person re-id">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/13/MAR/soft_multilabel_learning.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/05/13/MAR/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MAR | 田佳杰</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/TJJTJJTJJ/TJJTJJTJJ.github.io.git"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">田佳杰</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">代码的搬运工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/./about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/./archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-something">
+
+    <a href="/./test2/" rel="section"><i class="fa fa-something fa-fw"></i>测试</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/MAR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiajie Tian">
+      <meta itemprop="description" content="记录一些学习到的东西和论文记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="田佳杰">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MAR
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-13 11:29:27" itemprop="dateCreated datePublished" datetime="2019-05-13T11:29:27+08:00">2019-05-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-05-15 18:48:41" itemprop="dateModified" datetime="2019-05-15T18:48:41+08:00">2019-05-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index"><span itemprop="name">deep learning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1903.06325v2">CVPR2019 Unsupervised Person Re-identification by Soft Multilabel Learning</a></li>
+<li>code: <a target="_blank" rel="noopener" href="https://github.com/KovenYu/MAR">pytorch</a></li>
+<li>参考链接: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/Thinker-pcw/p/10807681.html">https://www.cnblogs.com/Thinker-pcw/p/10807681.html</a></li>
+</ul>
+<p>出发点 Multi-label 很强，效果的确好，就是论文看得有点头晕，有些公式自己之前从来没见过，并且有些公式的出发点没有实验证明。</p>
+<p>这篇论文是腾讯的，今年腾讯优图实验室25篇、腾讯AILab33篇共计55篇论文被 CVPR 2019 录取。</p>
+<a id="more"></a>
+
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>这是篇跨数据集的行人重识别，source 是 MSMT，target 是 Market 和 Duke。</p>
+<p>作者针对跨数据集行人重识别没有标签问题，提出四个工作：</p>
+<ol>
+<li>soft multilabel learning, 示例如下图</li>
+<li>soft multilabel-guided hard negative mining</li>
+<li>cross-view consistent soft multi-label learning</li>
+<li>reference agent learning</li>
+</ol>
+<img src="/2019/05/13/MAR/soft_multilabel_learning.png" class="" title="soft multilabel learning">
+
+<img src="/2019/05/13/MAR/network.png" class="" title="network">
+
+<ol>
+<li>用分类结果作为图片的真值，即 soft multilabel</li>
+<li>确定正负样本：特征相似但是 soft multilabel 不相似的作为负样本，特征相似且 soft multilabel 相似的作为正样本</li>
+<li>跨摄像头的一致性，摄像头同一数据集下，应该是不管哪个摄像头下，得到的 soft multilabel 的分布是近似的，</li>
+<li>reference agent 应该满足：有标签数据集中，和 agent 同类别的图片得到的特征应该和 agent 相似，不同类别的图片得到的特征应该不相似，在无标签数据集中，图片得到的特征和 agent 应该不相似。</li>
+</ol>
+<p>这几个点感觉完全没有联系啊，作者是咋想到的并放在一起的呢？</p>
+<p>剩下的三个创新点后面依次阐述，其理解还是有点费劲的。</p>
+<p>注:</p>
+<ul>
+<li>本论文中的 auxiliary dataset 等价于 source dataset</li>
+<li>agent 是一个单独的 classx2048 维的数据，代码中是直接调用的 fc.weight。</li>
+</ul>
+<h2 id="2-Deep-Soft-Multilabel-Reference-Learning"><a href="#2-Deep-Soft-Multilabel-Reference-Learning" class="headerlink" title="2. Deep Soft Multilabel Reference Learning"></a>2. Deep Soft Multilabel Reference Learning</h2><h3 id="2-1-Problem-formulation-and-Overview"><a href="#2-1-Problem-formulation-and-Overview" class="headerlink" title="2.1 Problem formulation and Overview"></a>2.1 Problem formulation and Overview</h3><table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$X=\lbrace x_i \rbrace_{i=1}^{N_u}$</td>
+<td align="left">没有标签的数据集，$N_u$张图片</td>
+</tr>
+<tr>
+<td align="left">$Z=\lbrace z_i, w_i \rbrace_{i=1}^{N_a}, \text{where }w_i=1,2,…, N_p$</td>
+<td align="left">有标签的数据集 auxiliary，$z_i$表示图片，$w_i$表示 label，$N_a$ 张图片，$N_p$个人，有标签数据集和无标签数据集人物没有重叠</td>
+</tr>
+<tr>
+<td align="left">$f(\cdot)$</td>
+<td align="left">discriminative deep feature embedding，应该是特征提取模型，即 $f(x)$，满足 $\parallel f(\cdot) \parallel_2=1$</td>
+</tr>
+<tr>
+<td align="left">$\lbrace a_i \rbrace_{i=1}^{N_p}$</td>
+<td align="left">reference person feature, $\parallel a_i \parallel_2=1$</td>
+</tr>
+<tr>
+<td align="left">$y=l(f(x),\lbrace a_i \rbrace_{i=1}^{N_p})\in R^{N_p}$</td>
+<td align="left">soft multilabel function $l(\cdot)$, where $y=(y^{(1)}, y^{(2)}, …, y^{(N_p)})$, $\sum_i^{N_p} y^{(i)}=1, y^{(i)}\in [0, 1]$</td>
+</tr>
+</tbody></table>
+<p>一共有两个内容需要学习: $f(\cdot)$, $\lbrace a_i \rbrace_{i=1}^{N_p}$</p>
+<h3 id="2-2-Soft-multilabel-guided-hard-negative-mining"><a href="#2-2-Soft-multilabel-guided-hard-negative-mining" class="headerlink" title="2.2 Soft multilabel-guided hard negative mining"></a>2.2 Soft multilabel-guided hard negative mining</h3><p>大哥，你的上下标能不能提前说清楚啊[捂脸]，算了算了，腾讯的，惹不起惹不起。</p>
+<img src="/2019/05/13/MAR/soft_multilabel_guided_hard_negative_mining.png" class="" title="soft multilabel guided hard negative mining">
+
+<p><strong>定义</strong> soft multilabel function:<br>$$ y^{(k)}=l(f(x),\lbrace a_i \rbrace_{i=1}^{N_p})^{(k)}=\frac{\exp(a_k^Tf(x))}{\sum_i \exp(a_i^Tf(x))}$$</p>
+<p>也就是说，用 $f(x)$ 去依次点乘 $a_k$， 然后用一个 softmax。</p>
+<p>按照这个公式来说的话，是在特征空间上做的操作，有点类似 ECN 中的预测概率，越相似，值越大，而不是通过分类器预测概率。</p>
+<p>代码中有温度T。</p>
+<p><strong>假设</strong>：如果一对样本 $x_i, x_j$ 有很高的特征相似性, 即 $f(x_i)^Tf(x_j)$，称之为相似样本。如果这对相似样本的其他特性也相似，则大概率为一对正样本，如果其他特性不相似，则大概率为一个难负样本 hard negative pair。</p>
+<p>注：这里并没有实验证明一对 hard negative pair 的其他特性（主要指下文提到的 soft multilabel agreement）大概率不相似。所以表示存疑其假设的正确性。又想了想，在难采样三元组损失中，hard negative pair 就是指特征相似但是 label 不同的样本，positive pair 指 label 相同的样本的，easy positive pair 指 label 相同特征相似的样本，hard positive pair 指 label 相同特征不相似的样本，这样的话可以把 soft multilabel 看成样本的 label 的话，也是可以说得通的。</p>
+<p><strong>引理1：其他特性的相似性</strong>：作者选用 soft multilabel 作为其他特性，soft multilabel agreement $A(\cdot, \cdot)$ 表示作为其他特性的相似性。定义为<br>$$A(y_i,y_j)=y_i \land y_j=\sum_k \min(y_i^{(k)},y_j^{(k)})=1-\frac{\parallel y_i-y_j \parallel_1}{2} \in [0,1]$$</p>
+<p>越相似，值越大。最后一个等号通过画图很容易求得，就不解释了。Question: 这里的相似性定义成了向量之间的一范，没有定义成熟悉的点积，暂时不知道原因。</p>
+<p><strong>引理2： hard negative pair</strong>：对于无标签数据集 $X$ 的所有样本对 $M=N_u\times (N_u-1)/2$，设置比例 $p$，取 $pM$ 个特征最相似的样本对，即 $\hat{M}=\lbrace (i,j)|f(x_i)^T f(x_j)\ge S\rbrace, \parallel \hat{M} \parallel=pM$, 其中 $S$ 表示 $pM$ 个特征最相似样本对的阈值，动态变化，不是很重要的，重要的是取 $pM$个样本对。然后根据 label 的相似性将这些样本对划分为 positive set $P$ and hard negative set $N$，即<br>$$P=\lbrace (i,j)|f(x_i)^T f(x_j)\ge S, A(y_i, y_j)\ge T \rbrace$$<br>$$N=\lbrace (k,l)|f(x_k)^T f(x_l)\ge S, A(y_k, y_l)&lt; T \rbrace$$<br>其中 $T$ 表示 soft multilabel agreement 的阈值。会更新。</p>
+<p><strong>loss</strong>：soft Multilabel-guided Discriminative embedding Learning:<br>$$L_{MDL}=-\log \frac{\bar{P}}{\bar{P}+\bar{N}}$$<br>where,<br>$$\bar{P}=\frac{1}{|P|}\sum_{(i,j)\in P}\exp(-\parallel f(x_i)-f(x_j) \parallel_2^2)$$<br>$$\bar{N}=\frac{1}{|N|}\sum_{(k,l)\in N}\exp(-\parallel f(x_k)-f(x_l) \parallel_2^2)$$</p>
+<p>so,<br>$$\begin{aligned}<br>L_{MDL}&amp;=-\log \frac{\bar{P}}{\bar{P}+\bar{N}} \<br>       &amp;=-\log \frac{\frac{1}{|P|}\sum_{(i,j)\in P}\exp(-\parallel f(x_i)-f(x_j) \parallel_2^2)}{\frac{1}{|P|}\sum_{(i,j)\in P}\exp(-\parallel f(x_i)-f(x_j) \parallel_2^2)+\frac{1}{|N|}\sum_{(k,l)\in N}\exp(-\parallel f(x_k)-f(x_l) \parallel_2^2)}<br>\end{aligned}$$</p>
+<p>Question: 这是个啥公式啊，都没有见过类似的公式，作者也没有给出解释。</p>
+<p>此时固定 agent $\lbrace a_i \rbrace_{i=1}^{N_p}$ ，学习 $f(\cdot)$.</p>
+<p>实际训练时，$M=M_{batch}=N_{batch}\times (N_{batch}-1)/2$</p>
+<h3 id="2-3-Cross-view-consistent-soft-multilabel-learning"><a href="#2-3-Cross-view-consistent-soft-multilabel-learning" class="headerlink" title="2.3 Cross-view consistent soft multilabel learning"></a>2.3 Cross-view consistent soft multilabel learning</h3><p>因为行人重识别要求跨摄像头识别，所以考虑到行人的分布应该与摄像头无关。</p>
+<p><strong>Loss</strong>:<br>$$L_{CML}=\sum_v d(P_v(y), P(y))^2$$<br>其中，$P(y)$ 表示数据集 $X$ 的 soft multilabel 分布，$P_v(y)$ 表示数据集 $X$ 在摄像头 $v$ 的 soft multilabel 分布，$d(\cdot, \cdot)$ 表示分布的距离，可以是 KL divergence 或者 <a target="_blank" rel="noopener" href="https://blog.csdn.net/yzxnuaa/article/details/79725014">Wasserstein distance</a>.因为实际观察到服从 log-normal 分布，所以采取 simplified 2-Wasserstein distance。<br>$$L_{CML}=\sum_v \parallel \mu_v-\mu \parallel_2^2 + \parallel \sigma_v-\sigma\parallel_2^2$$<br>其中，$\mu/\sigma$表示总体数据集的 log-soft multilabel 的均值和方差，$\mu_v/\sigma_v$表示总体数据集在摄像头$v$的 log-soft multilabel 的均值和方差.<br>Question: 这个公式又是咋推出来的，这是妥妥地写出来也看不懂系列。</p>
+<p>此时固定 agent $\lbrace a_i \rbrace_{i=1}^{N_p}$ ，学习 $f(\cdot)$.</p>
+<h3 id="2-4-Reference-agent-Learning"><a href="#2-4-Reference-agent-Learning" class="headerlink" title="2.4 Reference agent Learning"></a>2.4 Reference agent Learning</h3><p>考虑到 referentce agent 需要与 soft multilabel function $l(\cdot, \cdot)$ 有关，因此得到损失函数</p>
+<p>$$L_{AL}=\sum_k -\log l(f(z_k), {a_i})^{(w_k)}=\sum_k -\log \frac{\exp(a_{w_k}^T f(z_k))}{\sum_j \exp(a_j^T f(z_k))} $$</p>
+<p>其中，$z_k$ 表示有标签数据集 $Z$ 中标签为 $w_k$ 的第 $k$ 张图片。</p>
+<p>这里可以理解成 $z_k$ 的预测概率和真实概率的交叉熵损失。这个损失函数不仅训练 $a_i$ 更接近第i个人的所有图片的特征，也训练 feature embedding $f$，使 $l(\cdot, \cdot)$ 得到的标签更具有表示同一个人的能力，符合 soft multilabel-guided hard negative mining 的假设：特征相似，但是 soft multilabel 不相似的为 hard negative mining。</p>
+<p>这个公式更新的是 $f$ 和 agent $a_i$.</p>
+<p>注：该论文中的公式其实按照从广义的定义到实际的应用的具体化过程，所以刚开始才会感觉有点乱，公式里面的字符也会一变再变，其实是从理论的公式到具体化实际代码的过程。</p>
+<p><strong>Joint embedding learning for reference comparability</strong>: 为了更好地提高 soft multilabel function 表示无标签数据集图片的正确性，提出 Joint embedding learning for reference comparability，为了修正 domain shift，利用无标签数据集 $f(x)$ 和 $a_i$ 肯定不是一对，提出 loss:<br>$$L_{RJ}=\sum_i \sum_{j\in M_i} \sum_{k:w_k=i}[m-\parallel a_i-f(x_j) \parallel_2^2]_+ + \parallel a_i-f(z_k) \parallel_2^2$$<br>其中，其目的是为了保证$a_i$所表示的有标签数据集中的同一id的图片和$a_i$特征相似，$a_i$和所有无标签数据集中的图片特征都不相似。 $M_i=\lbrace j| \parallel a_i-f(x_j) \parallel_2^2 &lt; m \rbrace$，表示对第 $i$ 个 agent $a_i$ 而言，特征最为相似 ($\parallel a_i-f(x_j) \parallel_2^2=2(1-a_i^Tf(x_j))$, 越相似，值越小) 的无标签数据集中的图片，按照作者推荐的论文 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1704.06369">44:Normface: l2 hypersphere embedding for face verification</a>，建议 $m=1$。</p>
+<p>此时固定 agent $\lbrace a_i \rbrace_{i=1}^{N_p}$ ，学习 $f(\cdot)$.</p>
+<p>对 $L_{RJ}$ 根据代码再次做出解释，$L_{RJ}$ 的目的是学习更好的特征提取器 $f$，使有标签数据集提取出的特征与同类别的 agent 的特征相似，与不同类别的agent不相似，无标签数据集提取出的特征与 agent 都不相似，有点三元组损失的意思。此时的 $a_i$ 是常量，不进行反向求导的。其二，对于任意一个 agent $a_i$，有标签数据集中，label 等于 $i$ 的图片视为正样本，其他图片视为负样本，对于无标签数据集，则直接视为 $a_i$ 的负样本。具体来说，就是对每一张有标签数据集的图片，$a_{label}$ 为正， 其余 $a_i$ 为负，对于每一张无标签数据集的图片，$a_i$ 都为负。</p>
+<p>所以总的 reference agent learning loss为:<br>$$L_{RAL}=L_{AL}+\beta L_{RJ}$$</p>
+<h3 id="2-5-1-Model-training-and-testing"><a href="#2-5-1-Model-training-and-testing" class="headerlink" title="2.5.1 Model training and testing"></a>2.5.1 Model training and testing</h3><p>$$L_{MAR}=L_{MDL}+\lambda_1 L_{CML}+\lambda_2 L_{RAL}$$</p>
+<h2 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3. Experiments"></a>3. Experiments</h2><p>MSMT17 为辅助数据集， Market-1501、Duke 为无标签数据集。</p>
+<img src="/2019/05/13/MAR/comparison.png" class="" title="comparison">
+
+<img src="/2019/05/13/MAR/Ablation.png" class="" title="Ablation study">
+
+<p>备注: 论文中的 agent 其实并不是之前以为通过图片输入模型得到的特征求出来的，而是 ResNet-50 的 fc.weight(classx2048) ，也就是分类器的分类向量。和 ECN 论文中的使用方法有很大的不同吧。在 ECN 中，使用的就是图片输入模型得到的特征，可能是因为 ECN 中一张图片对应一个特征，而本论文中是多个图片对应一个特征。</p>
+<h2 id="4-code"><a href="#4-code" class="headerlink" title="4. code"></a>4. code</h2><h3 id="4-1-Logger"><a href="#4-1-Logger" class="headerlink" title="4.1 Logger"></a>4.1 Logger</h3><p>两种logger</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一种：定义简单，使用繁琐</span></span><br><span class="line"><span class="comment"># 定义</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">time_string</span>():</span></span><br><span class="line">    ISOTIMEFORMAT = <span class="string">&#x27;%Y-%m-%d %X&#x27;</span></span><br><span class="line">    string = <span class="string">&#x27;[&#123;&#125;]&#x27;</span>.format(time.strftime(ISOTIMEFORMAT, time.localtime(time.time())))</span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Logger</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, save_path</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(save_path):</span><br><span class="line">            os.makedirs(save_path)</span><br><span class="line">        self.file = open(os.path.join(save_path, <span class="string">&#x27;log_&#123;&#125;.txt&#x27;</span>.format(time_string())), <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">        self.print_log(<span class="string">&quot;python version : &#123;&#125;&quot;</span>.format(sys.version.replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27; &#x27;</span>)))</span><br><span class="line">        self.print_log(<span class="string">&quot;torch  version : &#123;&#125;&quot;</span>.format(torch.__version__))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_log</span>(<span class="params">self, string</span>):</span></span><br><span class="line">        self.file.write(<span class="string">&quot;&#123;&#125;\n&quot;</span>.format(string))</span><br><span class="line">        self.file.flush()</span><br><span class="line">        print(string)</span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">logger = Logger(args.save_path)</span><br><span class="line">logger.print_log(<span class="string">&quot;=&gt; loading checkpoint &#x27;&#123;&#125;&#x27;&quot;</span>.format(load_path))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第二种，定义繁琐，使用简单，重定向</span></span><br><span class="line"><span class="comment"># 推荐用这种</span></span><br><span class="line"><span class="comment"># 定义</span></span><br><span class="line"><span class="comment"># .\logging.py</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> errno</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mkdir_if_missing</span>(<span class="params">dir_path</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        os.makedirs(dir_path)</span><br><span class="line">    <span class="keyword">except</span> OSError <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">if</span> e.errno != errno.EEXIST:</span><br><span class="line">            <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Logger</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, fpath=None</span>):</span></span><br><span class="line">        self.console = sys.stdout</span><br><span class="line">        self.file = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> fpath <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            mkdir_if_missing(os.path.dirname(fpath))</span><br><span class="line">            self.file = open(fpath, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span>(<span class="params">self, *args</span>):</span></span><br><span class="line">        self.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write</span>(<span class="params">self, msg</span>):</span></span><br><span class="line">        self.console.write(msg)</span><br><span class="line">        <span class="keyword">if</span> self.file <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.file.write(msg)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">flush</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.console.flush()</span><br><span class="line">        <span class="keyword">if</span> self.file <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.file.flush()</span><br><span class="line">            os.fsync(self.file.fileno())</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.console.close()</span><br><span class="line">        <span class="keyword">if</span> self.file <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.file.close()</span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os.path <span class="keyword">as</span> osp</span><br><span class="line">sys.stdout = Logger(osp.join(args.logs_dir, <span class="string">&#x27;log.txt&#x27;</span>))</span><br><span class="line">print(args)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-model"><a href="#4-2-model" class="headerlink" title="4.2 model"></a>4.2 model</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ResNet</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="comment"># 3x384x128</span></span><br><span class="line">        x = self.conv1(x)</span><br><span class="line">        x = self.bn1(x)</span><br><span class="line">        x = self.relu(x)</span><br><span class="line">        x = self.maxpool(x)</span><br><span class="line"></span><br><span class="line">        x = self.layer1(x)</span><br><span class="line">        x = self.layer2(x)</span><br><span class="line">        x = self.layer3(x)</span><br><span class="line">        feature_maps = self.layer4(x)</span><br><span class="line">        <span class="comment"># 2048x12x4</span></span><br><span class="line">        x = self.avgpool(feature_maps)</span><br><span class="line">        x = x.view(x.size(<span class="number">0</span>), <span class="number">-1</span>)</span><br><span class="line">        <span class="comment"># bx2048</span></span><br><span class="line">        <span class="comment"># renorm 使每一行的向量的2范进行了截断处理</span></span><br><span class="line">        <span class="comment"># 使之变成[0,1e-5]，再线性变成[0,1]</span></span><br><span class="line">        <span class="comment"># 这里的renorm可以暂时理解成进行了二范处理，</span></span><br><span class="line">        feature = x.renorm(<span class="number">2</span>, <span class="number">0</span>, <span class="number">1e-5</span>).mul(<span class="number">1e5</span>)</span><br><span class="line">        <span class="comment"># bx2048</span></span><br><span class="line">        w = self.fc.weight</span><br><span class="line">        <span class="comment"># 注: 这个self.fc.weight(classx2048)就是论文中的agent</span></span><br><span class="line">        ww = w.renorm(<span class="number">2</span>, <span class="number">0</span>, <span class="number">1e-5</span>).mul(<span class="number">1e5</span>)</span><br><span class="line">        sim = feature.mm(ww.t())</span><br><span class="line">        <span class="comment"># sim: bxclass</span></span><br><span class="line">        <span class="comment"># feature(f): bx2048, sim(y): bxclass, feature_maps: 2048x12x4</span></span><br><span class="line">        <span class="keyword">return</span> feature, sim, feature_maps</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-optim"><a href="#4-3-optim" class="headerlink" title="4.3 optim"></a>4.3 optim</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bn_params, other_params = partition_params(self.net, <span class="string">&#x27;bn&#x27;</span>)</span><br><span class="line">self.optimizer = torch.optim.SGD([&#123;<span class="string">&#x27;params&#x27;</span>: bn_params, <span class="string">&#x27;weight_decay&#x27;</span>: <span class="number">0</span>&#125;,</span><br><span class="line">                                  &#123;<span class="string">&#x27;params&#x27;</span>: other_params&#125;], lr=args.lr, momentum=<span class="number">0.9</span>, weight_decay=args.wd)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-trainer-init-losses"><a href="#4-4-trainer-init-losses" class="headerlink" title="4.4 trainer/init_losses"></a>4.4 trainer/init_losses</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReidTrainer</span>(<span class="params">Trainer</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, args, logger</span>):</span></span><br><span class="line">        self.al_loss = nn.CrossEntropyLoss().cuda()</span><br><span class="line">        self.rj_loss = JointLoss(args.margin).cuda()</span><br><span class="line">        self.cml_loss = MultilabelLoss(args.batch_size).cuda()  <span class="comment"># L_CML</span></span><br><span class="line">        self.mdl_loss = DiscriminativeLoss(args.mining_ratio).cuda() <span class="comment"># L_MDL</span></span><br><span class="line">        self.net = resnet50(pretrained=<span class="literal">False</span>, num_classes=self.args.num_classes)</span><br><span class="line">        self.multilabel_memory = torch.zeros(N_target_samples, <span class="number">4101</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_losses</span>(<span class="params">self, target_loader</span>):</span></span><br><span class="line">        self.logger.print_log(<span class="string">&#x27;initializing centers/threshold ...&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(self.args.ml_path):</span><br><span class="line">            (multilabels, views, pairwise_agreements) = torch.load(self.args.ml_path)</span><br><span class="line">            self.logger.print_log(<span class="string">&#x27;loaded ml from &#123;&#125;&#x27;</span>.format(self.args.ml_path))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.logger.print_log(<span class="string">&#x27;not found &#123;&#125;. computing ml...&#x27;</span>.format(self.args.ml_path))</span><br><span class="line">            sim, _, views = extract_features(target_loader, self.net, index_feature=<span class="number">1</span>, return_numpy=<span class="literal">False</span>)</span><br><span class="line">            <span class="comment"># sim: bxclass, views: bx1</span></span><br><span class="line">            multilabels = F.softmax(sim * self.args.scala_ce, dim=<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># multilabels: bxclass 这里应该对于soft multilabel funtion得到的结果y^&#123;(k)&#125;</span></span><br><span class="line">            <span class="comment"># Question: sim*self.args.scala_ce 是什么意思</span></span><br><span class="line">            ml_np = multilabels.cpu().numpy()</span><br><span class="line">            pairwise_agreements = <span class="number">1</span> - pdist(ml_np, <span class="string">&#x27;minkowski&#x27;</span>, p=<span class="number">1</span>)/<span class="number">2</span></span><br><span class="line">            <span class="comment"># pairwise_agreements: soft multilabel agreement A(.,.) 公式2</span></span><br><span class="line">        log_multilabels = torch.log(multilabels)</span><br><span class="line">        self.cml_loss.init_centers(log_multilabels, views)</span><br><span class="line">        self.logger.print_log(<span class="string">&#x27;initializing centers done.&#x27;</span>)</span><br><span class="line">        self.mdl_loss.init_threshold(pairwise_agreements)</span><br><span class="line">        self.logger.print_log(<span class="string">&#x27;initializing threshold done.&#x27;</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_epoch</span>(<span class="params">self, source_loader, target_loader, epoch</span>):</span></span><br><span class="line">        self.lr_scheduler.step()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.cml_loss.initialized <span class="keyword">or</span> <span class="keyword">not</span> self.mdl_loss.initialized:</span><br><span class="line">            self.init_losses(target_loader)</span><br><span class="line">        batch_time_meter = AverageMeter()</span><br><span class="line">        stats = (<span class="string">&#x27;loss_source&#x27;</span>, <span class="string">&#x27;loss_st&#x27;</span>, <span class="string">&#x27;loss_ml&#x27;</span>, <span class="string">&#x27;loss_target&#x27;</span>, <span class="string">&#x27;loss_total&#x27;</span>)</span><br><span class="line">        meters_trn = &#123;stat: AverageMeter() <span class="keyword">for</span> stat <span class="keyword">in</span> stats&#125;</span><br><span class="line">        self.train()</span><br><span class="line"></span><br><span class="line">        end = time.time()</span><br><span class="line">        target_iter = iter(target_loader)</span><br><span class="line">        <span class="keyword">for</span> i, source_tuple <span class="keyword">in</span> enumerate(source_loader):</span><br><span class="line">            imgs = source_tuple[<span class="number">0</span>].cuda()</span><br><span class="line">            labels = source_tuple[<span class="number">1</span>].cuda()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                target_tuple = next(target_iter)</span><br><span class="line">            <span class="keyword">except</span> StopIteration:</span><br><span class="line">                target_iter = iter(target_loader)</span><br><span class="line">                target_tuple = next(target_iter)</span><br><span class="line">            imgs_target = target_tuple[<span class="number">0</span>].cuda()</span><br><span class="line">            labels_target = target_tuple[<span class="number">1</span>].cuda()</span><br><span class="line">            views_target = target_tuple[<span class="number">2</span>].cuda()</span><br><span class="line">            idx_target = target_tuple[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">            features, similarity, _ = self.net(imgs)</span><br><span class="line">            features_target, similarity_target, _ = self.net(imgs_target)</span><br><span class="line">            <span class="comment"># features: bx2048, similarity: bxclass</span></span><br><span class="line">            scores = similarity * self.args.scala_ce</span><br><span class="line">            loss_source = self.al_loss(scores, labels) <span class="comment"># 公式7，同时训练 agent 和 f()</span></span><br><span class="line">            agents = self.net.module.fc.weight.renorm(<span class="number">2</span>, <span class="number">0</span>, <span class="number">1e-5</span>).mul(<span class="number">1e5</span>)</span><br><span class="line">            <span class="comment"># features: bx2048, agents: classx2048, labels: bx1, similarity: bxclass</span></span><br><span class="line">            loss_st = self.rj_loss(features, agents.detach(), labels, similarity.detach(), features_target, similarity_target.detach())</span><br><span class="line">            multilabels = F.softmax(features_target.mm(agents.detach().t_()*self.args.scala_ce), dim=<span class="number">1</span>)</span><br><span class="line">            loss_ml = self.cml_loss(torch.log(multilabels), views_target)</span><br><span class="line">            <span class="keyword">if</span> epoch &lt; <span class="number">1</span>:</span><br><span class="line">                loss_target = torch.Tensor([<span class="number">0</span>]).cuda()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                multilabels_cpu = multilabels.detach().cpu()</span><br><span class="line">                is_init_batch = self.initialized[idx_target]</span><br><span class="line">                initialized_idx = idx_target[is_init_batch]</span><br><span class="line">                uninitialized_idx = idx_target[~is_init_batch]</span><br><span class="line">                self.multilabel_memory[uninitialized_idx] = multilabels_cpu[~is_init_batch]</span><br><span class="line">                self.initialized[uninitialized_idx] = <span class="number">1</span></span><br><span class="line">                self.multilabel_memory[initialized_idx] = <span class="number">0.9</span> * self.multilabel_memory[initialized_idx] \</span><br><span class="line">                                                          + <span class="number">0.1</span> * multilabels_cpu[is_init_batch]</span><br><span class="line">                loss_target = self.mdl_loss(features_target, self.multilabel_memory[idx_target], labels_target)</span><br><span class="line"></span><br><span class="line">            self.optimizer.zero_grad()</span><br><span class="line">            loss_total = loss_target + self.args.lamb_1 * loss_ml + self.args.lamb_2 * \</span><br><span class="line">                         (loss_source + self.args.beta * loss_st)</span><br><span class="line">            loss_total.backward()</span><br><span class="line">            self.optimizer.step()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> stats:</span><br><span class="line">                v = locals()[k]</span><br><span class="line">                meters_trn[k].update(v.item(), self.args.batch_size)</span><br><span class="line"></span><br><span class="line">            batch_time_meter.update(time.time() - end)</span><br><span class="line">            freq = self.args.batch_size / batch_time_meter.avg</span><br><span class="line">            end = time.time()</span><br><span class="line">            <span class="keyword">if</span> i % self.args.print_freq == <span class="number">0</span>:</span><br><span class="line">                self.logger.print_log(<span class="string">&#x27;  Iter: [&#123;:03d&#125;/&#123;:03d&#125;]   Freq &#123;:.1f&#125;   &#x27;</span>.format(</span><br><span class="line">                    i, len(source_loader), freq) + create_stat_string(meters_trn) + time_string())</span><br><span class="line"></span><br><span class="line">        save_checkpoint(self, epoch, os.path.join(self.args.save_path, <span class="string">&quot;checkpoints.pth&quot;</span>))</span><br><span class="line">        <span class="keyword">return</span> meters_trn </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># L_CML 公式6</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MultilabelLoss</span>(<span class="params">torch.nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, batch_size, use_std=True</span>):</span></span><br><span class="line">        super(MultilabelLoss, self).__init__()</span><br><span class="line">        self.use_std = use_std</span><br><span class="line">        self.moment = batch_size / <span class="number">10000</span></span><br><span class="line">        self.initialized = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_centers</span>(<span class="params">self, log_multilabels, views</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param log_multilabels: shape=(N, n_class)</span></span><br><span class="line"><span class="string">        :param views: (N,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        # 用于初始化全局的均值和方差</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        univiews = torch.unique(views)</span><br><span class="line">        mean_ml = []</span><br><span class="line">        std_ml = []</span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> univiews:</span><br><span class="line">            ml_in_v = log_multilabels[views == v]</span><br><span class="line">            mean = ml_in_v.mean(dim=<span class="number">0</span>)</span><br><span class="line">            std = ml_in_v.std(dim=<span class="number">0</span>)</span><br><span class="line">            mean_ml.append(mean)</span><br><span class="line">            std_ml.append(std)</span><br><span class="line">        center_mean = torch.mean(torch.stack(mean_ml), dim=<span class="number">0</span>)</span><br><span class="line">        center_std = torch.mean(torch.stack(std_ml), dim=<span class="number">0</span>)</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;center_mean&#x27;</span>, center_mean)</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;center_std&#x27;</span>, center_std)</span><br><span class="line">        self.initialized = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_update_centers</span>(<span class="params">self, log_multilabels, views</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param log_multilabels: shape=(BS, n_class)</span></span><br><span class="line"><span class="string">        :param views: shape=(BS,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        univiews = torch.unique(views)</span><br><span class="line">        means = []</span><br><span class="line">        stds = []</span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> univiews:</span><br><span class="line">            ml_in_v = log_multilabels[views == v]</span><br><span class="line">            <span class="keyword">if</span> len(ml_in_v) == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            mean = ml_in_v.mean(dim=<span class="number">0</span>)</span><br><span class="line">            means.append(mean)</span><br><span class="line">            <span class="keyword">if</span> self.use_std:</span><br><span class="line">                std = ml_in_v.std(dim=<span class="number">0</span>)</span><br><span class="line">                stds.append(std)</span><br><span class="line">        new_mean = torch.mean(torch.stack(means), dim=<span class="number">0</span>)</span><br><span class="line">        self.center_mean = self.center_mean * (<span class="number">1</span> - self.moment) + new_mean * self.moment</span><br><span class="line">        <span class="keyword">if</span> self.use_std:</span><br><span class="line">            new_std = torch.mean(torch.stack(stds), dim=<span class="number">0</span>)</span><br><span class="line">            self.center_std = self.center_std * (<span class="number">1</span> - self.moment) + new_std * self.moment</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, log_multilabels, views</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param log_multilabels: shape=(BS, n_class)</span></span><br><span class="line"><span class="string">        :param views: shape=(BS,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self._update_centers(log_multilabels.detach(), views)</span><br><span class="line"></span><br><span class="line">        univiews = torch.unique(views)</span><br><span class="line">        loss_terms = []</span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> univiews:</span><br><span class="line">            ml_in_v = log_multilabels[views == v]</span><br><span class="line">            <span class="keyword">if</span> len(ml_in_v) == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            mean = ml_in_v.mean(dim=<span class="number">0</span>)</span><br><span class="line">            loss_mean = (mean - self.center_mean).pow(<span class="number">2</span>).sum()</span><br><span class="line">            loss_terms.append(loss_mean)</span><br><span class="line">            <span class="keyword">if</span> self.use_std:</span><br><span class="line">                std = ml_in_v.std(dim=<span class="number">0</span>)</span><br><span class="line">                loss_std = (std - self.center_std).pow(<span class="number">2</span>).sum()</span><br><span class="line">                loss_terms.append(loss_std)</span><br><span class="line">        loss_total = torch.mean(torch.stack(loss_terms))</span><br><span class="line">        <span class="keyword">return</span> loss_total</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># L_MDL 公式4</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiscriminativeLoss</span>(<span class="params">torch.nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, mining_ratio=<span class="number">0.001</span></span>):</span></span><br><span class="line">        super(DiscriminativeLoss, self).__init__()</span><br><span class="line">        self.mining_ratio = mining_ratio</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;n_pos_pairs&#x27;</span>, torch.Tensor([<span class="number">0</span>]))</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;rate_TP&#x27;</span>, torch.Tensor([<span class="number">0</span>]))</span><br><span class="line">        self.moment = <span class="number">0.1</span></span><br><span class="line">        self.initialized = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_threshold</span>(<span class="params">self, pairwise_agreements</span>):</span></span><br><span class="line">        <span class="comment"># Question：论文中还有一个限制条件，f(x_i)f(x_j)&gt;S，代码只考虑了A(y_i, y_j)</span></span><br><span class="line">        pos = int(len(pairwise_agreements) * self.mining_ratio)</span><br><span class="line">        sorted_agreements = np.sort(pairwise_agreements)</span><br><span class="line">        t = sorted_agreements[-pos]</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;threshold&#x27;</span>, torch.Tensor([t]).cuda())</span><br><span class="line">        self.initialized = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, features, multilabels, labels</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param features: shape=(BS, dim)</span></span><br><span class="line"><span class="string">        :param multilabels: (BS, n_class)</span></span><br><span class="line"><span class="string">        :param labels: (BS,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        P, N = self._partition_sets(features.detach(), multilabels, labels)</span><br><span class="line">        <span class="keyword">if</span> P <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            pos_exponant = torch.Tensor([<span class="number">1</span>]).cuda()</span><br><span class="line">            num = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sdist_pos_pairs = []</span><br><span class="line">            <span class="keyword">for</span> (i, j) <span class="keyword">in</span> zip(P[<span class="number">0</span>], P[<span class="number">1</span>]):</span><br><span class="line">                sdist_pos_pair = (features[i] - features[j]).pow(<span class="number">2</span>).sum()</span><br><span class="line">                sdist_pos_pairs.append(sdist_pos_pair)</span><br><span class="line">            pos_exponant = torch.exp(- torch.stack(sdist_pos_pairs)).mean()</span><br><span class="line">            num = -torch.log(pos_exponant)</span><br><span class="line">        <span class="keyword">if</span> N <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            neg_exponant = torch.Tensor([<span class="number">0.5</span>]).cuda()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sdist_neg_pairs = []</span><br><span class="line">            <span class="keyword">for</span> (i, j) <span class="keyword">in</span> zip(N[<span class="number">0</span>], N[<span class="number">1</span>]):</span><br><span class="line">                sdist_neg_pair = (features[i] - features[j]).pow(<span class="number">2</span>).sum()</span><br><span class="line">                sdist_neg_pairs.append(sdist_neg_pair)</span><br><span class="line">            neg_exponant = torch.exp(- torch.stack(sdist_neg_pairs)).mean()</span><br><span class="line">        den = torch.log(pos_exponant + neg_exponant)</span><br><span class="line">        loss = num + den</span><br><span class="line">        <span class="keyword">return</span> loss</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_partition_sets</span>(<span class="params">self, features, multilabels, labels</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        partition the batch into confident positive, hard negative and others</span></span><br><span class="line"><span class="string">        :param features: shape=(BS, dim)</span></span><br><span class="line"><span class="string">        :param multilabels: shape=(BS, n_class)</span></span><br><span class="line"><span class="string">        :param labels: shape=(BS,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        P: positive pair set. tuple of 2 np.array i and j.</span></span><br><span class="line"><span class="string">            i contains smaller indices and j larger indices in the batch.</span></span><br><span class="line"><span class="string">            if P is None, no positive pair found in this batch.</span></span><br><span class="line"><span class="string">        N: negative pair set. similar to P, but will never be None.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        f_np = features.cpu().numpy()</span><br><span class="line">        ml_np = multilabels.cpu().numpy()</span><br><span class="line">        p_dist = pdist(f_np)</span><br><span class="line">        p_agree = <span class="number">1</span> - pdist(ml_np, <span class="string">&#x27;minkowski&#x27;</span>, p=<span class="number">1</span>) / <span class="number">2</span></span><br><span class="line">        sorting_idx = np.argsort(p_dist)</span><br><span class="line">        n_similar = int(len(p_dist) * self.mining_ratio)</span><br><span class="line">        similar_idx = sorting_idx[:n_similar]</span><br><span class="line">        is_positive = p_agree[similar_idx] &gt; self.threshold.item()</span><br><span class="line">        pos_idx = similar_idx[is_positive]</span><br><span class="line">        neg_idx = similar_idx[~is_positive]</span><br><span class="line">        P = dist_idx_to_pair_idx(len(f_np), pos_idx)</span><br><span class="line">        N = dist_idx_to_pair_idx(len(f_np), neg_idx)</span><br><span class="line">        self._update_threshold(p_agree)</span><br><span class="line">        self._update_buffers(P, labels)</span><br><span class="line">        <span class="keyword">return</span> P, N</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_update_threshold</span>(<span class="params">self, pairwise_agreements</span>):</span></span><br><span class="line">        pos = int(len(pairwise_agreements) * self.mining_ratio)</span><br><span class="line">        sorted_agreements = np.sort(pairwise_agreements)</span><br><span class="line">        t = torch.Tensor([sorted_agreements[-pos]]).cuda()</span><br><span class="line">        self.threshold = self.threshold * (<span class="number">1</span> - self.moment) + t * self.moment</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_update_buffers</span>(<span class="params">self, P, labels</span>):</span></span><br><span class="line">        <span class="keyword">if</span> P <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            self.n_pos_pairs = <span class="number">0.9</span> * self.n_pos_pairs</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        n_pos_pairs = len(P[<span class="number">0</span>])</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> (i, j) <span class="keyword">in</span> zip(P[<span class="number">0</span>], P[<span class="number">1</span>]):</span><br><span class="line">            count += labels[i] == labels[j]</span><br><span class="line">        rate_TP = float(count) / n_pos_pairs</span><br><span class="line">        self.n_pos_pairs = <span class="number">0.9</span> * self.n_pos_pairs + <span class="number">0.1</span> * n_pos_pairs</span><br><span class="line">        self.rate_TP = <span class="number">0.9</span> * self.rate_TP + <span class="number">0.1</span> * rate_TP</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># L_RJ 公式 8</span></span><br><span class="line"><span class="comment"># 与公式8略有不同</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JointLoss</span>(<span class="params">torch.nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, margin=<span class="number">1</span></span>):</span></span><br><span class="line">        super(JointLoss, self).__init__()</span><br><span class="line">        self.margin = margin</span><br><span class="line">        self.sim_margin = <span class="number">1</span> - margin / <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, features, agents, labels, similarity, features_target, similarity_target</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param features: shape=(BS/2, dim)</span></span><br><span class="line"><span class="string">        :param agents: shape=(n_class, dim)</span></span><br><span class="line"><span class="string">        :param labels: shape=(BS/2,)</span></span><br><span class="line"><span class="string">        :param features_target: shape=(BS/2, n_class)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        loss_terms = []</span><br><span class="line">        arange = torch.arange(len(agents)).cuda()</span><br><span class="line">        zero = torch.Tensor([<span class="number">0</span>]).cuda()</span><br><span class="line">        <span class="keyword">for</span> (f, l, s) <span class="keyword">in</span> zip(features, labels, similarity):</span><br><span class="line">            loss_pos = (f - agents[l]).pow(<span class="number">2</span>).sum() <span class="comment"># 公式8的最后一项，a_i-f(z_k)</span></span><br><span class="line">            loss_terms.append(loss_pos)</span><br><span class="line">            neg_idx = arange != l</span><br><span class="line">            <span class="comment"># 从agent中选出与当前图片特征相似度高于阈值，但不是同一类的的agent</span></span><br><span class="line">            hard_agent_idx = neg_idx &amp; (s &gt; self.sim_margin) <span class="comment"># 越相似，值越大</span></span><br><span class="line">            <span class="keyword">if</span> torch.any(hard_agent_idx):</span><br><span class="line">                hard_neg_sdist = (f - agents[hard_agent_idx]).pow(<span class="number">2</span>).sum(dim=<span class="number">1</span>)</span><br><span class="line">                loss_neg = torch.max(zero, self.margin - hard_neg_sdist).mean()</span><br><span class="line">                loss_terms.append(loss_neg)</span><br><span class="line">        <span class="keyword">for</span> (f, s) <span class="keyword">in</span> zip(features_target, similarity_target):</span><br><span class="line">            hard_agent_idx = s &gt; self.sim_margin</span><br><span class="line">            <span class="keyword">if</span> torch.any(hard_agent_idx):</span><br><span class="line">                hard_neg_sdist = (f - agents[hard_agent_idx]).pow(<span class="number">2</span>).sum(dim=<span class="number">1</span>)</span><br><span class="line">                loss_neg = torch.max(zero, self.margin - hard_neg_sdist).mean()</span><br><span class="line">                loss_terms.append(loss_neg)</span><br><span class="line">        loss_total = torch.mean(torch.stack(loss_terms))</span><br><span class="line">        <span class="keyword">return</span> loss_total</span><br></pre></td></tr></table></figure>
+
+<p>根据代码，重新明确两个定义:</p>
+<ul>
+<li>similarity 指的是图片的 feature1 和 agent 的 feature2 的特征相似性: feature1*feature2</li>
+<li>multilabels 指的是 similarity.mul(self.args.scala_ce) 再softmax得到的</li>
+</ul>
+<p>算了，有些代码还是跑的时候看吧，因为有些更新方式有些看不懂。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/person-re-id/" rel="tag"># person re-id</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/10/residual-attention_and_CBAM_GCNet/" rel="prev" title="residual_attention">
+      <i class="fa fa-chevron-left"></i> residual_attention
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/17/BNNeck/" rel="next" title="BNNeck">
+      BNNeck <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Deep-Soft-Multilabel-Reference-Learning"><span class="nav-number">3.</span> <span class="nav-text">2. Deep Soft Multilabel Reference Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Problem-formulation-and-Overview"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Problem formulation and Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Soft-multilabel-guided-hard-negative-mining"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Soft multilabel-guided hard negative mining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Cross-view-consistent-soft-multilabel-learning"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Cross-view consistent soft multilabel learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Reference-agent-Learning"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Reference agent Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-Model-training-and-testing"><span class="nav-number">3.5.</span> <span class="nav-text">2.5.1 Model training and testing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Experiments"><span class="nav-number">4.</span> <span class="nav-text">3. Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-code"><span class="nav-number">5.</span> <span class="nav-text">4. code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Logger"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Logger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-model"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-optim"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 optim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-trainer-init-losses"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 trainer&#x2F;init_losses</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiajie Tian</p>
+  <div class="site-description" itemprop="description">记录一些学习到的东西和论文记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/./archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiajie Tian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

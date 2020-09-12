@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="论文分享">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SEIGAN">
+<meta property="og:url" content="http://yoursite.com/2018/12/27/SEIGAN/index.html">
+<meta property="og:site_name" content="田佳杰">
+<meta property="og:description" content="论文分享">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN1.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN1.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN2.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN2.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN3.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN3.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN4.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN4.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN5.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN5.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN6.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN6.png">
+<meta property="article:published_time" content="2018-12-27T08:57:16.000Z">
+<meta property="article:modified_time" content="2018-12-28T09:11:52.292Z">
+<meta property="article:author" content="Jiajie Tian">
+<meta property="article:tag" content="GAN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN1.png">
+
+<link rel="canonical" href="http://yoursite.com/2018/12/27/SEIGAN/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SEIGAN | 田佳杰</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/TJJTJJTJJ/TJJTJJTJJ.github.io.git"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">田佳杰</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">代码的搬运工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/./about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/./archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-something">
+
+    <a href="/./test2/" rel="section"><i class="fa fa-something fa-fw"></i>测试</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/27/SEIGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiajie Tian">
+      <meta itemprop="description" content="记录一些学习到的东西和论文记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="田佳杰">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SEIGAN
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-27 16:57:16" itemprop="dateCreated datePublished" datetime="2018-12-27T16:57:16+08:00">2018-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-28 17:11:52" itemprop="dateModified" datetime="2018-12-28T17:11:52+08:00">2018-12-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>论文分享</p>
+<a id="more"></a>
+
+<h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.07630">SEIGAN: Towards Compositional Image Generation by Simultaneously Learning to Segment, Enhance, and Inpaint.</a></p>
+<p>Pavel Ostyakov, Roman Suvorov, Elizaveta Logacheva1 Oleg Khomenko, Sergey I. Nikolenko</p>
+<p>一作Pavel Ostyakov是莫斯科三星AI中心的人员，在 Kaggle Cdiscount’s Image Classification Challenge 比赛中获得第一名，<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Mw2vdYv4ups">YouTube 视频</a>，github:<a target="_blank" rel="noopener" href="https://github.com/PavelOstyakov?tab=repositories">https://github.com/PavelOstyakov?tab=repositories</a>，他参加的 Kaggle 比赛多一点。</p>
+<p>论文代码还没有公布。</p>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p><img src="./SEIGAN/SEIGAN1.png" alt="实验效果图"></p>
+<img src="/2018/12/27/SEIGAN/SEIGAN1.png" class="" title="实验效果图">
+
+<p>要解决的问题是图像合成，一共三件事：<strong>剪切、贴图、修复</strong>。即如何把一张图片的物体剪切下来，然后贴到另一张背景图上，并且补全被剪掉的区域。</p>
+<p>并且实验证明，结果不仅合成的新图片逼真，而且分割也做得很好。</p>
+<blockquote>
+<p>This process consists of three basic operations: (1) cut, extracting an object from image; (2) paste and enhance, making the pasted object appear natural in the new context; (3) inpaint, restoring the background after cutting out an object</p>
+</blockquote>
+<p><strong>关键词</strong>：语义分割、贴图、去目标、补全、修复、GAN、image generation、图像合成</p>
+<p>备注：训练过程不需要成对图片。</p>
+<p>相似工作：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1803.06414">Learning to segment via cut-and-paste</a></p>
+<p>通过作者的论述，思想相同的地方很多。</p>
+<h1 id="2-Methods"><a href="#2-Methods" class="headerlink" title="2. Methods"></a>2. Methods</h1><h2 id="2-1-Problem-Setting-and-General-Pipeline"><a href="#2-1-Problem-Setting-and-General-Pipeline" class="headerlink" title="2.1 Problem Setting and General Pipeline"></a>2.1 Problem Setting and General Pipeline</h2><p><strong>字符表示</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="center">字符</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$x=&lt;O,B_x&gt;$</td>
+<td align="center">图片$x$，由目标$O$和背景$B_x$组成</td>
+</tr>
+<tr>
+<td align="center">$y=&lt;\emptyset,B_y&gt;$</td>
+<td align="center">图片$y$，包含背景$B_y$，没有目标</td>
+</tr>
+<tr>
+<td align="center">$Y={&lt;\emptyset,B_y&gt;}_{y\in Y}$</td>
+<td align="center">背景数据集</td>
+</tr>
+<tr>
+<td align="center">$X={&lt;O_x,B_x&gt;}_{x\in X}$</td>
+<td align="center">不同物体在不同背景的图片</td>
+</tr>
+<tr>
+<td align="center">$m$</td>
+<td align="center">目标$O$在图片$x$上的mask $m$</td>
+</tr>
+<tr>
+<td align="center">$\hat{x}=&lt;\emptyset,\hat{B}_x&gt;$</td>
+<td align="center">去除目标只剩背景$B_x$并修复后的图片</td>
+</tr>
+<tr>
+<td align="center">$\hat{y}=&lt;\hat{O},\hat{B}_y&gt;$</td>
+<td align="center">将目标粘贴到背景$B_y$并增强后的图片</td>
+</tr>
+</tbody></table>
+<p><strong>问题定义</strong>：</p>
+<p>对于任意一组图片$x=&lt;O,B_x&gt;$和$y=&lt;\emptyset,B_y&gt;$，利用模型将其变成$\hat{x}=&lt;\emptyset,\hat{B}_x&gt;$和$\hat{y}=&lt;\hat{O},\hat{B}_y&gt;$，其中$\hat{B}_x\approx B_x$，$\hat{B}_y\approx B_y$和$\hat{O}\approx O$.</p>
+<p><strong>步骤分解</strong>：</p>
+<ul>
+<li>分割(segmentation)：预测图片$x=&lt;O,B_x&gt;$的分割掩码$m=Mask(x)$，并且做简单的粘贴$z=m\odot x+(1-m)\odot y$，$\odot$我的理解是对应元素的乘法。</li>
+</ul>
+<blockquote>
+<p>$\odot$ denotes componentwise multiplication;</p>
+</blockquote>
+<ul>
+<li><p>增强(enhancement)：对于$z$，做进一步图片增强，使其更自然，得到$\hat{y}=&lt;\hat{O},\hat{B}_y&gt;$</p>
+</li>
+<li><p>修复(inpainting)：对于去除目标后的图片$(1-m)\odot x$，修复成$\hat{x}=&lt;\emptyset,\hat{B}_x&gt;$</p>
+</li>
+</ul>
+<p><img src="./SEIGAN/SEIGAN2.png" alt="网络架构"></p>
+<img src="/2018/12/27/SEIGAN/SEIGAN2.png" class="" title="网络架构">
+
+<p>其中 swap network 就是 segmentation network 和 enhancement network 的组合。</p>
+<ul>
+<li>类似CycleGAN，网络架构应用两次，第一次得到$\hat{x}$和$\hat{y}$，第二次得到$\hat{\hat{x}}$和$\hat{\hat{y}}$</li>
+<li>$G_{seg}$：Fig.3.right，输入$x=&lt;O,B_x&gt;$，输出$m=Mask(x)$</li>
+<li>$G_{inp}$：Fig.3.left，输入$(1-m)\odot x$，输出$\hat{x}=&lt;\emptyset,\hat{B}_x&gt;$</li>
+<li>$G_{enh}$：Fig.3.left，输入$z=m\odot x+(1-m)\odot y$和噪声，输出$\hat{y}=&lt;\hat{O},\hat{B}_y&gt;$</li>
+<li>$D_{bg}$：背景判别器，判断真背景($y$)和假背景($\hat{x}$、$\hat{\hat{y}}$)，真为1，假为0</li>
+<li>$D_{obj}$：目标判别器，判断背景和目标是一体的($x$)和背景和目标是合成的($z$,$\hat{y}$)，一体的为1，合成的为0.</li>
+</ul>
+<h2 id="2-2-The-inpainting-Network-G-inp"><a href="#2-2-The-inpainting-Network-G-inp" class="headerlink" title="2.2 The inpainting Network $G_{inp}$"></a>2.2 The inpainting Network $G_{inp}$</h2><p><strong>背景对抗损失函数</strong>:<br>$$l^{GAN}_{inp}=(1-D_{bg}(\hat{x})),l^{GAN}_{inp2}=(1-D_{bg}(\hat{\hat{y}}))$$<br>$$l^{GAN}<em>{bg}=\lambda_1 l^{GAN}_{inp} + \lambda_2 l^{GAN}\</em>{inp2} $$</p>
+<p><strong>背景重构损失函数</strong>：<br>$$l^{texture}<em>{bg}=|Gram(VGG_1(y))-Gram(VGG_1(\hat{\hat{y}}))|$$<br>$$l^{perc}</em>{bg}=|VGG_2(y)-VGG_2(\hat{\hat{y}})|$$<br>$$l^{MAE}_{bg}=|y-\hat{\hat{y}}|$$<br>$$l^{rec}_{bg}=\lambda_3 l^{texture}_{bg}+\lambda_4 l^{perc}_{bg}+\lambda_5l^{MAE}_{bg}$$</p>
+<p>其中，$VGG_1(y)$表示VGG19的前五层，$VGG_2(y)$表示VGG19的后五层</p>
+<p><strong>$G_{inp}$ 的网络架构</strong>:</p>
+<p><img src="./SEIGAN/SEIGAN3.png" alt="$G_{inp}$ 的网络架构"></p>
+<img src="/2018/12/27/SEIGAN/SEIGAN3.png" class="" title="$G_{inp}$ 的网络架构">
+
+<p>其实没太看懂这个网络，可能还是需要有代码。</p>
+<h2 id="2-3-The-Swap-Network"><a href="#2-3-The-Swap-Network" class="headerlink" title="2.3 The Swap Network"></a>2.3 The Swap Network</h2><p>The swap network = the segmentation network + the enhancement network</p>
+<p><strong>目标重构损失函数</strong>：<br>$$l^{perc}<em>{obj}=|VGG_2(x)-VGG_2(\hat{\hat{x}})|$$<br>$$l^{MAE}\</em>{obj}=|x-\hat{\hat{x}}|$$<br>$$l^{rec}_{obj}=\lambda_6 l^{perc}_{obj}+\lambda_7 l^{MAE}_{obj}$$</p>
+<p><strong>目标对抗损失函数</strong>：<br>$$l^{GAN}_{coarse}=(1-D_{obj}(z))^2$$<br>$$l^{GAN}_{enh}=(1-D_{obj}(\hat{y}))^2$$<br>$$l^{GAN}_{obj}=\lambda_8 l^{GAN}_{coarse} + \lambda_9 l^{GAN}_{enh}$$</p>
+<p><strong>identity loss</strong>：</p>
+<p>$$l^{id}_{bg}=|G_{inp}((1-G_{seg}(y))\odot y)-y|$$<br>$$l^{id}_{obj}=|G_{enh}(x)-x|$$<br>$$l^{id}=\lambda_{10}l^{id}_{obj} + \lambda_{11}l^{id}_{bg}$$</p>
+<h2 id="2-4-Total-Loss-Funcion-Remarks-and-Network-Architectures"><a href="#2-4-Total-Loss-Funcion-Remarks-and-Network-Architectures" class="headerlink" title="2.4 Total Loss Funcion, Remarks, and Network Architectures"></a>2.4 Total Loss Funcion, Remarks, and Network Architectures</h2><p><strong>The Generator Loss</strong>:<br>$$\begin{split}<br>l=\lambda_1 l^{GAN}_{inp} + \lambda_2 l^{GAN}_{inp2} + \lambda_4 l^{perc}<em>{bg} + \lambda_5l^{MAE}_{bg} + \lambda_6 l^{perc}_{obj} + \<br>\lambda_7 l^{MAE}_{obj} + \lambda_8 l^{GAN}_{coarse} + \lambda_9 l^{GAN}_{enh} + \lambda</em>{10}l^{id}_{obj} + \lambda_{11}l^{id}_{bg}<br>\end{split}$$</p>
+<p><strong>The Discriminator Loss</strong>:<br>$$l^{disc}_{bg}=(1-D_{bg}(y))^2+\frac{1}{2}D_{bg}(\hat{x})^2+\frac{1}{2}D_{bg}(\hat{\hat{y}})^2$$<br>$$l^{disc}_{obj}=(1-D_{obj}(x))^2+\frac{1}{2}D_{obj}(\hat{y})^2+\frac{1}{2}D_{obj}(z)^2$$</p>
+<p><strong>Remarks</strong>：</p>
+<ol>
+<li>a pool of fake images，类似Cycle GAN也有。</li>
+<li>对于不同大小和比例的图片$x,y$，作者使用了增强网络</li>
+<li>texture loss $l^{rec}_{bg}$ 比 threshold 作用在 mask m 上的效果更好</li>
+</ol>
+<blockquote>
+<p>In our setup this problem is addressed by a separate enhancement network, so we have fewer limitations when looking for appropriate training data.</p>
+</blockquote>
+<h1 id="3-Experimental-evaluation"><a href="#3-Experimental-evaluation" class="headerlink" title="3. Experimental evaluation"></a>3. Experimental evaluation</h1><p>实验性能主要分为两个：</p>
+<ol>
+<li>生成图片的主观真实性</li>
+<li>生成分割掩码的准确性</li>
+</ol>
+<p><strong>生成图片的主观真实性</strong>：<br><img src="./SEIGAN/SEIGAN4.png" alt="生成图片的主观真实性"></p>
+<img src="/2018/12/27/SEIGAN/SEIGAN4.png" class="" title="生成图片的主观真实性">
+
+<p>从Fig.4.left可以简单地看出，Full的效果还是很明显的。</p>
+<p><strong>生成分割掩码的准确性</strong>：<br><img src="./SEIGAN/SEIGAN5.png" alt="生成分割掩码的准确性"></p>
+<img src="/2018/12/27/SEIGAN/SEIGAN5.png" class="" title="生成分割掩码的准确性">
+
+<p><strong>实验效果</strong>：<br><img src="./SEIGAN/SEIGAN6.png" alt="实验效果"></p>
+<img src="/2018/12/27/SEIGAN/SEIGAN6.png" class="" title="实验效果">
+
+<h1 id="4-Future"><a href="#4-Future" class="headerlink" title="4. Future"></a>4. Future</h1><p>这个方法是否可以用在两个图片的目标对换呢？如果用在跨数据集的行人重识别上，那么是否可以将源数据集的行人粘贴在目标数据集上呢？好像有一个GAN就是类似的.</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.08565">Person Transfer GAN to Bridge Domain Gap for Person Re-Identification</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GAN/" rel="tag"># GAN</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/26/GPU/" rel="prev" title="GPU">
+      <i class="fa fa-chevron-left"></i> GPU
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/03/deep-learning-network/" rel="next" title="deep-learning-network">
+      deep-learning-network <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Methods"><span class="nav-number">3.</span> <span class="nav-text">2. Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Problem-Setting-and-General-Pipeline"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Problem Setting and General Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-The-inpainting-Network-G-inp"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 The inpainting Network $G_{inp}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-The-Swap-Network"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 The Swap Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Total-Loss-Funcion-Remarks-and-Network-Architectures"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Total Loss Funcion, Remarks, and Network Architectures</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Experimental-evaluation"><span class="nav-number">4.</span> <span class="nav-text">3. Experimental evaluation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Future"><span class="nav-number">5.</span> <span class="nav-text">4. Future</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiajie Tian</p>
+  <div class="site-description" itemprop="description">记录一些学习到的东西和论文记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/./archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiajie Tian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

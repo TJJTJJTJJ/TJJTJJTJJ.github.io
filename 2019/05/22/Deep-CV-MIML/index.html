@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="0. 前言 paper: CVPR2019 Weakly Supervised Person Re-Identification code:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep CV-MIML">
+<meta property="og:url" content="http://yoursite.com/2019/05/22/Deep-CV-MIML/index.html">
+<meta property="og:site_name" content="田佳杰">
+<meta property="og:description" content="0. 前言 paper: CVPR2019 Weakly Supervised Person Re-Identification code:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/Deep-CV-MIML/weakly_supervised_setting.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/Deep-CV-MIML/intra_bag_alignment.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/Deep-CV-MIML/cross_view_bag_alignment.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/Deep-CV-MIML/ablation_study.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/Deep-CV-MIML/comparison.png">
+<meta property="article:published_time" content="2019-05-22T02:26:35.000Z">
+<meta property="article:modified_time" content="2019-05-25T09:17:05.233Z">
+<meta property="article:author" content="Jiajie Tian">
+<meta property="article:tag" content="person re-id">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/22/Deep-CV-MIML/weakly_supervised_setting.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/05/22/Deep-CV-MIML/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Deep CV-MIML | 田佳杰</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/TJJTJJTJJ/TJJTJJTJJ.github.io.git"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">田佳杰</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">代码的搬运工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/./about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/./archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-something">
+
+    <a href="/./test2/" rel="section"><i class="fa fa-something fa-fw"></i>测试</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/Deep-CV-MIML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiajie Tian">
+      <meta itemprop="description" content="记录一些学习到的东西和论文记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="田佳杰">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Deep CV-MIML
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-22 10:26:35" itemprop="dateCreated datePublished" datetime="2019-05-22T10:26:35+08:00">2019-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-05-25 17:17:05" itemprop="dateModified" datetime="2019-05-25T17:17:05+08:00">2019-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/person-re-id/" itemprop="url" rel="index"><span itemprop="name">person re-id</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.03832">CVPR2019 Weakly Supervised Person Re-Identification</a></li>
+<li>code:</li>
+</ul>
+<a id="more"></a>
+
+<p>这篇论文主要的创新点是：不再需要在 video 的每一帧都给出行人的位置和 id，而是直接赋予一段 video 一个 video-level label，即这段 video 中有哪些人。主要目的也是为了降低标注成本。有点重新定义行人重识别问题的意思。我觉得很有意思，也更贴近实际一些。</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>在传统的行人重识别设定中，每张图片表示用方框圈出来的行人。因此，作者提出了 <strong>weakly supervised setting</strong>，即在训练阶段，只有 video-level label，因此此时每段 video 中有多个行人，有个标签，即 multi-instance multi-label(<strong>MIML</strong>)。</p>
+<p>**订正(2019-05-24)**：论文中的 train set 分为：probe set 和 gallery set，probe set 每个行人的一系列图片组成一个 bag ，有准确的标签，gallery set 一段 video 组成一个 bag，取出这段 video 每一帧自动检测出的行人图片，有 video level label，但是不知道具体哪个行人对应哪个标签。</p>
+<p>提出：</p>
+<ul>
+<li>intra-bag alignment</li>
+<li>cross-view bag alignment</li>
+</ul>
+<img src="/2019/05/22/Deep-CV-MIML/weakly_supervised_setting.png" class="" title="weakly supervised setting">
+
+<p>基本定义：</p>
+<ul>
+<li>gallery set 中的 every video clip 为一个 bag</li>
+<li>每个 bag 包含多个行人的图片，并标记 video-level label</li>
+<li>probe set 中是经过手工标记的图片，为了统一，也视这些图片为一个 bag</li>
+</ul>
+<p>解决的问题：</p>
+<ul>
+<li>每个 bag 中包含相同的行人: intra-bag alignment</li>
+<li>bag 与 bag （跨摄像头）之间也包含相同的行人: cross-view bag alignment</li>
+</ul>
+<p>现有的 MIML 直接应用到 person re-id 中存在的问题</p>
+<ul>
+<li>现有的 MIML 忽略了 intra-bag variation，即 bag 内会有相同类别的实例</li>
+<li>现有的 MIML 假设 instance-level label 是高度相关的，但是 person re-id 中的行人都相互独立的</li>
+<li>现有的 MIML 没有考虑到 bag 之间的 (cross-view) 相关性</li>
+</ul>
+<h2 id="2-The-Proposed-Approach"><a href="#2-The-Proposed-Approach" class="headerlink" title="2. The Proposed Approach"></a>2. The Proposed Approach</h2><h3 id="2-1-Problem-Statement-and-Notation"><a href="#2-1-Problem-Statement-and-Notation" class="headerlink" title="2.1 Problem Statement and Notation"></a>2.1 Problem Statement and Notation</h3><p>在 weakly supervised person re-id setting 中，不再是以图搜图，而是以图搜视频，或者以视频搜视频，即给定同一个行人组成的视频，在只经过自动画框的视频中找出这个行人。</p>
+<table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$C$</td>
+<td align="left">identities</td>
+</tr>
+<tr>
+<td align="left">$V$</td>
+<td align="left">camera views</td>
+</tr>
+<tr>
+<td align="left">$\tilde{C}$</td>
+<td align="left">$\tilde{C}=C+1$</td>
+</tr>
+<tr>
+<td align="left">$\cal{X}$</td>
+<td align="left">the training set</td>
+</tr>
+<tr>
+<td align="left">$N_{\cal{X}}$</td>
+<td align="left">$N_{\cal{X}}$ video in the training set</td>
+</tr>
+<tr>
+<td align="left">$\cal{X}_p, \cal{X}_g$</td>
+<td align="left">probe set and gallery set,and $\cal{X}_p + \cal{X}_g=\cal{X}$</td>
+</tr>
+<tr>
+<td align="left">$\cal{X}_p=\lbrace (X_b, y_b, v_b) \rbrace _{b=1}^{N_p}$</td>
+<td align="left">probe set</td>
+</tr>
+<tr>
+<td align="left">$\cal{X}_g=\lbrace (X_b, y_b, v_b) \rbrace _{b=1}^{N_g}$</td>
+<td align="left">gallery set</td>
+</tr>
+<tr>
+<td align="left">$v_b \in \lbrace 1,2,…,V \rbrace$</td>
+<td align="left">摄像头</td>
+</tr>
+<tr>
+<td align="left">$y_b=[y_b^0, y_b^1,…, y_b^C]\in\lbrace 0,1 \rbrace^{\tilde{C}}$</td>
+<td align="left">行人标签</td>
+</tr>
+<tr>
+<td align="left">$X_b=\lbrace x_{b,1}, x_{b,2},…, x_{b,n_b} \rbrace $</td>
+<td align="left">多实例</td>
+</tr>
+<tr>
+<td align="left">$x_{b,i}=f_e(I_b;\theta)\in \mathbb{R}^d$</td>
+<td align="left">图片 $I_b$，特征提取方程 $f_e(\cdot;\theta)$</td>
+</tr>
+<tr>
+<td align="left">$f_c(\cdot;W)$</td>
+<td align="left">classifier</td>
+</tr>
+<tr>
+<td align="left">$y_{b,i}=f_c(x_{b,i};W)$</td>
+<td align="left">分类器</td>
+</tr>
+</tbody></table>
+<p>基本保证每个行人至少在两个摄像头下出现过，并视在 untrimmed videos 中的出现的未知行人为新的一类，即第0类，所以 $\tilde{C}=C+1$</p>
+<p>Question: probe set 是图片，gallery set 是视频，那training set 是什么？也是视频吗？ gallery set 和 training set 是一个集合还是完全不同的集合？</p>
+<p>gallery set 中的视频没有经过人工画框，只有 video-level weak label，其中的行人是自动检测出的，没有人工标定行人标签，所以具体到行人对应哪个标签也是未知的。</p>
+<p>probe set 中，each query 由一系列同一个行人的检测图片组成。为了统一，视 probe set 中的 each query 也为一个 bag，此时 video-level 应该是单实例的。</p>
+<p>所以，可以统一为：$\cal{X}=\lbrace \cal{X}_p, \cal{X}_g \rbrace$，其中 $\cal{X}_p=\lbrace (X_b, y_b, v_b) \rbrace _{b=1}^{N_p}$，$\cal{X}_g=\lbrace (X_b, y_b, v_b) \rbrace _{b=1}^{N_g}$.其中 probe set 的 bag 是单标签的，gallery set 的 bag label 为0时，表示不确定这个行人是否在这个 video 中出现过。</p>
+<p>重新定义问题需要重新定义好多概念。</p>
+<h3 id="2-2-Cross-View-MIML-for-Person-Re-id"><a href="#2-2-Cross-View-MIML-for-Person-Re-id" class="headerlink" title="2.2 Cross-View MIML for Person Re-id"></a>2.2 Cross-View MIML for Person Re-id</h3><h4 id="2-2-1-Weakly-Supervised-Person-Re-id-MIML"><a href="#2-2-1-Weakly-Supervised-Person-Re-id-MIML" class="headerlink" title="2.2.1 Weakly Supervised Person Re-id MIML"></a>2.2.1 Weakly Supervised Person Re-id MIML</h4><p>令 classifier $f_c(\cdot;W)$, 对于 probe set $\mathcal{X}_p$，一个 bag 内的所有实例 $\lbrace x _{b,i} \rbrace _{i=1}^{n_b}$ 标签都是一样的 label $y_b$，此时可以可以直接使用交叉熵损失函数。对于 gallery set $\mathcal{X}_g$，共享 weak video-level label $y_b$，很明显这时候不能直接使用交叉熵损失函数，所以 probe set 和 gallery set 需要分开训练。</p>
+<p>对于 <strong>probe set</strong> 中的 bag，可以直接使用 instance-level 交叉熵损失函数。</p>
+<p>$$L_p=\frac{1}{N_p}\displaystyle \sum_{X_b \in \mathcal{X}<em>p} \sum _{i\in \lbrace 1,…,n_b \rbrace} \sum _{c\in \lbrace 0,…,C \rbrace} (-y_b^c\log \tilde{y}</em>{b,i}^c) $$</p>
+<p>其中，$y_b^c$ 表示第 b 个 bag 的第 c 类的真实 bag 标签，$\tilde{y}_{b,i}^c$ 表示第 b 个包的第 i 个图片的第 c 类的预测标签。</p>
+<p>Question: probe set 中，一个 bag 是由行人的图片组成的像上面的一样，而 gallery set 中，一个bag的组成图片是一大张，行人在其中只占到很小的比例，明显两个不是一个尺度的，所以(根据 gallery set 的预测函数得出的猜测)猜测 gallery set 在进行训练时，是把每一帧中的行人(已经自动检测出)图片抠出来，然后送入网络，那么 gallery set 中，bag 大小不是表示这个 video 的帧数，而是这段 video 自动检测出来的行人图片个数，如果是这样的话，那怎么解决检测出的未知人(第0类)和丢失的行人。</p>
+<p>对于 <strong>gallery set</strong> 中的 bag，因为是多实例多标签，所以用的方法略微不同，之前没见过，先举个例子解释下。</p>
+<p>假设一个 bag 内有两个图片，label 是三类，即: $X_b=\lbrace x_{b,1}, x_{b,2} \rbrace $, $y_b=[1,0,1]$，预测标签是 $\tilde{y}_ {b,1}=[0.1, 0.2, 0.7], \tilde{y}_{b,2}=[0.3, 0.4, 0.3]$，对于每一类，先找出该类预测概率最大的图片，即 $q_1=2, q_2=2, q_3=1$，即第一类和第二类在第二张图片出现的概率最大，第三类在第一张图片出现的概率最大(纵向比较，而非常规意义上的横向比较)，从而得到bag的预测概率 $\tilde{y}=[0,3, 0.4, 0.7]$，然后再做个交叉熵。</p>
+<p>Question:其理论基础是什么。</p>
+<p>选择第 c 类后验概率最大的实例，记为 <strong>seed instance</strong> $x_{b, q_c}$，其中 $q_c$ 的定义为：</p>
+<p>$$q_c= \mathop{argmax}_{i\in \lbrace 1,2,…,n_b \rbrace} \lbrace \tilde{y}_{b,i}^c \rbrace $$</p>
+<p>然后定义 bag-level 分类损失:</p>
+<p>$$L_g=\frac{1}{N_g}\displaystyle \sum_{X_b \in \mathcal{X}<em>g} \sum _{c\in \lbrace 0,…,C \rbrace} (-y_b^c\log \max \lbrace \tilde{y}</em> {b,1}^c, \tilde{y}_ {b,2}^c, …, \tilde{y}_{b,n_b}^c \rbrace )$$</p>
+<p>从而得到 <strong>MIML classification loss</strong>:<br>$$L_C=L_p+L_g$$</p>
+<h3 id="2-2-2-Intra-bag-Alignment"><a href="#2-2-2-Intra-bag-Alignment" class="headerlink" title="2.2.2 Intra-bag Alignment"></a>2.2.2 Intra-bag Alignment</h3><img src="/2019/05/22/Deep-CV-MIML/intra_bag_alignment.png" class="" title="intra bag alignment">
+
+<p>应该是指一段视频中即一个 bag，因为行人出现在连续的帧中，所以每一帧的行人分布是差不多的，因此可以尽可能地将属于同一个人的图片聚在一起。</p>
+<p>在 gallery set 中，对于第 c 类已经找到 seed instance $x_{b, q_c}$，即对于第 c 类，这张图片比其他图片更像，从而构建一个 group 包含类似第 c 类的图片</p>
+<p>$$G_{b,c}=\lbrace p|x_{b,p}\in \mathcal{N}_{q_c} \text{ and } \tilde{y}_{b,p}^c \ge \gamma \tilde{y} _{b,q_c}^c \rbrace$$</p>
+<p>其中，$\mathcal{N}_{q_c}$ 表示 $x_{b,q_c}$ 的 K-近邻，$\gamma\in (0, 1)$，上述的公式表示这个 group 中的图片既需要满足在特征上相近，也要满足预测概率大于预定值。</p>
+<p>Question: soft multi-label, ECN 在选择正样本和负样本的时候的构建规则和这个就不太一样，或者说这么多构建最相似的规则，其区别大概在什么地方，特征相似，概率相似。不太懂，可能还是自己见得少吧。</p>
+<p>因此可以得到 <strong>intra-bag alignment loss</strong>:<br>$$L_{IA}=\frac{1}{N_{IA}} \displaystyle\sum_{X_b\in \mathcal{X}<em>g} \sum _{c\in \lbrace 0,…C \rbrace} \sum _{p \in G _{b,c}} y_b^c D</em>{KL}(\tilde{y}<em>{b,p}||\tilde{y} _{b,q_c})$$<br>$$D</em>{KL}(\tilde{y}<em>{b,p}||\tilde{y} _{b,q_c})=\sum</em>{c\in\lbrace 0,…,C \rbrace}\tilde{y}_{b,p}^c(\log \tilde{y} _{b,p}^c -\log \tilde{y} _{b,q_c}^c)$$</p>
+<p>这个是用KL散度衡量分布一致性。</p>
+<h3 id="2-2-3-Cross-view-Bag-Alignment"><a href="#2-2-3-Cross-view-Bag-Alignment" class="headerlink" title="2.2.3 Cross-view Bag Alignment"></a>2.2.3 Cross-view Bag Alignment</h3><p>intra-bag alignment and cross-view bag alignment 都是在尽量找到同一个行人的不同图片并且使这些图片得到特征相似，预测类别相似。</p>
+<img src="/2019/05/22/Deep-CV-MIML/cross_view_bag_alignment.png" class="" title="cross view bag alignment">
+
+<p>理论上来说，不同 view 下的同一个行人的特征应该也是相似的，因此，对每个行人引入 <strong>distribution prototype</strong>，并且同一个行人的图片特征应该近似 distribution prototype 的特征。公式定义为：第 t 个 epoch 时 第 c 类行人的 distribution prototype 为 $\hat{p}_c^t$:</p>
+<p>$$p_c^t=\frac{1}{|V_c|} \sum_{v\in V_c} (\frac{1}{|I_{c,v}|} \sum_{i\in I_{c,v}}\tilde{y}_i )$$<br>$$\hat{p}_c^t=\alpha \hat{p}_c^{t-1}+(1-\alpha)p_c^t$$</p>
+<p>其中，$V_c$ 表示所有的 camera view，$I_{c,v}$ 表示在第 v 个 camera view 下第 c 类的所有实例，可以理解成，在 gallery set 中，每个 bag 是一段视频，视频的每一帧是一张大图片，然后从上面扣下来行人图片，即行人图片是指第几个 bag 的第几帧的第几个行人，同时 bag 还有 camera view 信息，即第几个摄像头拍的。</p>
+<p>Question: $I_{c,v}$ 是怎么得到的，在训练阶段， probe set 是可以具体到 instance-level label，在 gallery set 只有 bag-level label，那怎么得出属于同一类的 instance，是通过 $G_{b,c}$ 吗？总感觉怪怪的。</p>
+<p>从而得到对齐损失函数：</p>
+<p>$$L_{CA}=\frac{1}{N_{CA}} \sum_{X_b\in(\mathcal{X}<em>p \bigcup \mathcal{X}<em>g)} \sum _{c\in \lbrace 0,…C \rbrace} \sum _{i \in I_c} y_b^c D</em>{KL}(\tilde{y}</em>{b,i}||\hat{p}_c^t)$$</p>
+<p>$I_c$ 表示第 c 类的所有 instance.</p>
+<p>需要注意的是：两次求 KL-散度 都在前面乘以了 bag-level label 用以衡量当前 video 当前类的重要性。</p>
+<p>这两个公式都写的很长哈。而且是那种需要把全部图片遍历一遍才可以计算的那种。</p>
+<h3 id="2-3-Deep-Cross-view-MIML-Model"><a href="#2-3-Deep-Cross-view-MIML-Model" class="headerlink" title="2.3 Deep Cross-view MIML Model"></a>2.3 Deep Cross-view MIML Model</h3><p>作者提出了一个新的 <strong>entropy regularization</strong> term，在 gallery set 中，总是会存在一些 outlier instance，在 intra-bag and cross-view alignment 中远离 data group，为了避免这种情况，设计了个正则项:<br>$$L_E=\frac{1}{N_E} \sum_{X_b\in \mathcal{X}_g} \sum _{i\in \lbrace 1,…n_b \rbrace} \sum _{c\in \lbrace 0,…C \rbrace} (-\tilde{y} _{b,i}^c \log \tilde{y} _{b,i}^c ) $$</p>
+<p>这是信息熵公式，应该是想尽可能使预测的概率陡峭，或为1或为0.</p>
+<p>这个公式来得有点突然啊，是有什么实验证明吗？</p>
+<p><strong>Cross-view Multi-label Multi-Instance learning (CV-MIML)</strong>:</p>
+<p>$$L_{CV-MIML}=L_C+\delta (L_{IA}+L_{CA}+L{E})$$</p>
+<h3 id="2-4-Implementation-Details"><a href="#2-4-Implementation-Details" class="headerlink" title="2.4 Implementation Details"></a>2.4 Implementation Details</h3><p>实现还是有点意思的，希望看到代码吧。</p>
+<h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><img src="/2019/05/22/Deep-CV-MIML/ablation_study.png" class="" title="ablation study">
+
+<img src="/2019/05/22/Deep-CV-MIML/comparison.png" class="" title="comparison">
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/person-re-id/" rel="tag"># person re-id</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/17/BNNeck/" rel="prev" title="BNNeck">
+      <i class="fa fa-chevron-left"></i> BNNeck
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/27/STGAN/" rel="next" title="STGAN">
+      STGAN <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-The-Proposed-Approach"><span class="nav-number">3.</span> <span class="nav-text">2. The Proposed Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Problem-Statement-and-Notation"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Problem Statement and Notation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Cross-View-MIML-for-Person-Re-id"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Cross-View MIML for Person Re-id</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Weakly-Supervised-Person-Re-id-MIML"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1 Weakly Supervised Person Re-id MIML</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Intra-bag-Alignment"><span class="nav-number">3.3.</span> <span class="nav-text">2.2.2 Intra-bag Alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-Cross-view-Bag-Alignment"><span class="nav-number">3.4.</span> <span class="nav-text">2.2.3 Cross-view Bag Alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Deep-Cross-view-MIML-Model"><span class="nav-number">3.5.</span> <span class="nav-text">2.3 Deep Cross-view MIML Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Implementation-Details"><span class="nav-number">3.6.</span> <span class="nav-text">2.4 Implementation Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Experiments"><span class="nav-number">4.</span> <span class="nav-text">4. Experiments</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiajie Tian</p>
+  <div class="site-description" itemprop="description">记录一些学习到的东西和论文记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/./archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiajie Tian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

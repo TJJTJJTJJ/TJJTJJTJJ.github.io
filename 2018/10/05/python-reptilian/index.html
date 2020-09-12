@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="前言这是第一次爬虫，以理论为主，以实现为辅。因为是到处看的，所以不是很有逻辑性。参考链接：python爬虫原理Python爬虫的两套解析方法和四种爬虫实现爬虫基本原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python_reptilian">
+<meta property="og:url" content="http://yoursite.com/2018/10/05/python-reptilian/index.html">
+<meta property="og:site_name" content="田佳杰">
+<meta property="og:description" content="前言这是第一次爬虫，以理论为主，以实现为辅。因为是到处看的，所以不是很有逻辑性。参考链接：python爬虫原理Python爬虫的两套解析方法和四种爬虫实现爬虫基本原理">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-10-05T03:13:00.000Z">
+<meta property="article:modified_time" content="2018-10-05T14:39:27.400Z">
+<meta property="article:author" content="Jiajie Tian">
+<meta property="article:tag" content="代码">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/10/05/python-reptilian/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python_reptilian | 田佳杰</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/TJJTJJTJJ/TJJTJJTJJ.github.io.git"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">田佳杰</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">代码的搬运工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/./about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/./archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-something">
+
+    <a href="/./test2/" rel="section"><i class="fa fa-something fa-fw"></i>测试</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/05/python-reptilian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jiajie Tian">
+      <meta itemprop="description" content="记录一些学习到的东西和论文记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="田佳杰">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python_reptilian
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2018-10-05 11:13:00 / 修改时间：22:39:27" itemprop="dateCreated datePublished" datetime="2018-10-05T11:13:00+08:00">2018-10-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这是第一次爬虫，以理论为主，以实现为辅。因为是到处看的，所以不是很有逻辑性。<br>参考链接：<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sss4/p/7809821.html">python爬虫原理</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5NDY1MjQzNA==&mid=2247487461&idx=2&sn=9cf9910f44808e429f32731fb5214380&chksm=ec5ed098db29598e9ce3a99a1ed6005fe552c9fde8533639c561e3ca7c44d71f6f053c68de8e&mpshare=1&scene=1&srcid=0827ZJWXHEkP54zWy7t6FfGV#rd">Python爬虫的两套解析方法和四种爬虫实现</a><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/linhaifeng/articles/7773496.html">爬虫基本原理</a></p>
+<a id="more"></a>
+<h1 id="一、工具"><a href="#一、工具" class="headerlink" title="一、工具"></a>一、工具</h1><ul>
+<li>两个解析库：BeautifulSoup, lxml</li>
+<li>两个请求库：urllib, requests</li>
+<li>法法</li>
+</ul>
+<hr>
+<h1 id="二、爬虫流程"><a href="#二、爬虫流程" class="headerlink" title="二、爬虫流程"></a>二、爬虫流程</h1><p>用户获取网络数据的方式<br>方式1:浏览器提交请求—-&gt;下载网页代码—-&gt;解析成页面<br>方式2:模拟浏览器发送请求(获取网页代码)—-&gt;提取有用数据—-&gt;存放在数据库或者文件中<br>爬虫就是指方式2.</p>
+<h2 id="1-发起请求"><a href="#1-发起请求" class="headerlink" title="1.发起请求"></a>1.发起请求</h2><p>使用http库向目标站点发送请求，即发送一个Request。<br>Request包含：请求头，请求体等。<br>Request模块缺点：不能执行JS和CSS代码。</p>
+<h2 id="2-获取响应内容"><a href="#2-获取响应内容" class="headerlink" title="2.获取响应内容"></a>2.获取响应内容</h2><p>服务器正常响应，得到一个Response。<br>Response包含：html，json，图片，视频等。</p>
+<h2 id="3-解析内容"><a href="#3-解析内容" class="headerlink" title="3.解析内容"></a>3.解析内容</h2><p>解析html数据：正则表达式(RE模块)，第三方解析库如BeautifulSoup,pyquery等<br>解析json数据：json模块<br>解析二进制数据：以wb形式写入文件</p>
+<h2 id="4-保存数据"><a href="#4-保存数据" class="headerlink" title="4.保存数据"></a>4.保存数据</h2><p>数据库（MySQL, Mongdb, Redis)<br>文件</p>
+<hr>
+<h1 id="三、Request-amp-Response"><a href="#三、Request-amp-Response" class="headerlink" title="三、Request&amp;Response"></a>三、Request&amp;Response</h1><h2 id="1-Request"><a href="#1-Request" class="headerlink" title="1.Request"></a>1.Request</h2><h3 id="1-1-请求方式"><a href="#1-1-请求方式" class="headerlink" title="1.1.请求方式"></a>1.1.请求方式</h3><p>常见的有：GET/POST</p>
+<h3 id="1-2-请求的URL"><a href="#1-2-请求的URL" class="headerlink" title="1.2.请求的URL"></a>1.2.请求的URL</h3><p>url是全球容易资源定位符，用来丁意思互联网上一个唯一的资源，例如：一张图片、一个文件、一段视频。</p>
+<h3 id="1-3-请求头"><a href="#1-3-请求头" class="headerlink" title="1.3.请求头"></a>1.3.请求头</h3><p>User-agen：访问的浏览器请求头没有user-agent客户端配置，会被当成非法用户host<br>cookies：cookie用来保存登录信息<br>Referrer：访问源至哪里来</p>
+<h3 id="1-4-请求体"><a href="#1-4-请求体" class="headerlink" title="1.4.请求体"></a>1.4.请求体</h3><p>get：请求体没有内容<br>post：请求体是format data</p>
+<h2 id="2-Response"><a href="#2-Response" class="headerlink" title="2.Response"></a>2.Response</h2><h3 id="2-1-响应状态码"><a href="#2-1-响应状态码" class="headerlink" title="2.1 响应状态码"></a>2.1 响应状态码</h3><p>200：代表成功<br>301：代表调转<br>404：文件不存在<br>403：无权限访问<br>502：服务器错误</p>
+<h3 id="2-2-响应头"><a href="#2-2-响应头" class="headerlink" title="2.2 响应头"></a>2.2 响应头</h3><p>Set-Cookie:BDSVRTM=0; path=/：可能有多个，是来告诉浏览器，把cookie保存下来<br>Content-Location：服务端响应头中包含Location返回浏览器之后，浏览器就会重新访问另一个页面</p>
+<h3 id="2-3preview"><a href="#2-3preview" class="headerlink" title="2.3preview"></a>2.3preview</h3><p>网页源代码，包括：<br>Json数据、html、图片、二进制数据</p>
+<h1 id="接下来开始尝试写一些基本的爬虫代码，并做记录"><a href="#接下来开始尝试写一些基本的爬虫代码，并做记录" class="headerlink" title="接下来开始尝试写一些基本的爬虫代码，并做记录"></a>接下来开始尝试写一些基本的爬虫代码，并做记录</h1><pre><code class="python"># 发起请求，并获取请求内容
+from urllib import request
+resp = request.urlopen(&#39;https://movie.douban.com/nowplaying/hangzhou/&#39;) # http.client.HTTPResponse
+html_data = resp.read().decode(&#39;utf-8&#39;) # str 这里的print是最好看的
+# 解析内容
+from bs4 import BeautifulSoup as bs
+soup = bs(html_data, &#39;html.parser&#39;)  # bs4.BeautifulSoup
+nowplaying_movie = soup.find_all(&#39;div&#39;, id=&#39;nowplaying&#39;) # bs4.element.ResultSet list的形式，可以暂时看成是多个组成的list，需要先[0]的进行访问。
+tmp = nowplaying_movie[0] # bs4.element.Tag
+nowplaying_movie_list = nowplaying_movie[0].find_all(&#39;li&#39;, class_=&#39;list-item&#39;) # bs4.element.ResultSet  list形式， bs4.element.Tag
+nowplaying_list = []  # 此时就是直接获取数据了，find_all是对相应片段的截取
+for item in nowplaying_movie_list:
+    nowplaying_dict = &#123;&#125;
+    nowplaying_dict[&#39;id&#39;] = item[&#39;data-subject&#39;]
+    for tag_img_item in item.find_all(&#39;img&#39;):
+        nowplaying_dict[&#39;name&#39;] = tag_img_item[&#39;alt&#39;]
+        nowplaying_list.append(nowplaying_dict)
+
+requrl = &#39;https://movie.douban.com/subject/&#39;+nowplaying_list[0][&#39;id&#39;] + &#39;/comments&#39; +&#39;?&#39; +&#39;start=0&#39; + &#39;&amp;limit=20&#39;
+# 三句一体
+resp = request.urlopen(requrl)
+html_data = resp.read().decode(&#39;utf-8&#39;)
+soup = bs(html_data, &#39;html.parser&#39;)
+
+comment_div_lists[0].find_all(&#39;span&#39;, class_=&quot;short&quot;)[0].string # .string 可以暂时理解成中间的字符串
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/10/04/git/" rel="prev" title="git">
+      <i class="fa fa-chevron-left"></i> git
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/05/cuda/" rel="next" title="cuda安装教程">
+      cuda安装教程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">一、工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%88%AC%E8%99%AB%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">二、爬虫流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82"><span class="nav-number">3.1.</span> <span class="nav-text">1.发起请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%8E%B7%E5%8F%96%E5%93%8D%E5%BA%94%E5%86%85%E5%AE%B9"><span class="nav-number">3.2.</span> <span class="nav-text">2.获取响应内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%A7%A3%E6%9E%90%E5%86%85%E5%AE%B9"><span class="nav-number">3.3.</span> <span class="nav-text">3.解析内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE"><span class="nav-number">3.4.</span> <span class="nav-text">4.保存数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Request-amp-Response"><span class="nav-number">4.</span> <span class="nav-text">三、Request&amp;Response</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Request"><span class="nav-number">4.1.</span> <span class="nav-text">1.Request</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="nav-number">4.1.1.</span> <span class="nav-text">1.1.请求方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E8%AF%B7%E6%B1%82%E7%9A%84URL"><span class="nav-number">4.1.2.</span> <span class="nav-text">1.2.请求的URL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="nav-number">4.1.3.</span> <span class="nav-text">1.3.请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E8%AF%B7%E6%B1%82%E4%BD%93"><span class="nav-number">4.1.4.</span> <span class="nav-text">1.4.请求体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Response"><span class="nav-number">4.2.</span> <span class="nav-text">2.Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.1 响应状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%93%8D%E5%BA%94%E5%A4%B4"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2 响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3preview"><span class="nav-number">4.2.3.</span> <span class="nav-text">2.3preview</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%BC%80%E5%A7%8B%E5%B0%9D%E8%AF%95%E5%86%99%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%88%AC%E8%99%AB%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%B9%B6%E5%81%9A%E8%AE%B0%E5%BD%95"><span class="nav-number">5.</span> <span class="nav-text">接下来开始尝试写一些基本的爬虫代码，并做记录</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jiajie Tian</p>
+  <div class="site-description" itemprop="description">记录一些学习到的东西和论文记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/./archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiajie Tian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

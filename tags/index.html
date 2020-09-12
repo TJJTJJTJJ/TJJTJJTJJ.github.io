@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
   <meta name="description" content="记录一些学习到的东西和论文记录">
@@ -107,6 +107,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -141,11 +142,38 @@
     <a href="/./test2/" rel="section"><i class="fa fa-something fa-fw"></i>测试</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -189,10 +217,10 @@
       <div class="post-body">
           <div class="tag-cloud">
             <div class="tag-cloud-title">
-              目前共计 4 个标签
+              目前共计 67 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/github/" style="font-size: 12px; color: #ccc">github</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/npm/" style="font-size: 12px; color: #ccc">npm</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 12px; color: #ccc">基础</a>
+              <a href="/tags/CMC/" style="font-size: 12px; color: #ccc">CMC</a> <a href="/tags/CNN/" style="font-size: 12px; color: #ccc">CNN</a> <a href="/tags/GAN/" style="font-size: 30px; color: #111">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 12px; color: #ccc">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 12px; color: #ccc">Linux</a> <a href="/tags/Markdown/" style="font-size: 12px; color: #ccc">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 12px; color: #ccc">RotationNet</a> <a href="/tags/SE/" style="font-size: 12px; color: #ccc">SE</a> <a href="/tags/SPGAN/" style="font-size: 12px; color: #ccc">SPGAN</a> <a href="/tags/a/" style="font-size: 12px; color: #ccc">a</a> <a href="/tags/attention/" style="font-size: 18px; color: #8e8e8e">attention</a> <a href="/tags/b/" style="font-size: 12px; color: #ccc">b</a> <a href="/tags/cross-domain/" style="font-size: 12px; color: #ccc">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 12px; color: #ccc">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 15px; color: #adadad">cuda</a> <a href="/tags/cudnn/" style="font-size: 12px; color: #ccc">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 12px; color: #ccc">cycleGAN</a> <a href="/tags/data/" style="font-size: 12px; color: #ccc">data</a> <a href="/tags/deep-learning/" style="font-size: 12px; color: #ccc">deep-learning</a> <a href="/tags/docker/" style="font-size: 15px; color: #adadad">docker</a> <a href="/tags/domain-adaption/" style="font-size: 12px; color: #ccc">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 12px; color: #ccc">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 12px; color: #ccc">driver</a> <a href="/tags/face-recognition/" style="font-size: 12px; color: #ccc">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 12px; color: #ccc">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 12px; color: #ccc">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 12px; color: #ccc">few-shot learning</a> <a href="/tags/git/" style="font-size: 12px; color: #ccc">git</a> <a href="/tags/github/" style="font-size: 15px; color: #adadad">github</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/html/" style="font-size: 12px; color: #ccc">html</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/markdown/" style="font-size: 15px; color: #adadad">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 12px; color: #ccc">mask and colour</a> <a href="/tags/math/" style="font-size: 12px; color: #ccc">math</a> <a href="/tags/mathjax/" style="font-size: 12px; color: #ccc">mathjax</a> <a href="/tags/memory/" style="font-size: 15px; color: #adadad">memory</a> <a href="/tags/meta-learning/" style="font-size: 12px; color: #ccc">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 12px; color: #ccc">multi-domain</a> <a href="/tags/network/" style="font-size: 12px; color: #ccc">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 12px; color: #ccc">neural style transfer</a> <a href="/tags/npm/" style="font-size: 12px; color: #ccc">npm</a> <a href="/tags/numpy/" style="font-size: 15px; color: #adadad">numpy</a> <a href="/tags/object-detection/" style="font-size: 12px; color: #ccc">object detection</a> <a href="/tags/one-example/" style="font-size: 12px; color: #ccc">one_example</a> <a href="/tags/paper/" style="font-size: 21px; color: #6f6f6f">paper</a> <a href="/tags/person-re-id/" style="font-size: 27px; color: #303030">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 12px; color: #ccc">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 15px; color: #adadad">person-reid</a> <a href="/tags/python/" style="font-size: 15px; color: #adadad">python</a> <a href="/tags/python-picture/" style="font-size: 12px; color: #ccc">python,picture</a> <a href="/tags/pytorch/" style="font-size: 24px; color: #4f4f4f">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 12px; color: #ccc">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 12px; color: #ccc">re-ID</a> <a href="/tags/re-id/" style="font-size: 15px; color: #adadad">re-id</a> <a href="/tags/segmentation/" style="font-size: 12px; color: #ccc">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 12px; color: #ccc">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 12px; color: #ccc">sharelatex</a> <a href="/tags/softmax/" style="font-size: 12px; color: #ccc">softmax</a> <a href="/tags/starGAN/" style="font-size: 12px; color: #ccc">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 12px; color: #ccc">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 18px; color: #8e8e8e">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 12px; color: #ccc">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 12px; color: #ccc">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 12px; color: #ccc">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12px; color: #ccc">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 12px; color: #ccc">计算机操作系统</a>
             </div>
           </div>
         
@@ -269,14 +297,19 @@
       <div class="site-state-item site-state-posts">
           <a href="/./archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -309,7 +342,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Jiajie Tian</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
 
         
@@ -335,7 +368,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/pisces.js"></script>
+<script src="/js/schemes/muse.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -346,6 +379,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
