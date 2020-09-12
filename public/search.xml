@@ -1923,6 +1923,39 @@ f_t^l &= (1-z^l)\circ\hat{s}^{l+1}+z^l\circ \hat{f}_t^l
       </tags>
   </entry>
   <entry>
+    <title>SyRI</title>
+    <url>/2019/01/14/SyRI/</url>
+    <content><![CDATA[<h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>这也是一篇合成数据集的论文。</p>
+<a id="more"></a>
+<p>paper: <a href="http://openaccess.thecvf.com/content_ECCV_2018/papers/Slawomir_Bak_Domain_Adaptation_through_ECCV_2018_paper.pdf">Domain Adaptation through Synthesis for Unsupervised Person Re-identification</a></p>
+<p>github: 无</p>
+<p>项目地址: 无</p>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>针对的问题是行人重识别数据缺乏在不同光照条件下的多样性，所以作者进行了数据合成。</p>
+<p><strong>HDR maps</strong>: high dynamic range environment maps.</p>
+<p><strong>three-step domain adaption technique</strong>:</p>
+<p><img src="./SyRI/SyRI1.png" alt="three-step domain adaption technique"><br><img src="/2019/01/14/SyRI/SyRI1.png" class="" title="three-step domain adaption technique"></p>
+<ol>
+<li>Illumination inference</li>
+<li>Domain translation</li>
+<li>Fine-tuning</li>
+</ol>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>这篇文章看得我有点迷迷糊糊的，感觉其中用到了cycleGAN，优化了cycleGAN的一个损失函数，但是怎么进行的illuminaion inference、fine-tuning，没有充分理解。</p>
+<h1 id="罗浩对这篇文章的解读"><a href="#罗浩对这篇文章的解读" class="headerlink" title="罗浩对这篇文章的解读"></a>罗浩对这篇文章的解读</h1><p><a href="https://zhuanlan.zhihu.com/p/44212707">https://zhuanlan.zhihu.com/p/44212707</a></p>
+<blockquote>
+<p>由于训练数据的缺乏，以及3D建模的技术增强，利用游戏等合成的逼真数据来进行视觉研究已经逐渐打入各个领域。这一篇就是利用电脑合成数据在进行ReID的论文。论文提出了新的合成数据集SyRI dataset，该数据集通过改变HDR参数等，一个行人ID可以拥有一百多个环境下图像数据。此外，为了在未见过的真实场景上实现更好的域适应效果，论文基于这个合成数据集提出了一种新的方法。</p>
+<p>整个Pipeline包括三个环节。第一步是拿到了target domain $R_{M+1}$ 的一些未标注图片之后，要对光照进行一个推理，在合成数据集 $S_{k^*}$ 里面找到最接近样本 。然后利用CycleGAN将合成数据生成target domain style的数据。最后利用生成的数据对ReID网络进行fune-tuning。整体来说pipeline比较简单.</p>
+<p>例如，在CycleGAN生成图环节，为了得到更高质量的图像，论文使用了和PTGAN一样的前景mask的思想。不同点在于PTGAN是借助于语义分割网络得到一个行人前景的mask，本文是直接使用了一个2D高斯核作为mask</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>person re-id</category>
+      </categories>
+      <tags>
+        <tag>person re-identification</tag>
+        <tag>domain adaption</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Sharelatex</title>
     <url>/2020/01/13/Sharelatex/</url>
     <content><![CDATA[<h1 id="1-本地部署ShareLatex"><a href="#1-本地部署ShareLatex" class="headerlink" title="1. 本地部署ShareLatex"></a>1. 本地部署ShareLatex</h1><p>本地部署ShareLatex</p>
@@ -1958,39 +1991,6 @@ f_t^l &= (1-z^l)\circ\hat{s}^{l+1}+z^l\circ \hat{f}_t^l
       <tags>
         <tag>docker</tag>
         <tag>sharelatex</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SyRI</title>
-    <url>/2019/01/14/SyRI/</url>
-    <content><![CDATA[<h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>这也是一篇合成数据集的论文。</p>
-<a id="more"></a>
-<p>paper: <a href="http://openaccess.thecvf.com/content_ECCV_2018/papers/Slawomir_Bak_Domain_Adaptation_through_ECCV_2018_paper.pdf">Domain Adaptation through Synthesis for Unsupervised Person Re-identification</a></p>
-<p>github: 无</p>
-<p>项目地址: 无</p>
-<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>针对的问题是行人重识别数据缺乏在不同光照条件下的多样性，所以作者进行了数据合成。</p>
-<p><strong>HDR maps</strong>: high dynamic range environment maps.</p>
-<p><strong>three-step domain adaption technique</strong>:</p>
-<p><img src="./SyRI/SyRI1.png" alt="three-step domain adaption technique"><br><img src="/2019/01/14/SyRI/SyRI1.png" class="" title="three-step domain adaption technique"></p>
-<ol>
-<li>Illumination inference</li>
-<li>Domain translation</li>
-<li>Fine-tuning</li>
-</ol>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>这篇文章看得我有点迷迷糊糊的，感觉其中用到了cycleGAN，优化了cycleGAN的一个损失函数，但是怎么进行的illuminaion inference、fine-tuning，没有充分理解。</p>
-<h1 id="罗浩对这篇文章的解读"><a href="#罗浩对这篇文章的解读" class="headerlink" title="罗浩对这篇文章的解读"></a>罗浩对这篇文章的解读</h1><p><a href="https://zhuanlan.zhihu.com/p/44212707">https://zhuanlan.zhihu.com/p/44212707</a></p>
-<blockquote>
-<p>由于训练数据的缺乏，以及3D建模的技术增强，利用游戏等合成的逼真数据来进行视觉研究已经逐渐打入各个领域。这一篇就是利用电脑合成数据在进行ReID的论文。论文提出了新的合成数据集SyRI dataset，该数据集通过改变HDR参数等，一个行人ID可以拥有一百多个环境下图像数据。此外，为了在未见过的真实场景上实现更好的域适应效果，论文基于这个合成数据集提出了一种新的方法。</p>
-<p>整个Pipeline包括三个环节。第一步是拿到了target domain $R_{M+1}$ 的一些未标注图片之后，要对光照进行一个推理，在合成数据集 $S_{k^*}$ 里面找到最接近样本 。然后利用CycleGAN将合成数据生成target domain style的数据。最后利用生成的数据对ReID网络进行fune-tuning。整体来说pipeline比较简单.</p>
-<p>例如，在CycleGAN生成图环节，为了得到更高质量的图像，论文使用了和PTGAN一样的前景mask的思想。不同点在于PTGAN是借助于语义分割网络得到一个行人前景的mask，本文是直接使用了一个2D高斯核作为mask</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>person re-id</category>
-      </categories>
-      <tags>
-        <tag>person re-identification</tag>
-        <tag>domain adaption</tag>
       </tags>
   </entry>
   <entry>
