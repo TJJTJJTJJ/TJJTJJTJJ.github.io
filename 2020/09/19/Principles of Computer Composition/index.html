@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>计算机组成原理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算机组成原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机组成原理">
+<meta property="og:url" content="http://example.com/2020/09/19/Principles%20of%20Computer%20Composition/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="计算机组成原理">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-19T15:20:26.000Z">
+<meta property="article:modified_time" content="2020-09-22T15:53:09.352Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="408">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Principles of Computer Composition" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/19/Principles%20of%20Computer%20Composition/" class="article-date">
+  <time class="dt-published" datetime="2020-09-19T15:20:26.000Z" itemprop="datePublished">2020-09-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/408/">408</a>►<a class="article-category-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      计算机组成原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>计算机组成原理</p>
+<span id="more"></span>
+
+<h1 id="1-计算机组成原理"><a href="#1-计算机组成原理" class="headerlink" title="1. 计算机组成原理"></a>1. 计算机组成原理</h1><h2 id="1-1-计算机组成原理概述"><a href="#1-1-计算机组成原理概述" class="headerlink" title="1.1 计算机组成原理概述"></a>1.1 计算机组成原理概述</h2><h3 id="1-1-1-软硬件发展"><a href="#1-1-1-软硬件发展" class="headerlink" title="1.1.1 软硬件发展"></a>1.1.1 软硬件发展</h3><p>机器字长：计算机一次整数运算所能处理的二进制位数</p>
+<p>操作系统位数：其所依赖的指令集的位数</p>
+<p>CPU：运算器+控制器</p>
+<p>存储器+控制器+运算器</p>
+<p><strong>层次结构</strong></p>
+<p>虚拟机器 M4 高级语言机器<br>虚拟机器 M3 汇编语言机器<br>虚拟机器 M2 操作系统机器<br>传统机器 M1 机器语言机器<br>微程序机器 M0 微指令系统</p>
+<p><strong>存储器</strong></p>
+<p>存储器：MAR(地址寄存器)–&gt;存储体&lt;–&gt;MDR(数据寄存器)<br>译码器：n位地址–&gt;2^n 个存储单元<br>最大容量：2^n * 存储字长<br>实际容量：存储单元个数 * 存储字长 bit</p>
+<p>CPI 执行一条指令所需的时钟周期数<br>指令耗时： CPI x CPU时钟周期<br>MIPS 每秒可以执行多少百万条指令</p>
+<p>数据通路带宽：数据总线一次所能并行传送信息的位数<br>吞吐量：系统在单位时间内处理请求的数量<br>响应时间：用户向计算机发出请求，到系统对该请求做出响应并获得它所需要的结果的等待时间</p>
+<h1 id="2-进位计数法"><a href="#2-进位计数法" class="headerlink" title="2. 进位计数法"></a>2. 进位计数法</h1><h2 id="2-1-BCD-码"><a href="#2-1-BCD-码" class="headerlink" title="2.1 BCD 码"></a>2.1 BCD 码</h2><p>BCD 码：4位二进制数表示1位十进制数，使二进制与十进制之间的转换得以快捷的进行。</p>
+<p><strong>8421码</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0000</td>
+<td align="center">0001</td>
+<td align="center">0010</td>
+<td align="center">0011</td>
+<td align="center">0100</td>
+<td align="center">0101</td>
+<td align="center">0110</td>
+<td align="center">0111</td>
+<td align="center">1000</td>
+<td align="center">1001</td>
+</tr>
+</tbody></table>
+<p>5+8&#x3D;13<br>0101+1000&#x3D;1101, 1101+0110&#x3D;0001 0011&#x3D;13(加6强行进制)</p>
+<p><strong>余3码</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0011</td>
+<td align="center">0100</td>
+<td align="center">0101</td>
+<td align="center">0110</td>
+<td align="center">0111</td>
+<td align="center">1000</td>
+<td align="center">1001</td>
+<td align="center">1010</td>
+<td align="center">1011</td>
+<td align="center">1100</td>
+</tr>
+</tbody></table>
+<p><strong>2421码</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0000</td>
+<td align="center">0001</td>
+<td align="center">0010</td>
+<td align="center">0011</td>
+<td align="center">0100</td>
+<td align="center">1011</td>
+<td align="center">1100</td>
+<td align="center">1101</td>
+<td align="center">1110</td>
+<td align="center">1111</td>
+</tr>
+</tbody></table>
+<p>大端模式：存储单元内先存储高位字节、后存储低位字节的顺序<br>小端模式：存储单元内先存储低位字节、后存储高位字节的顺序</p>
+<p>字符串：ABCDEFGH</p>
+<p>大端模式：</p>
+<p>A B C D<br>E F G H</p>
+<p>小端模式：</p>
+<p>D C B A<br>H G F E</p>
+<h2 id="2-2-校验"><a href="#2-2-校验" class="headerlink" title="2.2 校验"></a>2.2 校验</h2><p>码距：两个合法码字对应位上数字的不同位的个数</p>
+<p>奇偶校验码：保证一段数据中出现奇数&#x2F;偶数个1</p>
+<p>海明码：k+n 位</p>
+<p>循环冗余校验码 CRC：K+R位，模2余法，余数</p>
+<p>[X]_补 –&gt; [-X] _补 连同符号位一起取反加1</p>
+<p>补码: 正负数的相加，-2^n ~ 2^n-1, -1~ 1-2^-n<br>-2^n:1,0000, -1:1,0000</p>
+
+
+<p>移码：符号位取反的补码，为了保证浮点数的机器0为全0，易于比较大小</p>
+<h2 id="2-3-符号数"><a href="#2-3-符号数" class="headerlink" title="2.3 符号数"></a>2.3 符号数</h2><h3 id="2-3-1-溢出"><a href="#2-3-1-溢出" class="headerlink" title="2.3.1 溢出"></a>2.3.1 溢出</h3><p>设A的符号位是A_s，B的符号位是B_s,结果的符号位是V_s, V&#x3D;A_s B_s <del>V_s+</del>(A_s B_s)V_s<br>如果V&#x3D;0，表示无溢出，如果V&#x3D;1，表示有溢出。</p>
+<p>双符号位：00表示正，11表示负，低位符号位参与移位，高位符号位表示符号</p>
+<h3 id="2-3-2-乘法"><a href="#2-3-2-乘法" class="headerlink" title="2.3.2 乘法"></a>2.3.2 乘法</h3><p>原码一位乘法：ACC, MQ：数值位 加法+右移，符号位：亦或<br>补码一位乘法：Booth算法</p>
+<h3 id="2-3-3-强制类型转换"><a href="#2-3-3-强制类型转换" class="headerlink" title="2.3.3 强制类型转换"></a>2.3.3 强制类型转换</h3><p>有符号数&lt;–&gt;无符号数：不改变数据内容，改变解释方式<br>长位–&gt;短位：高位截断，保留低位<br>短–&gt;长: 符号扩展(负数补1，正数补0)</p>
+<h3 id="2-3-4-除法"><a href="#2-3-4-除法" class="headerlink" title="2.3.4 除法"></a>2.3.4 除法</h3><p>原码不恢复余数法：<br>被除数减去除数 |x|+[-| y |]_补，若结果为正，商1，左移，再减去除数；若结果为负，商0，左移，再加上除数。若最终余数为负，需恢复余数。</p>
+<p>补码加减交替法：被除数和除数同号，则被除数减去除数；异号则被除数加上除数。余数和除数同号，商1，余数左移1位减去除数；余数和除数异号，商0，余数左移1位加上除数，重复n次。商末位恒置1.</p>
+<h2 id="2-4-浮点数"><a href="#2-4-浮点数" class="headerlink" title="2.4 浮点数"></a>2.4 浮点数</h2><p>阶码：常用补码或者移码表示<br>尾数：常用原码或者补码表示</p>
+<p>规格化浮点数： 1&#x2F;2&lt;&#x3D;|M|&lt;&#x3D;1，移码+原码，隐藏1</p>
+<p>int-&gt;float：可能损失精度<br>float-&gt;int：可能溢出以及损失精度</p>
+<h2 id="2-5-基本逻辑符号"><a href="#2-5-基本逻辑符号" class="headerlink" title="2.5 基本逻辑符号"></a>2.5 基本逻辑符号</h2><p>运算器：</p>
+<p>MQ<br>ACC<br>ALU<br>X<br>PSW</p>
+<h3 id="2-5-1-加法器"><a href="#2-5-1-加法器" class="headerlink" title="2.5.1 加法器"></a>2.5.1 加法器</h3><p>一位全加器：</p>
+<p>A_i, B_i, C_{i-1} –&gt; S_i, C_i</p>
+<p>S_i: 输入中有奇数个1 (异或)<br>C_i&#x3D;(A+B)C_{i-1}+AB: A和B中有一个1且C为1 或者 A和B都为1 才产生进位</p>
+<p>串行加法器：只有一个全加器，逐位进行计算<br>并行加法器：串行进位的并行加法器、并行进位的并行加法器、4位CLA加法器(单级先行进位方式、多级先行进位方式)</p>
+<h1 id="3-存储系统"><a href="#3-存储系统" class="headerlink" title="3. 存储系统"></a>3. 存储系统</h1><p>存储器和CPU的协同工作：</p>
+<ol>
+<li>存储器的简单模型以及寻址的概念</li>
+<li>主存与CPU的连接</li>
+<li>双口RAM和多模块存储器</li>
+<li>高速缓冲存储器</li>
+<li>虚拟存储器</li>
+</ol>
+<p>半导体存储器：</p>
+<ol>
+<li>静态SRAM、动态DRAM的工作原理</li>
+</ol>
+<h2 id="3-1-存储系统"><a href="#3-1-存储系统" class="headerlink" title="3.1 存储系统"></a>3.1 存储系统</h2><p>层次化结构：CPU–Cache–主存–辅存</p>
+<h2 id="3-2-半导体存储芯片"><a href="#3-2-半导体存储芯片" class="headerlink" title="3.2 半导体存储芯片"></a>3.2 半导体存储芯片</h2><p>地址线– 译码驱动–存储矩阵–读写电路–数据线<br>片选线–读写控制线</p>
+<p>地址线：单向，10位<br>数据线：双向，4位。2^10*4位<br>片选线：选择芯片</p>
+<p>易失性：静态SRAM和动态DRAM</p>
+<p>DRAM的刷新：</p>
+<p>RAM 读写周期：地址线–片选线–数据线</p>
+<p>只读ROM：</p>
+<h2 id="3-3-主存连接原理"><a href="#3-3-主存连接原理" class="headerlink" title="3.3 主存连接原理"></a>3.3 主存连接原理</h2><p>总容量 1KB</p>
+<p>按字节寻址：1K个单元，每个单元1B<br>按字寻址：256个单元，每个单元4B<br>按半字寻址：512个单元，每个单元2B<br>按双字寻址：128个单元，每个单元8B</p>
+<p>主存容量扩展–位扩展(8个1Kx1位–&gt;1Kx8位)、字扩展(译码器：8个1Kx8位–&gt;8Kx8位)</p>
+<h2 id="3-4-双口RAM和多模块存储器"><a href="#3-4-双口RAM和多模块存储器" class="headerlink" title="3.4 双口RAM和多模块存储器"></a>3.4 双口RAM和多模块存储器</h2><p>存储器加快读写时间</p>
+<p>双口RAM：空间并行<br>多模块存储器：时间并行，多体并行存储器，流水线</p>
+<h2 id="3-5-高速缓冲存储器"><a href="#3-5-高速缓冲存储器" class="headerlink" title="3.5 高速缓冲存储器"></a>3.5 高速缓冲存储器</h2><p>高速缓冲存储器：组相联映射：按号分组，组内随意放，某一主存块j按模Q映射到缓存的第i组的任意一块</p>
+<p>地址： 主存字块标记，组地址，字块内地址</p>
+<p>替换算法： 近期最少使用算法(LRU), 最不经常使用算法(LFU)</p>
+<p>写策略：写回法+写分配法、全写法+非写分配法</p>
+<h2 id="3-6-虚拟存储器"><a href="#3-6-虚拟存储器" class="headerlink" title="3.6 虚拟存储器"></a>3.6 虚拟存储器</h2><p>段页式虚拟存储器：段号+段内页号+页内地址</p>
+<h1 id="4-指令系统"><a href="#4-指令系统" class="headerlink" title="4. 指令系统"></a>4. 指令系统</h1><p>指令格式<br>指令的寻址方式<br>CISC和RISC</p>
+<h2 id="4-1-指令格式"><a href="#4-1-指令格式" class="headerlink" title="4.1 指令格式"></a>4.1 指令格式</h2><p>指令基本格式<br>地址码的个数<br>定长操作码和扩展操作码<br>操作类型</p>
+<p><strong>指令基本格式</strong></p>
+<p>指令格式：操作码字段(OP), 地址码字段(A)</p>
+<p>地址码字段(A)：四地址指令，三地址指令，二地址指令，一地址指令，零地址指令</p>
+<p><strong>扩展操作码</strong></p>
+<p>15条四地址指令：xxxx,xxxx,xxxx,xxxx,xxxx<br>15条三地址指令：1111,xxxx,xxxx,xxxx,xxxx<br>15条二地址指令：1111,1111,xxxx,xxxx,xxxx<br>15条一地址指令：1111,1111,1111,xxxx,xxxx<br>16条零地址指令：1111,1111,1111,1111,xxxx</p>
+<p><strong>操作类型</strong></p>
+<p>转移操作：陷阱与陷阱指令</p>
+<h2 id="4-2-寻址方式"><a href="#4-2-寻址方式" class="headerlink" title="4.2 寻址方式"></a>4.2 寻址方式</h2><p>寻址方式：</p>
+<ol>
+<li>指令寻址</li>
+<li>数据寻址</li>
+</ol>
+<p><strong>指令寻址</strong></p>
+<p>程序计数器PC给出：PC+1<br>转移指令：跳跃寻址</p>
+<p><strong>数据寻址</strong></p>
+<p>寻址特征+形式地址：直接寻址、间接寻址、寄存器寻址(R)、偏移寻址、堆栈寻址</p>
+<p>偏移寻址：基址寻址(基址寄存器)、变址寻址(变址寄存器)、相对寻址(程序计数器)</p>
+<h2 id="4-3-CISC和RISC"><a href="#4-3-CISC和RISC" class="headerlink" title="4.3 CISC和RISC"></a>4.3 CISC和RISC</h2><p>CISC：一条指令完成一个复杂的基本功能，x86<br>RISC：一条指令完成一个基本功能，ARM，手机、平板</p>
+<h1 id="5-中央处理器"><a href="#5-中央处理器" class="headerlink" title="5. 中央处理器"></a>5. 中央处理器</h1><p>CPU的功能和结构<br>指令执行过程<br>数据通路的功能和基本结构<br>控制器的功能和工作原理<br>指令流水线</p>
+<h2 id="5-1-CPU的功能和结构"><a href="#5-1-CPU的功能和结构" class="headerlink" title="5.1 CPU的功能和结构"></a>5.1 CPU的功能和结构</h2><p>CPU&#x3D;运算器+控制器</p>
+<p>控制器的功能：取指令，分析指令，执行指令，中断处理<br>运算器：算术逻辑单元、通用寄存器组、暂存寄存器(主存的数据)</p>
+<h2 id="5-2-指令执行过程"><a href="#5-2-指令执行过程" class="headerlink" title="5.2 指令执行过程"></a>5.2 指令执行过程</h2><p>时钟周期：<br>机器周期：若干个时钟周期<br>指令周期：若干个机器周期，取指周期+间址周期+执行周期+中断周期</p>
+<p>数据流：数据总线+地址总线+控制总线</p>
+<p>指令执行方案：流水线方案</p>
+<h2 id="5-3-数据通路的功能和基本结构"><a href="#5-3-数据通路的功能和基本结构" class="headerlink" title="5.3 数据通路的功能和基本结构"></a>5.3 数据通路的功能和基本结构</h2><p>数据通路:数据在功能部件之间传送的路径<br>系统总线、内部总线</p>
+<p>CPU内部单总线<br>CPU内部多总线<br>专用数据通路方式</p>
+<p>主存数据寄存器MDR、主存地址寄存器MAR、程序寄存器PC、指令分析器IR、累加寄存器ACC</p>
+<h2 id="5-4-控制器的功能和工作原理"><a href="#5-4-控制器的功能和工作原理" class="headerlink" title="5.4 控制器的功能和工作原理"></a>5.4 控制器的功能和工作原理</h2><p>控制器的功能：</p>
+<p>从主存中取出一条指令<br>对指令进行译码<br>指挥并控制CPU、主存等设备之间的数据流动方向</p>
+<p>CU的设计：硬布线、微程序 ROM</p>
+<p>CPU控制方式：同步控制方式、异步控制方式<br>一条机器指令对应一个微程序<br>微程序：ROM、微指令，下地址</p>
+<p>IF：取址<br>ID：译码<br>EX：执行<br>M：数据<br>WB：写回</p>
+<p>影响流水线的因素：结构相关、数据相关、控制相关</p>
+<h1 id="6-总线"><a href="#6-总线" class="headerlink" title="6. 总线"></a>6. 总线</h1><p>总线概述<br>总线仲裁<br>总线操作与定时<br>总线标准</p>
+<h2 id="6-1-总线概述"><a href="#6-1-总线概述" class="headerlink" title="6.1 总线概述"></a>6.1 总线概述</h2><p>总线：一组能为多个部件时共享的公共信息传送线路</p>
+<p>总线：片内总线、系统总线、通信总线</p>
+<p>系统总线：单总线(系统总线)、双总线(I&#x2F;O总线)、三总线(I&#x2F;O总线，DMA总线)、四总线(桥，CPU总线、系统总线、高速总线、扩充总线)</p>
+<p>总线仲裁：集中仲裁方式</p>
+<p>即插即用、热插拔</p>
+<h1 id="7-输入输出系统"><a href="#7-输入输出系统" class="headerlink" title="7. 输入输出系统"></a>7. 输入输出系统</h1><p>接口–端口</p>
+<p>DMA</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/19/Principles%20of%20Computer%20Composition/" data-id="cla55fgd7001mwka79mxu8vt8" data-title="计算机组成原理" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/408/" rel="tag">408</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/20/TCP_illustrated_1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          TCP_illustrated
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/13/Sharelatex/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Sharelatex</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/23/python-100-days/">python_100_days</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/data-VOS/">data_VOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/TVOS/">TVOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/java/">java参考</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

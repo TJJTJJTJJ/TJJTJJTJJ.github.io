@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>markdown-math | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前言: 因为最近经常用到markdown写数学公式，每次都查感觉有点啰嗦，所以做个简单小结，把平常用的做个记录。这个博客根据平时自己常用到的进行动态增加。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markdown-math">
+<meta property="og:url" content="http://example.com/2018/12/03/markdown-math/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言: 因为最近经常用到markdown写数学公式，每次都查感觉有点啰嗦，所以做个简单小结，把平常用的做个记录。这个博客根据平时自己常用到的进行动态增加。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-12-03T02:17:02.000Z">
+<meta property="article:modified_time" content="2020-09-07T15:21:08.693Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="math">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-markdown-math" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/12/03/markdown-math/" class="article-date">
+  <time class="dt-published" datetime="2018-12-03T02:17:02.000Z" itemprop="datePublished">2018-12-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/markdown/">markdown</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      markdown-math
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>前言: 因为最近经常用到markdown写数学公式，每次都查感觉有点啰嗦，所以做个简单小结，把平常用的做个记录。这个博客根据平时自己常用到的进行动态增加。</p>
+<span id="more"></span>
+
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 2019-01-18: hexo更换渲染引擎，详见下文</li>
+<li><input checked="" disabled="" type="checkbox"> 2018-12-27: 使用<a target="_blank" rel="noopener" href="https://katex.org/docs/supported.html">Katex</a></li>
+<li><input checked="" disabled="" type="checkbox"> 2018-12-27：<a target="_blank" rel="noopener" href="http://www.mohu.org/info/symbols/symbols.htm">一份不太简单的LATEX2e介绍</a></li>
+<li><input checked="" disabled="" type="checkbox"> 2019-05-24: \mathop {argmin}_{a} $\mathop {argmin} _{a}$</li>
+</ul>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://wangcong.info/article/MarkdownWithMath.html">https://wangcong.info/article/MarkdownWithMath.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/deepinC/article/details/81103326">https://blog.csdn.net/deepinC/article/details/81103326</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/HaleyPKU/article/details/80341932">https://blog.csdn.net/HaleyPKU/article/details/80341932</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zybuluo.com/fyywy520/note/82980">https://www.zybuluo.com/fyywy520/note/82980</a></p>
+<h1 id="1-公式使用参考"><a href="#1-公式使用参考" class="headerlink" title="1. 公式使用参考"></a>1. 公式使用参考</h1><h2 id="1-1-插入公式"><a href="#1-1-插入公式" class="headerlink" title="1.1 插入公式"></a>1.1 插入公式</h2><p>插入公式分为行中公式，独立公式和自动编号公式</p>
+<p>1.行中公式 $ a&#x3D;b $</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">数学公式 $</span></span><br></pre></td></tr></table></figure>
+
+<p>2.独立公式 $$ a&#x3D;b $$</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">$ 数学公式 $$</span></span><br></pre></td></tr></table></figure>
+
+<p>3.编号公式<br>$$ a&#x3D;b \tag {1} $$</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">$ 数学公式 \tag &#123;1&#125; $$</span></span><br></pre></td></tr></table></figure>
+
+<p>由公式$(1)$可以得出结论</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由公式$(1)$可以得出结论</span><br></pre></td></tr></table></figure>
+
+<p>4.自动编号公式<br>自动编号公式在github上显示不出来，原则上是可以的，推荐使用手动编号。<br>$$<br>\begin{equation}<br>x^n+y^n&#x3D;z^n<br>\label{eq:afa}<br>\end{equation}<br>$$</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;equation&#125;</span><br><span class="line">数学公式</span><br><span class="line">\label&#123;eq:当前公式名&#125;</span><br><span class="line">\end&#123;equation&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.自动编号公式的引用方法</p>
+<p>在公式 $$\eqref{eq:wwqr}$$ 中，我们看到了这个被自动编号的公式。<br>貌似没有成功</p>
+<p>6.单个公式换行</p>
+<p>单个公式很长的时候需要换行，但仅允许生成一个编号时，可以用split标签包围公式代码，在需要转行的地方使用\，每行需要使用1个&amp;来标识对齐的位置，结束后可使用\tag{…}标签编号。</p>
+<p>$$<br>\begin{split}<br>a &amp;&#x3D; b \<br>c &amp;&#x3D; d \<br>e &amp;&#x3D; f<br>\end{split}\tag{1.2}<br>$$</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">$</span></span><br><span class="line">\begin&#123;split&#125;</span><br><span class="line">a &amp;= b \\</span><br><span class="line">c &amp;= d \\</span><br><span class="line">e &amp;= f </span><br><span class="line">\end&#123;split&#125;\tag&#123;1.3&#125;</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">$</span></span><br></pre></td></tr></table></figure>
+
+<p>7.多行的独立公式</p>
+<p>有时候需要罗列多个公式，可以用eqnarray*标签包围公式代码，在需要转行的地方使用\，每行需要使用2个&amp;来标识对齐位置，两个&amp;…&amp;号之间的是公式间对齐的位置，每行公式后可使用\tag{…}标签编号：</p>
+<p>github貌似对于多行公式显示不出来。</p>
+<p>$$\begin{eqnarray*}<br>x^n+y^n &amp;&#x3D;&amp; z^n \tag{1.4} \<br>x+y &amp;&#x3D;&amp; z \tag{1.5}<br>\end{eqnarray*}$$</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">$</span></span><br><span class="line">\begin&#123;eqnarray*&#125;</span><br><span class="line">x^n+y^n &amp;=&amp; z^n \tag&#123;1.4&#125; \\</span><br><span class="line">x+y &amp;=&amp; z \tag&#123;1.5&#125;</span><br><span class="line">\end&#123;eqnarray*&#125;</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">$</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-符号"><a href="#1-2-符号" class="headerlink" title="1.2 符号"></a>1.2 符号</h2><table>
+<thead>
+<tr>
+<th align="center">输入</th>
+<th align="center">显示</th>
+<th align="center">输入</th>
+<th align="center">显示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">x^y</td>
+<td align="center">$x^y$</td>
+<td align="center">x_y</td>
+<td align="center">$x_y$</td>
+</tr>
+<tr>
+<td align="center">\sideset{^1_2}{^3_4}\bigotimes</td>
+<td align="center">$\sideset{^1_2}{^3_4}\bigotimes$</td>
+<td align="center">\langle</td>
+<td align="center">&lt;</td>
+</tr>
+<tr>
+<td align="center">\lceil</td>
+<td align="center">$\lceil$</td>
+<td align="center">\rceil</td>
+<td align="center">$\rceil$</td>
+</tr>
+<tr>
+<td align="center">\lfloor</td>
+<td align="center">$\lfloor$</td>
+<td align="center">\frac{a}{b}</td>
+<td align="center">$\frac{a}{b}$</td>
+</tr>
+<tr>
+<td align="center">\sqrt[2]{3}</td>
+<td align="center">$\sqrt[2]{3}$</td>
+<td align="center">\alpha,\gamma</td>
+<td align="center">$\alpha$ $\gamma$</td>
+</tr>
+<tr>
+<td align="center">\frac{a}{b}</td>
+<td align="center">$\frac{a}{b}$</td>
+<td align="center">\sum_{n&#x3D;1}^N{3n}</td>
+<td align="center">$\sum_{n&#x3D;1}^N{3n}$</td>
+</tr>
+<tr>
+<td align="center">\prod_{n&#x3D;1}^N{3n}</td>
+<td align="center">$\prod_{n&#x3D;1}^N{3n}$</td>
+<td align="center">\sqrt[2]{5}</td>
+<td align="center">$\sqrt[2]{5}$</td>
+</tr>
+<tr>
+<td align="center">\int^5_1{f(x)}{\rm d}x</td>
+<td align="center">$\int^5_1{f(x)}{\rm d}x$</td>
+<td align="center">\iint^5_1{f(x)}{\rm d}x</td>
+<td align="center">$\iint^5_1{f(x)}{\rm d}x$</td>
+</tr>
+<tr>
+<td align="center">+\infty</td>
+<td align="center">$+\infty$</td>
+<td align="center">-\infty</td>
+<td align="center">$-\infty$</td>
+</tr>
+<tr>
+<td align="center">\lim_{n\rightarrow+\infty} n</td>
+<td align="center">$\lim_{n\rightarrow+\infty} n$</td>
+<td align="center">\in</td>
+<td align="center">$\in$</td>
+</tr>
+<tr>
+<td align="center">\geq,\leq</td>
+<td align="center">$\geq,\leq$</td>
+<td align="center">\subset,\supset</td>
+<td align="center">$\subset,\supset$</td>
+</tr>
+<tr>
+<td align="center">\pm,\cdot</td>
+<td align="center">$\pm,\cdot$</td>
+<td align="center">\times,\div</td>
+<td align="center">$\times,\div$</td>
+</tr>
+<tr>
+<td align="center">\not&#x3D;,\not&lt;</td>
+<td align="center">$\not&#x3D;,\not&lt;$</td>
+<td align="center">\not\supset</td>
+<td align="center">$\not\supset$</td>
+</tr>
+<tr>
+<td align="center">\log_2{18}</td>
+<td align="center">$\log_2{18}$</td>
+<td align="center">\parallel</td>
+<td align="center">$\parallel$</td>
+</tr>
+<tr>
+<td align="center">\sum_{n&#x3D;1}^N{n}</td>
+<td align="center">$\sum_{n&#x3D;1}^N{n}$</td>
+<td align="center">\prod{n}</td>
+<td align="center">$\prod{n}$</td>
+</tr>
+<tr>
+<td align="center">\pm,\cdot,\times,\div</td>
+<td align="center">$\pm,\cdot,\times,\div$</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="1-3-希腊字母"><a href="#1-3-希腊字母" class="headerlink" title="1.3 希腊字母"></a>1.3 希腊字母</h2><table>
+<thead>
+<tr>
+<th align="center">输入</th>
+<th align="center">显示</th>
+<th align="center">输入</th>
+<th align="center">显示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">\alpha,\beta,\gamma</td>
+<td align="center">$\alpha,\beta,\gamma$</td>
+<td align="center">\delta,\epsilon, \varepsilon</td>
+<td align="center">$\delta,\epsilon, \varepsilon$</td>
+</tr>
+<tr>
+<td align="center">\theta,\lambda,\mu</td>
+<td align="center">$\theta,\lambda,\mu$</td>
+<td align="center">\phi,\varphi,\sigma</td>
+<td align="center">$\phi,\varphi,\sigma$</td>
+</tr>
+<tr>
+<td align="center">\Sigma</td>
+<td align="center">$\Sigma$</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="1-4-空心字母与Fraktur字母"><a href="#1-4-空心字母与Fraktur字母" class="headerlink" title="1.4 空心字母与Fraktur字母"></a>1.4 空心字母与Fraktur字母</h2><table>
+<thead>
+<tr>
+<th align="center">输入</th>
+<th align="center">显示</th>
+<th align="center">输入</th>
+<th align="center">显示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">\mathbb{A}</td>
+<td align="center">$\mathbb{A}$</td>
+<td align="center">\mathfrak{B}</td>
+<td align="center">$\mathfrak{B}$</td>
+</tr>
+</tbody></table>
+<h2 id="1-5-分段函数"><a href="#1-5-分段函数" class="headerlink" title="1.5 分段函数"></a>1.5 分段函数</h2><p>$$<br>P_{r-j}&#x3D;<br> \begin{cases}<br>   0 &amp;\mbox{if $r-j$ is odd}\<br>   r!,(-1)^{(r-j)&#x2F;2} &amp;\mbox{if $r-j$ is even}<br>   \end{cases}<br>$$</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">$</span></span><br><span class="line">P_&#123;r-j&#125;=</span><br><span class="line"> \begin&#123;cases&#125;</span><br><span class="line">   0 &amp;\mbox&#123;if $r-j$ is odd&#125;\\</span><br><span class="line">   r!\,(-1)^&#123;(r-j)/2&#125; &amp;\mbox&#123;if $r-j$ is even&#125;</span><br><span class="line">   \end&#123;cases&#125;</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">$</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-6-多行对齐公式"><a href="#1-6-多行对齐公式" class="headerlink" title="1.6 多行对齐公式"></a>1.6 多行对齐公式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;align&#125;</span><br><span class="line">h(x) =&amp; \frac&#123;<span class="number">1</span>&#125;&#123;\int_xt(x)\mathrm&#123;d&#125;x&#125; \tag&#123;<span class="number">1</span>&#125;\\</span><br><span class="line">f(x) =&amp; \frac&#123;<span class="number">1</span>&#125;&#123;\int_x\eta(x)\mathrm&#123;d&#125;x&#125;g(x)\tag&#123;<span class="number">2</span>&#125;</span><br><span class="line">\end&#123;align&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-LaTex公式渲染引擎"><a href="#2-LaTex公式渲染引擎" class="headerlink" title="2. LaTex公式渲染引擎"></a>2. LaTex公式渲染引擎</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a9f26f4cd4e6">https://www.jianshu.com/p/a9f26f4cd4e6</a></p>
+<p>针对Hexo渲染LaTex公式的时候，下划线总是容易被渲染成斜体，所以更换Hexo默认的Markdown渲染引擎。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
+
+<p>更换渲染引擎只能保证块内公式的下划线的问题，对于行内公式，需要修改\node_modules\kramed\lib\rules\inline.js。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//  em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span><br><span class="line">  em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span><br></pre></td></tr></table></figure>
+
+<p>对于两个连续的花括号，需要中间加个空格。</p>
+<p>对于2019-01-18之前已经发过的博客文章，如公式不进行主动修复。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/03/markdown-math/" data-id="cla55fgdl003ywka7fpjn0g0f" data-title="markdown-math" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/" rel="tag">math</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/03/github-markdown-mathjax/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          github-markdown-mathjax
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/29/person-reid-transfer-learning/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">person-reid-transfer-learning</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/23/python-100-days/">python_100_days</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/data-VOS/">data_VOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/TVOS/">TVOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/java/">java参考</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

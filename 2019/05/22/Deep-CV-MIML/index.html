@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Deep CV-MIML | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="0. 前言 paper: CVPR2019 Weakly Supervised Person Re-Identification code:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep CV-MIML">
+<meta property="og:url" content="http://example.com/2019/05/22/Deep-CV-MIML/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="0. 前言 paper: CVPR2019 Weakly Supervised Person Re-Identification code:">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-05-22T02:26:35.000Z">
+<meta property="article:modified_time" content="2019-05-25T09:17:05.233Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="person re-id">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Deep-CV-MIML" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/05/22/Deep-CV-MIML/" class="article-date">
+  <time class="dt-published" datetime="2019-05-22T02:26:35.000Z" itemprop="datePublished">2019-05-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/person-re-id/">person re-id</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Deep CV-MIML
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.03832">CVPR2019 Weakly Supervised Person Re-Identification</a></li>
+<li>code:</li>
+</ul>
+<span id="more"></span>
+
+<p>这篇论文主要的创新点是：不再需要在 video 的每一帧都给出行人的位置和 id，而是直接赋予一段 video 一个 video-level label，即这段 video 中有哪些人。主要目的也是为了降低标注成本。有点重新定义行人重识别问题的意思。我觉得很有意思，也更贴近实际一些。</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>在传统的行人重识别设定中，每张图片表示用方框圈出来的行人。因此，作者提出了 <strong>weakly supervised setting</strong>，即在训练阶段，只有 video-level label，因此此时每段 video 中有多个行人，有个标签，即 multi-instance multi-label(<strong>MIML</strong>)。</p>
+<p>**订正(2019-05-24)**：论文中的 train set 分为：probe set 和 gallery set，probe set 每个行人的一系列图片组成一个 bag ，有准确的标签，gallery set 一段 video 组成一个 bag，取出这段 video 每一帧自动检测出的行人图片，有 video level label，但是不知道具体哪个行人对应哪个标签。</p>
+<p>提出：</p>
+<ul>
+<li>intra-bag alignment</li>
+<li>cross-view bag alignment</li>
+</ul>
+
+
+<p>基本定义：</p>
+<ul>
+<li>gallery set 中的 every video clip 为一个 bag</li>
+<li>每个 bag 包含多个行人的图片，并标记 video-level label</li>
+<li>probe set 中是经过手工标记的图片，为了统一，也视这些图片为一个 bag</li>
+</ul>
+<p>解决的问题：</p>
+<ul>
+<li>每个 bag 中包含相同的行人: intra-bag alignment</li>
+<li>bag 与 bag （跨摄像头）之间也包含相同的行人: cross-view bag alignment</li>
+</ul>
+<p>现有的 MIML 直接应用到 person re-id 中存在的问题</p>
+<ul>
+<li>现有的 MIML 忽略了 intra-bag variation，即 bag 内会有相同类别的实例</li>
+<li>现有的 MIML 假设 instance-level label 是高度相关的，但是 person re-id 中的行人都相互独立的</li>
+<li>现有的 MIML 没有考虑到 bag 之间的 (cross-view) 相关性</li>
+</ul>
+<h2 id="2-The-Proposed-Approach"><a href="#2-The-Proposed-Approach" class="headerlink" title="2. The Proposed Approach"></a>2. The Proposed Approach</h2><h3 id="2-1-Problem-Statement-and-Notation"><a href="#2-1-Problem-Statement-and-Notation" class="headerlink" title="2.1 Problem Statement and Notation"></a>2.1 Problem Statement and Notation</h3><p>在 weakly supervised person re-id setting 中，不再是以图搜图，而是以图搜视频，或者以视频搜视频，即给定同一个行人组成的视频，在只经过自动画框的视频中找出这个行人。</p>
+<table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$C$</td>
+<td align="left">identities</td>
+</tr>
+<tr>
+<td align="left">$V$</td>
+<td align="left">camera views</td>
+</tr>
+<tr>
+<td align="left">$\tilde{C}$</td>
+<td align="left">$\tilde{C}&#x3D;C+1$</td>
+</tr>
+<tr>
+<td align="left">$\cal{X}$</td>
+<td align="left">the training set</td>
+</tr>
+<tr>
+<td align="left">$N_{\cal{X}}$</td>
+<td align="left">$N_{\cal{X}}$ video in the training set</td>
+</tr>
+<tr>
+<td align="left">$\cal{X}_p, \cal{X}_g$</td>
+<td align="left">probe set and gallery set,and $\cal{X}_p + \cal{X}_g&#x3D;\cal{X}$</td>
+</tr>
+<tr>
+<td align="left">$\cal{X}_p&#x3D;\lbrace (X_b, y_b, v_b) \rbrace _{b&#x3D;1}^{N_p}$</td>
+<td align="left">probe set</td>
+</tr>
+<tr>
+<td align="left">$\cal{X}_g&#x3D;\lbrace (X_b, y_b, v_b) \rbrace _{b&#x3D;1}^{N_g}$</td>
+<td align="left">gallery set</td>
+</tr>
+<tr>
+<td align="left">$v_b \in \lbrace 1,2,…,V \rbrace$</td>
+<td align="left">摄像头</td>
+</tr>
+<tr>
+<td align="left">$y_b&#x3D;[y_b^0, y_b^1,…, y_b^C]\in\lbrace 0,1 \rbrace^{\tilde{C}}$</td>
+<td align="left">行人标签</td>
+</tr>
+<tr>
+<td align="left">$X_b&#x3D;\lbrace x_{b,1}, x_{b,2},…, x_{b,n_b} \rbrace $</td>
+<td align="left">多实例</td>
+</tr>
+<tr>
+<td align="left">$x_{b,i}&#x3D;f_e(I_b;\theta)\in \mathbb{R}^d$</td>
+<td align="left">图片 $I_b$，特征提取方程 $f_e(\cdot;\theta)$</td>
+</tr>
+<tr>
+<td align="left">$f_c(\cdot;W)$</td>
+<td align="left">classifier</td>
+</tr>
+<tr>
+<td align="left">$y_{b,i}&#x3D;f_c(x_{b,i};W)$</td>
+<td align="left">分类器</td>
+</tr>
+</tbody></table>
+<p>基本保证每个行人至少在两个摄像头下出现过，并视在 untrimmed videos 中的出现的未知行人为新的一类，即第0类，所以 $\tilde{C}&#x3D;C+1$</p>
+<p>Question: probe set 是图片，gallery set 是视频，那training set 是什么？也是视频吗？ gallery set 和 training set 是一个集合还是完全不同的集合？</p>
+<p>gallery set 中的视频没有经过人工画框，只有 video-level weak label，其中的行人是自动检测出的，没有人工标定行人标签，所以具体到行人对应哪个标签也是未知的。</p>
+<p>probe set 中，each query 由一系列同一个行人的检测图片组成。为了统一，视 probe set 中的 each query 也为一个 bag，此时 video-level 应该是单实例的。</p>
+<p>所以，可以统一为：$\cal{X}&#x3D;\lbrace \cal{X}_p, \cal{X}_g \rbrace$，其中 $\cal{X}_p&#x3D;\lbrace (X_b, y_b, v_b) \rbrace _{b&#x3D;1}^{N_p}$，$\cal{X}_g&#x3D;\lbrace (X_b, y_b, v_b) \rbrace _{b&#x3D;1}^{N_g}$.其中 probe set 的 bag 是单标签的，gallery set 的 bag label 为0时，表示不确定这个行人是否在这个 video 中出现过。</p>
+<p>重新定义问题需要重新定义好多概念。</p>
+<h3 id="2-2-Cross-View-MIML-for-Person-Re-id"><a href="#2-2-Cross-View-MIML-for-Person-Re-id" class="headerlink" title="2.2 Cross-View MIML for Person Re-id"></a>2.2 Cross-View MIML for Person Re-id</h3><h4 id="2-2-1-Weakly-Supervised-Person-Re-id-MIML"><a href="#2-2-1-Weakly-Supervised-Person-Re-id-MIML" class="headerlink" title="2.2.1 Weakly Supervised Person Re-id MIML"></a>2.2.1 Weakly Supervised Person Re-id MIML</h4><p>令 classifier $f_c(\cdot;W)$, 对于 probe set $\mathcal{X}_p$，一个 bag 内的所有实例 $\lbrace x _{b,i} \rbrace _{i&#x3D;1}^{n_b}$ 标签都是一样的 label $y_b$，此时可以可以直接使用交叉熵损失函数。对于 gallery set $\mathcal{X}_g$，共享 weak video-level label $y_b$，很明显这时候不能直接使用交叉熵损失函数，所以 probe set 和 gallery set 需要分开训练。</p>
+<p>对于 <strong>probe set</strong> 中的 bag，可以直接使用 instance-level 交叉熵损失函数。</p>
+<p>$$L_p&#x3D;\frac{1}{N_p}\displaystyle \sum_{X_b \in \mathcal{X}_p} \sum _{i\in \lbrace 1,…,n_b \rbrace} \sum <em>{c\in \lbrace 0,…,C \rbrace} (-y_b^c\log \tilde{y}</em>{b,i}^c) $$</p>
+<p>其中，$y_b^c$ 表示第 b 个 bag 的第 c 类的真实 bag 标签，$\tilde{y}_{b,i}^c$ 表示第 b 个包的第 i 个图片的第 c 类的预测标签。</p>
+<p>Question: probe set 中，一个 bag 是由行人的图片组成的像上面的一样，而 gallery set 中，一个bag的组成图片是一大张，行人在其中只占到很小的比例，明显两个不是一个尺度的，所以(根据 gallery set 的预测函数得出的猜测)猜测 gallery set 在进行训练时，是把每一帧中的行人(已经自动检测出)图片抠出来，然后送入网络，那么 gallery set 中，bag 大小不是表示这个 video 的帧数，而是这段 video 自动检测出来的行人图片个数，如果是这样的话，那怎么解决检测出的未知人(第0类)和丢失的行人。</p>
+<p>对于 <strong>gallery set</strong> 中的 bag，因为是多实例多标签，所以用的方法略微不同，之前没见过，先举个例子解释下。</p>
+<p>假设一个 bag 内有两个图片，label 是三类，即: $X_b&#x3D;\lbrace x_{b,1}, x_{b,2} \rbrace $, $y_b&#x3D;[1,0,1]$，预测标签是 $\tilde{y}_ {b,1}&#x3D;[0.1, 0.2, 0.7], \tilde{y}_{b,2}&#x3D;[0.3, 0.4, 0.3]$，对于每一类，先找出该类预测概率最大的图片，即 $q_1&#x3D;2, q_2&#x3D;2, q_3&#x3D;1$，即第一类和第二类在第二张图片出现的概率最大，第三类在第一张图片出现的概率最大(纵向比较，而非常规意义上的横向比较)，从而得到bag的预测概率 $\tilde{y}&#x3D;[0,3, 0.4, 0.7]$，然后再做个交叉熵。</p>
+<p>Question:其理论基础是什么。</p>
+<p>选择第 c 类后验概率最大的实例，记为 <strong>seed instance</strong> $x_{b, q_c}$，其中 $q_c$ 的定义为：</p>
+<p>$$q_c&#x3D; \mathop{argmax}<em>{i\in \lbrace 1,2,…,n_b \rbrace} \lbrace \tilde{y}</em>{b,i}^c \rbrace $$</p>
+<p>然后定义 bag-level 分类损失:</p>
+<p>$$L_g&#x3D;\frac{1}{N_g}\displaystyle \sum_{X_b \in \mathcal{X}<em>g} \sum <em>{c\in \lbrace 0,…,C \rbrace} (-y_b^c\log \max \lbrace \tilde{y}</em> {b,1}^c, \tilde{y}</em> {b,2}^c, …, \tilde{y}_{b,n_b}^c \rbrace )$$</p>
+<p>从而得到 <strong>MIML classification loss</strong>:<br>$$L_C&#x3D;L_p+L_g$$</p>
+<h3 id="2-2-2-Intra-bag-Alignment"><a href="#2-2-2-Intra-bag-Alignment" class="headerlink" title="2.2.2 Intra-bag Alignment"></a>2.2.2 Intra-bag Alignment</h3>
+
+<p>应该是指一段视频中即一个 bag，因为行人出现在连续的帧中，所以每一帧的行人分布是差不多的，因此可以尽可能地将属于同一个人的图片聚在一起。</p>
+<p>在 gallery set 中，对于第 c 类已经找到 seed instance $x_{b, q_c}$，即对于第 c 类，这张图片比其他图片更像，从而构建一个 group 包含类似第 c 类的图片</p>
+<p>$$G_{b,c}&#x3D;\lbrace p|x_{b,p}\in \mathcal{N}<em>{q_c} \text{ and } \tilde{y}</em>{b,p}^c \ge \gamma \tilde{y} _{b,q_c}^c \rbrace$$</p>
+<p>其中，$\mathcal{N}<em>{q_c}$ 表示 $x</em>{b,q_c}$ 的 K-近邻，$\gamma\in (0, 1)$，上述的公式表示这个 group 中的图片既需要满足在特征上相近，也要满足预测概率大于预定值。</p>
+<p>Question: soft multi-label, ECN 在选择正样本和负样本的时候的构建规则和这个就不太一样，或者说这么多构建最相似的规则，其区别大概在什么地方，特征相似，概率相似。不太懂，可能还是自己见得少吧。</p>
+<p>因此可以得到 <strong>intra-bag alignment loss</strong>:<br>$$L_{IA}&#x3D;\frac{1}{N_{IA}} \displaystyle\sum_{X_b\in \mathcal{X}<em>g} \sum <em>{c\in \lbrace 0,…C \rbrace} \sum <em>{p \in G <em>{b,c}} y_b^c D</em>{KL}(\tilde{y}</em>{b,p}||\tilde{y} <em>{b,q_c})$$<br>$$D</em>{KL}(\tilde{y}</em>{b,p}||\tilde{y} <em>{b,q_c})&#x3D;\sum</em>{c\in\lbrace 0,…,C \rbrace}\tilde{y}</em>{b,p}^c(\log \tilde{y} _{b,p}^c -\log \tilde{y} _{b,q_c}^c)$$</p>
+<p>这个是用KL散度衡量分布一致性。</p>
+<h3 id="2-2-3-Cross-view-Bag-Alignment"><a href="#2-2-3-Cross-view-Bag-Alignment" class="headerlink" title="2.2.3 Cross-view Bag Alignment"></a>2.2.3 Cross-view Bag Alignment</h3><p>intra-bag alignment and cross-view bag alignment 都是在尽量找到同一个行人的不同图片并且使这些图片得到特征相似，预测类别相似。</p>
+
+
+<p>理论上来说，不同 view 下的同一个行人的特征应该也是相似的，因此，对每个行人引入 <strong>distribution prototype</strong>，并且同一个行人的图片特征应该近似 distribution prototype 的特征。公式定义为：第 t 个 epoch 时 第 c 类行人的 distribution prototype 为 $\hat{p}_c^t$:</p>
+<p>$$p_c^t&#x3D;\frac{1}{|V_c|} \sum_{v\in V_c} (\frac{1}{|I_{c,v}|} \sum_{i\in I_{c,v}}\tilde{y}_i )$$<br>$$\hat{p}_c^t&#x3D;\alpha \hat{p}_c^{t-1}+(1-\alpha)p_c^t$$</p>
+<p>其中，$V_c$ 表示所有的 camera view，$I_{c,v}$ 表示在第 v 个 camera view 下第 c 类的所有实例，可以理解成，在 gallery set 中，每个 bag 是一段视频，视频的每一帧是一张大图片，然后从上面扣下来行人图片，即行人图片是指第几个 bag 的第几帧的第几个行人，同时 bag 还有 camera view 信息，即第几个摄像头拍的。</p>
+<p>Question: $I_{c,v}$ 是怎么得到的，在训练阶段， probe set 是可以具体到 instance-level label，在 gallery set 只有 bag-level label，那怎么得出属于同一类的 instance，是通过 $G_{b,c}$ 吗？总感觉怪怪的。</p>
+<p>从而得到对齐损失函数：</p>
+<p>$$L_{CA}&#x3D;\frac{1}{N_{CA}} \sum_{X_b\in(\mathcal{X}_p \bigcup \mathcal{X}_g)} \sum <em>{c\in \lbrace 0,…C \rbrace} \sum <em>{i \in I_c} y_b^c D</em>{KL}(\tilde{y}</em>{b,i}||\hat{p}_c^t)$$</p>
+<p>$I_c$ 表示第 c 类的所有 instance.</p>
+<p>需要注意的是：两次求 KL-散度 都在前面乘以了 bag-level label 用以衡量当前 video 当前类的重要性。</p>
+<p>这两个公式都写的很长哈。而且是那种需要把全部图片遍历一遍才可以计算的那种。</p>
+<h3 id="2-3-Deep-Cross-view-MIML-Model"><a href="#2-3-Deep-Cross-view-MIML-Model" class="headerlink" title="2.3 Deep Cross-view MIML Model"></a>2.3 Deep Cross-view MIML Model</h3><p>作者提出了一个新的 <strong>entropy regularization</strong> term，在 gallery set 中，总是会存在一些 outlier instance，在 intra-bag and cross-view alignment 中远离 data group，为了避免这种情况，设计了个正则项:<br>$$L_E&#x3D;\frac{1}{N_E} \sum_{X_b\in \mathcal{X}_g} \sum _{i\in \lbrace 1,…n_b \rbrace} \sum _{c\in \lbrace 0,…C \rbrace} (-\tilde{y} _{b,i}^c \log \tilde{y} _{b,i}^c ) $$</p>
+<p>这是信息熵公式，应该是想尽可能使预测的概率陡峭，或为1或为0.</p>
+<p>这个公式来得有点突然啊，是有什么实验证明吗？</p>
+<p><strong>Cross-view Multi-label Multi-Instance learning (CV-MIML)</strong>:</p>
+<p>$$L_{CV-MIML}&#x3D;L_C+\delta (L_{IA}+L_{CA}+L{E})$$</p>
+<h3 id="2-4-Implementation-Details"><a href="#2-4-Implementation-Details" class="headerlink" title="2.4 Implementation Details"></a>2.4 Implementation Details</h3><p>实现还是有点意思的，希望看到代码吧。</p>
+<h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/05/22/Deep-CV-MIML/" data-id="cla55fgcx0009wka77d4nbko9" data-title="Deep CV-MIML" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/27/STGAN/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          STGAN
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/17/BNNeck/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">BNNeck</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/23/python-100-days/">python_100_days</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/data-VOS/">data_VOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/TVOS/">TVOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/java/">java参考</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>TCP_illustrated | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="参考资料： http:&#x2F;&#x2F;www.52im.net&#x2F;topic-tcpipvol1.html?mobile&#x3D;no https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Mx411v7rJ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP_illustrated">
+<meta property="og:url" content="http://example.com/2020/09/20/TCP_illustrated_1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="参考资料： http:&#x2F;&#x2F;www.52im.net&#x2F;topic-tcpipvol1.html?mobile&#x3D;no https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Mx411v7rJ">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-20T15:20:26.000Z">
+<meta property="article:modified_time" content="2020-09-22T15:46:01.670Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="408">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-TCP_illustrated_1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/20/TCP_illustrated_1/" class="article-date">
+  <time class="dt-published" datetime="2020-09-20T15:20:26.000Z" itemprop="datePublished">2020-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/408/">408</a>►<a class="article-category-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      TCP_illustrated
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="http://www.52im.net/topic-tcpipvol1.html?mobile=no">http://www.52im.net/topic-tcpipvol1.html?mobile=no</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mx411v7rJ">https://www.bilibili.com/video/BV1Mx411v7rJ</a></p>
+<span id="more"></span>
+
+
+<h1 id="第一章：概述"><a href="#第一章：概述" class="headerlink" title="第一章：概述"></a>第一章：概述</h1><p>应用层：Telnet，FTP，email等<br>运输层：TCP，UDP<br>网络层：IP、ICMP、IGMP<br>链路层：设备驱动程序和接口卡、以太网协议、令牌环、ARP、RARP、PPP、SLIP</p>
+<p>路由器的好处是为不同类型的物理网络提供连接：以太网、令牌环网、点对点的链接和FDDI（光纤分布式数据接口）等等。</p>
+<p>运输层TCP：在不可靠的IP层上提供了一个可靠的运输层。为了提供这种可靠的服务，TCP采用了超时重传、发送和接收端到端的确认分组等机制。<br>网络层IP：提供的是一种不可靠的服务，只是尽可能快地把分组从源结点送到目的结点</p>
+<p>网桥是在链路层上对网络进行互连，而路由器则是在网络层上对网络进行互连</p>
+<p>应用层：消息（message)、<br>传输层：数据段(segment)、TCP报文段：端到端<br>网络层：数据报(datagram)、IP数据报：点到点<br>数据链路层：帧(frame)</p>
+
+
+<p>一般来说， TCP服务器是并发的，而UDP服务器是重复的</p>
+<p>知名端口：1-1023<br>临时端口：1024-5000<br>其他端口：&gt;5000，为其他服务器预留<br>&#x2F;etc&#x2F;services</p>
+<p>全为0和全为1的网络号有其他用途<br>全为0的主机号表示本网络，全为1的主机号表示广播<br>而网络地址中的主机号为0，以指定网络中的所有主机（如以太网，令牌环网）</p>
+<p>网络协议：       第4页 图1-4<br>数据封装过程：    第7页 图1-7<br>网络协议传输过程：第8页 图1-8</p>
+<h1 id="第二章：链路层"><a href="#第二章：链路层" class="headerlink" title="第二章：链路层"></a>第二章：链路层</h1><p>链路层：设备驱动程序和接口卡、以太网协议、令牌环、ARP、RARP</p>
+<p>链路层主要有三个目的：（1）为IP模块发送和接收IP数据报；（2）为ARP模块发送ARP请求和接收ARP应答；（3）为RARP发送RARP请求和接收RARP应答。</p>
+<p>最大传输单元MTU：以太网：1500</p>
+<p>链路层协议：令牌环、点对点PPP、SLIP、loopback协议<br>PPP和SLIP协议更适合于低速链路</p>
+<p>netstat：MTU<br>路径MTU：ICMP的不可到达错误、IP分片、traceroute</p>
+<p>MAC地址</p>
+<h1 id="第三章：IP：网际协议"><a href="#第三章：IP：网际协议" class="headerlink" title="第三章：IP：网际协议"></a>第三章：IP：网际协议</h1><p>IP提供不可靠、无连接的数据报传送服务</p>
+<p>不可靠：不能保证IP数据报一定能到达目的地，简单的错误处理方法：丢弃该数据报并发送ICMP，而不是重传。<br>无连接：发送的数据报没有顺序，并且接收时也没有顺序</p>
+<p>IP地址</p>
+<p>Telnet、Rlogin：要求最小的传输时延<br>FTP：最大的吞吐量<br>网络管理SNMP、路由选择协议：最高可靠性<br>用户网络新闻 NNTP：最小费用</p>
+<p>IP数据报最长：65535字节</p>
+<p>TTL：生存时间字段</p>
+<p>16位首部校验和：反码求和全为1。</p>
+<p>IP校验和只校验20字节的IP报头；<br>而ICMP校验和覆盖整个报文（ICMP报头+ICMP数据）；<br>UDP和TCP校验和不仅覆盖整个报文，而且还有12字节的IP伪首部，包括源IP地址(4字节)、目的IP地址(4字节)、协议(2字节，第一字节补0)和TCP&#x2F;UDP包长(2字节）</p>
+<p>而网络地址中的主机号为0，以指定网络中的所有主机（如以太网，令牌环网）</p>
+<p>Tracerouter </p>
+<h1 id="第四章：ARP协议"><a href="#第四章：ARP协议" class="headerlink" title="第四章：ARP协议"></a>第四章：ARP协议</h1><p>ARP：链路层协议，地址解析协议，通过IP获取MAC</p>
+<p>arp -a命令</p>
+<p>arp高速缓存是有时限的,一般是20分钟(伯克利系统的衍生系统)。</p>
+<h1 id="第五章：RARP"><a href="#第五章：RARP" class="headerlink" title="第五章：RARP"></a>第五章：RARP</h1><p>RARP：逆地址解析协议，链路层协议</p>
+<p>具有本地磁盘的系统引导时，一般是从磁盘上的配置文件中读取 I P地址。但是无盘机，如X终端或无盘工作站，则需要采用其他方法来获得 I P地址。</p>
+<p>R A R P请求以广播方式传送，而R A R P应答一般是单播( u n i c a s t )传送的。</p>
+<p>R A R P的一个缺点就是它使用链路层广播，这种广播通常不会由路由器转发。</p>
+<h1 id="第六章-ICMP：internet控制报文协议"><a href="#第六章-ICMP：internet控制报文协议" class="headerlink" title="第六章 ICMP：internet控制报文协议"></a>第六章 ICMP：internet控制报文协议</h1><p>ICMP：IP层协议</p>
+<p>I C M P经常被认为是 I P层的一个组成部分。它传递差错报文以及其他需要注意的信息。<br>I C M P报文通常被I P层或更高层协议（T C P或U D P）使用。<br>一些I C M P报文把差错报文返回给用户进程。</p>
+<p>ICMP报文：分为查询报文和差错报文</p>
+<p>而ICMP校验和覆盖整个报文（ICMP报头+ICMP数据）：反码求和</p>
+<p>I C M P报文：</p>
+<ul>
+<li>地址掩码请求和应答(查询报文)</li>
+<li>时间戳请求和应答(查询报文)</li>
+<li>不可达端口(差错报文)</li>
+</ul>
+<p>U D P的规则之一是，如果收到一份U D P数据报而目的端口与某个正在使用的进程不相符，那么U D P返回一个I C M P不可达报文。可以用T F T P来强制生成一个端口不可达报文</p>
+<p>I C M P地址掩码请求和应答以及时间戳请求和应答:在I C M P报文中都有标识符和序列号。发送端应用程序在标识字段内存入一个唯一的数值，以区别于其他进程的应答。序列号字段使得客户程序可以在应答和请求之间进行匹配。</p>
+<p>ICMP不可达端口报文包括：导致差错的 I P数据报的首部及后续8个字节</p>
+<p>I C M P地址掩码请求用于无盘系统在引导过程中获取自己的子网掩码，无盘系统获取子网掩码的另一个方法是 B O O T P协议</p>
+<p>ICMP不可达差错（需要分片）–路径MTU：当路由器收到一份需要分片的的数据报，但是在IP首部设置了不分片的标志比特，那么就会返回ICMP不可达差错报文，从而在程序上实现路径MTU的发现。即不停地加大数据报的长度，一直到返回ICMP不可达差错，即为路径MTU。</p>
+<p>tracerout–路径MTU：不停减少数据报的长度，直到能正常通过。</p>
+<p>UDP–路径MTU </p>
+<h1 id="第七章-ICMP的应用–ping程序"><a href="#第七章-ICMP的应用–ping程序" class="headerlink" title="第七章 ICMP的应用–ping程序"></a>第七章 ICMP的应用–ping程序</h1><p>ICMP：IP层协议</p>
+<p>ping对应的是ICMP报文</p>
+<p>U n i x系统在实现p i n g程序时是把I C M P报文中的标识符字段置成发送进程的 I D号。</p>
+<p>序列号从0开始，每发送一次新的回显请求就加 1。p i n g程序打印出返回的每个分组的序列号，允许我们查看是否有分组丢失、失序或重复。</p>
+<p>p i n g程序是对两个T C P &#x2F; I P系统连通性进行测试的基本工具。它只利用 I C M P回显请求和回显应答报文，而不用经过传输层（T C P &#x2F; U D P） 。P i n g服务器一般在内核中实现I C M P的功能。</p>
+<h1 id="第八章-ICMP的应用–traceroute程序"><a href="#第八章-ICMP的应用–traceroute程序" class="headerlink" title="第八章 ICMP的应用–traceroute程序"></a>第八章 ICMP的应用–traceroute程序</h1><p>ICMP：IP层协议</p>
+<p>traceroute：使用UDP、ICMP</p>
+<p>traceroute更适合记录中间路由，补充ping的不足。</p>
+<p>Tr a c e r o u t e程序使用I C M P报文和I P首部中的T T L字段（生存周期） 。T T L字段是由发送端初始设置一个8 bit字段。</p>
+<p>当路由器收到一份I P数据报，如果其T T L字段是0或1，路由器将该数据报丢弃，并给信源机发一份I C M P“超时”信息。Tr a c e r o u t e程序的关键在于包含这份I C M P信息的I P报文的信源地址是该路由器的I P地址。</p>
+<p>traceroute程序的原理：它发送一份T T L字段为1的I P数据报给目的主机。处理这份数据报的第一个路由器将 T T L值减1，丢弃该数据报，并发回一份超时I C M P报文。这样就得到了该路径中的第一个路由器的地址。然后 Tr a c e r o u t e程序发送一份T T L值为2的数据报，这样我们就可以得到第二个路由器的地址。继续这个过程直至该数据报到达目的主机。</p>
+<p>traceroute程序判断目的主机：Tr a c e r o u t e程序发送一份U D P数据报给目的主机，但它选择一个不可能的值作为 U D P端口号（大于30 000） ，使目的主机的任何一个应用程序都不可能使用该端口。因为，当该数据报到达时，将使目的主机的 U D P模块产生一份“端口不可达”错误（见 6 . 5节）的I C M P报文。</p>
+<h1 id="第九章-IP选路"><a href="#第九章-IP选路" class="headerlink" title="第九章 IP选路"></a>第九章 IP选路</h1><p>netstat</p>
+<p>ICMP重定向报文只能由路由器发出，为主机所用,而不是为路由器所用。</p>
+<h1 id="第十章-动态选路协议"><a href="#第十章-动态选路协议" class="headerlink" title="第十章 动态选路协议"></a>第十章 动态选路协议</h1><p>IP选路是静态路由，动态选路协议是动态路由</p>
+<p>内部网关协议IGP：RIP、OSPF、HELLO<br>边际网关协议BGP：</p>
+<p>RIP：选路信息协议，RIP报文包含在UDP报文中，以跳数为度量</p>
+<p>routed程序：支持RIP协议</p>
+<p>OSPF：开放最短路径优先协议：直接使用IP，采用多播</p>
+<p>BGP：基于TCP层，距离向量协议</p>
+<p>CIDR：无类型域间选路</p>
+<p>路由协议不严格属于某个特定层</p>
+<h1 id="第十一章-UDP-用户数据报协议"><a href="#第十一章-UDP-用户数据报协议" class="headerlink" title="第十一章 UDP 用户数据报协议"></a>第十一章 UDP 用户数据报协议</h1><p>UDP校验和：不仅覆盖整个报文，而且还有12字节的IP伪首部，包括源IP地址(4字节)、目的IP地址(4字节)、协议(2字节，第一字节补0)和TCP&#x2F;UDP包长(2字节）</p>
+<p>IP层没有超时和重传机制，TCP有超时和重传机制。</p>
+<p>ICMP不可达差错：UDP数据报需要分片但是设置为不可分片</p>
+<p>采用UDP的路径MTU发现</p>
+<p>UDP和ARP的交互</p>
+<p>UDP应用程序：DNS、TFTP、BOOTP、SNMP</p>
+<p>I C M P“源站抑制(source quench)”差错：使用U D P产生I C M P“源站抑制(source quench)”差错。当一个系统（路由器或主机）接收数据报的速度比其处理速度快时，可能产生这个差错：流量控制。</p>
+<p>UDP 协议并不提供超时重传,出错重传等功能,也就是说其是不可靠的协议。</p>
+<p>UDP：面向数据报，进程的每个输出操作正好产生一个UDP数据报，并组装成一份待发送的IP数据包。</p>
+<p>TCP：面向流字符</p>
+<p>UDP不提供可靠性</p>
+<p>UDP的三大应用：</p>
+<ol>
+<li>查询DNS<br>1.1 多个DNS可以同时查询<br>1.2 快</li>
+<li>数据传输：TFTP<br>2.1 停止等待协议：慢（应用层负责确认）<br>2.2 适合无盘工作站</li>
+<li>语音视频流<br>3.1 支持广播和组播<br>3.2 支持丢包，保障效率</li>
+</ol>
+<p>IP分片：如果丢失某个分片，需要重传整个数据报</p>
+<h1 id="第十二章-广播和多播"><a href="#第十二章-广播和多播" class="headerlink" title="第十二章 广播和多播"></a>第十二章 广播和多播</h1><p>广播和多播仅应用于 U D P</p>
+<p>对于以太网，当地址中最高字节的最低位设置为 1时表示该地址是一个多播地址，用十六进制可表示为 0 1 : 0 0 : 0 0 : 0 0 : 0 0 : 0 0（以太网广播地址ff : ff : ff : ff : ff : ff可看作是以太网多播地址的特例）</p>
+<p>受限的广播地址是 2 5 5 . 2 5 5 . 2 5 5 . 2 5 5。该地址用于主机配置过程中 I P数据报的目的地址，在任何情况下，路由器都不转发目的地址为受限的广播地址的数据报，这样的数据报仅出现在本地网络中。</p>
+<p>指向网络的广播地址是主机号为全1的地址。A类网络广播地址为n e t i d . 2 5 5 . 2 5 5 . 2 5 5。一个路由器必须转发指向网络的广播，但它也必须有一个不进行转发的选择。</p>
+<p>指向子网的广播地址为主机号为全 1且有特定子网号的地址</p>
+<p>I G M P：I n t e r n e t组管理协议：让多播路由器了解确定网络中属于确定多播组的任何一个主机</p>
+<h1 id="第十三章-IGMP协议"><a href="#第十三章-IGMP协议" class="headerlink" title="第十三章 IGMP协议"></a>第十三章 IGMP协议</h1><p>I G M P：I n t e r n e t组管理协议：让多播路由器了解确定网络中属于确定多播组的任何一个主机</p>
+<p>IGMP：TTL&#x3D;1，控制在同一个路由器网内。</p>
+<h1 id="第十四章：DNS-域名系统"><a href="#第十四章：DNS-域名系统" class="headerlink" title="第十四章：DNS 域名系统"></a>第十四章：DNS 域名系统</h1><p>域名系统（D N S）是一种用于T C P &#x2F; I P应用程序的分布式数据库，它提供主机名字和 I P地址之间的转换及有关电子邮件的选路信息。</p>
+<p>DNS不属于操作系统内核，核心是解析器，运行在应用程序中。<br>对D N S的访问是通过一个地址解析器（ r e s oler)完成的。<br>操作系统内核中的TCP&#x2F;IP协议对DNS不知道。</p>
+<p>DNS服务器的查询一般情况下基于UDP</p>
+<h1 id="第十五章-TFTP-简单文件传送协议"><a href="#第十五章-TFTP-简单文件传送协议" class="headerlink" title="第十五章 TFTP 简单文件传送协议"></a>第十五章 TFTP 简单文件传送协议</h1><p>为保持简单和短小，T F T P将使用U D P</p>
+<p>以读一个文件作为例子，T F T P客户需要发送一个读请求说明要读的文件名和文件模式 ( m o d e )。如果这个文件能被这个客户读取，T F T P服务器就返回一个块编号为 1的数据分组。T F T P客户又发送一个块编号为1的A C K。T F T P服务器随后发送块编号为2的数据。T F T P客户发回块编号为2的A C K。重复这个过程直到这个文件传送完。除了最后一个数据分组可含有不足 5 1 2字节的数据，其他每个数据分组均含有5 1 2字节的数据。当T F T P客户收到一个不足5 1 2字节的数据分组，就知道它收到最后一个数据分组。</p>
+<p>在写请求的情况下，TFTP 客户发送W R Q指明文件名和模式。如果该文件能被 该客户写，TFTP 服务器就返回块编号为0的A C K包。该客户就将文件的头5 1 2字节以块编号为1发出。服务器则返回块编号为1的A C K。</p>
+<p>这种类型的数据传输称为停止等待协议。它只用在一些简单的协议如 T F T P中。</p>
+<p>TFTP实现简单，低吞吐量</p>
+<p>TFTP协议：服务器处理读请求是常用的端口69，但是后续发送数据就重开一个端口传输数据，实现并发。</p>
+<p>T F T P协议没有提供安全特性</p>
+<h1 id="第十六章-BOOTP-引导程序协议"><a href="#第十六章-BOOTP-引导程序协议" class="headerlink" title="第十六章 BOOTP 引导程序协议"></a>第十六章 BOOTP 引导程序协议</h1><p>B O O T P：用于无盘系统进行系统引导的替代方法，又称为引导程序协议</p>
+<p>B O O T P使用U D P，且通常需与 T F T P协同工作。</p>
+<p>当一个客户使用B O O T P（操作码为1）进行系统引导时，引导请求通常是采用链路层广播，I P首部中的目的 I P地址为2 5 5 . 2 5 5 . 2 5 5 . 2 5 5（受限的广播， 1 2 . 2节） 。源I P地址通常是0 . 0 . 0 . 0，因为此时客户还不知道它本身的 I P地址。回顾图3 - 9，在系统进行自引导时， 0 . 0 . 0 . 0是一个有效的I P地址。</p>
+<p>既然B O O T P用于系统引导过程，一个无盘系统需要下列协议才能在只读存储器中完成：B O O T P、T F T P、U D P、I P和一个局域网的驱动程序。</p>
+<h1 id="第十七章-TCP-传输控制协议"><a href="#第十七章-TCP-传输控制协议" class="headerlink" title="第十七章 TCP 传输控制协议"></a>第十七章 TCP 传输控制协议</h1><p>T C P提供一种面向连接的、可靠的字节流服务。</p>
+<p>面向连接：</p>
+<ul>
+<li>两个TCP应用在传输数据前必须先建立TCP连接</li>
+</ul>
+<p>TCP提供可靠性传输</p>
+<ul>
+<li>应用数据被分割成T C P认为最适合发送的数据块。</li>
+<li>超时重传</li>
+<li>当T C P收到发自T C P连接另一端的数据，它将发送一个确认。这个确认不是立即发送，通常将推迟几分之一秒</li>
+<li>T C P将保持它首部和数据的检验和。</li>
+<li>T C P还能提供流量控制。</li>
+</ul>
+<p>字节流服务：两个应用程序通过TCP连接交换8bit字节构成的字节流。TCP不在字节流插入记录标识符。发送方按照10字节、20字节、50字节的顺序发送字节流，收方可以是分四次、每次20字节的顺序接收，一方只负责将字节流放在TCP中，同样的字节流将出现在另一方。</p>
+<p>T C P对字节流的内容不作任何解释。 T C P不知道传输的数据字节流是二进制数据，还是A S C I I字符、E B C D I C字符或者其他类型数据。对字节流的解释由 T C P连接双方的应用层解释。</p>
+<p>如果将字节流看作在两个应用程序间的单向流动，则 T C P用序号对每个字节进行计数。序号是32 bit的无符号数，序号到达23^2－1后又从0开始。</p>
+<p>当建立一个新的连接时，S Y N标志变1。序号字段包含由这个主机选择的该连接的初始序号I S N（Initial Sequence Number） 。该主机要发送数据的第一个字节序号为这个 I S N加1，因为S Y N标志消耗了一个序号（将在下章详细介绍如何建立和终止连接，届时我们将看到 F I N标志也要占用一个序号） 。</p>
+<p>T C P可以表述为一个没有选择确认或否认的滑动窗口协议.</p>
+<p>T C P的流量控制由连接的每一端通过声明的窗口大小来提供.</p>
+<p>检验和覆盖了整个的T C P报文段：T C P首部和T C P数据。这是一个强制性的字段，一定是由发端计算和存储，并由收端进行验证。</p>
+<p>T C P将用户数据打包构成报文段；它发送数据后启动一个定时器；另一端对收到的数据进行确认，对失序的数据重新排序，丢弃重复数据； T C P提供端到端的流量控制，并计算和验证一个强制性的端到端检验和。</p>
+<p>许多流行的应用程序如 Te l n e t、R l o g i n、F T P和S M T P都使用T C P。</p>
+<p>IP分片有标识位：占16位，标识这玩意很好理解，IP在存储器中维持一个计数器，每产生一个 数据报，计数器就加1,并将此值赋给标识字段。但这个标识并不是平常的序号，因为IP是 无连接服务，数据报不存在按序接收的问题。当数据报由于长度超过网络的MTU而必须分 片时，这个标识字段的值就被复制到所有的数据报片的标识字段中，等到重组的时候，相同标识符的值的数据报就会被重新组装成一个数据报。</p>
+<p>TCP只有序号：表示偏移量</p>
+<h1 id="第18章-TCP连接的建立与终止"><a href="#第18章-TCP连接的建立与终止" class="headerlink" title="第18章 TCP连接的建立与终止"></a>第18章 TCP连接的建立与终止</h1><p>S: SYN 同步序号<br>F：FIN 发送方完成数据发送</p>
+<p>三次握手(建立连接)：</p>
+<ol>
+<li>发送方：SYN: 100</li>
+<li>接收方：SYN：200，ack：101</li>
+<li>发送方：ack：201</li>
+</ol>
+<p>最大报文段长度 MSS</p>
+<p>四次挥手：</p>
+<ol>
+<li>发送方：FIN：100</li>
+<li>接收方：ack：101</li>
+<li>接收方：FIN：200</li>
+<li>发送方：ack：201</li>
+</ol>
+<p>MSL：TCP报文段最大生存时间，时间为单位<br>TTL：IP数据报最大生存时间，时间为跳数</p>
+<p>T I M E _ WA I T状态也称为2 M S L等待状态。</p>
+<p>一个插口对（即包含本地 I P地址、本地端口、远端I P地址和远端端口的4元组）在它处于2 M S L等待时，将不能再被使用。</p>
+<p>复位标识R：终止连接。产生复位的一种常见情况是当连接请求到达时，目的端口没有进程正在听。对于 U D P，我们在6 . 5节看到这种情况，当一个数据报到达目的端口时，该端口没在使用，它将产生一个I C M P端口不可达的信息。而T C P则使用复位。</p>
+<p>复位标识R：异常终止一个连接对应用程序来说有两个优点： （1）丢弃任何待发数据并立即发送复位报文段；（2）R S T的接收方会区分另一端执行的是异常关闭还是正常关闭。应用程序使用的A P I必须提供产生异常关闭而不是正常关闭的手段。</p>
+<p>复位标识R的使用场景：</p>
+<ol>
+<li>到不存在的端口的连接请求</li>
+<li>异常终止连接</li>
+<li>检测半打开连接</li>
+</ol>
+<h1 id="第19章-TCP的交互数据流"><a href="#第19章-TCP的交互数据流" class="headerlink" title="第19章 TCP的交互数据流"></a>第19章 TCP的交互数据流</h1><p>TCP的数据传输：块数据、交互数据</p>
+<p>交互数据总是以小于最大报文段长度的分组发送。在 R l o g i n中通常只有一个字节从客户发送到服务器。Te l n e t允许一次发送一行输入数据，但是目前大多数实现仍然发送一个字节。</p>
+<p>delay ack: 对于这些小的报文段，接收方使用经受时延的确认方法来判断确认是否可被推迟发送，以便与回送数据一起发送。这样通常会减少报文段的数目，尤其是对于需要回显用户输入字符的R l o g i n会话。</p>
+<p>nagle算法：在较慢的广域网环境中，通常使用 N a g l e算法来减少这些小报文段的数目。这个算法限制发送者任何时候只能有一个发送的小报文段未被确认。</p>
+<h1 id="第20章-TCP的成块数据流"><a href="#第20章-TCP的成块数据流" class="headerlink" title="第20章 TCP的成块数据流"></a>第20章 TCP的成块数据流</h1><p>TFTP: 停止-等待协议<br>TCP：滑动窗口协议–&gt;流量控制</p>
+<p>确认机制：</p>
+<ul>
+<li>delay ack</li>
+<li>隔一个报文段确认</li>
+</ul>
+<p>TCP：累积确认</p>
+<p>慢启动：拥塞窗口cwnd，指数增加</p>
+<p>拥塞窗口是发送方使用的流量控制，而通告窗口则是接收方使用的流量控制。</p>
+<p>PUSH标志：通知接收方将接收到的数据全部交给接受进程。</p>
+<p>URG标示：紧急数据</p>
+<p>分组丢失：超时和重复确认</p>
+<p><strong>慢开始与拥塞避免</strong></p>
+<p>慢开始：当cwnd&lt; ssthress, 从一个报文段开始，指数增大<br>拥塞避免：达到ssthresh值后线性增大</p>
+<p>发生拥塞（超时重发）:</p>
+<p>1.把ssthresh降低为cwnd值的一半</p>
+<p>2.把cwnd重新设置为1</p>
+<p>3.重新进入慢启动过程。</p>
+<p><strong>快重传和快恢复</strong></p>
+<p>快速恢复丢失的数据包。</p>
+<p>快重传：收到3个重复的确认后(冗余ack重发)（接收方接收到了失序的报文），执行快重传</p>
+<p>快速重传做的事情有：</p>
+<p>1.把ssthresh设置为cwnd的一半</p>
+<p>2.把cwnd再设置为ssthresh的值(具体实现有些为ssthresh+3)</p>
+<p>3.重新进入拥塞避免阶段。</p>
+<p>快恢复：快重传发生时，ssthresh设置为拥塞窗口的一半，拥塞窗口设置为新的ssthresh</p>
+<p>快速恢复的主要步骤是：</p>
+<p>1.当收到3个重复ACK时，把ssthresh设置为cwnd的一半，把cwnd设置为ssthresh的值加3，然后重传丢失的报文段，加3的原因是因为收到3个重复的ACK，表明有3个“老”的数据包离开了网络。</p>
+<p>2.再收到重复的ACK时，拥塞窗口增加1。</p>
+<p>3.当收到新的数据包的ACK时，把cwnd设置为第一步中的ssthresh的值。原因是因为该ACK确认了新的数据，说明从重复ACK时的数据都已收到，该恢复过程已经结束，可以回到恢复之前的状态了，也即再次进入拥塞避免状态</p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000018360050">https://segmentfault.com/a/1190000018360050</a></p>
+<p>ICMP源站抑制：拥塞窗口cwnd设置为1，慢启动阈值ssthresh不变</p>
+<h1 id="第21章-TCP的超时和重传"><a href="#第21章-TCP的超时和重传" class="headerlink" title="第21章 TCP的超时和重传"></a>第21章 TCP的超时和重传</h1><p>TCP的可靠：超时和重传</p>
+<p>超时重传：指数退避</p>
+<p>重传定时器：在规定时间内，需要收到另一端发出的报文确认</p>
+<p>坚持定时器：使窗口大小信息保持不断流动，即使另一端关闭了其接收窗口–窗口更新ack</p>
+<p>保活定时器：用于检测一个空闲连接的另一端是否还保持连接</p>
+<p>2MSL定时器：TIME_WAIT状态的时间</p>
+<p>坚持定时器：</p>
+<p>问题：ACK的传输不可靠，如果通告窗口更新的ACK报文丢失怎么办？</p>
+<p>解决方法：发送方使用坚持定时器来周期性地向接收方查询，以便发现窗口是否已经增大。这些发送发发送的报文段称为窗口探查。指数退避。 </p>
+<p>糊涂窗口综合症</p>
+<p>保活定时器：连接中断</p>
+<p>如果一个给定的连接在两个小时之内没有任何动作，则服务器就向客户发送一个探查报文段（我们将在随后的例子中看到这个探查报文段看起来像什么）。客户主机必须处于以下 4个状态之一。</p>
+<p>(1) 客户主机依然正常运行，并从服务器可达。客户的 T C P响应正常，而服务器也知道对方是正常工作的。服务器在两小时以后将保活定时器复位。如果在两个小时定时器到时间之前有应用程序的通信量通过此连接，则定时器在交换数据后的未来 2小时再复位。</p>
+<p>(2) 客户主机已经崩溃，并且关闭或者正在重新启动。在任何一种情况下，客户的 T C P都没有响应。服务器将不能够收到对探查的响应，并在 7 5秒后超时。服务器总共发送 1 0个这样的探查，每个间隔 7 5秒。如果服务器没有收到一个响应，它就认为客户主机已经关闭并终止连接。</p>
+<p>(3) 客户主机崩溃并已经重新启动。这时服务器将收到一个对其保活探查的响应，但是这个响应是一个复位，使得服务器终止这个连接。</p>
+<p>(4) 客户主机正常运行，但是从服务器不可达。这与状态 2相同，因为T C P不能够区分状态4与状态2之间的区别，它所能发现的就是没有收到探查的响应。</p>
+<h1 id="第22章-协议"><a href="#第22章-协议" class="headerlink" title="第22章  协议"></a>第22章  协议</h1><p>协议：FTP、Telnet、HHTP、SMTP&#x2F;POP3、SSl、SNMP、SIP</p>
+<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2><p>数据传输主流协议<br>成块数据流</p>
+<p>两个信道</p>
+<ul>
+<li>控制信道</li>
+<li>数据信道</li>
+</ul>
+<p>两个模式</p>
+<ul>
+<li>Active mode</li>
+<li>Passive mode</li>
+</ul>
+<h2 id="Telnet"><a href="#Telnet" class="headerlink" title="Telnet"></a>Telnet</h2><p>交互数据流</p>
+<h2 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h2><p>哑服务器</p>
+<p>cookie</p>
+<p>多连接</p>
+<p>安全性弱</p>
+<h2 id="SMTP和POP3"><a href="#SMTP和POP3" class="headerlink" title="SMTP和POP3"></a>SMTP和POP3</h2><p>SMTP：客户–&gt;服务器，服务器–&gt;服务器</p>
+<h2 id="SSL和TLS"><a href="#SSL和TLS" class="headerlink" title="SSL和TLS"></a>SSL和TLS</h2><h2 id="SNMP"><a href="#SNMP" class="headerlink" title="SNMP"></a>SNMP</h2><p>网络管理协议</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/20/TCP_illustrated_1/" data-id="cla55fgdc002dwka74hiy0ali" data-title="TCP_illustrated" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/408/" rel="tag">408</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/21/computer_network/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          计算机网络
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/19/Principles%20of%20Computer%20Composition/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">计算机组成原理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/23/python-100-days/">python_100_days</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/data-VOS/">data_VOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/TVOS/">TVOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/java/">java参考</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

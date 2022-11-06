@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>STGAN | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="0. 前言 paper: CVPR2019_STGAN: A Unified Selective Transfer Network for Arbitrary Image Attribute Editing code: tensorflow, pytorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STGAN">
+<meta property="og:url" content="http://example.com/2019/05/27/STGAN/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="0. 前言 paper: CVPR2019_STGAN: A Unified Selective Transfer Network for Arbitrary Image Attribute Editing code: tensorflow, pytorch">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-05-27T03:03:40.000Z">
+<meta property="article:modified_time" content="2019-05-28T08:11:37.231Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="GAN">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-STGAN" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/05/27/STGAN/" class="article-date">
+  <time class="dt-published" datetime="2019-05-27T03:03:40.000Z" itemprop="datePublished">2019-05-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/GAN/">GAN</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      STGAN
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.09709">CVPR2019_STGAN: A Unified Selective Transfer Network for Arbitrary Image Attribute Editing</a></li>
+<li>code: <a target="_blank" rel="noopener" href="https://github.com/csmliu/STGAN">tensorflow</a>, <a target="_blank" rel="noopener" href="https://github.com/bluestyle97/STGAN-pytorch">pytorch</a></li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li>reference: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.09020">CVPR2018_StarGAN：StarGAN Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation</a></li>
+<li>code: <a target="_blank" rel="noopener" href="https://github.com/yunjey/StarGAN">pytorch</a></li>
+<li>reference: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.10678">Valse2018_AttGAN: Facial Attribute Editing by Only Changing What You Want</a></li>
+<li>code: <a target="_blank" rel="noopener" href="https://github.com/LynnHo/AttGAN-Tensorflow">tensorflow</a>, <a target="_blank" rel="noopener" href="https://github.com/elvisyjlin/AttGAN-PyTorch">pytorch</a></li>
+</ul>
+<p>这也是一篇做GAN的文章，根据论文的叙述，一直和 StarGAN, AttGAN 做对比。我只看过 StarGANs，没有看过 AttGAN.</p>
+<!--more-->
+
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>作者首先发现了 skip connection 和 target attribute vector 的缺点: skip connection 对重建有用，但是对于 attribute manipulation 有害，target attribute vector 对重建有害。</p>
+<p>作者提出自己的创新点时论据很充分。</p>
+<p>作者在使用GAN时，发现 skip connection 可以提高重建图片质量(图片属性和生成图片属性一致时)(reconstruction)，但是会减弱属性变化的程度(图片属性和生成图片不一致时)(attribute manipulation)。</p>
+<p>作者从 selective transfer 角度来解决这些问题:</p>
+<ul>
+<li>selective: a. 仅仅考虑改变的属性；b. 有选择地拼接 encoder feature and decoder feature</li>
+<li>transfer: 对局部和全局属性提供一个统一的框架</li>
+</ul>
+<p>Question: transfer 的解释不是很理解，看后面如何应用吧。</p>
+<p>创新点：</p>
+<ul>
+<li>输入的是 <strong>different attribute vector</strong></li>
+<li>z针对skip connection, 使用 <strong>selective transfer units</strong>，同时提高输入属性的影响力和图片质量</li>
+</ul>
+<h2 id="2-Proposed-Method"><a href="#2-Proposed-Method" class="headerlink" title="2. Proposed Method"></a>2. Proposed Method</h2>
+
+<h3 id="2-1-Limitation-of-Skip-Connection-in-AttGAN"><a href="#2-1-Limitation-of-Skip-Connection-in-AttGAN" class="headerlink" title="2.1 Limitation of Skip Connection in AttGAN"></a>2.1 Limitation of Skip Connection in AttGAN</h3>
+
+<p>可以看出，增加 skip connections 有益于重建图像(图片属性和生成属性一致)(reconstruction)，但是，会生成其他属性的图片时的精度会降低(图片属性和生成属性不一致)(attribute manipulation ability)。主要原因是直接 concatenates encoder and decoder features.</p>
+<p>作者为了解决这个问题，使用 selective transfer units to adaptively transform encoder features guided by attributes to be changed.</p>
+<h3 id="2-2-Taking-Difference-Attribute-Vector-as-Input"><a href="#2-2-Taking-Difference-Attribute-Vector-as-Input" class="headerlink" title="2.2 Taking Difference Attribute Vector as Input"></a>2.2 Taking Difference Attribute Vector as Input</h3>
+
+<p>StarGAN and AttGAN 是把 target attribute vector $att_t$ 做为输入，作者通过观察 StarGAN and AttGAN 的重建图片，发现 attribute vector 会对重建图片有害。其实也不难理解，要想不发生变换，最好是 x0，但是 attribute vector 肯定不是0，卷积层也不可能是0，自然 attribute vector 会改变生成的图片，尤其是重建图片，因为此时是希望完全不变的，要求更高一些。</p>
+<p>作者针对 target attribute vector 的缺点提出 difference attribute vector。</p>
+<p>$$att_{diff}&#x3D;att_t-att_s$$</p>
+<h3 id="2-3-Selective-Transfer-Units-STU"><a href="#2-3-Selective-Transfer-Units-STU" class="headerlink" title="2.3 Selective Transfer Units(STU)"></a>2.3 Selective Transfer Units(STU)</h3><p>作者使用修改版的 GRU 来建立 STUs 作为 skip connection.</p>
+
+
+<p>设第 $l$ 层的 encoder feature 表示为 $f_{enc}^l$，第 $l+1$ 层的 hidden state 为 $s^{l+1}$，从而有下述方程，更新 hidden state $s^l$ 和 transformed encoder feature $f_t^l$:<br>$$\begin{aligned}<br>\hat{s}^{l+1}&amp;&#x3D;W_{t<em>T}[s^{l+1}, att_{diff}]\<br>r^l &amp;&#x3D; \sigma(W_r * [f_{enc}^l, \hat{s}^{l+1}])\<br>z^l &amp;&#x3D; \sigma(W_z * [f_{enc}^l, \hat{s}^{l+1}])\<br>s^l&amp;&#x3D;r^l\circ \hat{s}^{l+1}\<br>\hat{f}_t^l &amp;&#x3D; tanh(W_h</em>[f_{enc}^l, s^l])\<br>f_t^l &amp;&#x3D; (1-z^l)\circ\hat{s}^{l+1}+z^l\circ \hat{f}_t^l<br>\end{aligned}$$<br>其中 $[\cdot ,\cdot]$ 表示 concatenation operation，$*T$ 表示 transposed convolution.</p>
+<p>$*$ 表示 convolution operation，$\circ$ 表示 entry-wise product，$\sigma(\cdot)$ 表示 sigmoid function.</p>
+<p>看着很像常规意义上的 LSTM 的方程，但是自己在这方面接触比较少。所以简单地记录下GRU的原始公式。</p>
+
+
+<p>两者的公式基本上是一致的，但是不太懂其原理或者可以达到的效果。另外其含义也发生了一些变化，主要是 GRU 中，$f_t^l$ 是 output of hidden state，作者把 $s^l$ 作为 output of hidden state，$f_t^l$ 作为 output of transformed encoder feature。</p>
+<p>不懂。但我觉得能提出这个，就很厉害。</p>
+<h3 id="2-4-Network-Architecture"><a href="#2-4-Network-Architecture" class="headerlink" title="2.4 Network Architecture"></a>2.4 Network Architecture</h3><p>STGAN 分为两部分: generator G and discriminator D.</p>
+<p>G: $G_{enc}$ and $G_{dec}$，都分别有5个卷积操作。STU应用在前四个 encoder layers,即<br>$$(f_t^l, s^l)&#x3D;G_{st}^l(f_{enc}^l, s^{l+1}, att_{diff})$$</p>
+<p>D: $D_{adv}$ and $D_{att}$. $D_{adv}$ and $D_{att}$ 共享前五个卷积层，分别有两个全连接层用于预测。</p>
+<h3 id="2-5-Loss-Functions"><a href="#2-5-Loss-Functions" class="headerlink" title="2.5 Loss Functions"></a>2.5 Loss Functions</h3><p>第一步: 给定一张图片 $x$，可以得到 encoder features:<br>$$f&#x3D;\lbrace f_{enc}^1, f_{enc}^2,…, f_{enc}^5 \rbrace&#x3D;G_{enc}(x)$$<br>第二步: 进而通过 STUs 得到 transform encoder features:<br>$$(f_t^l, s^l)&#x3D;G_{st}^l(f_{enc}^l, s^{l+1}, att_{diff})$$<br>其中，不同的 STU 之间不共享参数。<br>即：<br>$$f_t&#x3D;\lbrace f_t^1, f_t^2, f_t^3, f_t^4 \rbrace $$<br>第三步: 得到结果,<br>$$\hat{y}&#x3D;G_{dec}(f_{enc}^5, f_t)$$<br>即:<br>$$\hat{y}&#x3D;G(x, att_{diff})$$</p>
+<p><strong>Reconstruction loss</strong>:<br>$$L_{rec}&#x3D;\parallel x-G(x,0) \parallel_1$$</p>
+<p><strong>Adversarial loss</strong>:<br>$$\max_{D_{adv}} L_{D_{adv}} &#x3D; \mathbb{E}_x D _{adv}(x)-\mathbb{E} <em>{\hat{y}} D <em>{adv}(\hat{y})+\lambda \mathbb{E} [ (\parallel \nabla <em>{\hat{x}} D <em>{adv}(\hat{x}) \parallel_2 -1)^2 ]$$<br>$$\max</em>{G} L</em>{G</em>{adv}} &#x3D; \mathbb{E}</em>{x, att _{diff}} D _{adv}(G(x, att _{diff})) $$</p>
+<p>其中 $\hat{x}$ 表示真和生成图片的线性插值，在 StarGAN 中也见到过。</p>
+<p><strong>Attribute manipulation loss</strong>:</p>
+<p>$$L_{D_{att}}&#x3D;- \sum <em>{i&#x3D;1}^c[ att_s^{(i)}\log D</em>{att}^{(i)}(x)+(1-att_s^{(i)})\log (1-D_{att}^{(i)}(x)) ]$$<br>$$L_{G_{att}}&#x3D;- \sum <em>{i&#x3D;1}^c[ att_t^{(i)}\log D</em>{att}^{(i)}(\hat{y})+(1-att_s^{(i)})\log (1-D_{att}^{(i)}(\hat{y})) ]$$</p>
+<p>这里应该只是一个简单的分类器。</p>
+<p>Question: 为什么还会有第二项？</p>
+<p><strong>Model Objective</strong>:<br>$$\min_D L_D&#x3D; -L_{D_{adv}} + \lambda_1 L_{D_{att}}$$<br>$$\min_G L_G&#x3D; -L_{G_{adv}} + \lambda_2 L_{G_{att}} + \lambda_3 L_{rec} $$</p>
+<h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><p>结果很棒，在真实性和分类准确率上都要比其它的GAN好很多。</p>
+<h2 id="5-Ablation-Study"><a href="#5-Ablation-Study" class="headerlink" title="5. Ablation Study"></a>5. Ablation Study</h2>
+
+<ul>
+<li>STGAN: original STGAN</li>
+<li>STGAN-dst: target attribute vector, not difference attribute vector</li>
+<li>STGAN-conv: conv(encoder feature and difference attribute vector), not STU</li>
+<li>STGAN-conv-res: residual learning formulation to learn the convolution operator in STGAN-conv</li>
+<li>STGAN-gru: GRU not STU</li>
+<li>STGAN-res: residual learning formulation to learn the STU in STGAN</li>
+</ul>
+<p>作者的对比实验做的是真多。</p>
+<p><strong>Difference attribute vector vs. target attribute vector</strong>: 可以看出，AttGAN, StarGAN, STGAN 三个模型上 difference attribute vector 都要好于 target attribute vector。</p>
+<p><strong>Selective Transfer Unit vs. its variants</strong>: STGAN-conv, STGAN-conv-res 性能很低，STGAN-gru, STGAN-res, STGAN 三种方法的性能差不太多，可能具体到某个属性会略有区别，因为作者没有一个最终的指标，所以说不上来到底差多少，但是从各个属性上看，STGAN最好，其他两个略微低一些。</p>
+<p>Question: 具体 GRU, STU 的工作机制有机会的话还是需要多了解一下。</p>
+<h2 id="6-code"><a href="#6-code" class="headerlink" title="6. code"></a>6. code</h2><p>因为最近在跑实验，所以没法具体跑论文的代码，以后再看情况把。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/05/27/STGAN/" data-id="cla55fgda0021wka76h3a0io9" data-title="STGAN" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/29/FUNIT/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          FUNIT
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/22/Deep-CV-MIML/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Deep CV-MIML</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/23/python-100-days/">python_100_days</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/data-VOS/">data_VOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/TVOS/">TVOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/java/">java参考</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>pytorch-2.0 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. eval">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch-2.0">
+<meta property="og:url" content="http://example.com/2018/12/10/pytorch-2.0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. eval">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-12-10T07:18:25.000Z">
+<meta property="article:modified_time" content="2018-12-23T14:47:18.685Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="pytorch">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-pytorch-2.0" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/12/10/pytorch-2.0/" class="article-date">
+  <time class="dt-published" datetime="2018-12-10T07:18:25.000Z" itemprop="datePublished">2018-12-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/pytorch/">pytorch</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      pytorch-2.0
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-eval"><a href="#1-eval" class="headerlink" title="1. eval"></a>1. eval</h1><span id="more"></span>
+<p>pytorch 的eval()只是改变一些模块的状态，并不影响backward过程。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012436149/article/details/78281553">https://blog.csdn.net/u012436149/article/details/78281553</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6cb1fd785540">https://www.jianshu.com/p/6cb1fd785540</a></p>
+<h1 id="2-扩展-torch-autograd"><a href="#2-扩展-torch-autograd" class="headerlink" title="2. 扩展 torch.autograd"></a>2. 扩展 torch.autograd</h1><p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/27783097">https://zhuanlan.zhihu.com/p/27783097</a></p>
+<p><a target="_blank" rel="noopener" href="https://pytorch-cn.readthedocs.io/zh/latest/notes/extending/">https://pytorch-cn.readthedocs.io/zh/latest/notes/extending/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Hungryof/article/details/78346304">https://blog.csdn.net/Hungryof/article/details/78346304</a></p>
+<h2 id="2-1-Function和Module的差异和应用场景"><a href="#2-1-Function和Module的差异和应用场景" class="headerlink" title="2.1 Function和Module的差异和应用场景"></a>2.1 Function和Module的差异和应用场景</h2><ul>
+<li>Function一般只定义一个操作，因为无法保存参数，例如激活函数、pool操作等；</li>
+<li>Module可以保存参数，适合于定义一个层</li>
+<li>Function需要定义三个方法：__init__, forward, backward;</li>
+<li>Module: 需要定义__init__和forward，而backward由自动求导构成；</li>
+<li>可以简单地认为，Module就是由Function构成的</li>
+<li>Module中不仅包括了Function，还包括了对应的参数、其他变量等等。</li>
+<li>Function: __init__ (optional) - 如果你的operation包含非Variable参数，那么就将其作为__init__的参数传入到operation中。例如：AddConstant Function加一个常数，Transpose Function需要指定哪两个维度需要交换。如果你的operation不需要额外的参数，你可以忽略__init__。</li>
+</ul>
+<h2 id="2-2-定义一个ReLU函数"><a href="#2-2-定义一个ReLU函数" class="headerlink" title="2.2 定义一个ReLU函数"></a>2.2 定义一个ReLU函数</h2><h3 id="2-2-1-定义一个ReLU函数"><a href="#2-2-1-定义一个ReLU函数" class="headerlink" title="2.2.1 定义一个ReLU函数"></a>2.2.1 定义一个ReLU函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyReLU</span>(torch.autograd.Function):</span><br><span class="line">        <span class="comment"># 输入和输出相互对应</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, input_</span>):</span><br><span class="line">        <span class="comment"># 在forward中，需要定义MyReLU这个运算的forward计算过程</span></span><br><span class="line">        <span class="comment"># 同时可以保存任何在后向传播中需要使用的变量值</span></span><br><span class="line">        self.save_for_backward(input_)         <span class="comment"># 将输入保存起来，在backward时使用</span></span><br><span class="line">        output = input_.clamp(<span class="built_in">min</span>=<span class="number">0</span>)               <span class="comment"># relu就是截断负数，让所有负数等于0</span></span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, grad_output</span>):</span><br><span class="line">        <span class="comment"># 根据BP算法的推导（链式法则），dloss / dx = (dloss / doutput) * (doutput / dx)</span></span><br><span class="line">        <span class="comment"># dloss / doutput就是输入的参数grad_output、</span></span><br><span class="line">        <span class="comment"># 因此只需求relu的导数，在乘以grad_output</span></span><br><span class="line">        input_, = self.saved_tensors</span><br><span class="line">        grad_input = grad_output.clone()</span><br><span class="line">        grad_input[<span class="built_in">input</span> &lt; <span class="number">0</span>] = <span class="number">0</span>                <span class="comment"># 上诉计算的结果就是左式。即ReLU在反向传播中可以看做一个通道选择函数，所有未达到阈值（激活值&lt;0）的单元的梯度都为0</span></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GuidedBackpropReLU</span>(<span class="title class_ inherited__">Function</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">        positive_mask = (<span class="built_in">input</span> &gt; <span class="number">0</span>).type_as(<span class="built_in">input</span>)</span><br><span class="line">        output = torch.addcmul(torch.zeros(<span class="built_in">input</span>.size()).type_as(<span class="built_in">input</span>), <span class="built_in">input</span>, positive_mask)</span><br><span class="line">        self.save_for_backward(<span class="built_in">input</span>, output)</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, grad_output</span>):</span><br><span class="line">        <span class="built_in">input</span>, output = self.saved_tensors</span><br><span class="line">        grad_input = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        positive_mask_1 = (<span class="built_in">input</span> &gt; <span class="number">0</span>).type_as(grad_output)</span><br><span class="line">        positive_mask_2 = (grad_output &gt; <span class="number">0</span>).type_as(grad_output)</span><br><span class="line">        grad_input = torch.addcmul(torch.zeros(<span class="built_in">input</span>.size()).type_as(<span class="built_in">input</span>),</span><br><span class="line">                                   torch.addcmul(torch.zeros(<span class="built_in">input</span>.size()).type_as(<span class="built_in">input</span>), grad_output,</span><br><span class="line">                                                 positive_mask_1), positive_mask_2)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Inherit from Function</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Linear</span>(<span class="title class_ inherited__">Function</span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># bias is an optional argument</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span>, weight, bias=<span class="literal">None</span></span>):</span><br><span class="line">        self.save_for_backward(<span class="built_in">input</span>, weight, bias)</span><br><span class="line">        output = <span class="built_in">input</span>.mm(weight.t())</span><br><span class="line">        <span class="keyword">if</span> bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            output += bias.unsqueeze(<span class="number">0</span>).expand_as(output)</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line">    <span class="comment"># This function has only a single output, so it gets only one gradient</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, grad_output</span>):</span><br><span class="line">        <span class="comment"># This is a pattern that is very convenient - at the top of backward</span></span><br><span class="line">        <span class="comment"># unpack saved_tensors and initialize all gradients w.r.t. inputs to</span></span><br><span class="line">        <span class="comment"># None. Thanks to the fact that additional trailing Nones are</span></span><br><span class="line">        <span class="comment"># ignored, the return statement is simple even when the function has</span></span><br><span class="line">        <span class="comment"># optional inputs.</span></span><br><span class="line">        <span class="built_in">input</span>, weight, bias = self.saved_tensors</span><br><span class="line">        grad_input = grad_weight = grad_bias = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># These needs_input_grad checks are optional and there only to</span></span><br><span class="line">        <span class="comment"># improve efficiency. If you want to make your code simpler, you can</span></span><br><span class="line">        <span class="comment"># skip them. Returning gradients for inputs that don&#x27;t require it is</span></span><br><span class="line">        <span class="comment"># not an error.</span></span><br><span class="line">        <span class="keyword">if</span> self.needs_input_grad[<span class="number">0</span>]:</span><br><span class="line">            grad_input = grad_output.mm(weight)</span><br><span class="line">        <span class="keyword">if</span> self.needs_input_grad[<span class="number">1</span>]:</span><br><span class="line">            grad_weight = grad_output.t().mm(<span class="built_in">input</span>)</span><br><span class="line">        <span class="keyword">if</span> bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> self.needs_input_grad[<span class="number">2</span>]:</span><br><span class="line">            grad_bias = grad_output.<span class="built_in">sum</span>(<span class="number">0</span>).squeeze(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> grad_input, grad_weight, grad_bias</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-2-Wrap成一个ReLU函数"><a href="#2-2-2-Wrap成一个ReLU函数" class="headerlink" title="2.2.2 Wrap成一个ReLU函数"></a>2.2.2 Wrap成一个ReLU函数</h3><p>可以把刚刚自定义的ReLU类封装成一个函数，方便调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">relu</span>(<span class="params">input_</span>):</span><br><span class="line">    <span class="comment"># MyReLU()是创建一个MyReLU对象，</span></span><br><span class="line">    <span class="comment"># Function类利用了Python __call__操作，使得可以直接使用对象调用__call__制定的方法</span></span><br><span class="line">    <span class="comment"># __call__指定的方法是forward，因此下面这句MyReLU（）（input_）相当于</span></span><br><span class="line">    <span class="comment"># return MyReLU().forward(input_)</span></span><br><span class="line">    <span class="keyword">return</span> MyReLU()(input_)</span><br><span class="line">input_ = Variable(torch.linspace(-<span class="number">3</span>, <span class="number">3</span>, steps=<span class="number">5</span>))</span><br><span class="line"><span class="built_in">print</span> input_</span><br><span class="line"><span class="built_in">print</span> relu(input_)</span><br></pre></td></tr></table></figure>
+
+<p>在某些版本中，Function类的使用方法是.apply方法，其和__call__方法类似。</p>
+<p>在某些版本中，forward和backward方法需要是@staticmethod</p>
+<p>在某些版本中，forward中Variable参数会自动转为tensor，backward参数是Variable</p>
+<p>在某些版本中，forward和backward中self会写成ctx</p>
+<p>save_for_backward只能传入Variable或是Tensor的变量，如果是其他类型的，可以用self.xyz &#x3D; xyz，使其在backward中可以用。</p>
+<h3 id="2-2-3-检查backward是否正确"><a href="#2-2-3-检查backward是否正确" class="headerlink" title="2.2.3 检查backward是否正确"></a>2.2.3 检查backward是否正确</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> gradcheck</span><br><span class="line"></span><br><span class="line"><span class="comment"># gradchek takes a tuple of tensor as input, check if your gradient</span></span><br><span class="line"><span class="comment"># evaluated with these tensors are close enough to numerical</span></span><br><span class="line"><span class="comment"># approximations and returns True if they all verify this condition.</span></span><br><span class="line"><span class="built_in">input</span> = (Variable(torch.randn(<span class="number">20</span>,<span class="number">20</span>).double(), requires_grad=<span class="literal">True</span>),)</span><br><span class="line">test = gradcheck.gradcheck(Linear(), <span class="built_in">input</span>, eps=<span class="number">1e-6</span>, atol=<span class="number">1e-4</span>)</span><br><span class="line"><span class="built_in">print</span>(test)</span><br></pre></td></tr></table></figure>
+
+<p>备注：</p>
+<ul>
+<li>自动求导竟然是在backward的操作中创建的图！暂时没懂。</li>
+</ul>
+<h1 id="3-扩展torch-nn"><a href="#3-扩展torch-nn" class="headerlink" title="3. 扩展torch.nn"></a>3. 扩展torch.nn</h1><p>nn包括两种街扩-modules和functional版本。其中，functional版本已经在上面介绍过，不再重复，这一小节主要介绍modules。</p>
+<p>扩展module需要预先实现一个执行计算和梯度的Function。</p>
+<p>扩展module需要实现两个方法：</p>
+<ul>
+<li><p>__init__ (optional) - 输入参数，例如kernel sizes, numbers of features, 等等。同时初始化 parameters和buffers。</p>
+</li>
+<li><p>forward() - 实例化一个执行operation的Function，使用它执行operation。和functional wrapper(上面实现的那个简单的wrapper)十分类似。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Linear</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, input_features, output_features, bias=<span class="literal">True</span></span>):</span><br><span class="line">        self.input_features = input_features</span><br><span class="line">        self.output_features = output_features</span><br><span class="line"></span><br><span class="line">        <span class="comment"># nn.Parameter is a special kind of Variable, that will get</span></span><br><span class="line">        <span class="comment"># automatically registered as Module&#x27;s parameter once it&#x27;s assigned</span></span><br><span class="line">        <span class="comment"># as an attribute. Parameters and buffers need to be registered, or</span></span><br><span class="line">        <span class="comment"># they won&#x27;t appear in .parameters() (doesn&#x27;t apply to buffers), and</span></span><br><span class="line">        <span class="comment"># won&#x27;t be converted when e.g. .cuda() is called. You can use</span></span><br><span class="line">        <span class="comment"># .register_buffer() to register buffers.</span></span><br><span class="line">        <span class="comment"># nn.Parameters can never be volatile and, different than Variables,</span></span><br><span class="line">        <span class="comment"># they require gradients by default.</span></span><br><span class="line">        self.weight = nn.Parameter(torch.Tensor(input_features, output_features))</span><br><span class="line">        <span class="keyword">if</span> bias:</span><br><span class="line">            self.bias = nn.Parameter(torch.Tensor(output_features))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># You should always register all possible parameters, but the</span></span><br><span class="line">            <span class="comment"># optional ones can be None if you want.</span></span><br><span class="line">            self.register_parameter(<span class="string">&#x27;bias&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Not a very smart way to initialize weights</span></span><br><span class="line">        self.weight.data.uniform_(-<span class="number">0.1</span>, <span class="number">0.1</span>)</span><br><span class="line">        <span class="keyword">if</span> bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.bias.data.uniform_(-<span class="number">0.1</span>, <span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">        <span class="comment"># See the autograd section for explanation of what happens here.</span></span><br><span class="line">        <span class="keyword">return</span> Linear()(<span class="built_in">input</span>, self.weight, self.bias)</span><br><span class="line">        <span class="comment">#注意这个Linear是之前实现过的Linear</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>parameter和buffer是一类特殊的Variable。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">self._parameters = OrderedDict()</span><br><span class="line">self._modules = OrderedDict()</span><br><span class="line">self._buffers = OrderedDict()</span><br><span class="line">self._backward_hooks = OrderedDict()</span><br><span class="line">self._forward_hooks = OrderedDict()</span><br><span class="line">self.training = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>_parameters: 是一个字典，保存的有：nn.Parameter()和register_parameter()，而nn.Linear(3,4)的parameter不会保存于此。</li>
+<li>_modules:nn.Linear(3,4)会保存于此。</li>
+<li>_buffers:register_buffer()会保存于此.</li>
+<li>named_parameters():会保存_parameters和_modules的parameters。</li>
+<li>__getattr__()方法会从_modules,_parameters和_buffers这三个字典中获取。</li>
+</ul>
+<h1 id="3-retain-graph-and-create-graph"><a href="#3-retain-graph-and-create-graph" class="headerlink" title="3. retain_graph and create_graph"></a>3. retain_graph and create_graph</h1><h2 id="3-1-retain-graph"><a href="#3-1-retain-graph" class="headerlink" title="3.1 retain_graph"></a>3.1 retain_graph</h2><p>retain_graph 是保存前向传播过程中的buffer。是因为如果有两个backward,那么需要retain_graph&#x3D;true,因为默认一个前向对应一个反向,用于实现多次反向传播</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.ones(<span class="number">1</span>)</span><br><span class="line">b = torch.rand(<span class="number">1</span>, requires_grad=<span class="literal">True</span>)</span><br><span class="line">w = torch.rand(<span class="number">1</span>, requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = w * x</span><br><span class="line">z = y + b</span><br><span class="line">z2 = y-b</span><br><span class="line">z.backward()</span><br><span class="line">w.grad</span><br><span class="line"><span class="number">1</span></span><br><span class="line">z2.backward()</span><br><span class="line">RuntimeError: Trying to backward through the graph a second time, but the buffers have already been freed. Specify retain_graph=<span class="literal">True</span> when calling backward the first time.</span><br><span class="line">改为</span><br><span class="line">z.backward(retain_graph=<span class="literal">True</span>) <span class="comment"># 只能保证当前backward后的buffer不被清除.</span></span><br><span class="line">w.grad</span><br><span class="line"><span class="number">1</span></span><br><span class="line">z2.backward()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>发现一个神奇的操作,如果y&#x3D;w+x,那么不需要retain_graph 也可以多次反向传播,说明问题出现在y上.当y中存储了buffer w或者x后,就需要retain_graph,反之,不需要也能多次反向传播.<br>但是现在找不到这个buffer保存在哪里</p>
+<h2 id="3-2-create-graph"><a href="#3-2-create-graph" class="headerlink" title="3.2 create_graph"></a>3.2 create_graph</h2><p>create_graph用于实现高阶导数,相当于对于叶子节点的导数dx与x是否建立计算图,即是否需要保存f’(x)作为一个计算图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">x = torch.tensor([<span class="number">5.0</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = x ** <span class="number">2</span></span><br><span class="line">grad_x = torch.autograd.grad(y, x, create_graph=<span class="literal">True</span>)</span><br><span class="line">grad_x[<span class="number">0</span>].grad_fn</span><br><span class="line">&lt;MulBackward1 at <span class="number">0x7feb27c9e160</span>&gt;</span><br><span class="line">grad_grad_x = torch.autograd.grad(grad_x[<span class="number">0</span>], x)</span><br><span class="line"><span class="built_in">print</span>(grad_grad_x[<span class="number">0</span>].grad_fn)</span><br><span class="line">grad_grad_grad_x = torch.autograd.grad(grad_grad_x, x)</span><br><span class="line">RuntimeError: element <span class="number">0</span> of tensors does <span class="keyword">not</span> require grad <span class="keyword">and</span> does <span class="keyword">not</span> have a grad_fn</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/10/pytorch-2.0/" data-id="cla55fge7009jwka747m1aq7c" data-title="pytorch-2.0" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/11/RotationNet-paper/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RotationNet-paper
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/10/SPGAN-tensorflow/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SPGAN-tensorflow</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/23/python-100-days/">python_100_days</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/data-VOS/">data_VOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/TVOS/">TVOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/java/">java参考</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>GANnotation | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="0. 前言这是对GAN应用到人脸合成的改进，只是在arxiv上，先看看再说。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GANnotation">
+<meta property="og:url" content="http://example.com/2019/01/17/GANnotation/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="0. 前言这是对GAN应用到人脸合成的改进，只是在arxiv上，先看看再说。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/GANnotation/GANnotation2.png">
+<meta property="og:image" content="http://example.com/GANnotation/GANnotation1.png">
+<meta property="og:image" content="http://example.com/GANnotation/GANnotation3.png">
+<meta property="og:image" content="http://example.com/GANnotation/GANnotation4.png">
+<meta property="og:image" content="http://example.com/GANnotation/GANnotation5.png">
+<meta property="og:image" content="http://example.com/GANnotation/GANnotation6.png">
+<meta property="article:published_time" content="2019-01-17T09:00:01.000Z">
+<meta property="article:modified_time" content="2019-01-24T07:25:49.642Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="GAN">
+<meta property="article:tag" content="face synthesis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/GANnotation/GANnotation2.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-GANnotation" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/01/17/GANnotation/" class="article-date">
+  <time class="dt-published" datetime="2019-01-17T09:00:01.000Z" itemprop="datePublished">2019-01-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      GANnotation
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>这是对GAN应用到人脸合成的改进，只是在arxiv上，先看看再说。</p>
+<span id="more"></span>
+
+<ul>
+<li>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.03492">https://arxiv.org/abs/1811.03492</a></li>
+<li>github: <a target="_blank" rel="noopener" href="https://github.com/ESanchezLozano/GANnotation">https://github.com/ESanchezLozano/GANnotation</a></li>
+<li>youtube: <a target="_blank" rel="noopener" href="https://youtu.be/-8r7zexg4yg">https://youtu.be/-8r7zexg4yg</a></li>
+</ul>
+<p>key word: self-consistency loss, triple consistency loss, progressive image translation</p>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>作者对 <strong>self-consistency loss</strong> 的有效性进行了论证， self-consistency loss 可以有效地使图片转换前后 <strong>preserve identity</strong>，并且提出了新的loss <strong>triple consistency loss</strong>.</p>
+<p><img src="/./GANnotation/GANnotation2.png" alt="triple consistency loss"></p>
+
+
+<p>作者观察到当生成的图片再次经过生成另一种属性的图片时，生成的效果很差。记生成的图片再次经过网络生成新的图片的过程为 **”progressive image translation”**。比如输入一张图片a，先通过网络生成图片b，再将图片b送入网络，得到生成图片c。</p>
+<p><img src="/./GANnotation/GANnotation1.png" alt="progressive image translation"></p>
+
+
+<p>并且作者提出了<strong>GAN-notation</strong>，即 <strong>unconstrained landmark guided face-to-face synthesis</strong>, 同时改变人脸的姿势和表情(simultaneous change in pose and expression)， 论证了 triple consistency loss 的有效性。</p>
+<h1 id="2-Proposed-approach"><a href="#2-Proposed-approach" class="headerlink" title="2. Proposed approach"></a>2. Proposed approach</h1><p><img src="/./GANnotation/GANnotation3.png" alt="Proposed approach"></p>
+
+
+<h2 id="2-1-Notation"><a href="#2-1-Notation" class="headerlink" title="2.1 Notation"></a>2.1 Notation</h2><p>符号说明：</p>
+<table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="center">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$I\in \mathcal{I}, w × h$</td>
+<td align="center">人脸图片$I$</td>
+</tr>
+<tr>
+<td align="center">$s_i \in \mathbb{R}^{2n}$</td>
+<td align="center">$n$个有序点的集合</td>
+</tr>
+<tr>
+<td align="center">$H(s_t) \in \mathcal{H}, H(s_t) \in \mathbb{R}^{n×w×h}$</td>
+<td align="center">$s_i$编码成 heatmap，以均值为点的高斯分布的形式呈现</td>
+</tr>
+<tr>
+<td align="center">$G: \mathcal{I}×\mathcal{H} \to \hat{\mathcal{I}}$</td>
+<td align="center">$\hat{\mathcal{I}}$是生成图片的集合</td>
+</tr>
+<tr>
+<td align="center">$\hat{I} &#x3D; G(I;H(s_t))$</td>
+<td align="center">其中$I$和$H(s_t)$是在通道维拼接而成的</td>
+</tr>
+<tr>
+<td align="center">$\mathbb{P}_{\mathcal{I}}$</td>
+<td align="center">图片$I$的分布</td>
+</tr>
+<tr>
+<td align="center">$\mathbb{P}_{\hat{\mathcal{I}}}$</td>
+<td align="center">图片$\hat{I}$的分布</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-Architecture"><a href="#2-2-Architecture" class="headerlink" title="2.2 Architecture"></a>2.2 Architecture</h2><p><strong>G</strong>:</p>
+<ul>
+<li>two spatial downsampling convolutions</li>
+<li>followed by a set of residual blocks</li>
+<li>two spatial upsampling blocks with 1&#x3D;2 strided convolutions</li>
+<li>output: colour image $C$ and a mask $M$.</li>
+</ul>
+<p>$$\hat{I}&#x3D;(1-M) \circ C + M \circ I$$</p>
+<p><strong>D</strong>: PatchGAN, 128×128–&gt;4×4×512</p>
+<h2 id="2-3-Training"><a href="#2-3-Training" class="headerlink" title="2.3 Training"></a>2.3 Training</h2><h3 id="2-3-1-Adversarial-loss"><a href="#2-3-1-Adversarial-loss" class="headerlink" title="2.3.1 Adversarial loss"></a>2.3.1 Adversarial loss</h3><p>作者使用的是 hinge adversarial loss。</p>
+<p>我在参考<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1705.02894.pdf">文献19</a>中没有找到类似的loss，自己理解的是，对于判别器D而言，希望真图片的真值是$y \leqslant -1$，生成图片的真值是$y \geqslant 1$， 对于生成器G而言，希望生成的图片的真值是$y \geqslant 0$</p>
+<p>$$<br>\begin{align}<br>L_{adv}(D) &#x3D; &amp;-\mathbb{E}<em>{\hat{I}\backsim \mathbb{P}</em>{\hat{\mathcal{I}}}}[min(0, -1+D(\hat{I}))]+ \<br>&amp;-\mathbb{E}<em>{I\backsim \mathbb{P}</em>{\mathcal{I}}}[min(0, -1+D(\hat{I}))]<br>\end{align}<br>$$</p>
+<p>$$L_{adv}(G)&#x3D;-\mathbb{E}_{I \backsim \mathbb{P}_I } [D(\hat{I})]$$</p>
+<h3 id="2-3-2-Pixel-loss"><a href="#2-3-2-Pixel-loss" class="headerlink" title="2.3.2 Pixel loss"></a>2.3.2 Pixel loss</h3><p>这个公式应该需要成对图片</p>
+<p>$$L_{pix} &#x3D; \parallel G(I;H(s_t)) - I_t \parallel$$</p>
+<h3 id="2-3-3-Consistency-loss"><a href="#2-3-3-Consistency-loss" class="headerlink" title="2.3.3 Consistency loss"></a>2.3.3 Consistency loss</h3><p>$$L_{self}&#x3D;\parallel G(G(I;H(s_t)); H(s_i)) - I \parallel$$</p>
+<h3 id="2-3-4-Triple-Consistency-loss"><a href="#2-3-4-Triple-Consistency-loss" class="headerlink" title="2.3.4 Triple Consistency loss"></a>2.3.4 Triple Consistency loss</h3><p>$$L_{triple}&#x3D;\parallel G(\hat{I};H(s_n)) - G(I;H(s_n)) \parallel ^2$$</p>
+<p>其中，$ \hat{I} &#x3D; G(I;H(s_t)) $.</p>
+<h3 id="2-3-5-Identity-preserving-loss"><a href="#2-3-5-Identity-preserving-loss" class="headerlink" title="2.3.5 Identity preserving loss"></a>2.3.5 Identity preserving loss</h3><p>$$L_{id}&#x3D;\sum_{l&#x3D;fc,p} \parallel \Phi_{CNN}^l(I) - \Phi_{CNN}^l(\hat{I})  \parallel$$</p>
+<p>其中，这个公式的目的是为了preserve the identity(???), 使用 Light CNN 的 fully connected layer 和 last pooling layer 提取出的特征。</p>
+<p>不懂，为啥子呢？之前看StarGAN已经不使用这个公式了。</p>
+<h3 id="2-3-6-Perceptual-loss"><a href="#2-3-6-Perceptual-loss" class="headerlink" title="2.3.6 Perceptual loss"></a>2.3.6 Perceptual loss</h3><p>这个应该就是之前见过的Vgg提取特征做损失。</p>
+<p>$$<br>\begin{align}<br>L_{pp} &#x3D;&amp; \sum_{l} \parallel \Phi_{VGG}^l(I) \Phi_{VGG}^l(\hat{I}) \parallel \<br>&amp;+\parallel  \Gamma(\Phi_{VGG}^{relu3_3}(I)) - \Phi_{VGG}^{relu3_3}(\hat{I}) \parallel_F<br>\end{align}<br>$$</p>
+<p>其中，$l&#x3D;\lbrace relu1_2, relu2_2, relu3_3, relu4_3\rbrace$</p>
+<p>感觉用到的损失太多了。</p>
+<h3 id="2-3-7-Full-loss"><a href="#2-3-7-Full-loss" class="headerlink" title="2.3.7 Full loss"></a>2.3.7 Full loss</h3><p>$$\begin{align}<br>L(G) &#x3D;&amp; \lambda_{adv}L_{adv} + \lambda_{pix}L_{pix}+\lambda_{self}L_{self}+\<br>&amp;\lambda_{triple}L_{triple}+\lambda_{id}L_{id}+\lambda_{pp}L_{pp}+\lambda_{tv}L_{tv}<br>\end{align}$$</p>
+<p>其中，$\lambda_{adv}&#x3D;1, \lambda_{pix}&#x3D;10, \lambda_{self}&#x3D;100, \lambda_{triple}&#x3D;100, \lambda_{id}&#x3D;1, \lambda_{pp}&#x3D;10, \lambda_{tv}&#x3D;10^{-4} $</p>
+<p>在作者给的<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1603.08155.pdf">参考文献14</a>中，也没有明确找到$L_{tv}$的表达式。之后看代码再确定一下吧。</p>
+<h1 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3. Experiments"></a>3. Experiments</h1><ul>
+<li>Adam, $\beta_1&#x3D;0.5, \beta_2&#x3D;0.999$</li>
+</ul>
+<h2 id="3-1-On-the-use-of-a-triple-consistency-loss"><a href="#3-1-On-the-use-of-a-triple-consistency-loss" class="headerlink" title="3.1 On the use of a triple consistency loss"></a>3.1 On the use of a triple consistency loss</h2><p><img src="/./GANnotation/GANnotation4.png" alt="StarGAN with/without triple consistency loss"></p>
+
+
+<p>可以看到即使是 one-to-one ， with triple consistency loss 的效果也要更好一些。</p>
+<h2 id="3-2-GANnotation"><a href="#3-2-GANnotation" class="headerlink" title="3.2 GANnotation"></a>3.2 GANnotation</h2><p>StarGAN只能对很粗的概念进行转换，但是GANnotation可以直接对比较细的属性pose进行转换，而且还可以连续变换，更厉害一些。</p>
+<p><img src="/./GANnotation/GANnotation5.png" alt="GANnotation"></p>
+
+
+<p><img src="/./GANnotation/GANnotation6.png" alt="GANnotation.vs.CR-GAN"></p>
+
+
+<h1 id="4-code"><a href="#4-code" class="headerlink" title="4. code"></a>4. code</h1><h2 id="4-1-生成器G"><a href="#4-1-生成器G" class="headerlink" title="4.1 生成器G"></a>4.1 生成器G</h2><p>生成器G输入是一张3通道的人脸图片和66通道的目标人脸关键点热力图，输出是3通道的colour image 和1通道的mask图。</p>
+<p>生成器G共分为5部分：down_conv、bottleneck、feature_layer、colour_layer、mask_layer。</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> colour_image 和 mask 怎么理解？</li>
+</ul>
+<p>$$\hat{I}&#x3D;(1-M) \circ C + M \circ I$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Generator</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, conv_dim=<span class="number">64</span>, c_dim=<span class="number">66</span>, repeat_num=<span class="number">6</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(Generator, self).__init__()</span><br><span class="line">        initial_layer = [nn.Conv2d(<span class="number">3</span>+c_dim, conv_dim, kernel_size=<span class="number">7</span>, stride=<span class="number">1</span>,padding=<span class="number">3</span>, bias=<span class="literal">False</span>)]</span><br><span class="line">        initial_layer += [nn.InstanceNorm2d(conv_dim, affine=<span class="literal">True</span>)]</span><br><span class="line">        initial_layer += [nn.LeakyReLU(<span class="number">0.2</span>, inplace=<span class="literal">True</span>)]</span><br><span class="line"></span><br><span class="line">        curr_dim = conv_dim</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line">            initial_layer += [nn.Conv2d(curr_dim, curr_dim*<span class="number">2</span>, kernel_size=<span class="number">4</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>, bias=<span class="literal">False</span>)]</span><br><span class="line">            initial_layer += [nn.InstanceNorm2d(curr_dim*<span class="number">2</span>, affine=<span class="literal">True</span>)]</span><br><span class="line">            initial_layer += [nn.LeakyReLU(<span class="number">0.2</span>, inplace=<span class="literal">True</span>)]</span><br><span class="line">            curr_dim = curr_dim * <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        self.down_conv = nn.Sequential(*initial_layer)</span><br><span class="line"></span><br><span class="line">        bottleneck = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(repeat_num):</span><br><span class="line">            bottleneck += [ResidualBlock(curr_dim)]</span><br><span class="line"></span><br><span class="line">        self.bottleneck = nn.Sequential(*bottleneck)</span><br><span class="line"></span><br><span class="line">        features = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line">            features += [nn.ConvTranspose2d(curr_dim, curr_dim//<span class="number">2</span>, kernel_size=<span class="number">4</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>, bias=<span class="literal">False</span>)]</span><br><span class="line">            features += [nn.InstanceNorm2d(curr_dim//<span class="number">2</span>, affine=<span class="literal">True</span>)]</span><br><span class="line">            features += [nn.LeakyReLU(<span class="number">0.2</span>,inplace=<span class="literal">True</span>)]</span><br><span class="line">            curr_dim = curr_dim // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        self.feature_layer = nn.Sequential(*features)</span><br><span class="line"></span><br><span class="line">        colour = [nn.Conv2d(curr_dim, <span class="number">3</span>, kernel_size=<span class="number">7</span>, stride=<span class="number">1</span>, padding=<span class="number">3</span>, bias=<span class="literal">False</span>)]</span><br><span class="line">        colour += [nn.Tanh()]</span><br><span class="line">        self.colour_layer = nn.Sequential(*colour)</span><br><span class="line"></span><br><span class="line">        mask = [nn.Conv2d(curr_dim, <span class="number">1</span>, kernel_size=<span class="number">7</span>, stride=<span class="number">1</span>, padding=<span class="number">3</span>, bias=<span class="literal">False</span>)]</span><br><span class="line">        mask += [nn.Sigmoid()]</span><br><span class="line">        self.mask_layer = nn.Sequential(*mask)</span><br><span class="line">        init_weights(self)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params"> self, x </span>):</span><br><span class="line">        down = self.down_conv(x)</span><br><span class="line">        bottle = self.bottleneck(down)</span><br><span class="line">        features = self.feature_layer(bottle)</span><br><span class="line">        col = self.colour_layer(features)</span><br><span class="line">        mask = self.mask_layer(features)</span><br><span class="line">        output = mask * ( x[:,<span class="number">0</span>:<span class="number">3</span>,:,:] - col ) + col</span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+
+<p>初始化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">net, init_type=<span class="string">&#x27;normal&#x27;</span>, gain=<span class="number">0.02</span></span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_func</span>(<span class="params">m</span>):</span><br><span class="line">        classname = m.__class__.__name__</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">hasattr</span>(m, <span class="string">&#x27;weight&#x27;</span>) <span class="keyword">and</span> (classname.find(<span class="string">&#x27;Conv&#x27;</span>) != -<span class="number">1</span> <span class="keyword">or</span> classname.find(<span class="string">&#x27;Linear&#x27;</span>) != -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> init_type == <span class="string">&#x27;normal&#x27;</span>:</span><br><span class="line">                weight_init.normal_(m.weight.data, <span class="number">0.0</span>, gain)</span><br><span class="line">            <span class="keyword">elif</span> init_type == <span class="string">&#x27;xavier&#x27;</span>:</span><br><span class="line">                weight_init.xavier_normal_(m.weight.data, gain=gain)</span><br><span class="line">            <span class="keyword">elif</span> init_type == <span class="string">&#x27;kaiming&#x27;</span>:</span><br><span class="line">                weight_init.kaiming_normal_(m.weight.data, a=<span class="number">0</span>, mode=<span class="string">&#x27;fan_in&#x27;</span>)</span><br><span class="line">            <span class="keyword">elif</span> init_type == <span class="string">&#x27;orthogonal&#x27;</span>:</span><br><span class="line">                weight_init.orthogonal_(m.weight.data, gain=gain)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">raise</span> NotImplementedError(<span class="string">&#x27;initialization method [%s] is not implemented&#x27;</span> % init_type)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">hasattr</span>(m, <span class="string">&#x27;bias&#x27;</span>) <span class="keyword">and</span> m.bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                weight_init.constant_(m.bias.data, <span class="number">0.0</span>)</span><br><span class="line">        <span class="keyword">elif</span> classname.find(<span class="string">&#x27;BatchNorm2d&#x27;</span>) != -<span class="number">1</span>:</span><br><span class="line">            weight_init.normal_(m.weight.data, <span class="number">1.0</span>, gain)</span><br><span class="line">            weight_init.constant_(m.bias.data, <span class="number">0.0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;initialize network with %s&#x27;</span> % init_type)</span><br><span class="line">    net.apply(init_func)</span><br></pre></td></tr></table></figure>
+
+<p>np.loadtxt</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">points = np.loadtxt(<span class="string">&#x27;test_images/test_1.txt&#x27;</span>).transpose().reshape(<span class="number">66</span>,<span class="number">2</span>,-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-其他"><a href="#4-2-其他" class="headerlink" title="4.2 其他"></a>4.2 其他</h2><p>作者现在只公布了demo代码。但不久就会公布训练代码，搓搓小手手期待中。</p>
+<h2 id="4-3-StarGAN-with-Triple-Consistency-Loss"><a href="#4-3-StarGAN-with-Triple-Consistency-Loss" class="headerlink" title="4.3 StarGAN-with-Triple-Consistency-Loss"></a>4.3 StarGAN-with-Triple-Consistency-Loss</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generate target domain labels randomly.</span></span><br><span class="line">rand_idx = torch.randperm(label_org.size(<span class="number">0</span>))</span><br><span class="line">label_trg = label_org[rand_idx]</span><br><span class="line"></span><br><span class="line">rand_idx = torch.randperm(label_org.size(<span class="number">0</span>))</span><br><span class="line">label_third = label_org[rand_idx]</span><br><span class="line"><span class="comment"># ================================================================================#</span></span><br><span class="line"><span class="comment">#                               Triple consistency loss.                          #</span></span><br><span class="line"><span class="comment"># ================================================================================#</span></span><br><span class="line">x_third = self.G(x_fake, c_third)</span><br><span class="line">x_third_real = self.G(x_real, c_third)</span><br><span class="line">g_loss_triple = torch.mean(torch.<span class="built_in">abs</span>(x_third - x_third_real))</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-答疑解惑"><a href="#5-答疑解惑" class="headerlink" title="5. 答疑解惑"></a>5. 答疑解惑</h1><h2 id="5-1-colour-image-和-mask-怎么理解？"><a href="#5-1-colour-image-和-mask-怎么理解？" class="headerlink" title="5.1 colour_image 和 mask 怎么理解？"></a>5.1 colour_image 和 mask 怎么理解？</h2><p>这个公式来源于</p>
+<p>paper: <a target="_blank" rel="noopener" href="http://arxiv.org/abs/1807.09251">Ganimation: Anatomically-aware facial animation from a single image</a></p>
+<p>github: <a target="_blank" rel="noopener" href="https://github.com/albertpumarola/GANimatio">https://github.com/albertpumarola/GANimatio</a></p>
+<p>project: <a target="_blank" rel="noopener" href="http://www.albertpumarola.com/#projects">http://www.albertpumarola.com/#projects</a></p>
+<p>$$\hat{I}&#x3D;(1-M) \circ C + M \circ I$$</p>
+<p>网络生成器没有直接回归整个图像，而是输出两个掩码，一个着色掩码C和一个注意力掩码A，其中，掩码A表示C的每个像素在多大程度上对输出图像有贡献，这样生成器就无需渲染与表情无关的元素，仅聚焦于定义了人脸表情的像素上。</p>
+<p>这个公式貌似比StarGAN还牛逼。能不能放在StarGAN上呢？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/01/17/GANnotation/" data-id="cla55fgd1000nwka7ar3f0etg" data-title="GANnotation" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/24/GANimation/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          GANimation
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/15/tensorboard/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">tensorboard</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/23/python-100-days/">python_100_days</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/data-VOS/">data_VOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/TVOS/">TVOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/java/">java参考</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

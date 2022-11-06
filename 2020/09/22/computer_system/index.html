@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>计算机组成原理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算机组成原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机组成原理">
+<meta property="og:url" content="http://example.com/2020/09/22/computer_system/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="计算机组成原理">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-22T15:20:26.000Z">
+<meta property="article:modified_time" content="2020-09-22T15:54:43.206Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="408">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-computer_system" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/22/computer_system/" class="article-date">
+  <time class="dt-published" datetime="2020-09-22T15:20:26.000Z" itemprop="datePublished">2020-09-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/408/">408</a>►<a class="article-category-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      计算机组成原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>计算机组成原理</p>
+<span id="more"></span>
+
+<h3 id="4-1-4-文件的物理结构-文件分配方式-上"><a href="#4-1-4-文件的物理结构-文件分配方式-上" class="headerlink" title="4.1.4 文件的物理结构(文件分配方式)上"></a>4.1.4 文件的物理结构(文件分配方式)上</h3><p>操作系统对磁盘块的管理：</p>
+<ol>
+<li>对非空闲磁盘块的管理–文件的物理结构&#x2F;文件分配方式</li>
+<li>对空闲磁盘块的管理–文件存储空间管理</li>
+</ol>
+<p>文件的物理结构&#x2F;文件分配方式：</p>
+<ol>
+<li>即文件数据如何存放在外存中，或者逻辑地址到物理地址的映射</li>
+<li>连续分配</li>
+<li>链接分配<br>3.1 隐式链接<br>3.2 显式链接</li>
+<li>索引分配</li>
+</ol>
+<p>磁盘块vs内存块：磁盘中的存储单元也被分为一个个“磁盘块”。一般情况下，磁盘块的大小与内存块、页面的大小相同。内存与磁盘之间的数据交换都是以块为基本单位。</p>
+<p>磁盘块vs文件块：在内存管理中，进程的逻辑地址被分为一个个页面，可以表示为(页面号, 块内地址)。在外存管理中，为了方便对文件数据的管理，文件的逻辑地址也被分为一个个的文件块，也可以表示为(逻辑块号，块内地址)。</p>
+<p>用户通过逻辑地址操作自己的文件，而操作系统负责实现从<strong>逻辑地址到物理地址的映射</strong></p>
+<p><strong>文件分配方式–连续分配</strong></p>
+<p>连续分配实现每个文件在磁盘上占有一组连续的块</p>
+<p>文件目录</p>
+<table>
+<thead>
+<tr>
+<th align="center">文件名</th>
+<th align="center">…</th>
+<th align="center">起始块号</th>
+<th align="center">长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">aaa</td>
+<td align="center">…</td>
+<td align="center">4</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">bbb</td>
+<td align="center">…</td>
+<td align="center">10</td>
+<td align="center">5</td>
+</tr>
+</tbody></table>
+<p>操作系统找到该文件的目录项(FCB)<br>物理块号&#x3D;起始块号+逻辑块号</p>
+<p>优点：连续分配方式支持顺序访问和直接访问(即随机访问)，顺序读写速度最快。<br>缺点：对文件的拓展不方便，存储利用率低，会产生磁盘碎片(紧凑技术)</p>
+<p><strong>文件分配方式–链接分配</strong></p>
+<p>链接分配采用离散分配的方式，为文件分配离散的磁盘块，分为隐式链接和显式链接两种。</p>
+<p>链接分配–隐式链接</p>
+<p>目录中记录文件的起始块号和结束块号，每个磁盘块都会保存指向下一个盘块的指针，这些指针对用户是透明的。</p>
+<p>隐式链接只支持顺序访问，不支持随机访问。<br>不会产生碎片问题，方便拓展文件。</p>
+<p>链接分配–显式链接</p>
+<p>把用于链接文件各物理块的指针显式存放在一张表中，即文件分配表(FAT):物理块号–下一块，目录中只需要记录文件的起始块号。</p>
+<p>一个磁盘仅设置一张FAT。开机时，FAT读入内存，并常驻内存。FAT的各个表项在物理上连续存储，且物理块号字段可以隐含。</p>
+<p>采用显式链接方式的文件，支持顺序访问，也支持随机访问(多次访问FAT表，并不依次访问之前的磁盘块，块号的转换过程并不需要访问磁盘)，所以相比隐式链接来说，访问速度很快。<br>不会产生外部碎片，支持文件扩展。<br>文件分配表需要占用一定的存储空间</p>
+<h3 id="4-1-4-文件的物理结构-文件分配方式-下"><a href="#4-1-4-文件的物理结构-文件分配方式-下" class="headerlink" title="4.1.4 文件的物理结构(文件分配方式)下"></a>4.1.4 文件的物理结构(文件分配方式)下</h3><p>操作系统对磁盘块的管理：</p>
+<ol>
+<li>对非空闲磁盘块的管理–文件的物理结构&#x2F;文件分配方式</li>
+<li>对空闲磁盘块的管理–文件存储空间管理</li>
+</ol>
+<p>文件的物理结构&#x2F;文件分配方式：</p>
+<ol>
+<li>即文件数据如何存放在外存中，或者逻辑地址到物理地址的映射</li>
+<li>连续分配</li>
+<li>链接分配<br>3.1 隐式链接<br>3.2 显式链接</li>
+<li>索引分配</li>
+</ol>
+<p><strong>文件分配方式–索引分配</strong></p>
+<p>索引分配方式允许文件离散地分配在各个磁盘中，系统为每个文件建立一张索引表，索引表记录了文件的各个逻辑块对应的物理块(类似内存管理中的页面，记录逻辑页面到物理页面的映射)。索引表存放的磁盘块称为索引块。文件数据存放的磁盘块称为数据块。</p>
+<p>文件目录：文件名–索引块<br>索引表：逻辑块号–物理块号</p>
+<p>显式链接：文件分配表FAT是一个磁盘对应一张表<br>索引分配：一个文件对应一张表</p>
+<p>索引分配支持顺序访问和随机访问，支持文件扩展</p>
+<p>假设磁盘块大小为1KB，一个索引表表项占4B，则一个磁盘块只能存放256个索引项。</p>
+<p>索引块的大小是有限制的，如果文件太大，一张索引表太大，无法存储在一个索引块上时，需要以下方式解决：</p>
+<ol>
+<li>链接方案</li>
+<li>多层索引</li>
+<li>混合索引</li>
+</ol>
+<p><strong>文件分配方式–索引分配–链接方案</strong></p>
+<p>如果索引表太大，一个索引块装不下，那么可以将多个索引块隐式链接存放，即索引块中存放指向下一个索引块的链接。</p>
+<p>文件项：文件名–索引块</p>
+<p>不支持随机访问，效率低<br>想要访问第i号索引块，必须先访问0~i-1号索引块，导致磁盘I&#x2F;O次数太多</p>
+<p><strong>文件分配方式–索引分配–多层索引</strong></p>
+<p>建立多层索引，类似多级页表，使第一层指向第二层的索引块。</p>
+<p>文件项：文件名–索引块(一级索引表)</p>
+<p>假设磁盘块大小为1KB，一个索引表项占4B，则一个磁盘块只能存放256个索引项。<br>若某文件采用两层索引，则该文件的最大长度可以到256 * 256 * 1KB&#x3D;64MB</p>
+<p>假设要访问1026号逻辑块，则 1026&#x2F;256&#x3D;4, 1026%256&#x3D;2, 先将一级索引表调入内存，查询4号表项，将4号表项对应的磁盘块即二级索引表调入内存，再查询二级索引表的2号表项即可知道1026号逻辑块存放的磁盘块号。所以访问目标数据块，需要3次磁盘I&#x2F;O</p>
+<p>采用K层索引结构，且顶级索引表未调入内存，则访问一个数据块只需要K+1次读磁盘操作，相比链接方案少很多。</p>
+<p>对于小文件，每次查询又太浪费磁盘查询次数。</p>
+<p><strong>文件分配方式–索引分配–混合索引</strong></p>
+<p>混合索引方式：多种索引分配方式的结合。既包含直接地址索引、一级间接索引(指向单层索引表)、两级间接索引(指向两层索引表)。</p>
+<p>8个直接地址：一共对应8个磁盘块<br>一级间接索引：对应256个磁盘块<br>二级间接索引：对应256*256个磁盘块</p>
+<p>这种结构的索引支持的最大文件长度为(8+256+256 * 256)*1KB&#x3D;65800KB</p>
+<p>若顶级索引表还没有读入内存<br>访问0<del>7号逻辑块：两次读磁盘<br>访问8</del>263：三次<br>访问264~65799：四次</p>
+<p><strong>回顾</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">how</th>
+<th align="center">目录项内容</th>
+<th align="center">优点</th>
+<th align="center">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">顺序分配</td>
+<td align="center">连续的磁盘块</td>
+<td align="center">起始块号，文件长度</td>
+<td align="center">顺序存取速度快、支持随机访问</td>
+<td align="center">会产生碎片，不利于文件拓展</td>
+</tr>
+<tr>
+<td align="center">隐式链接</td>
+<td align="center">除文件的最后一个盘快外，每个盘快中都存有指向下一个盘块的指针</td>
+<td align="center">起始块号、结束块号</td>
+<td align="center">可以解决碎片问题，外存利用率高，文件扩展实现方便</td>
+<td align="center">只能顺序访问，不能随机访问</td>
+</tr>
+<tr>
+<td align="center">显式链接</td>
+<td align="center">建立一张文件分配表FAT，显式记录盘块的先后关系，开机后FAT常驻内存</td>
+<td align="center">起始块号</td>
+<td align="center">除了拥有隐式链接的优点外，还可以通过查询内存中的FAT实现随机访问</td>
+<td align="center">FAT需要占用一定的存储空间</td>
+</tr>
+<tr>
+<td align="center">索引分配</td>
+<td align="center">为文件数据块建立索引表，若文件太大，可以采用链接方案、多层索引、混合索引</td>
+<td align="center">链接方案记录的是第一个索引块的块号，多层和混合索引记录的是顶级索引块的块号</td>
+<td align="center">支持随机访问，易于实现文件的扩展</td>
+<td align="center">索引表需要占用一定的存储空间。访问数据块钱需要先读入索引块。若采用链接方案，查找索引块需要很多次磁盘操作</td>
+</tr>
+</tbody></table>
+<h3 id="4-1-5-文件存储管理"><a href="#4-1-5-文件存储管理" class="headerlink" title="4.1.5 文件存储管理"></a>4.1.5 文件存储管理</h3><p>操作系统对磁盘块的管理：</p>
+<ol>
+<li>对非空闲磁盘块的管理–文件的物理结构&#x2F;文件分配方式</li>
+<li>对空闲磁盘块的管理–文件存储空间管理</li>
+</ol>
+<p>文件存储空间管理</p>
+<ol>
+<li>存储空间的划分与初始化<br>1.1 文件卷(逻辑卷)概念<br>1.2 目录区与文件区</li>
+<li>几种管理方法<br>2.1 空闲表法<br>2.2 空闲链表法：空闲盘块链、空闲盘区链<br>2.3 位示图法<br>2.4 成组链接法</li>
+</ol>
+<p>三个角度：</p>
+<ol>
+<li>用什么方式记录、组织空闲块</li>
+<li>如何分配磁盘块</li>
+<li>如何回收磁盘块</li>
+</ol>
+<p><strong>存储空间的划分与初始化</strong>：</p>
+<p>磁盘分区：C盘、D盘等等<br>存储空间的划分：将物理磁盘划分为一个个文件卷(逻辑卷、逻辑盘)<br>文件卷：包含目录区和文件区。目录区主要存放文件目录信息(FCB)、用于磁盘存取空间管理的信息<br>有的系统支持超大型文件，可支持由多个物理磁盘组成一个文件卷</p>
+<p><strong>存储空间管理–空闲表法</strong></p>
+<p>用什么方式记录、组织空闲块？<br>用空闲盘块表记录空闲块区间：第一个空闲盘块号，空闲盘块数</p>
+<p>如何分配磁盘块？<br>与内存管理中的动态分区分配类似，为一个文件分配连续的存储空间。同样可采用首次适应、最佳适应、最坏适应等算法为文件分配哪个区间。</p>
+<p>如何回收磁盘块：与内存管理中的动态分区分配类似，回收时注意表项的合并问题。</p>
+<p><strong>存储空间管理–空闲链表法</strong></p>
+<p>空闲链表法：</p>
+<ol>
+<li>空闲盘块链：以盘块为单位组成一条空闲链，空闲盘块中存储这下一个空闲盘块的指针</li>
+<li>空闲盘区链：以盘区(连续的盘块为一个盘区)为单位组成一条空闲链，空闲盘区中的第一个盘块记录了盘区的长度、下一个盘区的指针</li>
+</ol>
+<p>空闲盘块链：</p>
+<p>记录：操作系统记录着链头、链尾指针<br>分配：链头分配，并修改空闲链的链头指针<br>回收：链尾回收，并修改空闲链的链尾指针<br>优点：适用于离散分配的物理结构，为文件分配多个盘块时需要重复多次操作</p>
+<p>空闲盘区链：</p>
+<p>记录：操作系统记录着链头、链尾指针<br>分配：可以采用首次适应、最佳适应等方法，从链头开始检索，按照算法规则找到一个符合要求的空闲盘区，或者将不同盘区的盘块同时分配给一个文件<br>回收：注意回收区与空闲盘区相邻</p>
+<p><strong>存储空间管理–位示图法</strong></p>
+<p>位示图：每个二进制位对应一个盘块。位示图一般采用连续的“字”表示。例如0表示空闲，1表示已分配，一个字的字长为16位，表示连续的16个磁盘的空闲情况，字中的每一位对应一个磁盘。因此可以用(字号，位号)对应一个盘块号，或者(行号，列号)<br>(i,j)–&gt;b:b&#x3D;n*i+j, i&#x3D;b&#x2F;n, j&#x3D;b%n</p>
+<p>分配：顺序扫描位示图，找到K个相邻或者不相邻的空闲磁盘块，根据字号、位号算出对应的盘块号，将相应盘块分配给文件，将相应位设置为1<br>回收：根据回收的盘块号计算出对应的字号、位号，将相应位设置为0</p>
+<p><strong>存储空间管理–成组链接法</strong></p>
+<p>空闲表法、空闲链表法不适用于大型文件系统，因为空闲表或者空闲链表可以太大。UNIX系统中采用了成组链接法对磁盘空闲块进行管理</p>
+<p>文件卷的目录区中专门用一个磁盘块作为超级块，当系统启动时需要将超级块读入内存，并且要保证内存与外存中的超级块数据一致。</p>
+<p>超级块记录了：下一组空闲盘块数，对应的空闲块号。并且第一个空闲块的记录格式与超级块的格式相同(下一组空闲盘块数，对应的空闲块号)，即为新的“超级块”，其他空闲块则是简单的空闲块。或者说第一个空闲块是特殊的空闲块，用于套娃。<br>若当前“超级块”没有下一个“超级块”，第一个空闲块应该设置为某个特殊值，并且下一组空闲盘块数比正常的超级块的下一组空闲盘块数少1<br>超级块的下一组空闲盘块数有上限</p>
+<p>分配：如果空闲盘块数比需求大，则直接分配，如果空闲盘块数等于需求，则复制下一级“超级块”的链接到超级块中<br>回收：如果可以放在超级块中，则放入超级块中，如果超级块已满，则复制超级块的链接到新的磁盘块，超级块指向新的磁盘块，此时超级块的下一组盘块数为1，将回收区放入超级块</p>
+<h3 id="4-1-6-文件的基本操作"><a href="#4-1-6-文件的基本操作" class="headerlink" title="4.1.6 文件的基本操作"></a>4.1.6 文件的基本操作</h3><p>操作系统向上提供的最基本的功能：</p>
+<ol>
+<li>创建文件(create系统调用)</li>
+<li>删除文件 delete</li>
+<li>读文件 read</li>
+<li>写文件 write</li>
+<li>打开 open</li>
+<li>关闭 close</li>
+</ol>
+<p><strong>创建文件</strong></p>
+<ol>
+<li>在外存中找到文件所需的空间</li>
+<li>根据文件存放路径的信息找到该目录对应的目录文件，在目录中中创建该文件对应的目录项。目录项中包含了文件名、文件在外存中的存放位置等信息。</li>
+</ol>
+<p><strong>删除文件</strong></p>
+<ol>
+<li>找到文件名对应的目录项</li>
+<li>确定回收文件占用的磁盘块</li>
+<li>删除文件对应的目录项</li>
+</ol>
+<p><strong>打开文件</strong></p>
+<ol>
+<li>找到文件名对应的目录项，检查用户的操作权限</li>
+<li>将目录项复制到内存中的“打开文件表”中。并将对应表目的编号返回给用户。之后用户使用打开文件表的编号来指明要操作的文件。</li>
+</ol>
+<p>系统的打开文件表(整个系统只有一张)：编号，文件名…，打开计数器<br>用户进程的打开文件表：编号，文件名，…，系统表索引号<br>其中打开计数器用于记录该文件被几个进程打开，可以方便地实现某些文件管理的功能。</p>
+<p>索引号也被称为文件描述符</p>
+<p><strong>关闭文件</strong></p>
+<ol>
+<li>将进程的打开文件表相应表项删除</li>
+<li>回收分配给该文件的内存空间等资源</li>
+<li>系统打开文件表的打开计数器count减1，若count&#x3D;0，则删除对应表项</li>
+</ol>
+<p><strong>读文件</strong></p>
+<p>从读指针指向的外存中，将用户指定大小的数据读入用户指定的内存区域中。</p>
+<p><strong>写文件</strong></p>
+<p>将文件数据从内存写入外存</p>
+<h3 id="4-1-7-文件共享"><a href="#4-1-7-文件共享" class="headerlink" title="4.1.7 文件共享"></a>4.1.7 文件共享</h3><p>文件共享：</p>
+<ol>
+<li>基于索引结点的共享方式(硬链接)</li>
+<li>基于符号链的共享方式(软链接)</li>
+</ol>
+<p><strong>基于索引结点的共享方式(硬链接)</strong></p>
+<p>索引结点，是一种文件目录瘦身策略。将文件名之外的其他信息放到索引结点中。这样目录项只需要文件名、索引结点指针。</p>
+<p>索引结点中设置一个链接计数变量count，用于表示链接到本索引结点上的用户目录项数。</p>
+<p>不同用户的目录指向同一个索引结点。<br>文件名可以不同。<br>删除文件时只是count减1.</p>
+<p><strong>基于符号链的共享方式(软链接)</strong></p>
+<p>Link类型的文件，记录共享文件的存放路径，可以简单理解成快捷方式，根据存放路径一层层找到共享文件。<br>如果共享文件删除，那么软链接文件还在，但是已经无法找到共享文件。<br>由于软链接的方式访问共享文件时需要查询多级目录，会有多次磁盘I&#x2F;O，因此比较慢。</p>
+<h3 id="4-1-8-文件保护"><a href="#4-1-8-文件保护" class="headerlink" title="4.1.8 文件保护"></a>4.1.8 文件保护</h3><p>文件保护：</p>
+<ol>
+<li>保护文件数据的安全</li>
+<li>口令保护</li>
+<li>加密保护</li>
+<li>访问控制</li>
+</ol>
+<p><strong>口令保护</strong></p>
+<p>口令一般存放在文件对应的FCB或者索引结点中<br>优点：空间开销和时间开销小<br>缺点：正确的口令存放在系统内部，不够安全</p>
+<p><strong>加密保护</strong></p>
+<p>使用密码对文件数据进行加密，解密后才能看到正确的数据<br>优点：保密性强，不需要在系统中存储密码<br>缺点：加密&#x2F;解密需要一定的时间</p>
+<p><strong>访问控制</strong></p>
+<p>在每个文件的FCB或者索引结点中增加一个访问控制列表(Access-Control List, ACL)，该表中记录了各个用户可以对该文件执行哪些操作。</p>
+<p>访问类型：</p>
+<ul>
+<li>读</li>
+<li>写</li>
+<li>执行：将文件装入内存并执行</li>
+<li>添加</li>
+<li>删除</li>
+<li>列表清单：列出文件名和文件属性</li>
+</ul>
+<p>精简的访问列表：以组为单位，标记各组用户对文件的权限</p>
+<h3 id="4-1-9-文件系统的层次结构"><a href="#4-1-9-文件系统的层次结构" class="headerlink" title="4.1.9 文件系统的层次结构"></a>4.1.9 文件系统的层次结构</h3><p>从上到下依次分为：</p>
+<ol>
+<li>用户接口：提供read等系统调用</li>
+<li>文件目录系统：根据文件路径找到相应的FCB或者索引结点</li>
+<li>存取控制模块：验证用户访问权限</li>
+<li>逻辑文件系统与文件信息缓冲区：文件记录号–&gt;对应的逻辑地址</li>
+<li>物理文件系统：逻辑地址–&gt;物理地址<br>6.1 辅助分配模块：分配和回收存储空间<br>6.2 设备管理程序模块：与硬件交互</li>
+</ol>
+<h2 id="4-2-磁盘"><a href="#4-2-磁盘" class="headerlink" title="4.2 磁盘"></a>4.2 磁盘</h2><h3 id="4-2-1-磁盘的结构"><a href="#4-2-1-磁盘的结构" class="headerlink" title="4.2.1 磁盘的结构"></a>4.2.1 磁盘的结构</h3><p>磁盘的结构：</p>
+<ol>
+<li>磁盘、磁道、扇区的概念</li>
+<li>如何在磁盘中读&#x2F;写数据</li>
+<li>盘面、柱面的概念</li>
+<li>磁盘的物理地址</li>
+<li>磁盘的分类</li>
+</ol>
+<p>磁盘的盘面被划分成一个个磁道。<br>一个磁道又被划分成一个个扇区，每个扇区就是一个磁盘块。每个扇区存放的数据量相同</p>
+<p>磁盘块的物理地址：(柱面号，盘面号，扇区号)</p>
+<p>磁盘的分类：</p>
+<ol>
+<li>移动头磁盘、固定头磁盘</li>
+<li>固定盘磁盘、可换盘磁盘</li>
+</ol>
+<h3 id="4-2-2-磁盘调度算法"><a href="#4-2-2-磁盘调度算法" class="headerlink" title="4.2.2 磁盘调度算法"></a>4.2.2 磁盘调度算法</h3><p>磁盘调度算法：</p>
+<ol>
+<li>一次磁盘读&#x2F;写操作所需的时间<br>1.1 寻找时间<br>1.2 延迟时间<br>1.3 传输时间</li>
+<li>磁盘调度算法<br>2.1 先来先服务 FCFS<br>2.2 最短寻找时间优先 SSTF<br>2.3 扫描算法 SCAN<br>2.4 循环扫描算法C-SCAN</li>
+</ol>
+<p><strong>一次磁盘读写操作所需的时间</strong></p>
+<p>寻找时间(寻道时间) $T_s$</p>
+<ol>
+<li>启动磁道臂时间 s</li>
+<li>移动磁头时间 m*n</li>
+</ol>
+<p>$T_s&#x3D;s+m*n$</p>
+<p>延迟时间 $T_R$</p>
+<p>旋转磁盘时间，设转速为r，平均延迟时间 $T_R&#x3D;1&#x2F;(2r)$</p>
+<p>传输时间 $T_t$</p>
+<p>磁盘读出或者写入时间，设转速，设转速为r，读或写的字节数为b，每个磁道上的字节数为N。则：</p>
+<p>$T_t&#x3D;b&#x2F;(rN)$</p>
+<p><strong>扫描算法</strong></p>
+<p>磁头移动到最外侧磁道的时候才能往内移动，移动到最内侧磁道的时候才能往外移动。</p>
+<p>SCAN算法对各个位置的磁道的响应频率不平均</p>
+<p><strong>LOOK算法</strong></p>
+<p>如果在磁头移动方向上已经没有别的请求，就可以立即改变磁头移动方向</p>
+<p><strong>循环扫描算法C-SCAN</strong></p>
+<p>磁头只能朝某个特定方向移动时才处理磁道访问请求，返回时快速移动到起始端而不处理任何请求。为了解决扫描算法对各个位置的磁道响应频率不平均的问题。</p>
+<p><strong>C-LOOK算法</strong></p>
+<h3 id="4-2-3-减少磁盘延迟时间的方法"><a href="#4-2-3-减少磁盘延迟时间的方法" class="headerlink" title="4.2.3 减少磁盘延迟时间的方法"></a>4.2.3 减少磁盘延迟时间的方法</h3><p>延迟时间：将目标扇区转到磁头下面所花的时间。或者说读入连续地址时，尽量减少时间。</p>
+<p>磁头读入一个扇区数据后需要一小段时间处理，如果逻辑上相邻的扇区在物理上也相邻，则读入几个连续的逻辑扇区，可能需要很长的延迟时间。</p>
+<p><strong>减少磁盘延迟时间的方法–交替编号</strong></p>
+<p>逻辑上相邻的扇区在物理上有一定的间隔</p>
+<p><strong>磁盘地址结构的设计</strong></p>
+<p>为什么磁盘的物理地址是(柱面号，盘面号，扇区号)，而不是(盘面号，柱面号，扇区号)</p>
+<p>假设某磁盘有8个柱面&#x2F;磁道(假设最内侧柱面&#x2F;磁道号为0)，4个盘面，8个扇区。则可以用3个二进制为表示柱面，2个二进制位表示盘面，3个二进制位表示扇区。</p>
+<p>读取连续的物理地址(00,000,000)-(00,001,111)的扇区</p>
+<p>(盘面号，柱面号，扇区号):</p>
+<p>(00,000,000)-(00,000,111) 转两圈可读完<br>(00,001,000)-(00,001,111) 启动磁头臂，移动到下一个磁道</p>
+<p>(柱面号，盘面号，扇区号):</p>
+<p>(000,00,000)-(000,00,111) 转两圈可读完<br>(000,01,000)-(000,01,111) 激活相邻盘面的磁头</p>
+<p>读取地址连续的磁盘块时，采用(柱面号，盘面号，扇区号)的地址结构可以减少磁头移动消耗的时间。</p>
+<p><strong>减少磁盘延迟时间的方法–错位命名</strong></p>
+<p>(000,00,111)-(000,01,000) 磁头读完0号盘面的111扇区，并经过一段时间的处理后，磁头已经划过1号盘面的000扇区。</p>
+<p>所以0号盘面的0号扇区对应的时1号盘面的111扇区</p>
+<h3 id="4-2-4-磁盘的管理"><a href="#4-2-4-磁盘的管理" class="headerlink" title="4.2.4 磁盘的管理"></a>4.2.4 磁盘的管理</h3><p>磁盘的管理：</p>
+<ol>
+<li>磁盘初始化</li>
+<li>引导块</li>
+<li>坏块的管理</li>
+</ol>
+<p><strong>磁盘初始化</strong></p>
+<p>step1：低级格式化(物理格式化)。将磁盘的各个磁道划分为扇区。一个扇区通常可以分为头、数据区域(如512B)、尾三个部分组成。管理扇区的各种数据结构一般存放在头、尾两个部分，包括扇区校验码。<br>step2：磁盘分区。每个分区由若干个相邻柱面组成。<br>step3：逻辑格式化，创建文件系统。包括创建文件系统的根目录、初始化存储空间管理所用的数据结构(如 位示图、空区分区表)</p>
+<p><strong>引导块</strong></p>
+<p>计算机开机的一系列初始化工作时通过执行初始化程序(自举程序)完成的。<br>初始化程序可以放在ROM(只读存储器)中。ROM的数据在出厂时就已经写入了，并且以后不能再修改。<br>ROM一般在出厂时就集成在主板上</p>
+<p>完整的初始化程序放在ROM中会导致 ROM中的数据无法更改，不方便。<br>所以ROM只存放很小的 “自举装入程序”，完整的自举程序存放在磁盘的启动块(即引导块&#x2F;启动分区)上，启动块位于磁盘的固定位置。<br>开机时计算机先运行“自举装入程序”，通过执行该程序就可以找到引导块，并将完整的“自举程序”装入内存，完成初始化。<br>拥有启动分区的磁盘称为启动磁盘或者系统磁盘</p>
+<p><strong>坏块的管理</strong></p>
+<p>坏块：坏了、无法正常使用的扇区。这属于硬件故障，操作系统是无法修复的。应该将坏块标记出来，以免错误地使用到它。</p>
+<p>对于简单的磁盘，可以在逻辑格式化时(建立文件系统)对整个磁盘进行坏块检查，表明哪些扇区是坏扇区。比如，在FAT表中标明。(在这种方式中，坏块对操作系统不透明)</p>
+<p>对于复杂的磁盘，磁盘控制器(磁盘设备内部的一个硬件部件)会维护一个坏块链表。磁盘出厂前进行低级格式化时就会将坏块链进行初始化。同时，会保留一些备用扇区，用于替换坏块。这种方案称为扇区备用。且这种方式中，坏块对操作系统不透明。</p>
+<h1 id="5-I-x2F-O设备"><a href="#5-I-x2F-O设备" class="headerlink" title="5. I&#x2F;O设备"></a>5. I&#x2F;O设备</h1><h2 id="5-1-I-x2F-O设备"><a href="#5-1-I-x2F-O设备" class="headerlink" title="5.1 I&#x2F;O设备"></a>5.1 I&#x2F;O设备</h2><h3 id="5-1-1-I-x2F-O设备的基本概念和分类"><a href="#5-1-1-I-x2F-O设备的基本概念和分类" class="headerlink" title="5.1.1 I&#x2F;O设备的基本概念和分类"></a>5.1.1 I&#x2F;O设备的基本概念和分类</h3><p>操作系统提供的功能：</p>
+<ol>
+<li>处理机管理</li>
+<li>存储器管理</li>
+<li>文件管理</li>
+<li>设备管理</li>
+</ol>
+<p>I&#x2F;O设备的基本概念和分类</p>
+<ol>
+<li>什么是I&#x2F;O设备</li>
+<li>按使用特性分类</li>
+<li>按传输速率分类</li>
+<li>按信息交换的单位分类</li>
+</ol>
+<p><strong>什么是I&#x2F;O设备</strong></p>
+<p>UNIX系统将外部设备抽象为一种特殊的文件，用户可以使用与文件操作系统的方式对外部设备进行操作。</p>
+<p>Write操作：向外部设备写出数据<br>Read操作：向外部设备读入数据</p>
+<p><strong>按使用特性分类</strong></p>
+<p>人机交互类外部设备<br>存储设备<br>网络通信设备</p>
+<p><strong>按信息交换的单位分类</strong></p>
+<p>块设备：以块为单位，可寻址，即可以随机地读写任一块，例如磁盘<br>字符设备：以字符为单位，不可寻址，输入输出常采用中断驱动方式，例如键盘</p>
+<h3 id="5-1-2-I-x2F-O控制器"><a href="#5-1-2-I-x2F-O控制器" class="headerlink" title="5.1.2 I&#x2F;O控制器"></a>5.1.2 I&#x2F;O控制器</h3><p>I&#x2F;O设备：</p>
+<ol>
+<li>机械单位</li>
+<li>电子部件：I&#x2F;O控制器(又称为设备控制器)</li>
+</ol>
+<p>CPU无法直接控制I&#x2F;O设备，需要通过I&#x2F;O控制器(又称为设备控制器)控制设备。</p>
+<p>I&#x2F;O控制器的功能：</p>
+<ol>
+<li>接受和识别CPU发出的命令：控制寄存器</li>
+<li>向CPU报告设备的状态：状态寄存器</li>
+<li>数据交换：数据寄存器</li>
+<li>地址识别：用于识别哪个寄存器</li>
+</ol>
+<p>I&#x2F;O控制器的组成：</p>
+<ol>
+<li>CPU与控制器的接口</li>
+<li>I&#x2F;O逻辑：负责接受和识别CPU命令，并负责对设备发出命令</li>
+<li>控制器与设备的接口1, 2,…, i (多个接口)</li>
+</ol>
+<p>备注：</p>
+<ol>
+<li>一个I&#x2F;O控制可能会对应多个设备</li>
+<li>数据寄存器、控制寄存器、状态寄存器可能有多个(每个控制&#x2F;状态寄存器对应一个具体的设备)，且这些寄存器都要有相应的地址，才能方便CPU操作。</li>
+<li>寄存器编址：<br>3.1 或者让这些寄存器占用内存地址的一部分，称为内存映像I&#x2F;O，可以采用对内存进行操作的指令对控制器进行操作<br>3.2 或者采用I&#x2F;O专用地址，即寄存器独立编址，需要设置专门的指令操作控制器</li>
+</ol>
+<h3 id="5-1-3-I-x2F-O控制方式"><a href="#5-1-3-I-x2F-O控制方式" class="headerlink" title="5.1.3 I&#x2F;O控制方式"></a>5.1.3 I&#x2F;O控制方式</h3><p>I&#x2F;O控制方式</p>
+<ol>
+<li>程序直接控制方式</li>
+<li>中断驱动方式</li>
+<li>DMA方式</li>
+<li>通道控制方式</li>
+</ol>
+<p>考察点：</p>
+<ol>
+<li>完成一次读写操作的流程</li>
+<li>CPU干预的频率</li>
+<li>数据传送的单位</li>
+<li>数据的流向</li>
+<li>优缺点</li>
+</ol>
+<p><strong>程序直接控制方式</strong></p>
+<p>完成一次读写操作的流程：轮询</p>
+<ol>
+<li>CPU向控制器发出读指令，设备启动，并且状态寄存器设为1(未就绪)</li>
+<li>轮询检查控制器的状态。若是1，说明还没有准备好要输入的数据</li>
+<li>输入设备准备好数据后将数据传给控制器，并报告自身状态</li>
+<li>控制器将输入的数据放到数据寄存器中，并将状态改为0(已就绪)</li>
+<li>CPU发现设备已就绪，即可将数据寄存器中的内容读入CPU的寄存器中，再把CPU寄存器中的内容放入内存。</li>
+</ol>
+<p>CPU干预的频率：</p>
+<p>很频繁，I&#x2F;O开始之前、完成之后都需要CPU介入，<br>在等待I&#x2F;O完成的过程中CPU需要不断地轮询检查。</p>
+<p>数据传送的单位：字</p>
+<p>数据的流向：</p>
+<p>读：I&#x2F;O设备–&gt;CPU–&gt;内存<br>写：内存–&gt;CPU–&gt;I&#x2F;O设备<br>每个字的读写都需要CPU帮助</p>
+<p>优点：实现简单<br>缺点：CPU利用率低</p>
+<p><strong>中断驱动方式</strong></p>
+<p>引入中断机制。</p>
+<p>CPU发出读写指令后，将等待I&#x2F;O的进程阻塞，执行其他进程。当I&#x2F;O完成后，控制器向CPU发出一个中断信号，CPU检测到中断信号，会转去执行中断处理程序处理该中断。处理中断的过程中，CPU从I&#x2F;O控制器读一个字的数据传送到CPU寄存器，再写入主存。</p>
+<p>备注：</p>
+<ol>
+<li>CPU会在每个指令周期的末尾检查中断</li>
+<li>中断处理过程中需要保存、恢复进程的运行环境</li>
+</ol>
+<p>CPU干预的频率：</p>
+<p>每次I&#x2F;O操作开始之前、完成之后需要CPU介入。<br>等待I&#x2F;O完成的过程中CPU可以切换到别的进程执行。</p>
+<p>数据传送的单位：字</p>
+<p>数据的流向：</p>
+<p>读操作：I&#x2F;O设备–&gt;CPU–&gt;内存<br>写操作：内存–&gt;CPU–&gt;I&#x2F;O设备</p>
+<p>优点：CPU与I&#x2F;O设备可以并行工作<br>缺点：每个字在I&#x2F;O设备与内存之间的传输，都需要经过CPU。而且贫寒的中断处理会消耗较多的CPU时间</p>
+<p><strong>DMA方式</strong></p>
+<p>与“中断驱动方式”相比，DMA方式(Direct Memory Access 直接存储器存取。主要用于块设备的I&#x2F;O控制)有几个改进：</p>
+<ol>
+<li>数据的传送单位是块</li>
+<li>数据的流向是 设备&lt;–&gt;内存，不需要CPU作为中转站</li>
+<li>仅在传送一个或者多个数据块的开始和结束时，才需要CPU干预</li>
+</ol>
+<p>开始：CPU 指明此次要进行的操作；结束：控制器完成操作后，向CPU发出中断信号</p>
+<p>DMA控制器的组成：</p>
+<ol>
+<li>主机-控制器接口<br>DR 数据寄存器<br>MAR 内存地址寄存器<br>DC 数据计数器<br>CR 命令&#x2F;状态寄存器<br>2</li>
+</ol>
+<p>磁盘和内存之间的数据传送单位：字</p>
+<p>CPU干预的频率：仅在传送一个或者多个数据块的开始或者结束时</p>
+<p>数据传送的单位：</p>
+<p>每次读写一个或者多个块(注意：每次读写的只能是连续的多个块，且这些块读入内存后，在内存中也必须是连续的)</p>
+<p>数据流向：I&#x2F;O设备&lt;–&gt;内存</p>
+<p>优点：数据传输效率进一步增加，CPU与I&#x2F;O设备的并行性得到提升<br>缺点：CPU的一条I&#x2F;O指令，只能读写一个或者多个连续的数据块。</p>
+<p><strong>通道控制方式</strong></p>
+<p>通道：一种硬件，可以理解为 弱鸡版的CPU。通道可以识别并执行一系列通道指令。</p>
+<ol>
+<li>CPU向通道发出I&#x2F;O指令。仅仅指明通道程序在内存中的位置，并指明要操作的是哪个I&#x2F;O设备。之后CPU就切换到其他进程执行了。</li>
+<li>通道执行内存中的通道程序(完整的程序在内存中，CPU仅仅发出简单的I&#x2F;O指令，记录了要读入写出的数据以及对应的地址)</li>
+<li>通道执行完规定的任务后，向CPU发出中断信号，之后CPU对中断进行处理。</li>
+</ol>
+<p>CPU干预的频率：</p>
+<p>极低，通道会根据CPU的指示执行相应的通道程序，只有完成一组数据块的读写后才需要发出中断信号，请求CPU干预。</p>
+<p>数据传送的单位：每次读写一组数据块</p>
+<p>数据的流向：(在通道的控制下进行)：I&#x2F;O 设备&lt;–&gt;内存</p>
+<p>缺点：实现复杂，需要专门的通道硬件支持<br>优点：CPU、通道、I&#x2F;O设备可以并行工作，资源利用率很高</p>
+<p>一个通道可以控制多个I&#x2F;O控制器，一个I&#x2F;O控制器可以控制多个设备。</p>
+<h3 id="5-1-4-I-x2F-O软件层次结构"><a href="#5-1-4-I-x2F-O软件层次结构" class="headerlink" title="5.1.4 I&#x2F;O软件层次结构"></a>5.1.4 I&#x2F;O软件层次结构</h3><p>I&#x2F;O软件的层次</p>
+<ol>
+<li>用户层软件</li>
+<li>设备独立性软件</li>
+<li>设备驱动程序</li>
+<li>中断处理程序</li>
+<li>硬件</li>
+</ol>
+<p>其中 设备独立性软件、设备驱动程序、中断处理程序 属于 操作系统的内核部分，属于核心态，称为 I&#x2F;O系统，或称 I&#x2F;O 核心子系统<br>用户层软件 属于 用户态</p>
+<p><strong>用户层软件</strong></p>
+<p>用户层软件实现了与用户交互的接口，用户可直接使用该层提供的、与I&#x2F;O操作相关的库函数对设备进行操作，比如printf函数</p>
+<p><strong>设备独立性软件</strong></p>
+<p>设备独立性软件向上提供 系统调用，例如write系统调用。用户层软件将用户请求翻译成格式化的I&#x2F;O请求，并通过系统调用请求操作系统内核的服务。</p>
+<p>Windows操作系统向外提供的一系列系统调用，但是由于系统调用的格式严格，使用麻烦，因此在用户层上封装了一系列更方便的库函数接口供用户使用(Windows API)</p>
+<p>设备独立性软件，又称设备无关性软件。与设备的硬件特性无关的功能几乎都在都这一层实现。</p>
+<p>设备独立性软件主要实现的功能：</p>
+<ol>
+<li>向上层提供统一的调用接口(read&#x2F;write等)</li>
+<li>设备保护(权限保护)</li>
+<li>差错管理</li>
+<li>设备的分配与回收</li>
+<li>数据缓冲区管理：通过缓冲技术屏蔽设备之间数据交换单位大小和传输速度的差异</li>
+<li>建立逻辑设备名到物理设备名的映射关系：通过逻辑设备表LUT，确定逻辑设备对应的物理设备，并根据设备类型选择调用相应的驱动程序，比如 打印机1&#x2F;打印机2。逻辑设备名以文件的形式存在。可以为一个系统或者一个用户设置一张逻辑设备表。</li>
+</ol>
+<p><strong>设备驱动程序</strong></p>
+<p>设备驱动程序：主要负责对硬件设备的具体控制，将上层发出的一系列命令(read)转化为特定设备能识别的操作。设置设备寄存器、检查设备状态。</p>
+<p>不同I&#x2F;O设备有不同的硬件特性，具体细节只有设备的厂家知道。</p>
+<p>驱动程序一般会以一个独立进程的方式存在。</p>
+<p><strong>中断处理程序</strong></p>
+<p>当I&#x2F;O任务完成时，I&#x2F;O控制会发送一个中断信号，系统会根据中断信号类型找到相应的中断处理程序并执行。</p>
+<p>中断处理程序的处理流程如下：</p>
+<p>从控制器读出设备状态–&gt;I&#x2F;O正常结束–&gt;是–&gt;从设备中读入一个字的数据并经由CPU放到内存缓冲区<br>–&gt;否–&gt;根据异常原因做相应处理</p>
+<p>中断处理程序可以与硬件直接接触</p>
+<p><strong>硬件</strong></p>
+<p>I&#x2F;O控制器</p>
+<h3 id="5-1-5-I-x2F-O核心子系统"><a href="#5-1-5-I-x2F-O核心子系统" class="headerlink" title="5.1.5 I&#x2F;O核心子系统"></a>5.1.5 I&#x2F;O核心子系统</h3><p>I&#x2F;O核心子系统：包括设备独立性软件、设备驱动程序、中断处理程序，这些程序属于操作系统的内核部分，即I&#x2F;O系统</p>
+<p>功能：</p>
+<ol>
+<li>I&#x2F;O调度</li>
+<li>设备保护</li>
+<li>假脱机技术(SPOOLing)</li>
+<li>设备分配与回收</li>
+<li>缓冲区管理(缓冲与高速缓存)</li>
+</ol>
+<p>I&#x2F;O软件的层次</p>
+<ol>
+<li>用户层软件：假脱机技术</li>
+<li>设备独立性软件：I&#x2F;O调度、设备保护、设备分配与回收、缓冲区管理</li>
+<li>设备驱动程序</li>
+<li>中断处理程序</li>
+<li>硬件</li>
+</ol>
+<h3 id="5-1-6-假脱机技术"><a href="#5-1-6-假脱机技术" class="headerlink" title="5.1.6 假脱机技术"></a>5.1.6 假脱机技术</h3><p>假脱机技术</p>
+<ol>
+<li>什么是假脱机技术，脱机技术可以解决什么问题</li>
+<li>假脱机技术的实现原理<br>2.1 输入井和输出井<br>2.2 输入进程和输出进程<br>2.3 输入缓冲区和输出缓冲区</li>
+<li>共享打印机的原理分析</li>
+</ol>
+<p><strong>脱机</strong></p>
+<p>脱机：脱离主机的控制的输入&#x2F;输出操作，由外围控制机进行控制。</p>
+<p>脱机技术，缓解了CPU与慢速I&#x2F;O设备之间的设备，可以提前输入或者输出到外围设备。</p>
+<p><strong>假脱机技术</strong></p>
+<p>假脱机技术，又称SPOOLing技术，用软件的技术模拟脱机技术。</p>
+<p>输入数据：输入设备–&gt;输入缓冲区(内存)–&gt;输入井(磁盘)<br>输出数据：输出设备&lt;–输出缓冲区(内存)&lt;–输出井(磁盘)</p>
+<p>在输入进程(外围控制机)的控制下，输入缓冲区用于暂存从输入设备输入的数据，之后在转存到输入井中<br>在输出进程(外围控制机)的控制下，输出缓冲区用于暂存从输出井送来的数据，之后在传送到输出设备上</p>
+<p><strong>共享打印机原理分析</strong></p>
+<p>独占式设备：只允许各个进程串行使用的设备<br>共享设备：允许多个进程同时使用的设备</p>
+<p>当多个进程提出打印请求时，假脱机管理进程为每个进程做两件事：</p>
+<ol>
+<li>在磁盘输出井中为进程申请一个空闲缓冲区(在磁盘上)，输入要打印的数据</li>
+<li>为用户进程申请一张空白的打印请求表，填入打印请求，并将该表挂到假脱机文件队列上</li>
+<li>当打印机空闲时，输出进程按表中的要求将打印的数据从输出井经输出缓冲区输出到打印机。</li>
+</ol>
+<p>SPOOLing技术可以把一台物理设备虚拟成逻辑上的多台设备，可将独占式设备改造成共享设备</p>
+<h3 id="5-1-7-设备的分配与回收"><a href="#5-1-7-设备的分配与回收" class="headerlink" title="5.1.7 设备的分配与回收"></a>5.1.7 设备的分配与回收</h3><p>设备的分配与回收</p>
+<ol>
+<li>设备分配时应考虑的因素</li>
+<li>静态分配与动态分配</li>
+<li>设备分配管理中的数据结构</li>
+<li>设备分配的步骤</li>
+<li>设备分配步骤的改进方法</li>
+</ol>
+<p><strong>设备分配时应该考虑的因素</strong></p>
+<ol>
+<li>设备的固有属性</li>
+<li>设备分配算法</li>
+<li>设备分配中的安全性</li>
+</ol>
+<p>设备的固有属性：独占设备、共享设备、虚拟设备<br>设备的分配算法：先来先服务等<br>设备分配中的安全性：安全分配方式(阻塞)、不安全分配方式(不阻塞)</p>
+<p><strong>静态分配和动态分配</strong></p>
+<p>静态分配：进程运行前为其分配全部所需资源，运行结束后归还资源<br>动态分配：进行运行过程中动态申请设备资源</p>
+<p><strong>设备分配管理中的数据结构</strong></p>
+<p>一个通道可以控制多个设备控制器，每个设备控制器可以控制多个设备</p>
+<p>设备控制表<br>控制器控制表<br>通道控制表<br>系统设备表</p>
+<p>设备控制表(DCT)：系统为每个设备配置一张DCT，用于记录设备情况</p>
+<table>
+<thead>
+<tr>
+<th align="center">设备控制表DCT</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">设备类型</td>
+<td align="center">如 打印机&#x2F;扫描仪</td>
+</tr>
+<tr>
+<td align="center">设备标示符</td>
+<td align="center">物理设备名，唯一</td>
+</tr>
+<tr>
+<td align="center">设备状态</td>
+<td align="center">忙碌&#x2F;空闲&#x2F;故障</td>
+</tr>
+<tr>
+<td align="center">指向控制器表的指针</td>
+<td align="center">每个设备由一个控制器控制</td>
+</tr>
+<tr>
+<td align="center">重复执行次数或时间</td>
+<td align="center">当重复执行多次I&#x2F;O操作仍不成功，才认为此次I&#x2F;O失败</td>
+</tr>
+<tr>
+<td align="center">设备队列的队首指针</td>
+<td align="center">指向等待该设备的进程队列(由进程PCB组成队列)</td>
+</tr>
+</tbody></table>
+<p>系统会根据阻塞原因不同，将进程PCB挂到不同的阻塞队列中</p>
+<p>控制器控制表(COCT)：每个设备控制器对应一张COCT。</p>
+<table>
+<thead>
+<tr>
+<th align="center">控制器控制表COCT</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">控制器标识符</td>
+<td align="center">各个控制器的唯一ID</td>
+</tr>
+<tr>
+<td align="center">控制器状态</td>
+<td align="center">忙碌&#x2F;空闲&#x2F;故障…</td>
+</tr>
+<tr>
+<td align="center">指向通道表的指针</td>
+<td align="center">每个控制器由一个通道控制</td>
+</tr>
+<tr>
+<td align="center">控制器队列的队首指针</td>
+<td align="center">指向正在等待该控制器的进程队列(由进程PCB组成队列)</td>
+</tr>
+<tr>
+<td align="center">控制器队列的队尾指针</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>通道控制表(CHCT)：每个通道对应一张CHCT</p>
+<p>通道控制表：通道标识符、通道状态、与通道连接的控制器表首址、通道队列的队首指针、通道队列的队尾指针</p>
+<p>系统设备表(SDT)：记录了系统中全部设备的情况，每个设备对应一个表目</p>
+<table>
+<thead>
+<tr>
+<th align="center">系统设备表(SDT)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">表目1</td>
+</tr>
+<tr>
+<td align="center">表目2</td>
+</tr>
+<tr>
+<td align="center">表目i</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">表目i</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">设备类型(逻辑设备名)</td>
+</tr>
+<tr>
+<td align="center">设备标识符(物理设备名)</td>
+</tr>
+<tr>
+<td align="center">DCT 设备控制表</td>
+</tr>
+<tr>
+<td align="center">驱动程序入口</td>
+</tr>
+</tbody></table>
+<p><strong>设备分配的步骤</strong></p>
+<ol>
+<li>根据进程请求的物理设备名查找SDT，物理设备名时进程请求分配设备时提供的参数</li>
+<li>根据SDT找到设备控制表DCT，若设备忙碌则将进程PCB挂到设备等待队列中，不忙碌则将设备分配给进程</li>
+<li>根据设备控制表DCT找到控制器控制表COCT，若控制器忙碌则将进程PCB挂到控制器等待队列中，不忙碌则将控制器分配给进程</li>
+<li>根据控制器控制表COCT找到通道控制表CHCT，若通道忙碌则将进程PCB挂到通道等待队列中，不忙碌则将通道分配给进程</li>
+<li>只有设备、控制器、通道三者都分配成功时，这次设备才算成功，之后便可启动I&#x2F;O设备</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>用户编程时必须使用 物理设备名，底层细节对用户不透明，不方便编程</li>
+<li>若换了一个设备，则程序无法运行</li>
+<li>若进程请求的物理设备正在忙碌，则即使系统中还有同类型的设备，进程也必须阻塞等待。</li>
+</ol>
+<p><strong>设备分配步骤的改进</strong></p>
+<p>建立逻辑设备名与物理设备名的映射机制，用户编程时只需要提供逻辑设备名</p>
+<ol>
+<li>根据进程请求提供的逻辑设备名查找系统设备表SDT</li>
+<li>查找SDT，找到用户进程指定类型且空闲的设备，将其分配给进程。操作系统在逻辑设备表LUT中新增一个表项</li>
+<li>根据设备控制表DCT找到控制器控制表COCT，若控制器忙碌则将进程PCB挂到控制器等待队列中，不忙碌则将控制器分配给进程</li>
+<li>根据控制器控制表COCT找到通道控制表CHCT，若通道忙碌则将进程PCB挂到通道等待队列中，不忙碌则将通道分配给进程</li>
+</ol>
+<p>逻辑设备表LUT</p>
+<table>
+<thead>
+<tr>
+<th align="center">逻辑设备名</th>
+<th align="center">物理设备名</th>
+<th align="center">驱动程序入口地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&#x2F;dev&#x2F;打印机</td>
+<td align="center">3</td>
+<td align="center">1024</td>
+</tr>
+</tbody></table>
+<p>逻辑设备表LUT建立了逻辑设备名与物理设备名之间的映射关系。</p>
+<p>逻辑设备表LUT的设置问题：一个系统一张或者一个用户一张</p>
+<h3 id="5-1-8-缓冲区管理"><a href="#5-1-8-缓冲区管理" class="headerlink" title="5.1.8 缓冲区管理"></a>5.1.8 缓冲区管理</h3><p>缓冲区管理：</p>
+<ol>
+<li>什么是缓冲区？有什么作用？</li>
+<li>单缓冲</li>
+<li>双缓冲</li>
+<li>循环缓冲</li>
+<li>缓冲池</li>
+</ol>
+<p><strong>缓冲器及其作用</strong></p>
+<p>缓冲区是一个存储区域，可以由专门的硬件寄存器组成，也可以利用内存作为缓冲区</p>
+<p>硬件寄存器：成本高、容量小、速度快，如 联想寄存器存放页表项的副本<br>内存缓冲区：设备独立性软件的缓冲区管理</p>
+<p>缓冲区的作用：</p>
+<ol>
+<li>缓和CPU与I&#x2F;O设备之间速度不匹配的矛盾</li>
+<li>减少对CPU的中断频率，放宽对CPU中断相应时间的限制</li>
+<li>解决数据粒度不匹配的问题</li>
+<li>提高CPU与I&#x2F;O设备之间的并行性</li>
+</ol>
+<p><strong>单缓冲</strong></p>
+<p>假设某用户进程请求某种块设备读入若干块的数据。<br>若采用单缓冲的策略，操作系统会在主存中为其分配一个缓冲区，一个缓冲区的大小就是一个块。</p>
+<p>数据：块设备–输入T–&gt;缓冲区–传送M–&gt;用户进程的工作区–处理C–&gt;CPU</p>
+<p>消耗时间 max(T,C)+M</p>
+<p>分析方法：假定一个初始状态，下一次达到该状态所需的时间</p>
+<p><strong>双缓冲</strong></p>
+<p>双缓冲，操作系统在主存中为其分配两个缓冲区</p>
+<p>耗时：max(T, C+M)</p>
+<p>单缓冲只能实现同一时刻的单通信<br>双缓冲能实现同一时刻的双向传输</p>
+<p><strong>循环缓冲区</strong></p>
+<p>将多个大小相等的缓冲区链接成一个循环队列</p>
+<p>in指针，指向下一个可以冲入数据的空缓冲区<br>out指针，指向下一个可以取出数据的满缓冲区</p>
+<p><strong>缓冲池</strong></p>
+<p>缓冲池由系统中的缓冲区组成。三个队列、四种工作缓冲区</p>
+<p>按使用状态分为：空缓冲队列、装满输入数据的缓冲队列(输入队列)、装满输出数据的缓冲队列(输出队列)</p>
+<p>按扮演功能又分为：用于收容输入数据的工作缓冲区(hin)、用于提取输入数据的工作缓冲区(sin)、用于收容输出数据的工作缓冲区(hout)、用于提取输出数据的工作缓冲区(sout)</p>
+<p>输入进程请求输入数据<br>从空缓冲队列中取出一块作为收容输入数据的工作缓冲区 hin，充满数据后将缓冲区挂到输入队列队尾</p>
+<p>计算进程想要取得一块输入数据<br>从输入队列中取得一块冲满输入数据的缓冲区作为提取输入数据的工作缓冲区sin。缓冲区读空后挂到空缓冲区队列</p>
+<p>计算进程想要准备号的数据冲入缓冲区<br>空缓冲队列–&gt;收容输出数据的工作缓冲区hout–&gt;输出队列</p>
+<p>输出进程请求输出数据<br>输出队列–&gt;提取输出数据的工作缓冲区sout–&gt;空缓冲队列</p>
+<p>hin、sout：I&#x2F;O设备<br>sin、hout：用户进程</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/22/computer_system/" data-id="cla55fgde002uwka79z4qdumn" data-title="计算机组成原理" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/408/" rel="tag">408</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/22/TVOS/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          TVOS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/22/java/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java参考</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/23/python-100-days/">python_100_days</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/data-VOS/">data_VOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/TVOS/">TVOS</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/22/java/">java参考</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
