@@ -27,18 +27,18 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言钟准团队的CCPR2019文章，牛逼。思想有一丢丢类似聚类，但是比聚类强的是，赋予了id。与HHL文章有很大的不同。什也不说了，虚心学习。  paper: CVPR2019_Invariance Matters Exemplar Memory for Domain Adaptive Person Re-identification code: pytorch">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2019/05/06/ECN/05/06/ECN/framework.png">
-<meta property="og:image" content="http://example.com/2019/05/06/ECN/05/06/ECN/temperature.png">
-<meta property="og:image" content="http://example.com/2019/05/06/ECN/05/06/ECN/weight.png">
-<meta property="og:image" content="http://example.com/2019/05/06/ECN/05/06/ECN/number.png">
-<meta property="og:image" content="http://example.com/2019/05/06/ECN/05/06/ECN/MSMT.png">
+<meta property="og:image" content="http://example.com/2019/05/06/ECN/framework.png">
+<meta property="og:image" content="http://example.com/2019/05/06/ECN/temperature.png">
+<meta property="og:image" content="http://example.com/2019/05/06/ECN/weight.png">
+<meta property="og:image" content="http://example.com/2019/05/06/ECN/number.png">
+<meta property="og:image" content="http://example.com/2019/05/06/ECN/MSMT.png">
 <meta property="article:published_time" content="2019-05-06T07:32:26.000Z">
 <meta property="article:modified_time" content="2019-06-03T09:20:33.708Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="person re-id">
 <meta property="article:tag" content="cross domain">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2019/05/06/ECN/05/06/ECN/framework.png">
+<meta name="twitter:image" content="http://example.com/2019/05/06/ECN/framework.png">
 
 <link rel="canonical" href="http://example.com/2019/05/06/ECN/">
 
@@ -263,7 +263,7 @@
 </tbody>
 </table>
 </div>
-<h3 id="3-1-Overview-of-Framework"><a href="#3-1-Overview-of-Framework" class="headerlink" title="3.1 Overview of Framework"></a>3.1 Overview of Framework</h3><img src="/2019/05/06/ECN/05/06/ECN/framework.png" class title="Framework of the proposed approach">
+<h3 id="3-1-Overview-of-Framework"><a href="#3-1-Overview-of-Framework" class="headerlink" title="3.1 Overview of Framework"></a>3.1 Overview of Framework</h3><img src="/2019/05/06/ECN/framework.png" class title="Framework of the proposed approach">
 <p>其实模型没有画的这么复杂，基本还是保留ResNet-50的基本网络，后面加个FC-4049，FC-#id/ exemplar memory，其中FC-#id用于 source domain 的数据， exemplar memory 用于计算 target domain 的数据，等下直接看代码一目了然。</p>
 <h3 id="3-2-Supervised-Learning-for-Source-Domain"><a href="#3-2-Supervised-Learning-for-Source-Domain" class="headerlink" title="3.2 Supervised Learning for Source Domain"></a>3.2 Supervised Learning for Source Domain</h3><p>这个容易理解， source domain 直接用个分类损失。</p>
 <script type="math/tex; mode=display">L_{src}=-\frac{1}{n_s}\sum_{i=1}^{n_s}\log p(y_{s,i}|x_{s,i})</script><h3 id="3-3-Exemplar-Memory"><a href="#3-3-Exemplar-Memory" class="headerlink" title="3.3 Exemplar Memory"></a>3.3 Exemplar Memory</h3><p>Exemplar Memory 借鉴的是 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1604.01850v3">Joint Detection and Identification Feature Learning for Person Search</a>，（已经有两篇论文没有看过了，自己菜不是没有原因的），采用的是 key-value 架构 $K,V$，其中在 key-memory 中存储每张图片的 FC-4096 特征， value-memory 中存储图片的lable，其中视每张图片为一类，index 即为 label。key-memory 中的特征初始化成0，value-memory 初始化成 $V[i]=i$，并且在整个训练过程中保持不变。key-memory 的更新策略是:</p>
@@ -293,19 +293,19 @@
 <h2 id="4-Experiment"><a href="#4-Experiment" class="headerlink" title="4. Experiment"></a>4. Experiment</h2><h3 id="4-1-Experiment-Setting"><a href="#4-1-Experiment-Setting" class="headerlink" title="4.1 Experiment Setting"></a>4.1 Experiment Setting</h3><p>前5个 epoch 只训练 exemplar-invariance and camera-invariance，也就是通用的交叉熵损失，5个epoch之后再加入 neighborhood-invariance。</p>
 <h3 id="4-2-Parameter-Analysis"><a href="#4-2-Parameter-Analysis" class="headerlink" title="4.2 Parameter Analysis"></a>4.2 Parameter Analysis</h3><p>temperature fact $\beta$, weight of loss $\lambda$, number of candidate positive samples $k$.</p>
 <p><strong>Temperature fact $\beta$</strong></p>
-<img src="/2019/05/06/ECN/05/06/ECN/temperature.png" class title="different values of $\beta$">
+<img src="/2019/05/06/ECN/temperature.png" class title="different values of $\beta$">
 <p>当 $\beta$ 比较小的时候，分布越陡，值越大，损失越小，结果也越好。最好的结果是 $\beta$ 在0.05 左右。同时通过表格可以看出，当 $\beta$ 变化从0.05到0.5时，rank-1下降了17。但同时，在最优解的附近也接近最优解。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在蒸馏网络中，T越大，分布越平缓</span></span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">fun1 = F.softmax</span><br><span class="line">aa = torch.tensor([<span class="number">0.2</span>, <span class="number">0.8</span>, <span class="number">0.2</span>])</span><br><span class="line">fun1(aa, dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">0.2616</span>, <span class="number">0.4767</span>, <span class="number">0.2616</span>])</span><br><span class="line">bb = torch.tensor([<span class="number">0.2</span>, <span class="number">0.8</span>, <span class="number">0.2</span>])/<span class="number">0.1</span></span><br><span class="line">fun1(bb, dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">0.0025</span>, <span class="number">0.9951</span>, <span class="number">0.0025</span>])</span><br></pre></td></tr></table></figure>
 <p><strong>The weight of source and target losses $\lambda$</strong>:</p>
-<img src="/2019/05/06/ECN/05/06/ECN/weight.png" class title="The weight of source and target losses $\lambda$">
+<img src="/2019/05/06/ECN/weight.png" class title="The weight of source and target losses $\lambda$">
 <p>可以看出即便只有 target loss， 性能也超过 baseline， 当取其他值的时候，性能几乎不变。</p>
 <p><strong>Number of positive samples $k$</strong>:</p>
-<img src="/2019/05/06/ECN/05/06/ECN/number.png" class title="Number of positive samples $k$">
+<img src="/2019/05/06/ECN/number.png" class title="Number of positive samples $k$">
 <p>可以看出，性能对k挺敏感的。</p>
 <h3 id="4-4-Evaluation"><a href="#4-4-Evaluation" class="headerlink" title="4.4 Evaluation"></a>4.4 Evaluation</h3>
 <p>通过表格中的数据集可以计算出，C+N&gt;C,N，C和N共同使用互相还有促进作用。</p>
 <p>作者也在 MSMT 数据集上做了训练测试。</p>
-<img src="/2019/05/06/ECN/05/06/ECN/MSMT.png" class title="performance evaluation when tested on MSMT17">
+<img src="/2019/05/06/ECN/MSMT.png" class title="performance evaluation when tested on MSMT17">
 <p>感觉大家都开始在 MSMT17 上做实验了，不怎么管 CUHK 了。</p>
 <h2 id="5-code"><a href="#5-code" class="headerlink" title="5. code"></a>5. code</h2><p>代码和HHL的差不多</p>
 <h3 id="5-1-model"><a href="#5-1-model" class="headerlink" title="5.1 model"></a>5.1 model</h3><h4 id="5-1-1-baseline"><a href="#5-1-1-baseline" class="headerlink" title="5.1.1 baseline"></a>5.1.1 baseline</h4><p>有以下几个改变：</p>

@@ -27,23 +27,23 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言 paper: Bag of Tricks and A Strong Baseline for Deep Person Re-identification code:　pytorch  这篇论文是旷视科技 Video Team 做的。 这篇论文主要介绍 re-id 代码中的各种 trick 的作用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/strong_baseline.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/pipelines_of_baseline.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/warmup.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/REA.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/BNNeck.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/loss.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/same_domain.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/ablation_study_of_BNNeck.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/cross_domain.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/batch_size.png">
-<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/image_size.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/strong_baseline.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/pipelines_of_baseline.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/warmup.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/REA.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/BNNeck.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/loss.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/same_domain.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/ablation_study_of_BNNeck.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/cross_domain.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/batch_size.png">
+<meta property="og:image" content="http://example.com/2019/05/17/BNNeck/image_size.png">
 <meta property="article:published_time" content="2019-05-17T08:20:21.000Z">
 <meta property="article:modified_time" content="2019-05-18T07:02:18.096Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="re-id">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2019/05/17/BNNeck/05/17/BNNeck/strong_baseline.png">
+<meta name="twitter:image" content="http://example.com/2019/05/17/BNNeck/strong_baseline.png">
 
 <link rel="canonical" href="http://example.com/2019/05/17/BNNeck/">
 
@@ -239,7 +239,7 @@
 <p>这篇论文主要介绍 re-id 代码中的各种 trick 的作用。</p>
 <span id="more"></span>
 <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>作者总结了各种 trick 并与 ECCV2018 CVPR2018 的论文做了比较，实验证明，只需要通过各种 trick 的组合，就比提出的算法高很多。</p>
-<img src="/2019/05/17/BNNeck/05/17/BNNeck/strong_baseline.png" class title="strong baseline">
+<img src="/2019/05/17/BNNeck/strong_baseline.png" class title="strong baseline">
 <h2 id="2-Standard-Baseline"><a href="#2-Standard-Baseline" class="headerlink" title="2. Standard Baseline"></a>2. Standard Baseline</h2><ol>
 <li>ResNet50 为基础网络，修改最后一个 fc 层的输出维度为行人类别 $N$.</li>
 <li>随机取 $P$ 个人， 每个人 $K$ 张图片，所以每个 batch $B=P\times K$，作者设置 $P=16, K=4$.</li>
@@ -250,15 +250,15 @@
 <li>ReID features $f$ 用于计算 triplet loss，ID prediction logits $p$ 用于计算交叉熵，margin $m=0.3$</li>
 <li>优化器: Adam: lr=0.00035, epoch=120, 第40和第70个 epoch 乘 0.1.</li>
 </ol>
-<h2 id="3-Training-Tricks"><a href="#3-Training-Tricks" class="headerlink" title="3. Training Tricks"></a>3. Training Tricks</h2><img src="/2019/05/17/BNNeck/05/17/BNNeck/pipelines_of_baseline.png" class title="pipelines of baseline">
+<h2 id="3-Training-Tricks"><a href="#3-Training-Tricks" class="headerlink" title="3. Training Tricks"></a>3. Training Tricks</h2><img src="/2019/05/17/BNNeck/pipelines_of_baseline.png" class title="pipelines of baseline">
 <h3 id="3-1-Warmup-Learning-Rate"><a href="#3-1-Warmup-Learning-Rate" class="headerlink" title="3.1 Warmup Learning Rate"></a>3.1 Warmup Learning Rate</h3><p>Question: 前10个epoch是不是写错了，应该是-4，不是-5</p>
-<img src="/2019/05/17/BNNeck/05/17/BNNeck/warmup.png" class title="warmup">
+<img src="/2019/05/17/BNNeck/warmup.png" class title="warmup">
 <script type="math/tex; mode=display">lr(t)=\begin{cases}
 3.5\times 10^{-5}\times \frac{t}{10}, &\text{if } 10 \ge t \ge 1 \\
 3.5\times 10^{-4}, &\text{if } 40 \ge t \ge 10 \\
 3.5\times 10^{-5}, &\text{if } 70 \ge t \ge 40 \\
 3.5\times 10^{-6}, &\text{if } 120 \ge t \ge 70 \\
-\end{cases}</script><h3 id="3-2-Random-Erasing-Augmentation"><a href="#3-2-Random-Erasing-Augmentation" class="headerlink" title="3.2 Random Erasing Augmentation"></a>3.2 Random Erasing Augmentation</h3><img src="/2019/05/17/BNNeck/05/17/BNNeck/REA.png" class title="REA">
+\end{cases}</script><h3 id="3-2-Random-Erasing-Augmentation"><a href="#3-2-Random-Erasing-Augmentation" class="headerlink" title="3.2 Random Erasing Augmentation"></a>3.2 Random Erasing Augmentation</h3><img src="/2019/05/17/BNNeck/REA.png" class title="REA">
 <ul>
 <li>probability: $p_e=0.5$</li>
 <li>rectangle region $I_e: S_e=W_e\times H_e$, $0.02&lt;S_e&lt;0.4$</li>
@@ -276,8 +276,8 @@
 <li>ID loss: 更偏向于 cosine distance</li>
 <li>triplet loss: 更偏向于 Euclidean distance</li>
 </ul>
-<img src="/2019/05/17/BNNeck/05/17/BNNeck/BNNeck.png" class title="BNNeck">
-<img src="/2019/05/17/BNNeck/05/17/BNNeck/loss.png" class title="loss">
+<img src="/2019/05/17/BNNeck/BNNeck.png" class title="BNNeck">
+<img src="/2019/05/17/BNNeck/loss.png" class title="loss">
 <h3 id="3-6-Center-Loss"><a href="#3-6-Center-Loss" class="headerlink" title="3.6 Center Loss"></a>3.6 Center Loss</h3><p>三元组损失只能使一个 batch 内的正负样本的值相差比较大，却不能考虑全局的正负样本值。</p>
 <p>Triplet loss:</p>
 <script type="math/tex; mode=display">T_{Tri}=[ d_p-d_n+\alpha ]_+</script><p>Center loss:</p>
@@ -285,15 +285,15 @@
 <p><strong>Overall</strong>:</p>
 <script type="math/tex; mode=display">L=L_{ID}+L_{Triplet}+\beta L_{C}</script><p>$\beta=0.0005$</p>
 <h2 id="4-Experimental-Results"><a href="#4-Experimental-Results" class="headerlink" title="4. Experimental Results"></a>4. Experimental Results</h2><p>作者一共做了两组实验，一组是在 source damain 上的，一组是在 cross domain 上的。</p>
-<h3 id="4-1-Influences-of-Each-Trich-Same-domain"><a href="#4-1-Influences-of-Each-Trich-Same-domain" class="headerlink" title="4.1 Influences of Each Trich (Same domain)"></a>4.1 Influences of Each Trich (Same domain)</h3><img src="/2019/05/17/BNNeck/05/17/BNNeck/same_domain.png" class title="same domain">
+<h3 id="4-1-Influences-of-Each-Trich-Same-domain"><a href="#4-1-Influences-of-Each-Trich-Same-domain" class="headerlink" title="4.1 Influences of Each Trich (Same domain)"></a>4.1 Influences of Each Trich (Same domain)</h3><img src="/2019/05/17/BNNeck/same_domain.png" class title="same domain">
 <p>这些应该是在前面各种 trick 已经有的情况再加一个得到的结果。</p>
-<h3 id="4-2-Analysis-of-BNNeck"><a href="#4-2-Analysis-of-BNNeck" class="headerlink" title="4.2 Analysis of BNNeck"></a>4.2 Analysis of BNNeck</h3><img src="/2019/05/17/BNNeck/05/17/BNNeck/ablation_study_of_BNNeck.png" class title="ablation study of BNNeck">
+<h3 id="4-2-Analysis-of-BNNeck"><a href="#4-2-Analysis-of-BNNeck" class="headerlink" title="4.2 Analysis of BNNeck"></a>4.2 Analysis of BNNeck</h3><img src="/2019/05/17/BNNeck/ablation_study_of_BNNeck.png" class title="ablation study of BNNeck">
 <p>我觉得这个表格说明了 bn 层是用的，但是在测试的时候取 $f_t$ 还是 $f_i$ ，用 cosine 还是 Euclidean 是无所谓的。</p>
-<h3 id="4-3-Influences-of-Each-Trick-Cross-domain"><a href="#4-3-Influences-of-Each-Trick-Cross-domain" class="headerlink" title="4.3 Influences of Each Trick　(Cross domain)"></a>4.3 Influences of Each Trick　(Cross domain)</h3><img src="/2019/05/17/BNNeck/05/17/BNNeck/cross_domain.png" class title="cross domain">
+<h3 id="4-3-Influences-of-Each-Trick-Cross-domain"><a href="#4-3-Influences-of-Each-Trick-Cross-domain" class="headerlink" title="4.3 Influences of Each Trick　(Cross domain)"></a>4.3 Influences of Each Trick　(Cross domain)</h3><img src="/2019/05/17/BNNeck/cross_domain.png" class title="cross domain">
 <p>warmup and label smoothing 更有用一些，stride=1, center loss 没啥用，REA 有负作用。</p>
-<h2 id="5-Supplementary-Experiments"><a href="#5-Supplementary-Experiments" class="headerlink" title="5. Supplementary Experiments"></a>5. Supplementary Experiments</h2><h3 id="5-1-Influences-of-the-Number-of-Batch-Size"><a href="#5-1-Influences-of-the-Number-of-Batch-Size" class="headerlink" title="5.1 Influences of the Number of Batch Size"></a>5.1 Influences of the Number of Batch Size</h3><img src="/2019/05/17/BNNeck/05/17/BNNeck/batch_size.png" class title="batch size">
+<h2 id="5-Supplementary-Experiments"><a href="#5-Supplementary-Experiments" class="headerlink" title="5. Supplementary Experiments"></a>5. Supplementary Experiments</h2><h3 id="5-1-Influences-of-the-Number-of-Batch-Size"><a href="#5-1-Influences-of-the-Number-of-Batch-Size" class="headerlink" title="5.1 Influences of the Number of Batch Size"></a>5.1 Influences of the Number of Batch Size</h3><img src="/2019/05/17/BNNeck/batch_size.png" class title="batch size">
 <p>差别也就在2个点足有，不是特别大，但是更大的 batch 是更有用的。</p>
-<h3 id="5-2-Influences-of-Image-Size"><a href="#5-2-Influences-of-Image-Size" class="headerlink" title="5.2 Influences of Image Size"></a>5.2 Influences of Image Size</h3><img src="/2019/05/17/BNNeck/05/17/BNNeck/image_size.png" class title="image size">
+<h3 id="5-2-Influences-of-Image-Size"><a href="#5-2-Influences-of-Image-Size" class="headerlink" title="5.2 Influences of Image Size"></a>5.2 Influences of Image Size</h3><img src="/2019/05/17/BNNeck/image_size.png" class title="image size">
 <p>也差不太多</p>
 
     </div>

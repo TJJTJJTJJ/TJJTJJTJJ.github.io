@@ -27,17 +27,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言 paper: CVPR2019 Unsupervised Person Re-identification by Soft Multilabel Learning code: pytorch 参考链接: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Thinker-pcw&#x2F;p&#x2F;10807681.html  出发点 Multi-label 很强，效果的确好，就是论文看得有点头晕，有些公">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2019/05/13/MAR/05/13/MAR/soft_multilabel_learning.png">
-<meta property="og:image" content="http://example.com/2019/05/13/MAR/05/13/MAR/network.png">
-<meta property="og:image" content="http://example.com/2019/05/13/MAR/05/13/MAR/soft_multilabel_guided_hard_negative_mining.png">
-<meta property="og:image" content="http://example.com/2019/05/13/MAR/05/13/MAR/comparison.png">
-<meta property="og:image" content="http://example.com/2019/05/13/MAR/05/13/MAR/Ablation.png">
+<meta property="og:image" content="http://example.com/2019/05/13/MAR/soft_multilabel_learning.png">
+<meta property="og:image" content="http://example.com/2019/05/13/MAR/network.png">
+<meta property="og:image" content="http://example.com/2019/05/13/MAR/soft_multilabel_guided_hard_negative_mining.png">
+<meta property="og:image" content="http://example.com/2019/05/13/MAR/comparison.png">
+<meta property="og:image" content="http://example.com/2019/05/13/MAR/Ablation.png">
 <meta property="article:published_time" content="2019-05-13T03:29:27.000Z">
 <meta property="article:modified_time" content="2019-05-15T10:48:41.828Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="person re-id">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2019/05/13/MAR/05/13/MAR/soft_multilabel_learning.png">
+<meta name="twitter:image" content="http://example.com/2019/05/13/MAR/soft_multilabel_learning.png">
 
 <link rel="canonical" href="http://example.com/2019/05/13/MAR/">
 
@@ -241,8 +241,8 @@
 <li>cross-view consistent soft multi-label learning</li>
 <li>reference agent learning</li>
 </ol>
-<img src="/2019/05/13/MAR/05/13/MAR/soft_multilabel_learning.png" class title="soft multilabel learning">
-<img src="/2019/05/13/MAR/05/13/MAR/network.png" class title="network">
+<img src="/2019/05/13/MAR/soft_multilabel_learning.png" class title="soft multilabel learning">
+<img src="/2019/05/13/MAR/network.png" class title="network">
 <ol>
 <li>用分类结果作为图片的真值，即 soft multilabel</li>
 <li>确定正负样本：特征相似但是 soft multilabel 不相似的作为负样本，特征相似且 soft multilabel 相似的作为正样本</li>
@@ -290,7 +290,7 @@
 </div>
 <p>一共有两个内容需要学习: $f(\cdot)$, $\lbrace a<em>i \rbrace</em>{i=1}^{N_p}$</p>
 <h3 id="2-2-Soft-multilabel-guided-hard-negative-mining"><a href="#2-2-Soft-multilabel-guided-hard-negative-mining" class="headerlink" title="2.2 Soft multilabel-guided hard negative mining"></a>2.2 Soft multilabel-guided hard negative mining</h3><p>大哥，你的上下标能不能提前说清楚啊[捂脸]，算了算了，腾讯的，惹不起惹不起。</p>
-<img src="/2019/05/13/MAR/05/13/MAR/soft_multilabel_guided_hard_negative_mining.png" class title="soft multilabel guided hard negative mining">
+<img src="/2019/05/13/MAR/soft_multilabel_guided_hard_negative_mining.png" class title="soft multilabel guided hard negative mining">
 <p><strong>定义</strong> soft multilabel function:</p>
 <script type="math/tex; mode=display">y^{(k)}=l(f(x),\lbrace a_i \rbrace_{i=1}^{N_p})^{(k)}=\frac{\exp(a_k^Tf(x))}{\sum_i \exp(a_i^Tf(x))}</script><p>也就是说，用 $f(x)$ 去依次点乘 $a_k$， 然后用一个 softmax。</p>
 <p>按照这个公式来说的话，是在特征空间上做的操作，有点类似 ECN 中的预测概率，越相似，值越大，而不是通过分类器预测概率。</p>
@@ -326,8 +326,8 @@ L_{MDL}&=-\log \frac{\bar{P}}{\bar{P}+\bar{N}} \\
 <p>对 $L<em>{RJ}$ 根据代码再次做出解释，$L</em>{RJ}$ 的目的是学习更好的特征提取器 $f$，使有标签数据集提取出的特征与同类别的 agent 的特征相似，与不同类别的agent不相似，无标签数据集提取出的特征与 agent 都不相似，有点三元组损失的意思。此时的 $a<em>i$ 是常量，不进行反向求导的。其二，对于任意一个 agent $a_i$，有标签数据集中，label 等于 $i$ 的图片视为正样本，其他图片视为负样本，对于无标签数据集，则直接视为 $a_i$ 的负样本。具体来说，就是对每一张有标签数据集的图片，$a</em>{label}$ 为正， 其余 $a_i$ 为负，对于每一张无标签数据集的图片，$a_i$ 都为负。</p>
 <p>所以总的 reference agent learning loss为:</p>
 <script type="math/tex; mode=display">L_{RAL}=L_{AL}+\beta L_{RJ}</script><h3 id="2-5-1-Model-training-and-testing"><a href="#2-5-1-Model-training-and-testing" class="headerlink" title="2.5.1 Model training and testing"></a>2.5.1 Model training and testing</h3><script type="math/tex; mode=display">L_{MAR}=L_{MDL}+\lambda_1 L_{CML}+\lambda_2 L_{RAL}</script><h2 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3. Experiments"></a>3. Experiments</h2><p>MSMT17 为辅助数据集， Market-1501、Duke 为无标签数据集。</p>
-<img src="/2019/05/13/MAR/05/13/MAR/comparison.png" class title="comparison">
-<img src="/2019/05/13/MAR/05/13/MAR/Ablation.png" class title="Ablation study">
+<img src="/2019/05/13/MAR/comparison.png" class title="comparison">
+<img src="/2019/05/13/MAR/Ablation.png" class title="Ablation study">
 <p>备注: 论文中的 agent 其实并不是之前以为通过图片输入模型得到的特征求出来的，而是 ResNet-50 的 fc.weight(classx2048) ，也就是分类器的分类向量。和 ECN 论文中的使用方法有很大的不同吧。在 ECN 中，使用的就是图片输入模型得到的特征，可能是因为 ECN 中一张图片对应一个特征，而本论文中是多个图片对应一个特征。</p>
 <h2 id="4-code"><a href="#4-code" class="headerlink" title="4. code"></a>4. code</h2><h3 id="4-1-Logger"><a href="#4-1-Logger" class="headerlink" title="4.1 Logger"></a>4.1 Logger</h3><p>两种logger</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一种：定义简单，使用繁琐</span></span><br><span class="line"><span class="comment"># 定义</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">time_string</span>():</span><br><span class="line">    ISOTIMEFORMAT = <span class="string">&#x27;%Y-%m-%d %X&#x27;</span></span><br><span class="line">    string = <span class="string">&#x27;[&#123;&#125;]&#x27;</span>.<span class="built_in">format</span>(time.strftime(ISOTIMEFORMAT, time.localtime(time.time())))</span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Logger</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, save_path</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(save_path):</span><br><span class="line">            os.makedirs(save_path)</span><br><span class="line">        self.file = <span class="built_in">open</span>(os.path.join(save_path, <span class="string">&#x27;log_&#123;&#125;.txt&#x27;</span>.<span class="built_in">format</span>(time_string())), <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">        self.print_log(<span class="string">&quot;python version : &#123;&#125;&quot;</span>.<span class="built_in">format</span>(sys.version.replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27; &#x27;</span>)))</span><br><span class="line">        self.print_log(<span class="string">&quot;torch  version : &#123;&#125;&quot;</span>.<span class="built_in">format</span>(torch.__version__))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">print_log</span>(<span class="params">self, string</span>):</span><br><span class="line">        self.file.write(<span class="string">&quot;&#123;&#125;\n&quot;</span>.<span class="built_in">format</span>(string))</span><br><span class="line">        self.file.flush()</span><br><span class="line">        <span class="built_in">print</span>(string)</span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">logger = Logger(args.save_path)</span><br><span class="line">logger.print_log(<span class="string">&quot;=&gt; loading checkpoint &#x27;&#123;&#125;&#x27;&quot;</span>.<span class="built_in">format</span>(load_path))</span><br></pre></td></tr></table></figure>

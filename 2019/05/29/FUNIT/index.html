@@ -27,17 +27,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言 paper: FUNIT: Few-Shot Unsupervised Image-to-Image Translation code: code  代码还需要等段时间，才能下载到所有代码。 这篇文章和郑哲东的 Joint Discriminative and Generative Learning for Person Re-identification 这篇文章看着有点像，果然是高">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2019/05/29/FUNIT/05/29/FUNIT/example.png">
-<meta property="og:image" content="http://example.com/2019/05/29/FUNIT/05/29/FUNIT/network.png">
-<meta property="og:image" content="http://example.com/2019/05/29/FUNIT/05/29/FUNIT/visual_comparison.png">
-<meta property="og:image" content="http://example.com/2019/05/29/FUNIT/05/29/FUNIT/limitation.png">
+<meta property="og:image" content="http://example.com/2019/05/29/FUNIT/example.png">
+<meta property="og:image" content="http://example.com/2019/05/29/FUNIT/network.png">
+<meta property="og:image" content="http://example.com/2019/05/29/FUNIT/visual_comparison.png">
+<meta property="og:image" content="http://example.com/2019/05/29/FUNIT/limitation.png">
 <meta property="article:published_time" content="2019-05-29T03:08:24.000Z">
 <meta property="article:modified_time" content="2019-05-30T06:21:58.515Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="GAN">
 <meta property="article:tag" content="few-shot">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2019/05/29/FUNIT/05/29/FUNIT/example.png">
+<meta name="twitter:image" content="http://example.com/2019/05/29/FUNIT/example.png">
 
 <link rel="canonical" href="http://example.com/2019/05/29/FUNIT/">
 
@@ -238,8 +238,8 @@
 <p>Question: 如果见过猫的站立和趴着的状态，看到蛇会咋想，蛇没有站或者趴这种说法，这种转换会考虑到这种情况吗？还是会生成一个站着的蛇？哈哈哈？</p>
 <p>Question: 测试时如果把 target dataset 作为 content image，不知道会是什么效果。</p>
 <p>Question: 作者是否隐藏了一个假设：content image 提供的信息或者属性是所有 object 都共享的？</p>
-<img src="/2019/05/29/FUNIT/05/29/FUNIT/example.png" class title="example">
-<h2 id="2-Few-shot-Unsupervised-Image-Translation"><a href="#2-Few-shot-Unsupervised-Image-Translation" class="headerlink" title="2. Few-shot Unsupervised Image Translation"></a>2. Few-shot Unsupervised Image Translation</h2><img src="/2019/05/29/FUNIT/05/29/FUNIT/network.png" class title="network">
+<img src="/2019/05/29/FUNIT/example.png" class title="example">
+<h2 id="2-Few-shot-Unsupervised-Image-Translation"><a href="#2-Few-shot-Unsupervised-Image-Translation" class="headerlink" title="2. Few-shot Unsupervised Image Translation"></a>2. Few-shot Unsupervised Image Translation</h2><img src="/2019/05/29/FUNIT/network.png" class title="network">
 <p>明确几个相关定义：</p>
 <ul>
 <li>数据集一共分为两个：source dataset (source class images), target dataset (target class images), 训练时只使用 source dataset, 测试时使用 source dataset 和 target dataset。</li>
@@ -278,11 +278,11 @@
 <li>Fair: StarGAN-Fair-K</li>
 <li>Unfair: StarGAN-Unfair-K, CycleGAN-Unfair-K, UNIT-Unfair-K, MUNIT-Unfair-K</li>
 </ul>
-<img src="/2019/05/29/FUNIT/05/29/FUNIT/visual_comparison.png" class title="visual comparison">
+<img src="/2019/05/29/FUNIT/visual_comparison.png" class title="visual comparison">
 <p>至于关于 GAN 的其他指标，则不列了，一是肯定效果好，二是自己也不是特别懂这些指标的意义和难度。</p>
 <p>训练时 source classes 越多，效果越好。</p>
 <p>在跨物种时，效果也会很差，只能改变 content image 的颜色。其类别没有发生变化。</p>
-<img src="/2019/05/29/FUNIT/05/29/FUNIT/limitation.png" class title="limitation">
+<img src="/2019/05/29/FUNIT/limitation.png" class title="limitation">
 
     </div>
 

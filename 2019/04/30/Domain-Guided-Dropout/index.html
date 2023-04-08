@@ -27,19 +27,19 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0.前言这篇文章的主要任务是，给定多个有标签行人重识别数据集，如何训练一个模型，在各个数据集上表现都好，并且这个模型能“隐式识别出”（Domain Guided Dropout）是哪个数据集。  paper: CVPR2016 Learning Deep Feature Representations with Domain Guided Dropout for Person Re-identif">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/pipeline.png">
-<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/structure.png">
-<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/impact_scores.png">
-<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/approximated.png">
-<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/different_methods.png">
-<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/different_Dropout.png">
+<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/pipeline.png">
+<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/structure.png">
+<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/impact_scores.png">
+<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/approximated.png">
+<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/different_methods.png">
+<meta property="og:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/different_Dropout.png">
 <meta property="article:published_time" content="2019-04-30T07:38:36.000Z">
 <meta property="article:modified_time" content="2019-05-02T12:05:58.980Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="person re-id">
 <meta property="article:tag" content="multi-domain">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/pipeline.png">
+<meta name="twitter:image" content="http://example.com/2019/04/30/Domain-Guided-Dropout/pipeline.png">
 
 <link rel="canonical" href="http://example.com/2019/04/30/Domain-Guided-Dropout/">
 
@@ -244,7 +244,7 @@
 <p>等会儿看看能不能从caffe代码中找到一些代码，毕竟看不懂caffe代码很伤啊。</p>
 <p>实验结果证明了：1. 多个数据集混合训练得到的baseline比单数据集的模型效果要好；2. deterministic DGD 对baseline有提升，而且stochastic DGD 提升效果更好。</p>
 <h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h2><p>现在对于多个数据集训练一个模型的方法集中在如何学习一个共同的域不变的特征表示空间，但是作者这篇论文提出的模型允许模型学习到与域相关的components和域无关的特征表示空间，我觉得这个思路要更好一些，因为测试是在各个数据集上分别进行测试的，那么如果能学到一些与域相关的components，将特征共享空间与component组合之后得到域相关空间。</p>
-<h2 id="3-Method"><a href="#3-Method" class="headerlink" title="3. Method"></a>3. Method</h2><img src="/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/pipeline.png" class title="overview of pipeline">
+<h2 id="3-Method"><a href="#3-Method" class="headerlink" title="3. Method"></a>3. Method</h2><img src="/2019/04/30/Domain-Guided-Dropout/pipeline.png" class title="overview of pipeline">
 <p>针对这张图，我是这么理解的，假设模型在训练时特征提取了2048维特征，那么这2048维特征可能前1500维特征是和 domain A 有关，而后1500维特征和 domain B 有关，这里的有关可以暂时理解成对后续的分类结果有比较大的影响，举个极端的例子，在 domain A 中，主要根据第100维特征分类，那么第100维特征的存在对分类结果有很大的影响，而其他维的特征对 domain A 中的数据集分类无关，那么模型只需要每次都把其他维的特征直接变成0即可，只是因为其他域的存在，使得模型不能把其他维的特征每次都变成0，从而影响了 domain A 的特征提取。</p>
 <p>后面作者也专门做了研究特征的影响。</p>
 <h3 id="3-1-公式定义"><a href="#3-1-公式定义" class="headerlink" title="3.1 公式定义"></a>3.1 公式定义</h3><div class="table-container">
@@ -276,16 +276,16 @@
 <script type="math/tex; mode=display">\sum_{i=1}^D \sum_{j=1}^{N_i} L(f_i(g(x_i^j)), y_i^j)</script><p>单分类器$f$</p>
 <script type="math/tex; mode=display">\sum_{i=1}^D \sum_{j=1}^{N_i} L(f(g(x_i^j)), y_i^j)</script><p>按照作者的说法，这种单分类器能同时学习到domain biases and person id，后续有实验分析证明这个理论。</p>
 <p><strong>网络架构</strong>：</p>
-<img src="/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/structure.png" class title="structure of CNN">
+<img src="/2019/04/30/Domain-Guided-Dropout/structure.png" class title="structure of CNN">
 <p>其中M表示行人类别。其中 fc7 包括：Linear, ReLU, Dropout, 再结合后续的DGD，不难猜测测试特征就是fc7的输出，也就是g(x)，这里的dropout灵活处理，因为DGD就是取代的dropout.</p>
 <h3 id="3-3-Domain-Guided-Dropout"><a href="#3-3-Domain-Guided-Dropout" class="headerlink" title="3.3 Domain Guided Dropout"></a>3.3 Domain Guided Dropout</h3><p>定义：$g(x)\in R^d$，第i个元素的影响因子定义为:</p>
 <script type="math/tex; mode=display">s_i=L(g(x)_{\i})-L(g(x))</script><p>其中$g(x)_{\i}$表示将i个元素变成0.</p>
 <p>对于每个域，遍历所有图片得到第i个元素的影响因子:</p>
-<script type="math/tex; mode=display">\bar{s}_i=E_{x\in D}[s_i]</script><img src="/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/impact_scores.png" class title="impact scores">
+<script type="math/tex; mode=display">\bar{s}_i=E_{x\in D}[s_i]</script><img src="/2019/04/30/Domain-Guided-Dropout/impact_scores.png" class title="impact scores">
 <p>这张图片可以清晰地表明对于不同的 domain，第i个特征的影响程度不同，换句话说，有些特征对 domain A 影响大，对 domain B 影响小，如果能自动学习到哪些特征影响作用大，那么就可以有针对性地训练这些特征并减少其他特征对测试的影响。作者的思路很清晰。</p>
 <p>作者实际是用的二阶泰勒展开逼近的$s_i$:</p>
 <script type="math/tex; mode=display">s_i \approx -\frac{\partial L}{\partial g(x)_i}g(x)_i+\frac{1}{2}\frac{\partial^2 L}{\partial g(x)_i^2}g(x)_i^2</script><p>实验证明，这种逼近的精度是可以满足需求的：</p>
-<img src="/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/approximated.png" class title="true and approximated">
+<img src="/2019/04/30/Domain-Guided-Dropout/approximated.png" class title="true and approximated">
 <p>定义：mask m，根据上一步得到的s得到mask m，有两种方案：</p>
 <p>方案一：deterministic</p>
 <script type="math/tex; mode=display">m_i = \begin{cases}
@@ -300,9 +300,9 @@
 <li>FT-JSTL+DGD: fine-tune the CNN separately on each domain with the stochastic Domain Guided Dropout</li>
 <li>FT-JSTL: fine-tune the CNN separately on each domain with standard dropout</li>
 </ul>
-<img src="/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/different_methods.png" class title="different methods">
+<img src="/2019/04/30/Domain-Guided-Dropout/different_methods.png" class title="different methods">
 <p>从上图中可以看出，联合训练对大数据集的作用不明显，对小数据集的作用比较明显，从随机初始化开始训练的话，deterministic DGD的作用几乎没有，fine-tune的作用是有的，fine-tune和stochastic DGD 共同起的作用更大一些，也就是说fine-tune本身的作用最大，如果在fine-tune的过程中加入DGD，发挥的作用会更好一些，</p>
-<img src="/2019/04/30/Domain-Guided-Dropout/04/30/Domain-Guided-Dropout/different_Dropout.png" class title="different Dropout">
+<img src="/2019/04/30/Domain-Guided-Dropout/different_Dropout.png" class title="different Dropout">
 <p>其中a图表示对所有的域同时训练，b图表示分别对域微调得到不同的模型。</p>
 
     </div>

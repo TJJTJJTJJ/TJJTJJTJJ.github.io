@@ -27,20 +27,20 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="1. Introduction paper: CVPR2017_Joint Detection and Identification Feature Learning for Person Search code: caffe, [pytorch][https:&#x2F;&#x2F;github.com&#x2F;Cysu&#x2F;open-reid] project: End-to-End Deep Learning for Pe">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2019/06/10/OIM/06/10/OIM/person_search.png">
-<meta property="og:image" content="http://example.com/2019/06/10/OIM/06/10/OIM/framework.png">
-<meta property="og:image" content="http://example.com/2019/06/10/OIM/06/10/OIM/LUT.png">
-<meta property="og:image" content="http://example.com/2019/06/10/OIM/06/10/OIM/OIM_Softmax.png">
-<meta property="og:image" content="http://example.com/2019/06/10/OIM/06/10/OIM/Softmax_OIM.png">
-<meta property="og:image" content="http://example.com/2019/06/10/OIM/06/10/OIM/sub_sampling.png">
-<meta property="og:image" content="http://example.com/2019/06/10/OIM/06/10/OIM/low_dimensional_subspace.png">
+<meta property="og:image" content="http://example.com/2019/06/10/OIM/person_search.png">
+<meta property="og:image" content="http://example.com/2019/06/10/OIM/framework.png">
+<meta property="og:image" content="http://example.com/2019/06/10/OIM/LUT.png">
+<meta property="og:image" content="http://example.com/2019/06/10/OIM/OIM_Softmax.png">
+<meta property="og:image" content="http://example.com/2019/06/10/OIM/Softmax_OIM.png">
+<meta property="og:image" content="http://example.com/2019/06/10/OIM/sub_sampling.png">
+<meta property="og:image" content="http://example.com/2019/06/10/OIM/low_dimensional_subspace.png">
 <meta property="article:published_time" content="2019-06-10T08:32:49.000Z">
 <meta property="article:modified_time" content="2019-06-14T08:54:52.916Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="person re-id">
 <meta property="article:tag" content="memory">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2019/06/10/OIM/06/10/OIM/person_search.png">
+<meta name="twitter:image" content="http://example.com/2019/06/10/OIM/person_search.png">
 
 <link rel="canonical" href="http://example.com/2019/06/10/OIM/">
 
@@ -240,16 +240,16 @@
 <p>作者提出 <strong>Online Instance Matching (OIM)</strong> loss function 来融合 pedestrian detection and person re-id.</p>
 <p>作者提出了新的数据集，18184 张图片，8432 个行人，96143 个行人框。</p>
 <p>作者重新定义了 test 的过程。在传统的 test 过程中，gallery 中的图片是已经裁剪好的单个行人图片，作者定义 gallery 中的图片是未经裁剪、有多个行人的图片，需要匹配是哪张图片的哪个行人。</p>
-<img src="/2019/06/10/OIM/06/10/OIM/person_search.png" class title="person search">
+<img src="/2019/06/10/OIM/person_search.png" class title="person search">
 <p>CNN 由两部分组成，给定一张 gallery image, a pedestrian proposal net 用于生成行人的 bounding boxes, 更偏向于召回率而不是精确度, 然后 a identification net 用于提取相应的特征。</p>
-<h2 id="3-Method"><a href="#3-Method" class="headerlink" title="3. Method"></a>3. Method</h2><img src="/2019/06/10/OIM/06/10/OIM/framework.png" class title="framework">
+<h2 id="3-Method"><a href="#3-Method" class="headerlink" title="3. Method"></a>3. Method</h2><img src="/2019/06/10/OIM/framework.png" class title="framework">
 <ul>
 <li>a pedestrian proposal net</li>
 <li>a identification net</li>
 </ul>
 <h3 id="3-1-Online-Instance-Matching-Loss"><a href="#3-1-Online-Instance-Matching-Loss" class="headerlink" title="3.1 Online Instance Matching Loss"></a>3.1 Online Instance Matching Loss</h3><p>a pedestrian proposal net 共检测出三类：labeled identities, unlabeled identities, background clutter. 这里只考虑 labeled identities and unlabeled identities.</p>
 <p>假设 a labeled identity $x\in R^D$，其中 $D$ 表示特征维度，作者建立了一个 <strong>lookup table (LUT)</strong> $V\in R^{D\times L}$ 来储存所有的 feature of all labeled identities，前向传播过程中，计算 cos 距离 $V^T x$，反向传播时 $v_t \gets \gamma v_t (1-\gamma) x$，其中 $\gamma\in [0, 1]$, 并进行归一化。这个过程和 ECN 基本一样。</p>
-<img src="/2019/06/10/OIM/06/10/OIM/LUT.png" class title="LUT">
+<img src="/2019/06/10/OIM/LUT.png" class title="LUT">
 <p>对于 a unlabeled identites，使用 <strong>a circular queue</strong> $U\in R^{D\times Q}$ 来储存 the features of unlabeed identites that appear in recent mini-batches，其中 $Q$ 表示　queue size. 前向传播时，计算 cos 距离 $V^T x$，反向传播时，弹出 queue 顶端的 features，插入当前 batch 的特征。</p>
 <p>通过上面两个结构，作者重新定义了 $x$ 属于某类的概率:</p>
 <script type="math/tex; mode=display">p_i = \frac{\exp(v_i^T x/\tau)}{\sum_{j=1}^L \exp(v_j^T x/\tau)+ \sum_{k=1}^Q \exp(u_k^T x/\tau)}</script><p>其中，更高的 $\tau$ 导致更平缓的分布。</p>
@@ -281,13 +281,13 @@
 \frac{\partial L}{\partial v_1} &= -(1-f_1)x \\
 \frac{\partial L}{\partial v_2} &= f_2 x \\
 \frac{\partial L}{\partial v_3} &= f_3 x
-\end{aligned}</script><h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><h3 id="4-1-Effectiveness-of-Online-Instance-Matching"><a href="#4-1-Effectiveness-of-Online-Instance-Matching" class="headerlink" title="4.1 Effectiveness of Online Instance Matching"></a>4.1 Effectiveness of Online Instance Matching</h3><img src="/2019/06/10/OIM/06/10/OIM/OIM_Softmax.png" class title="comparisons between the OIM and Softmax loss">
-<img src="/2019/06/10/OIM/06/10/OIM/Softmax_OIM.png" class title="Softmax OIM for standard person re-id task">
+\end{aligned}</script><h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><h3 id="4-1-Effectiveness-of-Online-Instance-Matching"><a href="#4-1-Effectiveness-of-Online-Instance-Matching" class="headerlink" title="4.1 Effectiveness of Online Instance Matching"></a>4.1 Effectiveness of Online Instance Matching</h3><img src="/2019/06/10/OIM/OIM_Softmax.png" class title="comparisons between the OIM and Softmax loss">
+<img src="/2019/06/10/OIM/Softmax_OIM.png" class title="Softmax OIM for standard person re-id task">
 <p><strong>Sub-sampling the identities</strong>:</p>
-<img src="/2019/06/10/OIM/06/10/OIM/sub_sampling.png" class title="sub-sampling">
+<img src="/2019/06/10/OIM/sub_sampling.png" class title="sub-sampling">
 <p>当 sub-sampling 的 size 更小的时候，最终性能差不多，但是收敛速度更快，说明了作者提出的方法能有效地处理大规模数据集。</p>
 <p><strong>Low-dimensional subspace</strong>: 作者对比了 128, 256, 512, 1024， 2048-dimention，发现原始的 2048 维特征得到结果不如其他。</p>
-<img src="/2019/06/10/OIM/06/10/OIM/low_dimensional_subspace.png" class title="low dimensional subspace">
+<img src="/2019/06/10/OIM/low_dimensional_subspace.png" class title="low dimensional subspace">
 <h2 id="5-code"><a href="#5-code" class="headerlink" title="5. code"></a>5. code</h2><p>从 open-reid 中只能看到 LUT 的代码，可以看出来，这个代码和 ECN 的代码可以说是一样，牛逼啊。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn, autograd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">OIM</span>(autograd.Function):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, lut, momentum=<span class="number">0.5</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(OIM, self).__init__()</span><br><span class="line">        self.lut = lut</span><br><span class="line">        self.momentum = momentum</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, inputs, targets</span>):</span><br><span class="line">        self.save_for_backward(inputs, targets)</span><br><span class="line">        outputs = inputs.mm(self.lut.t())</span><br><span class="line">        <span class="keyword">return</span> outputs</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, grad_outputs</span>):</span><br><span class="line">        inputs, targets = self.saved_tensors</span><br><span class="line">        grad_inputs = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> self.needs_input_grad[<span class="number">0</span>]:</span><br><span class="line">            grad_inputs = grad_outputs.mm(self.lut)</span><br><span class="line">        <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(inputs, targets):</span><br><span class="line">            self.lut[y] = self.momentum * self.lut[y] + (<span class="number">1.</span> - self.momentum) * x</span><br><span class="line">            self.lut[y] /= self.lut[y].norm()</span><br><span class="line">        <span class="keyword">return</span> grad_inputs, <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">oim</span>(<span class="params">inputs, targets, lut, momentum=<span class="number">0.5</span></span>):</span><br><span class="line">    <span class="keyword">return</span> OIM(lut, momentum=momentum)(inputs, targets)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">OIMLoss</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, num_features, num_classes, scalar=<span class="number">1.0</span>, momentum=<span class="number">0.5</span>,</span></span><br><span class="line"><span class="params">                 weight=<span class="literal">None</span>, size_average=<span class="literal">True</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(OIMLoss, self).__init__()</span><br><span class="line">        self.num_features = num_features</span><br><span class="line">        self.num_classes = num_classes</span><br><span class="line">        self.momentum = momentum</span><br><span class="line">        self.scalar = scalar <span class="comment"># Temperature</span></span><br><span class="line">        self.weight = weight</span><br><span class="line">        self.size_average = size_average</span><br><span class="line">        <span class="comment"># ECN 这里用的 nn.Parapmeter</span></span><br><span class="line">        self.register_buffer(<span class="string">&#x27;lut&#x27;</span>, torch.zeros(num_classes, num_features))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, inputs, targets</span>):</span><br><span class="line">        inputs = oim(inputs, targets, self.lut, momentum=self.momentum)</span><br><span class="line">        inputs *= self.scalar</span><br><span class="line">        loss = F.cross_entropy(inputs, targets, weight=self.weight,</span><br><span class="line">                               size_average=self.size_average)</span><br><span class="line">        <span class="keyword">return</span> loss, inputs</span><br></pre></td></tr></table></figure>
 <p>这里我有点晕，简单理一理。</p>

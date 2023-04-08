@@ -27,21 +27,21 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言0.0 前言这篇文章主要解决的问题是：当语义分割网络在合成数据集(有标签)上训练好，在真实数据集(没有标签)上性能下降比较多。作者认为有两个原因：对合成数据过拟合，合成数据与真实数据存在分布差异。(好吧，我认为这两是一个原因)。作者提出target guided distillation 和 spatial-aware adaptation 来改进性能，效果还挺好的。我主要看target">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/HydraPlus.png">
-<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/ROAD_Net.png">
-<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/target_guided_distillation.png">
-<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/spatial_aware_adaptation.png">
-<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/results.png">
-<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/td.png">
-<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/spt.png">
-<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/domain_classifier.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/HydraPlus.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/ROAD_Net.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/target_guided_distillation.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/spatial_aware_adaptation.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/results.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/td.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/spt.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/domain_classifier.png">
 <meta property="article:published_time" content="2019-05-03T07:52:58.000Z">
 <meta property="article:modified_time" content="2019-05-04T08:18:41.523Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="semantice segmentation">
 <meta property="article:tag" content="domain guided distillation">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/HydraPlus.png">
+<meta name="twitter:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/HydraPlus.png">
 
 <link rel="canonical" href="http://example.com/2019/05/03/Reality-Oriented-Adaptation/">
 
@@ -240,7 +240,7 @@
 <li>paper: <a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_ICCV_2017/papers/Liu_HydraPlus-Net_Attentive_Deep_ICCV_2017_paper.pdf">ICCV2017: HydraPlus-Net: Attentive Deep Features for Pedestrian Analysis</a></li>
 <li>code: <a target="_blank" rel="noopener" href="https://github.com/xh-liu/HydraPlus-Net">caffe</a></li>
 </ul>
-<img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/HydraPlus.png" class title="HydraPlus network">
+<img src="/2019/05/03/Reality-Oriented-Adaptation/HydraPlus.png" class title="HydraPlus network">
 <p>其主要创新点在于：</p>
 <ul>
 <li>attention不仅可以用于本block，也可以用于其他block</li>
@@ -252,15 +252,15 @@
 <li>real style orientation &amp; target guided distillation: 为了避免过拟合合成数据集，使用 distillation 使 model 的输出和预训练的模型的输出一致，注意，这里 distillation 针对的是真实数据集，而不是合成数据集，这种方法称为 target guided distillation.</li>
 <li>real distribution orientation &amp; spatial-aware adaptation &amp; domain classifier: 因为合成数据集和真实数据集的分布不一致，提出 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">DANN</a> 也就是 domain classifier，其实类似GAN的D，来使得合成数据集和真实数据集的特征分布一致。主要过程就是将合成数据集和真实数据集的特征图分割成几个区域，然后判断这几个区域是不是同一个domain。</li>
 </ul>
-<img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/ROAD_Net.png" class title="ROAD_Net">
-<h2 id="2-Reality-Oriented-Adaptation-Networks"><a href="#2-Reality-Oriented-Adaptation-Networks" class="headerlink" title="2. Reality Oriented Adaptation Networks"></a>2. Reality Oriented Adaptation Networks</h2><h3 id="2-1-Target-Guided-Distillation"><a href="#2-1-Target-Guided-Distillation" class="headerlink" title="2.1 Target Guided Distillation"></a>2.1 Target Guided Distillation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/target_guided_distillation.png" class title="illustration of target guided distillaion">
+<img src="/2019/05/03/Reality-Oriented-Adaptation/ROAD_Net.png" class title="ROAD_Net">
+<h2 id="2-Reality-Oriented-Adaptation-Networks"><a href="#2-Reality-Oriented-Adaptation-Networks" class="headerlink" title="2. Reality Oriented Adaptation Networks"></a>2. Reality Oriented Adaptation Networks</h2><h3 id="2-1-Target-Guided-Distillation"><a href="#2-1-Target-Guided-Distillation" class="headerlink" title="2.1 Target Guided Distillation"></a>2.1 Target Guided Distillation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/target_guided_distillation.png" class title="illustration of target guided distillaion">
 <p>其中，pretrained model 在训练的时候不更新.</p>
 <p><strong>distillation loss</strong>：</p>
 <script type="math/tex; mode=display">L_{dist}=\frac{1}{N}\sum_{i,j}\parallel x_{i,j}-z_{i,j} \parallel _2</script><p>其中，$x<em>{i,j}, z</em>{i,j}$分别表示 segmentation model 和 pretrained model 得到的 feature map 在位置 $(i,j)$ 的值，二范是简单的欧式距离。这个损失简单粗暴，后续的实验也证明了这种方法的确要更好一些。</p>
 <p>我觉得这个是一个思路，这种 distillation 可以在一定程度上使得 segmentation model 学习到真实数据集的特征分布。</p>
 <p>当然，除了 distillation loss 用来防止过拟合，也有其他方法用来防止过拟合，比如冻结一些层然后循环，或者用 source (合成数据集) 用来进行 distillation，是 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1606.09282.pdf">learning without forgetting</a>，这篇文章也很有用，等下简单地讲下这篇文章。</p>
 <p>其实这里大有文章可做。</p>
-<h3 id="2-2-Spatial-Aware-Adaptation"><a href="#2-2-Spatial-Aware-Adaptation" class="headerlink" title="2.2 Spatial-Aware Adaptation"></a>2.2 Spatial-Aware Adaptation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/spatial_aware_adaptation.png" class title="spatial-aware adaptation">
+<h3 id="2-2-Spatial-Aware-Adaptation"><a href="#2-2-Spatial-Aware-Adaptation" class="headerlink" title="2.2 Spatial-Aware Adaptation"></a>2.2 Spatial-Aware Adaptation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/spatial_aware_adaptation.png" class title="spatial-aware adaptation">
 <p>假设把特征图分割成了$m=1,…,M$块，每一块的区域坐标集合表示为$(u,v)\in R<em>m$，记点(u,v)对应的特征图为$x</em>{u,v}$，记区域对应的特征图为$X<em>m^s=\{x</em>{u,v}^s | (u,v)\in R<em>m\}$和$X_m^t=\{x</em>{u,v}^t | (u,v)\in R_m\}$，定义其loss为:</p>
 <script type="math/tex; mode=display">L_{spt}=\sum_{m=1}^M L_{da}(X_m^s, X_m^t)</script><p>其中，$L_{da}$表示 domain adaptation loss，其实就是domain classifier loss,具体表示如下。</p>
 <script type="math/tex; mode=display">L_H(X^s, X^t)=\frac{1}{|X|}\sum_{x\in X} l(h(x),d)</script><p>其中$h:x\to \{0,1\}$，采用的<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">DANN</a>模型，应该是类似GAN中的D，$d\in \{0,1\}$.</p>
@@ -269,13 +269,13 @@
 <li>dst: target guided distillation</li>
 <li>spt: spatial-aware adaptation</li>
 </ul>
-<img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/results.png" class title="results">
+<img src="/2019/05/03/Reality-Oriented-Adaptation/results.png" class title="results">
 <p>通过结果可以看出，这两个创新点是有用的。</p>
-<h3 id="3-2-Analysis-on-Real-Style-Orientation"><a href="#3-2-Analysis-on-Real-Style-Orientation" class="headerlink" title="3.2 Analysis on Real Style Orientation"></a>3.2 Analysis on Real Style Orientation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/td.png" class title="target domain distillation">
-<h3 id="3-3-Analysis-on-Real-Distribution-Orientation"><a href="#3-3-Analysis-on-Real-Distribution-Orientation" class="headerlink" title="3.3 Analysis on Real Distribution Orientation"></a>3.3 Analysis on Real Distribution Orientation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/spt.png" class title="spatial-aware adaptation">
+<h3 id="3-2-Analysis-on-Real-Style-Orientation"><a href="#3-2-Analysis-on-Real-Style-Orientation" class="headerlink" title="3.2 Analysis on Real Style Orientation"></a>3.2 Analysis on Real Style Orientation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/td.png" class title="target domain distillation">
+<h3 id="3-3-Analysis-on-Real-Distribution-Orientation"><a href="#3-3-Analysis-on-Real-Distribution-Orientation" class="headerlink" title="3.3 Analysis on Real Distribution Orientation"></a>3.3 Analysis on Real Distribution Orientation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/spt.png" class title="spatial-aware adaptation">
 <h2 id="4-Others"><a href="#4-Others" class="headerlink" title="4. Others"></a>4. Others</h2><p>这里主要简单介绍下论文中提到的几篇参考文献的主要内容，并没有细读这几篇参考文献。</p>
 <h3 id="4-1-Domain-Adaptation"><a href="#4-1-Domain-Adaptation" class="headerlink" title="4.1 Domain Adaptation"></a>4.1 Domain Adaptation</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">Unsupervised Domain Adaptation by Backpropagation</a></p>
-<img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/domain_classifier.png" class title="domain classifier">
+<img src="/2019/05/03/Reality-Oriented-Adaptation/domain_classifier.png" class title="domain classifier">
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/MataFela/article/details/77827217">Domain Adaptation</a></p>
 <h3 id="4-2-Distillation"><a href="#4-2-Distillation" class="headerlink" title="4.2 Distillation"></a>4.2 Distillation</h3><script type="math/tex; mode=display">q_i=\frac{exp(z_i/T)}{\sum_j exp(z_j/T)}</script><script type="math/tex; mode=display">L(p,q)=\sum_i p_i * (-\log q_i)</script><p><a target="_blank" rel="noopener" href="https://github.com/dkozlov/awesome-knowledge-distillation">Awesome Knowledge Distillation</a>中有相关的论文和一部分实现。</p>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1606.09282.pdf">Learning without Forgetting</a></p>

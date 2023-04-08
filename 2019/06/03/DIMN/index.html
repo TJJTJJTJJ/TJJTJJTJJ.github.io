@@ -27,9 +27,9 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="1. 前言 paper: CVPR2019_Generalizable Person Re-identification by Domain-Invariant Mapping Network code: 暂无">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2019/06/03/DIMN/06/03/DIMN/Network.png">
-<meta property="og:image" content="http://example.com/2019/06/03/DIMN/06/03/DIMN/dataset.png">
-<meta property="og:image" content="http://example.com/2019/06/03/DIMN/06/03/DIMN/ablation.png">
+<meta property="og:image" content="http://example.com/2019/06/03/DIMN/Network.png">
+<meta property="og:image" content="http://example.com/2019/06/03/DIMN/dataset.png">
+<meta property="og:image" content="http://example.com/2019/06/03/DIMN/ablation.png">
 <meta property="article:published_time" content="2019-06-03T08:16:17.000Z">
 <meta property="article:modified_time" content="2019-06-14T08:22:04.756Z">
 <meta property="article:author" content="TianJiajie">
@@ -37,7 +37,7 @@
 <meta property="article:tag" content="few-shot learning">
 <meta property="article:tag" content="cross-domain person re-id">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2019/06/03/DIMN/06/03/DIMN/Network.png">
+<meta name="twitter:image" content="http://example.com/2019/06/03/DIMN/Network.png">
 
 <link rel="canonical" href="http://example.com/2019/06/03/DIMN/">
 
@@ -271,7 +271,7 @@
 <p>感觉这个目标定的要比 ECN 更高一些。</p>
 <p>作者在实际实验的时候使用5个 datasets 作为 source domains，另外4个 datasets 作为 target domains，实验结果不是很全，比如没有做只有一个 dataset 的 source domain 的效果。所以不能完全排除因为扩大数据集而造成的性能提高。但是根据现有的使用过 memory 的论文，我觉得还是可信的。</p>
 <h2 id="3-Methodology"><a href="#3-Methodology" class="headerlink" title="3. Methodology"></a>3. Methodology</h2><p>背景：已知有标签的 M 个 datasets(domains), $D_1, D_2,…, D_M$，每个 domain 有自己的 label space，希望在这些数据集上训练得到的模型直接应用到新的 domain/dataset 得到好的效果，而不需要更新模型。</p>
-<img src="/2019/06/03/DIMN/06/03/DIMN/Network.png" class title="Network">
+<img src="/2019/06/03/DIMN/Network.png" class title="Network">
 <p>The network:</p>
 <ul>
 <li>the encoding subnets: $g_{\phi}$</li>
@@ -314,7 +314,7 @@
 <li>source datasets: CUHK02, CUHK03, Market-1501, DukeMTMC-ReID, CUHK-SYSU PersonSearch</li>
 <li>test datasets: VIPeR, PRID, GRID, i-LIDS</li>
 </ul>
-<img src="/2019/06/03/DIMN/06/03/DIMN/dataset.png" class title="dataset">
+<img src="/2019/06/03/DIMN/dataset.png" class title="dataset">
 <p><strong>Implementation Details</strong>:</p>
 <ul>
 <li>encoding subnet: MobileNetV2, output: 1792</li>
@@ -323,7 +323,7 @@
 <li>triplet loss margin $\triangle=0.8$</li>
 <li>weight of loss $\lambda_1=\lambda_3=1, \lambda_2=0.01$</li>
 </ul>
-<h3 id="4-3-Ablation-Study"><a href="#4-3-Ablation-Study" class="headerlink" title="4.3 Ablation Study"></a>4.3 Ablation Study</h3><img src="/2019/06/03/DIMN/06/03/DIMN/ablation.png" class title="ablation study">
+<h3 id="4-3-Ablation-Study"><a href="#4-3-Ablation-Study" class="headerlink" title="4.3 Ablation Study"></a>4.3 Ablation Study</h3><img src="/2019/06/03/DIMN/ablation.png" class title="ablation study">
 <p><strong>Question</strong>: 直接使用 memory 进行分类损失和使用 fc 进行分类损失有区别吗？前向计算过程是一样的，memory 的权重等同于 fc 的权重。反向求导过程不一样，memory 使用 running average 并进行二范归一化进行更新，fc 的权重使用链式求导进行更新，memory 和 fc 的 feature 反向求导也是一样的公式。也就是说两种唯一的不同在于权重的更新方式，memory 更新时其权重是固定的，fc 更新时其权重是变化的，memory 更新时会进行二范归一化，fc 更新时没有这个操作。这些区别足以产生这么大的影响吗？可能更需要其他理论上的支持</p>
 <p>从 ablation study 上看，缺失每一个对最终结果的影响都不大。</p>
 

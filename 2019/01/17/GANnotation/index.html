@@ -28,17 +28,17 @@
 <meta property="og:description" content="0. 前言这是对GAN应用到人脸合成的改进，只是在arxiv上，先看看再说。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation2.png">
-<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/01/17/GANnotation/GANnotation2.png">
+<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation2.png">
 <meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation1.png">
-<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/01/17/GANnotation/GANnotation1.png">
+<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation1.png">
 <meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation3.png">
-<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/01/17/GANnotation/GANnotation3.png">
+<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation3.png">
 <meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation4.png">
-<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/01/17/GANnotation/GANnotation4.png">
+<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation4.png">
 <meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation5.png">
-<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/01/17/GANnotation/GANnotation5.png">
+<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation5.png">
 <meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation6.png">
-<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/01/17/GANnotation/GANnotation6.png">
+<meta property="og:image" content="http://example.com/2019/01/17/GANnotation/GANnotation6.png">
 <meta property="article:published_time" content="2019-01-17T09:00:01.000Z">
 <meta property="article:modified_time" content="2019-01-24T07:25:49.642Z">
 <meta property="article:author" content="TianJiajie">
@@ -233,11 +233,11 @@
 </ul>
 <p>key word: self-consistency loss, triple consistency loss, progressive image translation</p>
 <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>作者对 <strong>self-consistency loss</strong> 的有效性进行了论证， self-consistency loss 可以有效地使图片转换前后 <strong>preserve identity</strong>，并且提出了新的loss <strong>triple consistency loss</strong>.</p>
-<p><img src="/2019/01/17/GANnotation/GANnotation2.png" alt="triple consistency loss"><br><img src="/2019/01/17/GANnotation/01/17/GANnotation/GANnotation2.png" class title="triple consistency loss"></p>
+<p><img src="/2019/01/17/GANnotation/GANnotation2.png" alt="triple consistency loss"><br><img src="/2019/01/17/GANnotation/GANnotation2.png" class title="triple consistency loss"></p>
 <p>作者观察到当生成的图片再次经过生成另一种属性的图片时，生成的效果很差。记生成的图片再次经过网络生成新的图片的过程为 <strong>“progressive image translation”</strong>。比如输入一张图片a，先通过网络生成图片b，再将图片b送入网络，得到生成图片c。</p>
-<p><img src="/2019/01/17/GANnotation/GANnotation1.png" alt="progressive image translation"><br><img src="/2019/01/17/GANnotation/01/17/GANnotation/GANnotation1.png" class title="progressive image translation"></p>
+<p><img src="/2019/01/17/GANnotation/GANnotation1.png" alt="progressive image translation"><br><img src="/2019/01/17/GANnotation/GANnotation1.png" class title="progressive image translation"></p>
 <p>并且作者提出了<strong>GAN-notation</strong>，即 <strong>unconstrained landmark guided face-to-face synthesis</strong>, 同时改变人脸的姿势和表情(simultaneous change in pose and expression)， 论证了 triple consistency loss 的有效性。</p>
-<h1 id="2-Proposed-approach"><a href="#2-Proposed-approach" class="headerlink" title="2. Proposed approach"></a>2. Proposed approach</h1><p><img src="/2019/01/17/GANnotation/GANnotation3.png" alt="Proposed approach"><br><img src="/2019/01/17/GANnotation/01/17/GANnotation/GANnotation3.png" class title="Proposed approach"></p>
+<h1 id="2-Proposed-approach"><a href="#2-Proposed-approach" class="headerlink" title="2. Proposed approach"></a>2. Proposed approach</h1><p><img src="/2019/01/17/GANnotation/GANnotation3.png" alt="Proposed approach"><br><img src="/2019/01/17/GANnotation/GANnotation3.png" class title="Proposed approach"></p>
 <h2 id="2-1-Notation"><a href="#2-1-Notation" class="headerlink" title="2.1 Notation"></a>2.1 Notation</h2><p>符号说明：</p>
 <div class="table-container">
 <table>
@@ -312,11 +312,11 @@ L(G) =& \lambda_{adv}L_{adv} + \lambda_{pix}L_{pix}+\lambda_{self}L_{self}+\\
 <h1 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3. Experiments"></a>3. Experiments</h1><ul>
 <li>Adam, $\beta_1=0.5, \beta_2=0.999$</li>
 </ul>
-<h2 id="3-1-On-the-use-of-a-triple-consistency-loss"><a href="#3-1-On-the-use-of-a-triple-consistency-loss" class="headerlink" title="3.1 On the use of a triple consistency loss"></a>3.1 On the use of a triple consistency loss</h2><p><img src="/2019/01/17/GANnotation/GANnotation4.png" alt="StarGAN with/without triple consistency loss"><br><img src="/2019/01/17/GANnotation/01/17/GANnotation/GANnotation4.png" class title="StarGAN with&#x2F;without triple consistency loss"></p>
+<h2 id="3-1-On-the-use-of-a-triple-consistency-loss"><a href="#3-1-On-the-use-of-a-triple-consistency-loss" class="headerlink" title="3.1 On the use of a triple consistency loss"></a>3.1 On the use of a triple consistency loss</h2><p><img src="/2019/01/17/GANnotation/GANnotation4.png" alt="StarGAN with/without triple consistency loss"><br><img src="/2019/01/17/GANnotation/GANnotation4.png" class title="StarGAN with&#x2F;without triple consistency loss"></p>
 <p>可以看到即使是 one-to-one ， with triple consistency loss 的效果也要更好一些。</p>
 <h2 id="3-2-GANnotation"><a href="#3-2-GANnotation" class="headerlink" title="3.2 GANnotation"></a>3.2 GANnotation</h2><p>StarGAN只能对很粗的概念进行转换，但是GANnotation可以直接对比较细的属性pose进行转换，而且还可以连续变换，更厉害一些。</p>
-<p><img src="/2019/01/17/GANnotation/GANnotation5.png" alt="GANnotation"><br><img src="/2019/01/17/GANnotation/01/17/GANnotation/GANnotation5.png" class title="GANnotation"></p>
-<p><img src="/2019/01/17/GANnotation/GANnotation6.png" alt="GANnotation.vs.CR-GAN"><br><img src="/2019/01/17/GANnotation/01/17/GANnotation/GANnotation6.png" class title="GANnotation.vs.CR-GAN"></p>
+<p><img src="/2019/01/17/GANnotation/GANnotation5.png" alt="GANnotation"><br><img src="/2019/01/17/GANnotation/GANnotation5.png" class title="GANnotation"></p>
+<p><img src="/2019/01/17/GANnotation/GANnotation6.png" alt="GANnotation.vs.CR-GAN"><br><img src="/2019/01/17/GANnotation/GANnotation6.png" class title="GANnotation.vs.CR-GAN"></p>
 <h1 id="4-code"><a href="#4-code" class="headerlink" title="4. code"></a>4. code</h1><h2 id="4-1-生成器G"><a href="#4-1-生成器G" class="headerlink" title="4.1 生成器G"></a>4.1 生成器G</h2><p>生成器G输入是一张3通道的人脸图片和66通道的目标人脸关键点热力图，输出是3通道的colour image 和1通道的mask图。</p>
 <p>生成器G共分为5部分：down_conv、bottleneck、feature_layer、colour_layer、mask_layer。</p>
 <ul>
