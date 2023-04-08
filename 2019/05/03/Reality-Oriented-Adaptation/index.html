@@ -1,105 +1,367 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  <title>Reality Oriented Adaptation | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="0. 前言0.0 前言这篇文章主要解决的问题是：当语义分割网络在合成数据集(有标签)上训练好，在真实数据集(没有标签)上性能下降比较多。作者认为有两个原因：对合成数据过拟合，合成数据与真实数据存在分布差异。(好吧，我认为这两是一个原因)。作者提出target guided distillation 和 spatial-aware adaptation 来改进性能，效果还挺好的。我主要看target">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="semantice segmentation,domain guided distillation," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0. 前言0.0 前言这篇文章主要解决的问题是：当语义分割网络在合成数据集(有标签)上训练好，在真实数据集(没有标签)上性能下降比较多。作者认为有两个原因：对合成数据过拟合，合成数据与真实数据存在分布差异。(好吧，我认为这两是一个原因)。作者提出target guided distillation 和 spatial-aware adaptation 来改进性能，效果还挺好的。我主要看target">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Reality Oriented Adaptation">
 <meta property="og:url" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言0.0 前言这篇文章主要解决的问题是：当语义分割网络在合成数据集(有标签)上训练好，在真实数据集(没有标签)上性能下降比较多。作者认为有两个原因：对合成数据过拟合，合成数据与真实数据存在分布差异。(好吧，我认为这两是一个原因)。作者提出target guided distillation 和 spatial-aware adaptation 来改进性能，效果还挺好的。我主要看target">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale">
 <meta property="article:published_time" content="2019-05-03T07:52:58.000Z">
 <meta property="article:modified_time" content="2019-05-04T08:18:41.523Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="semantice segmentation">
 <meta property="article:tag" content="domain guided distillation">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2019/05/03/Reality-Oriented-Adaptation/"/>
+
+
+
+
+
+  <title>Reality Oriented Adaptation | Hexo</title>
   
+
+
+
+
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-Reality-Oriented-Adaptation" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2019/05/03/Reality-Oriented-Adaptation/" class="article-date">
-  <time class="dt-published" datetime="2019-05-03T07:52:58.000Z" itemprop="datePublished">2019-05-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/semantice-segmentation/">semantice segmentation</a>
+        <p class="site-subtitle"></p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Reality Oriented Adaptation
-    </h1>
+</div>
+
+<nav class="site-nav">
   
 
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            something
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/03/Reality-Oriented-Adaptation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Reality Oriented Adaptation</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T15:52:58+08:00">
+                2019-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/semantice-segmentation/" itemprop="url" rel="index">
+                    <span itemprop="name">semantice segmentation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><h3 id="0-0-前言"><a href="#0-0-前言" class="headerlink" title="0.0 前言"></a>0.0 前言</h3><p>这篇文章主要解决的问题是：当语义分割网络在合成数据集(有标签)上训练好，在真实数据集(没有标签)上性能下降比较多。作者认为有两个原因：对合成数据过拟合，合成数据与真实数据存在分布差异。(好吧，我认为这两是一个原因)。作者提出target guided distillation 和 spatial-aware adaptation 来改进性能，效果还挺好的。我主要看target guided distillaiton。</p>
 <ul>
@@ -108,12 +370,10 @@
 </ul>
 <h3 id="0-1-HydraPlus-Net"><a href="#0-1-HydraPlus-Net" class="headerlink" title="0.1 HydraPlus-Net"></a>0.1 HydraPlus-Net</h3><p>顺便记录下刚看的论文 HydraPlus-Net，因为这篇论文是caffe代码且对我的帮助不大，所以只是简单地记录下其中的创新点。</p>
 <span id="more"></span>
-
 <ul>
 <li>paper: <a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_ICCV_2017/papers/Liu_HydraPlus-Net_Attentive_Deep_ICCV_2017_paper.pdf">ICCV2017: HydraPlus-Net: Attentive Deep Features for Pedestrian Analysis</a></li>
 <li>code: <a target="_blank" rel="noopener" href="https://github.com/xh-liu/HydraPlus-Net">caffe</a></li>
 </ul>
-
 
 <p>其主要创新点在于：</p>
 <ul>
@@ -127,205 +387,450 @@
 <li>real distribution orientation &amp; spatial-aware adaptation &amp; domain classifier: 因为合成数据集和真实数据集的分布不一致，提出 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">DANN</a> 也就是 domain classifier，其实类似GAN的D，来使得合成数据集和真实数据集的特征分布一致。主要过程就是将合成数据集和真实数据集的特征图分割成几个区域，然后判断这几个区域是不是同一个domain。</li>
 </ul>
 
-
 <h2 id="2-Reality-Oriented-Adaptation-Networks"><a href="#2-Reality-Oriented-Adaptation-Networks" class="headerlink" title="2. Reality Oriented Adaptation Networks"></a>2. Reality Oriented Adaptation Networks</h2><h3 id="2-1-Target-Guided-Distillation"><a href="#2-1-Target-Guided-Distillation" class="headerlink" title="2.1 Target Guided Distillation"></a>2.1 Target Guided Distillation</h3>
-
 <p>其中，pretrained model 在训练的时候不更新.</p>
-<p><strong>distillation loss</strong>：<br>$$L_{dist}&#x3D;\frac{1}{N}\sum_{i,j}\parallel x_{i,j}-z_{i,j} \parallel <em>2$$<br>其中，$x</em>{i,j}, z_{i,j}$分别表示 segmentation model 和 pretrained model 得到的 feature map 在位置 $(i,j)$ 的值，二范是简单的欧式距离。这个损失简单粗暴，后续的实验也证明了这种方法的确要更好一些。</p>
+<p><strong>distillation loss</strong>：</p>
+<script type="math/tex; mode=display">L_{dist}=\frac{1}{N}\sum_{i,j}\parallel x_{i,j}-z_{i,j} \parallel _2</script><p>其中，$x<em>{i,j}, z</em>{i,j}$分别表示 segmentation model 和 pretrained model 得到的 feature map 在位置 $(i,j)$ 的值，二范是简单的欧式距离。这个损失简单粗暴，后续的实验也证明了这种方法的确要更好一些。</p>
 <p>我觉得这个是一个思路，这种 distillation 可以在一定程度上使得 segmentation model 学习到真实数据集的特征分布。</p>
 <p>当然，除了 distillation loss 用来防止过拟合，也有其他方法用来防止过拟合，比如冻结一些层然后循环，或者用 source (合成数据集) 用来进行 distillation，是 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1606.09282.pdf">learning without forgetting</a>，这篇文章也很有用，等下简单地讲下这篇文章。</p>
 <p>其实这里大有文章可做。</p>
 <h3 id="2-2-Spatial-Aware-Adaptation"><a href="#2-2-Spatial-Aware-Adaptation" class="headerlink" title="2.2 Spatial-Aware Adaptation"></a>2.2 Spatial-Aware Adaptation</h3>
-
-<p>假设把特征图分割成了$m&#x3D;1,…,M$块，每一块的区域坐标集合表示为$(u,v)\in R_m$，记点(u,v)对应的特征图为$x_{u,v}$，记区域对应的特征图为$X_m^s&#x3D;{x_{u,v}^s | (u,v)\in R_m}$和$X_m^t&#x3D;{x_{u,v}^t | (u,v)\in R_m}$，定义其loss为:<br>$$L_{spt}&#x3D;\sum_{m&#x3D;1}^M L_{da}(X_m^s, X_m^t)$$<br>其中，$L_{da}$表示 domain adaptation loss，其实就是domain classifier loss,具体表示如下。<br>$$L_H(X^s, X^t)&#x3D;\frac{1}{|X|}\sum_{x\in X} l(h(x),d)$$<br>其中$h:x\to {0,1}$，采用的<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">DANN</a>模型，应该是类似GAN中的D，$d\in {0,1}$.</p>
+<p>假设把特征图分割成了$m=1,…,M$块，每一块的区域坐标集合表示为$(u,v)\in R<em>m$，记点(u,v)对应的特征图为$x</em>{u,v}$，记区域对应的特征图为$X<em>m^s=\{x</em>{u,v}^s | (u,v)\in R<em>m\}$和$X_m^t=\{x</em>{u,v}^t | (u,v)\in R_m\}$，定义其loss为:</p>
+<script type="math/tex; mode=display">L_{spt}=\sum_{m=1}^M L_{da}(X_m^s, X_m^t)</script><p>其中，$L_{da}$表示 domain adaptation loss，其实就是domain classifier loss,具体表示如下。</p>
+<script type="math/tex; mode=display">L_H(X^s, X^t)=\frac{1}{|X|}\sum_{x\in X} l(h(x),d)</script><p>其中$h:x\to \{0,1\}$，采用的<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">DANN</a>模型，应该是类似GAN中的D，$d\in \{0,1\}$.</p>
 <p>这个domain classifer的目的是为了使生成的source和target生成的特征尽量相似。</p>
-<h3 id="2-3-Network-Overview"><a href="#2-3-Network-Overview" class="headerlink" title="2.3 Network Overview"></a>2.3 Network Overview</h3><p>$$L_{ROAD}&#x3D;L_{seg}+\lambda_1 L_{dist}+\lambda_2 L_{spt}$$</p>
-<h2 id="3-Experimental-Results"><a href="#3-Experimental-Results" class="headerlink" title="3. Experimental Results"></a>3. Experimental Results</h2><h3 id="3-1-Experimental-Results"><a href="#3-1-Experimental-Results" class="headerlink" title="3.1 Experimental Results"></a>3.1 Experimental Results</h3><ul>
+<h3 id="2-3-Network-Overview"><a href="#2-3-Network-Overview" class="headerlink" title="2.3 Network Overview"></a>2.3 Network Overview</h3><script type="math/tex; mode=display">L_{ROAD}=L_{seg}+\lambda_1 L_{dist}+\lambda_2 L_{spt}</script><h2 id="3-Experimental-Results"><a href="#3-Experimental-Results" class="headerlink" title="3. Experimental Results"></a>3. Experimental Results</h2><h3 id="3-1-Experimental-Results"><a href="#3-1-Experimental-Results" class="headerlink" title="3.1 Experimental Results"></a>3.1 Experimental Results</h3><ul>
 <li>dst: target guided distillation</li>
 <li>spt: spatial-aware adaptation</li>
 </ul>
 
-
 <p>通过结果可以看出，这两个创新点是有用的。</p>
 <h3 id="3-2-Analysis-on-Real-Style-Orientation"><a href="#3-2-Analysis-on-Real-Style-Orientation" class="headerlink" title="3.2 Analysis on Real Style Orientation"></a>3.2 Analysis on Real Style Orientation</h3>
-
 <h3 id="3-3-Analysis-on-Real-Distribution-Orientation"><a href="#3-3-Analysis-on-Real-Distribution-Orientation" class="headerlink" title="3.3 Analysis on Real Distribution Orientation"></a>3.3 Analysis on Real Distribution Orientation</h3>
-
 <h2 id="4-Others"><a href="#4-Others" class="headerlink" title="4. Others"></a>4. Others</h2><p>这里主要简单介绍下论文中提到的几篇参考文献的主要内容，并没有细读这几篇参考文献。</p>
 <h3 id="4-1-Domain-Adaptation"><a href="#4-1-Domain-Adaptation" class="headerlink" title="4.1 Domain Adaptation"></a>4.1 Domain Adaptation</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">Unsupervised Domain Adaptation by Backpropagation</a></p>
 
-
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/MataFela/article/details/77827217">Domain Adaptation</a></p>
-<h3 id="4-2-Distillation"><a href="#4-2-Distillation" class="headerlink" title="4.2 Distillation"></a>4.2 Distillation</h3><p>$$q_i&#x3D;\frac{exp(z_i&#x2F;T)}{\sum_j exp(z_j&#x2F;T)}$$<br>$$L(p,q)&#x3D;\sum_i p_i * (-\log q_i)$$</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/dkozlov/awesome-knowledge-distillation">Awesome Knowledge Distillation</a>中有相关的论文和一部分实现。</p>
+<h3 id="4-2-Distillation"><a href="#4-2-Distillation" class="headerlink" title="4.2 Distillation"></a>4.2 Distillation</h3><script type="math/tex; mode=display">q_i=\frac{exp(z_i/T)}{\sum_j exp(z_j/T)}</script><script type="math/tex; mode=display">L(p,q)=\sum_i p_i * (-\log q_i)</script><p><a target="_blank" rel="noopener" href="https://github.com/dkozlov/awesome-knowledge-distillation">Awesome Knowledge Distillation</a>中有相关的论文和一部分实现。</p>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1606.09282.pdf">Learning without Forgetting</a></p>
-
 
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e73851f32c9f">模型压缩总览</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/nature553863/article/details/80568658">知识蒸馏</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qzrdypbuqk/article/details/81482598">Knowledge Distillation</a></p>
 <p>终于找到一个 KD (knowledge-distillation) loss 的<a target="_blank" rel="noopener" href="https://github.com/peterliht/knowledge-distillation-pytorch">代码</a>. <strong>这个我看懂了</strong>。</p>
-<p>$$D_{KL}(P||Q)&#x3D;\sum P(i)\frac{P(i)}{Q(i)}$$<br>$$H(p,q)&#x3D;E_p[-\log q]&#x3D;H(p)+D_{KL}(P||Q)$$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准的KD，利用的是交叉熵求KD</span></span><br><span class="line"><span class="comment"># 但速度很慢</span></span><br><span class="line">x, target = x.to(device), target.to(device)</span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    out = teacher(x)</span><br><span class="line">    soft_target = F.softmax(out/T, dim=<span class="number">1</span>)</span><br><span class="line">hard_target = target</span><br><span class="line">out = student(x)  <span class="comment">## this is the input to softmax</span></span><br><span class="line">logp = F.log_softmax(out/T, dim=<span class="number">1</span>)</span><br><span class="line">loss_soft_target = -torch.mean(torch.<span class="built_in">sum</span>(soft_target * logp, dim=<span class="number">1</span>))</span><br><span class="line">loss_hard_target = nn.CrossEntropyLoss()(out, hard_target)</span><br><span class="line">loss = loss_soft_target * T * T + alpha * loss_hard_target</span><br></pre></td></tr></table></figure>
-
-<p>$$L_{KD}&#x3D;\alpha T^2 KLdiv(Q_S^T,Q_T^T)+(1-\alpha)CrossEntrop(Q_s,y_{true})$$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 利用KL散度求KD</span></span><br><span class="line"><span class="comment"># 理论上和实际上KL散度等同于交叉熵，速度很快，结果相同</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">loss_fn_kd</span>(<span class="params">outputs, labels, teacher_outputs, params</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Compute the knowledge-distillation (KD) loss given outputs, labels.</span></span><br><span class="line"><span class="string">    &quot;Hyperparameters&quot;: temperature and alpha</span></span><br><span class="line"><span class="string">    NOTE: the KL Divergence for PyTorch comparing the softmaxs of teacher</span></span><br><span class="line"><span class="string">    and student expects the input tensor to be log probabilities! See Issue #2</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    alpha = params.alpha</span><br><span class="line">    T = params.temperature</span><br><span class="line">    KD_loss = nn.KLDivLoss()(F.log_softmax(outputs/T, dim=<span class="number">1</span>),</span><br><span class="line">                             F.softmax(teacher_outputs/T, dim=<span class="number">1</span>)) * (alpha * T * T) + \</span><br><span class="line">              F.cross_entropy(outputs, labels) * (<span class="number">1.</span> - alpha)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> KD_loss</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<script type="math/tex; mode=display">D_{KL}(P||Q)=\sum P(i)\frac{P(i)}{Q(i)}</script><script type="math/tex; mode=display">H(p,q)=E_p[-\log q]=H(p)+D_{KL}(P||Q)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准的KD，利用的是交叉熵求KD</span></span><br><span class="line"><span class="comment"># 但速度很慢</span></span><br><span class="line">x, target = x.to(device), target.to(device)</span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    out = teacher(x)</span><br><span class="line">    soft_target = F.softmax(out/T, dim=<span class="number">1</span>)</span><br><span class="line">hard_target = target</span><br><span class="line">out = student(x)  <span class="comment">## this is the input to softmax</span></span><br><span class="line">logp = F.log_softmax(out/T, dim=<span class="number">1</span>)</span><br><span class="line">loss_soft_target = -torch.mean(torch.<span class="built_in">sum</span>(soft_target * logp, dim=<span class="number">1</span>))</span><br><span class="line">loss_hard_target = nn.CrossEntropyLoss()(out, hard_target)</span><br><span class="line">loss = loss_soft_target * T * T + alpha * loss_hard_target</span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">L_{KD}=\alpha T^2 KLdiv(Q_S^T,Q_T^T)+(1-\alpha)CrossEntrop(Q_s,y_{true})</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 利用KL散度求KD</span></span><br><span class="line"><span class="comment"># 理论上和实际上KL散度等同于交叉熵，速度很快，结果相同</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">loss_fn_kd</span>(<span class="params">outputs, labels, teacher_outputs, params</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Compute the knowledge-distillation (KD) loss given outputs, labels.</span></span><br><span class="line"><span class="string">    &quot;Hyperparameters&quot;: temperature and alpha</span></span><br><span class="line"><span class="string">    NOTE: the KL Divergence for PyTorch comparing the softmaxs of teacher</span></span><br><span class="line"><span class="string">    and student expects the input tensor to be log probabilities! See Issue #2</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    alpha = params.alpha</span><br><span class="line">    T = params.temperature</span><br><span class="line">    KD_loss = nn.KLDivLoss()(F.log_softmax(outputs/T, dim=<span class="number">1</span>),</span><br><span class="line">                             F.softmax(teacher_outputs/T, dim=<span class="number">1</span>)) * (alpha * T * T) + \</span><br><span class="line">              F.cross_entropy(outputs, labels) * (<span class="number">1.</span> - alpha)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> KD_loss</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这段代码证明了DL散度和交叉熵的反向传播是一样的</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="comment"># sample number</span></span><br><span class="line">N = <span class="number">10</span></span><br><span class="line"><span class="comment"># category number</span></span><br><span class="line">C = <span class="number">5</span></span><br><span class="line"><span class="comment"># softmax output of teacher</span></span><br><span class="line">p = torch.softmax(torch.rand(N, C), dim=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># logit output of student</span></span><br><span class="line">s = torch.rand(N, C, requires_grad=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># softmax output of student, T = 1</span></span><br><span class="line">q = torch.softmax(s, dim=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># KL Diverse</span></span><br><span class="line"><span class="comment"># this is the implementation of the author&#x27;s</span></span><br><span class="line"><span class="comment"># torch will do element mean because it is the default option</span></span><br><span class="line"><span class="comment"># kl_loss = nn.KLDivLoss()(torch.log(q), p)</span></span><br><span class="line"><span class="comment"># I think this should be the right solution</span></span><br><span class="line">kl_loss = (nn.KLDivLoss(reduction=<span class="string">&#x27;none&#x27;</span>)(torch.log(q), p)).<span class="built_in">sum</span>(dim=<span class="number">1</span>).mean()</span><br><span class="line">kl_loss.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;grad using KL DivLoss&#x27;</span></span><br><span class="line"><span class="built_in">print</span> s.grad</span><br><span class="line"><span class="comment"># clear the grad</span></span><br><span class="line">s.grad.zero_()</span><br><span class="line"><span class="comment"># bug2: should not do element wise mean operation</span></span><br><span class="line"><span class="comment"># ce_loss = torch.mean(-torch.log(q) * p)</span></span><br><span class="line">ce_loss = torch.mean(torch.<span class="built_in">sum</span>(-torch.log(q) * p, dim=<span class="number">1</span>))</span><br><span class="line">ce_loss.backward()</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;grad using ce loss&#x27;</span></span><br><span class="line"><span class="built_in">print</span> s.grad</span><br><span class="line"><span class="comment"># the real gradient of s should be `(q - p) / batch_size`</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;real grad, should be (q-p) / batch_size&#x27;</span></span><br><span class="line"><span class="built_in">print</span> (q - p) / N</span><br></pre></td></tr></table></figure>
-
 <p>或者也可以参考: <a target="_blank" rel="noopener" href="https://github.com/PolarisShi/distillation/blob/master/student.py">code</a></p>
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2019/05/03/Reality-Oriented-Adaptation/" data-id="cla55fgd8001pwka7ex2mcxl3" data-title="Reality Oriented Adaptation" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/semantice-segmentation/" rel="tag"># semantice segmentation</a>
+          
+            <a href="/tags/domain-guided-distillation/" rel="tag"># domain guided distillation</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/30/Domain-Guided-Dropout/" rel="next" title="Domain Guided Dropout">
+                <i class="fa fa-chevron-left"></i> Domain Guided Dropout
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/04/SE-block/" rel="prev" title="SE block">
+                SE block <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2019/05/04/SE-block/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          SE block
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/04/30/Domain-Guided-Dropout/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Domain Guided Dropout</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+  </article>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
-    </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/11/06/test-2011-11-06/">test_2011_11_06</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/23/python-100-days/">python_100_days</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/data-VOS/">data_VOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/TVOS/">TVOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="post-spread">
       
-      &copy; 2022 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">0.0 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-HydraPlus-Net"><span class="nav-number">1.2.</span> <span class="nav-text">0.1 HydraPlus-Net</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Reality-Oriented-Adaptation-Networks"><span class="nav-number">3.</span> <span class="nav-text">2. Reality Oriented Adaptation Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Target-Guided-Distillation"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Target Guided Distillation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Spatial-Aware-Adaptation"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Spatial-Aware Adaptation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Network-Overview"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Network Overview</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Experimental-Results"><span class="nav-number">4.</span> <span class="nav-text">3. Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Experimental-Results"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Experimental Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Analysis-on-Real-Style-Orientation"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Analysis on Real Style Orientation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Analysis-on-Real-Distribution-Orientation"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 Analysis on Real Distribution Orientation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Others"><span class="nav-number">5.</span> <span class="nav-text">4. Others</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Domain-Adaptation"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Domain Adaptation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Distillation"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 Distillation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <nav id="mobile-nav">
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
 </body>
 </html>

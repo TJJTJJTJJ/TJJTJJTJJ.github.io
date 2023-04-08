@@ -1,114 +1,375 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  <title>tensorboard | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="0. 前言新装pytorch之后，可视化工具visdom就不能用了，所以改用tensorboard，以下是tensorboard及其变体的使用命令。">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="tensorflow,tensorboard," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0. 前言新装pytorch之后，可视化工具visdom就不能用了，所以改用tensorboard，以下是tensorboard及其变体的使用命令。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tensorboard">
 <meta property="og:url" content="http://example.com/2019/01/15/tensorboard/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言新装pytorch之后，可视化工具visdom就不能用了，所以改用tensorboard，以下是tensorboard及其变体的使用命令。">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/tensorboard/tensorboard.jpg">
-<meta property="og:image" content="http://example.com/tensorboard/tensorboard3.png">
-<meta property="og:image" content="http://example.com/tensorboard/tensorboard1.png">
-<meta property="og:image" content="http://example.com/tensorboard/tensorboard4.png">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2019/01/15/tensorboard/tensorboard/tensorboard.jpg">
+<meta property="og:image" content="http://example.com/2019/01/15/tensorboard/tensorboard/tensorboard3.png">
+<meta property="og:image" content="http://example.com/2019/01/15/tensorboard/tensorboard/tensorboard1.png">
+<meta property="og:image" content="http://example.com/2019/01/15/tensorboard/tensorboard/tensorboard4.png">
 <meta property="article:published_time" content="2019-01-15T09:15:48.000Z">
 <meta property="article:modified_time" content="2019-01-17T08:20:10.969Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="tensorflow">
 <meta property="article:tag" content="tensorboard">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/tensorboard/tensorboard.jpg">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+<meta name="twitter:image" content="http://example.com/2019/01/15/tensorboard/tensorboard/tensorboard.jpg">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2019/01/15/tensorboard/"/>
+
+
+
+
+
+  <title>tensorboard | Hexo</title>
   
+
+
+
+
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-tensorboard" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2019/01/15/tensorboard/" class="article-date">
-  <time class="dt-published" datetime="2019-01-15T09:15:48.000Z" itemprop="datePublished">2019-01-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/tensorboard/">tensorboard</a>
+        <p class="site-subtitle"></p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      tensorboard
-    </h1>
+</div>
+
+<nav class="site-nav">
   
 
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            something
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/01/15/tensorboard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">tensorboard</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-15T17:15:48+08:00">
+                2019-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tensorboard/" itemprop="url" rel="index">
+                    <span itemprop="name">tensorboard</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>新装pytorch之后，可视化工具visdom就不能用了，所以改用tensorboard，以下是tensorboard及其变体的使用命令。</p>
 <span id="more"></span>
-
 <h1 id="1-原理"><a href="#1-原理" class="headerlink" title="1. 原理"></a>1. 原理</h1><p>tensorboard与visdom不同，前者是直接读取文件进行展示，需要程序先把要展示的内容保存成文件，然后tensorboard再读取文件进行展示，后者是代码直接展示，在程序中就直接传递给visdom了。</p>
 <p>相同点是两者都需要在程序外面启动。</p>
 <h1 id="2-API以及使用流程"><a href="#2-API以及使用流程" class="headerlink" title="2. API以及使用流程"></a>2. API以及使用流程</h1><h2 id="2-1-API"><a href="#2-1-API" class="headerlink" title="2.1 API"></a>2.1 API</h2><ul>
@@ -120,85 +381,62 @@
 <li>tf.summary.merge_all——合并默认图像中的所有汇总</li>
 </ul>
 <h2 id="2-2-使用流程"><a href="#2-2-使用流程" class="headerlink" title="2.2 使用流程"></a>2.2 使用流程</h2><ol>
-<li>添加记录节点：tf.summary.scalar&#x2F;image&#x2F;histogram()等</li>
-<li>汇总记录节点：merged &#x3D; tf.summary.merge_all()</li>
-<li>运行汇总节点：summary &#x3D; sess.run(merged)，得到汇总结果</li>
-<li>日志书写器实例化：summary_writer &#x3D; tf.summary.FileWriter(logdir, graph&#x3D;sess.graph)，实例化的同时传入 graph 将当前计算图写入日志</li>
-<li>调用日志书写器实例对象summary_writer的add_summary(summary, global_step&#x3D;i)方法将所有汇总日志写入文件</li>
+<li>添加记录节点：tf.summary.scalar/image/histogram()等</li>
+<li>汇总记录节点：merged = tf.summary.merge_all()</li>
+<li>运行汇总节点：summary = sess.run(merged)，得到汇总结果</li>
+<li>日志书写器实例化：summary_writer = tf.summary.FileWriter(logdir, graph=sess.graph)，实例化的同时传入 graph 将当前计算图写入日志</li>
+<li>调用日志书写器实例对象summary_writer的add_summary(summary, global_step=i)方法将所有汇总日志写入文件</li>
 <li>调用日志书写器实例对象summary_writer的close()方法写入内存，否则它每隔120s写入一次， close() 之后就无法再次写入了，需要重新打开reopen()，这里可以替代为summary_writer.flush()。</li>
 </ol>
-<p><img src="/./tensorboard/tensorboard.jpg" alt="tensorboard使用流程图"></p>
-
-
+<p><img src="./tensorboard/tensorboard.jpg" alt="tensorboard使用流程图"><br></p>
 <h1 id="3-启动"><a href="#3-启动" class="headerlink" title="3. 启动"></a>3. 启动</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --logdir /path/to/log</span><br></pre></td></tr></table></figure>
-
 <h1 id="4-初始化"><a href="#4-初始化" class="headerlink" title="4. 初始化"></a>4. 初始化</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># tf.summary.FileWriter(logdir, graph=None, flush_secs=120, max_queue=10)</span></span><br><span class="line"></span><br><span class="line">writer = tf.summary.FileWriter(<span class="string">&quot;/path/to/log&quot;</span>, sess.graph(), flush_secs = <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">writer = tf.summary.FileWriter(<span class="string">&quot;/path/to/log&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">writer = tf.summary.FileWriter(<span class="string">&quot;/path/to/log&quot;</span>)</span><br><span class="line">writer.add_graph(sess.graph())</span><br></pre></td></tr></table></figure>
-
 <p>其他常用API</p>
 <ul>
 <li>add_event(event)：Adds an event to the event file</li>
-<li>add_graph(graph, global_step&#x3D;None)：Adds a Graph to the event file，Most users pass a graph in the constructor instead</li>
-<li>add_summary(summary, global_step&#x3D;None)：Adds a Summary protocol buffer to the event file，一定注意要传入 global_step</li>
+<li>add_graph(graph, global_step=None)：Adds a Graph to the event file，Most users pass a graph in the constructor instead</li>
+<li>add_summary(summary, global_step=None)：Adds a Summary protocol buffer to the event file，一定注意要传入 global_step</li>
 <li>close()：Flushes the event file to disk and close the file</li>
 <li>flush()：Flushes the event file to disk</li>
-<li>add_meta_graph(meta_graph_def,global_step&#x3D;None)</li>
-<li>add_run_metadata(run_metadata, tag, global_step&#x3D;None)</li>
+<li>add_meta_graph(meta_graph_def,global_step=None)</li>
+<li>add_run_metadata(run_metadata, tag, global_step=None)</li>
 </ul>
 <p>备注：这个event还是没有看懂怎么使用。</p>
 <h1 id="5-scalar"><a href="#5-scalar" class="headerlink" title="5. scalar"></a>5. scalar</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="comment"># 三个工具：writer用于指定路径，sess用于运行，summary_op用于执行。</span></span><br><span class="line">summary_writer = tf.summary.FileWriter(<span class="string">&quot;/path/to/log&quot;</span>)</span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line">tf.summary.scalar(<span class="string">&#x27;accuracy&#x27;</span>, accuracy) <span class="comment"># tag, value</span></span><br><span class="line"></span><br><span class="line">summary_op = tf.summary.merge_all()</span><br><span class="line">summary_str = sess.run(summary_op)</span><br><span class="line">summary_writer.add_summary(summary_str, global_step) <span class="comment"># y, x</span></span><br><span class="line"><span class="comment"># 备注：global_step总是int型，即使输入0.4，在图像显示也是0.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or family</span></span><br><span class="line">tf.summary.scalar(<span class="string">&#x27;loss1&#x27;</span>, <span class="number">1</span>, family=<span class="string">&#x27;loss&#x27;</span>)</span><br><span class="line">tf.summary.scalar(<span class="string">&#x27;loss2&#x27;</span>, <span class="number">2</span>, family=<span class="string">&#x27;loss&#x27;</span>)</span><br><span class="line">tf.summary.scalar(<span class="string">&#x27;loss3&#x27;</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># 示意如下图</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/./tensorboard/tensorboard3.png" alt="family"></p>
-
-
+<p><img src="./tensorboard/tensorboard3.png" alt="family"><br></p>
 <p>或者自定义数据</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="comment"># 两个工具 summary_writer: 用于连接路径， summary: 用于指定y值</span></span><br><span class="line">summary_writer = tf.summary.FileWriter(<span class="string">&quot;/path/to/log&quot;</span>)</span><br><span class="line">summary = tf.Summary(value=[</span><br><span class="line">  tf.Summary.Value(tag=<span class="string">&#x27;test2&#x27;</span>, simple_value=<span class="number">0</span>),</span><br><span class="line">  tf.Summary.Value(tag=<span class="string">&#x27;test3&#x27;</span>, simple_value=<span class="number">1</span>),</span><br><span class="line">])</span><br><span class="line">summary_writer.add_summary(summary, global_step) <span class="comment"># y, x</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">summary_writer = tf.summary.FileWriter(<span class="string">&quot;/path/to/log&quot;</span>)</span><br><span class="line">summary = tf.Summary()</span><br><span class="line">summary.value.add(tag=<span class="string">&#x27;test4&#x27;</span>, simple_value=<span class="number">0</span>)</span><br><span class="line">summary.value.add(tag=<span class="string">&#x27;test5&#x27;</span>, simple_value=<span class="number">1</span>)</span><br><span class="line">sumamry_writer.add_summary(summary, global_step)</span><br></pre></td></tr></table></figure>
-
 <h1 id="6-histogram"><a href="#6-histogram" class="headerlink" title="6. histogram"></a>6. histogram</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.summary.histogram(<span class="string">&#x27;layer&#x27;</span>+<span class="built_in">str</span>(i+<span class="number">1</span>)+<span class="string">&#x27;weights&#x27;</span>,weights)</span><br></pre></td></tr></table></figure>
-
 <p>这里的weights可以是list型，也可以是pytorch的tensor型，其他类型没试，但可以推断，一般情况下的都可以，猜测会统一转换为numpy型。</p>
 <h1 id="7-image"><a href="#7-image" class="headerlink" title="7. image"></a>7. image</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tf.summary.image(<span class="string">&#x27;input&#x27;</span>, x_image, max_outputs=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">tf.summary.image(<span class="string">&#x27;test&#x27;</span>, tf.reshape(images, [-<span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>]), <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">tf.summary.image(<span class="string">&#x27;test1&#x27;</span>, torch.rand(<span class="number">3</span>, <span class="number">256</span>, <span class="number">256</span>, <span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
 <p>备注：x_image必须是uint8或者float32型的4-D Tensor[batch_size, height, width, channels]，其中channels为1， 3 或者4</p>
 <p>对于numpy</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms <span class="keyword">as</span> T</span><br><span class="line">image_ = Image.<span class="built_in">open</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line">image_numpy = numpy.array(image_) <span class="comment"># 271, 108, 3</span></span><br><span class="line">tf.summary.image(<span class="string">&#x27;test1&#x27;</span>, image_numpy.reshape(<span class="number">1</span>, <span class="number">271</span>, <span class="number">108</span>,<span class="number">3</span>))</span><br><span class="line">summary_op = tf.summary.merge_all()</span><br><span class="line">summary_str = sess.run(summary_op)</span><br><span class="line">summary_writer.add_summary(summary_str, global_step)</span><br></pre></td></tr></table></figure>
-
 <p>对于pytorch</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">image_ = Image.<span class="built_in">open</span>(<span class="string">&#x27;path&#x27;</span>) <span class="comment"># 3, 271, 108</span></span><br><span class="line">image_tensor = T.ToTensor()(image_)</span><br><span class="line">tf.summary.image(<span class="string">&#x27;test9&#x27;</span>, image_tensor.permute(<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>).reshape(<span class="number">1</span>, <span class="number">271</span>, <span class="number">108</span>,<span class="number">3</span>))</span><br><span class="line"><span class="comment"># 备注：将permute改为reshape之后不知道为什么会展示9空格的相同的黑白图片</span></span><br><span class="line">summary_op = tf.summary.merge_all()</span><br><span class="line">summary_str = sess.run(summary_op)</span><br><span class="line">summary_writer.add_summary(summary_str, global_step)</span><br></pre></td></tr></table></figure>
-
 <p>uint8或者float32型的4-D Tensor[batch_size, height, width, channels]，其中channels为1， 3 或者4</p>
 <h1 id="8-多个event的可视化"><a href="#8-多个event的可视化" class="headerlink" title="8. 多个event的可视化"></a>8. 多个event的可视化</h1><p>如果 logdir 目录的子目录中包含另一次运行时的数据(多个 event)，那么 TensorBoard 会展示所有运行的数据(主要是scalar)，这样可以用于比较不同参数下模型的效果，调节模型的参数，让其达到最好的效果！</p>
 <p>这个还有待测试</p>
 <h1 id="9-tensorboard-logger"><a href="#9-tensorboard-logger" class="headerlink" title="9. tensorboard_logger"></a>9. tensorboard_logger</h1><p>tensorboard_logger可以暂时理解成简化版的tensorboard，或者是tensorboard的高级API。</p>
 <p>tensorboard_logger依赖于tensorboard。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">pip install tensorboard_logger</span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">tensorboard --logdir /path/to/log --port /port <span class="comment"># 实际还是通过tensorboard来使用</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化</span></span><br><span class="line"><span class="keyword">from</span> tensorboard_logger <span class="keyword">import</span> Logger</span><br><span class="line">logger = Logger(logdir=<span class="string">&#x27;./logs&#x27;</span>, flush_secs=<span class="number">2</span>)</span><br><span class="line"><span class="comment"># logger.logdir = &#x27;./logs2&#x27;  # 可以修改，尝试着修改了一下，发现没用，暂时用不着。</span></span><br><span class="line"><span class="comment"># logger.flush_secs = 3   # 可以修改</span></span><br><span class="line"><span class="comment"># API</span></span><br><span class="line">logger.log_value(<span class="string">&#x27;loss&#x27;</span>, <span class="number">10</span>, step=<span class="number">3</span>) <span class="comment"># step 可以不写，推荐写</span></span><br><span class="line"><span class="comment"># image_path = &#x27;test.jpg&#x27;</span></span><br><span class="line"><span class="comment"># image_ = Image.open(image_path)</span></span><br><span class="line"><span class="comment"># image_numpy = np.array(image_)</span></span><br><span class="line">logger.log_images(<span class="string">&#x27;images&#x27;</span>, image_numpy.reshape(<span class="number">1</span>,<span class="number">271</span>,<span class="number">168</span>,<span class="number">3</span>), step=<span class="number">2</span>) <span class="comment"># 规则同上</span></span><br><span class="line">logger.log_histogram(<span class="string">&#x27;weights&#x27;</span>, torch.rand(<span class="number">2</span>,<span class="number">3</span>)+<span class="number">10</span>, step=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 函数tensorboard_logger.configure, tensorboard_logger.log_value与tensorboard_logger.Logger可以达到一样的效果</span></span><br><span class="line"><span class="keyword">from</span> tensorboard_logger <span class="keyword">import</span> configure, log_value</span><br><span class="line">configure(<span class="string">&quot;runs/run-1234&quot;</span>, flush_secs=<span class="number">5</span>)</span><br><span class="line">log_value(<span class="string">&#x27;v1&#x27;</span>, v1, step)</span><br></pre></td></tr></table></figure>
-
 <h1 id="10-tensorboardX"><a href="#10-tensorboardX" class="headerlink" title="10. tensorboardX"></a>10. tensorboardX</h1><p><a target="_blank" rel="noopener" href="https://github.com/lanpa/tensorboardX">https://github.com/lanpa/tensorboardX</a></p>
 <p>tensorboardX也依赖于tensorflow和tensorboard。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">pip install tensorboardX</span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">tensorboard --logdir /path/to/log --port /port</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化</span></span><br><span class="line"><span class="keyword">from</span> tensorboardX <span class="keyword">import</span> SummaryWriter</span><br><span class="line">writer = SummaryWriter(logdir = <span class="string">&#x27;tensorboard7&#x27;</span>, comment = <span class="string">&#x27;test1&#x27;</span>, flush_secs = <span class="number">1</span>)</span><br><span class="line"><span class="comment"># 当有logdir时，comment被忽略，</span></span><br><span class="line"><span class="comment"># 当没有logdir时，只有comment(writer = SummaryWriter(comment = &#x27;tensorboard7_test1&#x27;, flush_secs = 1))会作为补充自动生成这样的文件目录：</span></span><br><span class="line"><span class="comment"># ./runs/Jan17_11-24-12_zbp-PowerEdge-T630tensorboard7_test1/events....</span></span><br><span class="line"><span class="comment"># 此外，任意tf.summary.FileWriter的参数都可以加上去。</span></span><br><span class="line">writer.close()</span><br><span class="line"><span class="comment"># 没有writer.flush()</span></span><br></pre></td></tr></table></figure>
-
 <p>另一种写法</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> SummaryWriter(logdir = <span class="string">&#x27;tensorboard7&#x27;</span>) <span class="keyword">as</span> w:</span><br><span class="line">    w.add_something()</span><br></pre></td></tr></table></figure>
-
 <p>不推荐with的写法，会自动重新创建一个文件，乱。</p>
 <h2 id="10-1-add-scalar"><a href="#10-1-add-scalar" class="headerlink" title="10.1 add_scalar"></a>10.1 add_scalar</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># API</span></span><br><span class="line">writer.add_scalar(<span class="string">&#x27;loss1&#x27;</span>, <span class="number">2</span>, global_step=<span class="number">2</span>)</span><br><span class="line">writer.add_scalars(<span class="string">&#x27;loss&#x27;</span>, &#123;<span class="string">&#x27;loss1&#x27;</span>:<span class="number">2</span>, <span class="string">&#x27;loss2&#x27;</span>:<span class="number">3</span>&#125;, global_step=<span class="number">2</span>)</span><br><span class="line"><span class="comment"># 示例如下图，add_scalars可以将多个loss显示同一个图上，实现类似visdom的功能。</span></span><br><span class="line"><span class="comment"># add_scalars(main_tag,tag_scalar_dict,global_step=None)</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/./tensorboard/tensorboard1.png" alt="add_scalar&amp;add_scalars"></p>
-
-
+<p><img src="./tensorboard/tensorboard1.png" alt="add_scalar&amp;add_scalars"><br></p>
 <p><strong>备注：</strong>:</p>
 <ol>
 <li><strong>SummaryWriter以及之前的类似Writer都可以自动创建文件夹</strong>。</li>
-<li><strong>tensorboard –logdir &#x2F;path&#x2F;to&#x2F;log会自动迭代该文件下的所有文件夹和文件，将event展示出来，并且将同名字的scalar放在一起，可以用于对比修改前后的结果</strong>。</li>
+<li><strong>tensorboard —logdir /path/to/log会自动迭代该文件下的所有文件夹和文件，将event展示出来，并且将同名字的scalar放在一起，可以用于对比修改前后的结果</strong>。</li>
 </ol>
 <h2 id="10-2-add-image"><a href="#10-2-add-image" class="headerlink" title="10.2 add_image"></a>10.2 add_image</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">writer.add_image(tag, img_tensor, global_step=<span class="literal">None</span>)</span><br><span class="line"><span class="comment"># img_tensor: 图像数据，shape（3，H，W) 配合torchvision.utils.make_grid使用</span></span><br><span class="line"><span class="comment"># writer.add_image(tag, img_tensor, global_step=None, walltime=None, dataformats=&#x27;CHW&#x27;),</span></span><br><span class="line"><span class="comment">#  dataformats: &#x27;CHW&#x27;, &#x27;HWC&#x27;, &#x27;HW&#x27;</span></span><br><span class="line"></span><br><span class="line">image_path = <span class="string">&#x27;test.jpg&#x27;</span></span><br><span class="line">image_ = Image.<span class="built_in">open</span>(image_path)</span><br><span class="line">image_tensor = T.ToTensor()(image_)</span><br><span class="line">writer.add_image(<span class="string">&#x27;test1&#x27;</span>, image_tensor, global_step=<span class="number">2</span>)</span><br><span class="line">writer.add_image(<span class="string">&#x27;test2&#x27;</span>, torchvision.utils.make_grid(torch.rand(<span class="number">16</span>, <span class="number">3</span>, <span class="number">256</span>,<span class="number">256</span>), nrow=<span class="number">8</span>, padding=<span class="number">20</span>), global_step=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
 <h2 id="10-3-add-histogram"><a href="#10-3-add-histogram" class="headerlink" title="10.3 add_histogram"></a>10.3 add_histogram</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">writer.add_histogram(tag,values,global_step=<span class="literal">None</span>,bins=<span class="string">&#x27;tensorflow&#x27;</span>)</span><br><span class="line"><span class="comment"># bins:  (string): one of &#123;&#x27;tensorflow&#x27;,&#x27;auto&#x27;, &#x27;fd&#x27;, ...&#125;, this determines</span></span><br><span class="line"><span class="comment"># how the bins are made. You can find other options in:</span></span><br><span class="line"><span class="comment"># https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogram.html</span></span><br><span class="line">writer.add_histogram(<span class="string">&#x27;test1&#x27;</span>, torch.rand(<span class="number">16</span>, <span class="number">3</span>, <span class="number">256</span>,<span class="number">256</span>), global_step=<span class="number">3</span>)</span><br><span class="line"><span class="comment"># 感觉 bins 这个参数也差不多么</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="10-4-add-graph"><a href="#10-4-add-graph" class="headerlink" title="10.4 add_graph"></a>10.4 add_graph</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Net1</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Net1, self).__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">3</span>, <span class="number">10</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">0</span>)</span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x </span>):</span><br><span class="line">        x = self.conv1(x)</span><br><span class="line">        x = x.view(-<span class="number">1</span>, <span class="number">10</span>)</span><br><span class="line">        x = self.fc1(x)</span><br><span class="line">        x = torch.nn.functional.softmax(x, dim=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="built_in">input</span> = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">model = Net1()</span><br><span class="line">writer.add_graph(model, (<span class="built_in">input</span>,))</span><br><span class="line"></span><br><span class="line">add_graph(model, input_to_model, verbose=<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># verbose 用于是否print</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/./tensorboard/tensorboard4.png" alt="add_graph"></p>
-
-
+<p><img src="./tensorboard/tensorboard4.png" alt="add_graph"><br></p>
 <p>终于pytorch也能显示graph了，不容易，应该提前熟悉这些API的。</p>
 <h1 id="11-结论"><a href="#11-结论" class="headerlink" title="11. 结论"></a>11. 结论</h1><p>综上所述，我觉得：</p>
 <ul>
@@ -212,155 +450,392 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2019/01/15/tensorboard/" data-id="cla55fgee00afwka7fjj3bbc7" data-title="tensorboard" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tensorflow/" rel="tag"># tensorflow</a>
+          
+            <a href="/tags/tensorboard/" rel="tag"># tensorboard</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/14/SyRI/" rel="next" title="SyRI">
+                <i class="fa fa-chevron-left"></i> SyRI
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/17/GANnotation/" rel="prev" title="GANnotation">
+                GANnotation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2019/01/17/GANnotation/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          GANnotation
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/01/14/SyRI/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">SyRI</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+  </article>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
-    </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/11/06/test-2011-11-06/">test_2011_11_06</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/23/python-100-days/">python_100_days</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/data-VOS/">data_VOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/TVOS/">TVOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="post-spread">
       
-      &copy; 2022 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">1. 原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-API%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">2. API以及使用流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-API"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 使用流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%90%AF%E5%8A%A8"><span class="nav-number">4.</span> <span class="nav-text">3. 启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text">4. 初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-scalar"><span class="nav-number">6.</span> <span class="nav-text">5. scalar</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-histogram"><span class="nav-number">7.</span> <span class="nav-text">6. histogram</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-image"><span class="nav-number">8.</span> <span class="nav-text">7. image</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E5%A4%9A%E4%B8%AAevent%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">9.</span> <span class="nav-text">8. 多个event的可视化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-tensorboard-logger"><span class="nav-number">10.</span> <span class="nav-text">9. tensorboard_logger</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-tensorboardX"><span class="nav-number">11.</span> <span class="nav-text">10. tensorboardX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-add-scalar"><span class="nav-number">11.1.</span> <span class="nav-text">10.1 add_scalar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-add-image"><span class="nav-number">11.2.</span> <span class="nav-text">10.2 add_image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-add-histogram"><span class="nav-number">11.3.</span> <span class="nav-text">10.3 add_histogram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-add-graph"><span class="nav-number">11.4.</span> <span class="nav-text">10.4 add_graph</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-%E7%BB%93%E8%AE%BA"><span class="nav-number">12.</span> <span class="nav-text">11. 结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <nav id="mobile-nav">
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
 </body>
 </html>

@@ -1,508 +1,1005 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  <title>InstaGAN | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="实例转换">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="GAN," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="实例转换">
 <meta property="og:type" content="article">
 <meta property="og:title" content="InstaGAN">
 <meta property="og:url" content="http://example.com/2019/01/04/InstaGAN/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="实例转换">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN1.png">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN2.png">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN3.png">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN4.png">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN5.png">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN6.png">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN7.png">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN8.png">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN9.png">
-<meta property="og:image" content="http://example.com/InstaGAN/InstaGAN10.png">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN1.png">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN2.png">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN3.png">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN4.png">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN5.png">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN6.png">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN7.png">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN8.png">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN9.png">
+<meta property="og:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN10.png">
 <meta property="article:published_time" content="2019-01-04T03:25:47.000Z">
 <meta property="article:modified_time" content="2019-01-10T14:57:05.795Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="GAN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/InstaGAN/InstaGAN1.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+<meta name="twitter:image" content="http://example.com/2019/01/04/InstaGAN/InstaGAN/InstaGAN1.png">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2019/01/04/InstaGAN/"/>
+
+
+
+
+
+  <title>InstaGAN | Hexo</title>
   
+
+
+
+
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-InstaGAN" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2019/01/04/InstaGAN/" class="article-date">
-  <time class="dt-published" datetime="2019-01-04T03:25:47.000Z" itemprop="datePublished">2019-01-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/paper/">paper</a>
+        <p class="site-subtitle"></p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      InstaGAN
-    </h1>
+</div>
+
+<nav class="site-nav">
   
 
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            something
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/01/04/InstaGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">InstaGAN</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T11:25:47+08:00">
+                2019-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper/" itemprop="url" rel="index">
+                    <span itemprop="name">paper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <p>实例转换</p>
 <span id="more"></span>
-
 <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1812.10889.pdf">InstaGAN Instance-aware image-to-image translation</a></p>
 <p>Sangwoo Mo, Minsu Cho, Jinwoo Shin</p>
 <p>github: <a target="_blank" rel="noopener" href="https://github.com/sangwoomo/instagan">https://github.com/sangwoomo/instagan</a></p>
 <p>project: <a target="_blank" rel="noopener" href="https://openreview.net/forum?id=ryxwJhC9YX">https://openreview.net/forum?id=ryxwJhC9YX</a></p>
-<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p><img src="/./InstaGAN/InstaGAN1.png" alt="Tranlation results"></p>
-
-
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p><img src="./InstaGAN/InstaGAN1.png" alt="Tranlation results"><br></p>
 <p>整体分为三部分:</p>
 <ol>
 <li>an instance-augmented neural architecture</li>
 <li>a context preserving loss</li>
-<li>a sequential mini-batch inference&#x2F;training technique</li>
+<li>a sequential mini-batch inference/training technique</li>
 </ol>
 <ul>
 <li>an instance-augmented neural architecture: an image and the corresponding set of instance attributes.</li>
 <li>a context preserving loss: target instances and an identity function</li>
-<li>a sequential mini-batch inference&#x2F;training technique: translating the mini-batches of instance attributes sequentially</li>
+<li>a sequential mini-batch inference/training technique: translating the mini-batches of instance attributes sequentially</li>
 </ul>
 <h1 id="2-InstaGAN"><a href="#2-InstaGAN" class="headerlink" title="2. InstaGAN"></a>2. InstaGAN</h1><p>符号说明：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">符号</th>
-<th align="center">说明</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$\mathcal{X}$, $\mathcal{Y}$</td>
-<td align="center">image domain</td>
+<tbody>
+<tr>
+<td style="text-align:center">$\mathcal{X}$, $\mathcal{Y}$</td>
+<td style="text-align:center">image domain</td>
 </tr>
 <tr>
-<td align="center">$\mathcal{A}, \mathcal{B}$</td>
-<td align="center">a space of set of instance attributes</td>
+<td style="text-align:center">$\mathcal{A}, \mathcal{B}$</td>
+<td style="text-align:center">a space of set of instance attributes</td>
 </tr>
 <tr>
-<td align="center">$\boldsymbol{a} &#x3D; \lbrace a_i \rbrace _{i&#x3D;1}^N $</td>
-<td align="center">set of instance attributes</td>
+<td style="text-align:center">$\boldsymbol{a} = \lbrace a<em>i \rbrace </em>{i=1}^N $</td>
+<td style="text-align:center">set of instance attributes</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center">instance segmentation mask</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">instance segmentation mask</td>
 </tr>
 <tr>
-<td align="center">$G_{XY}:\mathcal{X}-&gt;\mathcal{Y}, G_{YX}:\mathcal{Y}-&gt;\mathcal{X}$</td>
-<td align="center">tranlation function</td>
+<td style="text-align:center">$G<em>{XY}:\mathcal{X}-&gt;\mathcal{Y}, G</em>{YX}:\mathcal{Y}-&gt;\mathcal{X}$</td>
+<td style="text-align:center">tranlation function</td>
 </tr>
-</tbody></table>
-<h2 id="2-1-InstaGAN-architecture"><a href="#2-1-InstaGAN-architecture" class="headerlink" title="2.1 InstaGAN architecture"></a>2.1 InstaGAN architecture</h2><p><img src="/./InstaGAN/InstaGAN2.png" alt="InstaGAN architecture"></p>
-
-
+</tbody>
+</table>
+</div>
+<h2 id="2-1-InstaGAN-architecture"><a href="#2-1-InstaGAN-architecture" class="headerlink" title="2.1 InstaGAN architecture"></a>2.1 InstaGAN architecture</h2><p><img src="./InstaGAN/InstaGAN2.png" alt="InstaGAN architecture"><br></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">符号</th>
-<th align="center">说明</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$f_{GX}$</td>
-<td align="center">image feature extractor</td>
+<tbody>
+<tr>
+<td style="text-align:center">$f_{GX}$</td>
+<td style="text-align:center">image feature extractor</td>
 </tr>
 <tr>
-<td align="center">$f_{GA}$</td>
-<td align="center">attribute feature extractor</td>
+<td style="text-align:center">$f_{GA}$</td>
+<td style="text-align:center">attribute feature extractor</td>
 </tr>
 <tr>
-<td align="center">$H_{GX}(x,a)&#x3D;[f_{GX}(x);\sum_{i&#x3D;1}^Nf_{GA}(a_i)]$</td>
-<td align="center">image representation</td>
+<td style="text-align:center">$H<em>{GX}(x,a)=[f</em>{GX}(x);\sum<em>{i=1}^Nf</em>{GA}(a_i)]$</td>
+<td style="text-align:center">image representation</td>
 </tr>
 <tr>
-<td align="center">$H_{GA}^n(x,a)&#x3D;[f_{GX}(x);\sum_{i&#x3D;1}^Nf_{GA}(a_i);f_{GA}(a_n)]$</td>
-<td align="center">image representation</td>
+<td style="text-align:center">$H<em>{GA}^n(x,a)=[f</em>{GX}(x);\sum<em>{i=1}^Nf</em>{GA}(a<em>i);f</em>{GA}(a_n)]$</td>
+<td style="text-align:center">image representation</td>
 </tr>
 <tr>
-<td align="center">$h_{DX}(x,a)&#x3D;[f_{DX}(x);\sum_{i&#x3D;1}^Nf_{DA}(a_i)]$</td>
-<td align="center">image representation for discriminator</td>
+<td style="text-align:center">$h<em>{DX}(x,a)=[f</em>{DX}(x);\sum<em>{i=1}^Nf</em>{DA}(a_i)]$</td>
+<td style="text-align:center">image representation for discriminator</td>
 </tr>
 <tr>
-<td align="center">$f_{GX},f_{GA},f_{DX},f_{DA},g_{GX},G_{GA},G_{DX}$</td>
-<td align="center"></td>
+<td style="text-align:center">$f<em>{GX},f</em>{GA},f<em>{DX},f</em>{DA},g<em>{GX},G</em>{GA},G_{DX}$</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">$(x,a)-&gt;(y’,b’)$</td>
-<td align="center"></td>
+<td style="text-align:center">$(x,a)-&gt;(y’,b’)$</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">$(y,b)-&gt;(x’,a’)$</td>
-<td align="center"></td>
+<td style="text-align:center">$(y,b)-&gt;(x’,a’)$</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>作者为了能实现mask顺序不变性，采用相加的方式</strong>。</p>
 <h2 id="2-2-Training-loss"><a href="#2-2-Training-loss" class="headerlink" title="2.2 Training loss"></a>2.2 Training loss</h2><ol>
 <li><strong>domain loss</strong>: GAN loss</li>
 <li><strong>content loss</strong>: cycle-consistency loss and identity mapping loss and context preserving loss</li>
 </ol>
-<p><strong>LSGAN</strong>: 判断图片是原始的还是生成的<br>$$L_{LSGAN}&#x3D;(D_X(x,a)-1)^2+(D_X(G_{YX}(y,b)))^2+(D_Y(y,b)-1)^2+(D_Y(G_{XY}(y,b)))^2$$</p>
-<p><strong>cycle-consistency loss</strong>: 循环一致性<br>$$L_{cyc}&#x3D;\parallel G_{YX}(G_{XY}(x,a))-(x,a) \parallel _1+\parallel G_{XY}(G_{YX}(y,b))-(y,b) \parallel _1$$</p>
-<p><strong>identity mapping loss</strong>: 恒等映射<br>$$L_{idt}&#x3D;\parallel G_{XY}(y,b)-(y,b) \parallel _1 + \parallel G_{YX}(x,a)-(x,a) \parallel _1$$</p>
-<p><strong>context preserving loss</strong>: 保留背景<br>$$L_{ctx}&#x3D;\parallel w(a,b’)\odot(x-y’) \parallel _1 + \parallel w(b,a’)\odot(y-x’) \parallel _1 $$<br>其中，$w(a,b’), w(b,a’)$表示在原图片和生成图片都是背景的位置的权重是1.</p>
-<p><strong>Total loss</strong>:<br>$$<br>\begin{align}<br>L_{InstaGAN}&amp;&#x3D;L_{LSGAN} + \lambda_{cyc} L_{cyc}+ \lambda_{idt} L_{idt}+ \lambda_{ctx} L_{ctx} \<br>&amp;&#x3D;L_{LSGAN}+L_{content}<br>\end{align}<br>$$</p>
-<h2 id="2-3-sequential-mini-batch-translation"><a href="#2-3-sequential-mini-batch-translation" class="headerlink" title="2.3 sequential mini-batch translation"></a>2.3 sequential mini-batch translation</h2><p>考虑到在图片上的实例可能很多，而GPU的所需空间随之线性增长，可能不符合现实情况，所以需要考虑在图片上可以转化一小部分实例。</p>
-<p><img src="/./InstaGAN/InstaGAN3.png" alt="sequential mini-batch translation"></p>
-
-
+<p><strong>LSGAN</strong>: 判断图片是原始的还是生成的</p>
+<script type="math/tex; mode=display">L_{LSGAN}=(D_X(x,a)-1)^2+(D_X(G_{YX}(y,b)))^2+(D_Y(y,b)-1)^2+(D_Y(G_{XY}(y,b)))^2</script><p><strong>cycle-consistency loss</strong>: 循环一致性</p>
+<script type="math/tex; mode=display">L_{cyc}=\parallel G_{YX}(G_{XY}(x,a))-(x,a) \parallel \_1+\parallel G_{XY}(G_{YX}(y,b))-(y,b) \parallel _1</script><p><strong>identity mapping loss</strong>: 恒等映射</p>
+<script type="math/tex; mode=display">L_{idt}=\parallel G_{XY}(y,b)-(y,b) \parallel \_1 + \parallel G_{YX}(x,a)-(x,a) \parallel _1</script><p><strong>context preserving loss</strong>: 保留背景</p>
+<script type="math/tex; mode=display">L_{ctx}=\parallel w(a,b')\odot(x-y') \parallel _1 + \parallel w(b,a')\odot(y-x') \parallel _1</script><p>其中，$w(a,b’), w(b,a’)$表示在原图片和生成图片都是背景的位置的权重是1.</p>
+<p><strong>Total loss</strong>:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L_{InstaGAN}&=L_{LSGAN} + \lambda_{cyc} L_{cyc}+ \lambda_{idt} L_{idt}+ \lambda_{ctx} L_{ctx} \\
+&=L_{LSGAN}+L_{content}
+\end{align}</script><h2 id="2-3-sequential-mini-batch-translation"><a href="#2-3-sequential-mini-batch-translation" class="headerlink" title="2.3 sequential mini-batch translation"></a>2.3 sequential mini-batch translation</h2><p>考虑到在图片上的实例可能很多，而GPU的所需空间随之线性增长，可能不符合现实情况，所以需要考虑在图片上可以转化一小部分实例。</p>
+<p><img src="./InstaGAN/InstaGAN3.png" alt="sequential mini-batch translation"><br></p>
 <p>符号说明：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">符号</th>
-<th align="center">说明</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$a&#x3D;\cup_{i&#x3D;1}^Ma_i$</td>
-<td align="center">divide the set of instance masks a into mini-batch $a_1,a_2,…,a_M$</td>
+<tbody>
+<tr>
+<td style="text-align:center">$a=\cup_{i=1}^Ma_i$</td>
+<td style="text-align:center">divide the set of instance masks a into mini-batch $a_1,a_2,…,a_M$</td>
 </tr>
 <tr>
-<td align="center">$(x_m, a_m)-&gt;(y’_m, b’_m) or (x_{m+1}, a_{m+1})$</td>
-<td align="center">mini-batch translation</td>
+<td style="text-align:center">$(x<em>m, a_m)-&gt;(y’_m, b’_m) or (x</em>{m+1}, a_{m+1})$</td>
+<td style="text-align:center">mini-batch translation</td>
 </tr>
 <tr>
-<td align="center">$(y’_m, b’_{1:m})&#x3D;(y’_m, \cup_{i&#x3D;1}^m b’_i)$</td>
-<td align="center">用于判断真假</td>
+<td style="text-align:center">$(y’_m, b’_{1:m})=(y’_m, \cup_{i=1}^m b’_i)$</td>
+<td style="text-align:center">用于判断真假</td>
 </tr>
-</tbody></table>
-<p>在这种情况下，不同的损失函数作用的范围发生改变，第m次时，content loss作用在$(x_m, a_m), (y’_m, b’_m)$，domain loss 作用在$(x,a), (y’_m, b’_{1:m})$，即</p>
-<p>$$L_{InstaGAN-SM}&#x3D;\sum_{m&#x3D;1}^M \lbrace L_{LSGAN}((x,a),(y’<em>m, b’</em>{1:m}))+L_{content}((x_m, a_m),(y’<em>m, b’<em>m)) \rbrace$$<br>$$L</em>{content}&#x3D;\lambda</em>{cyc} L_{cyc}+\lambda_{idt} L_{idt}+\lambda_{ctx} L_{ctx}$$</p>
-<ul>
+</tbody>
+</table>
+</div>
+<p>在这种情况下，不同的损失函数作用的范围发生改变，第m次时，content loss作用在$(x<em>m, a_m), (y’_m, b’_m)$，domain loss 作用在$(x,a), (y’_m, b’\</em>{1:m})$，即</p>
+<script type="math/tex; mode=display">L_{InstaGAN-SM}=\sum_{m=1}^M \lbrace L_{LSGAN}((x,a),(y'_m, b'_{1:m}))+L_{content}((x_m, a_m),(y'_m, b'_m)) \rbrace</script><script type="math/tex; mode=display">L_{content}=\lambda_{cyc} L_{cyc}+\lambda_{idt} L_{idt}+\lambda_{ctx} L_{ctx}</script><ul>
 <li>每m个迭代detach一次，来使用固定大小的GPU。</li>
 <li>划分mini-batch的原则：size of instances, 由大到小</li>
 </ul>
-<h1 id="3-experimental-results"><a href="#3-experimental-results" class="headerlink" title="3. experimental results"></a>3. experimental results</h1><h2 id="3-1-image-to-image-translation-results"><a href="#3-1-image-to-image-translation-results" class="headerlink" title="3.1 image-to-image translation results"></a>3.1 image-to-image translation results</h2><p><img src="/./InstaGAN/InstaGAN4.png" alt="translation results"></p>
-
-
+<h1 id="3-experimental-results"><a href="#3-experimental-results" class="headerlink" title="3. experimental results"></a>3. experimental results</h1><h2 id="3-1-image-to-image-translation-results"><a href="#3-1-image-to-image-translation-results" class="headerlink" title="3.1 image-to-image translation results"></a>3.1 image-to-image translation results</h2><p><img src="./InstaGAN/InstaGAN4.png" alt="translation results"><br></p>
 <p>通过上述结果的展示，我可以认为在这方面InstaGAN要比CycleGAN的效果更好，更能得到想要的指定的结果。</p>
-<p><img src="/./InstaGAN/InstaGAN5.png" alt="results of translation "></p>
-
-
+<p><img src="./InstaGAN/InstaGAN5.png" alt="results of translation "><br></p>
 <p>第一个结果表明可以通过控制掩码来控制生成的图片。</p>
 <p>第二个结果表明可以使用预测的掩码进行转换图片，从而减少获取掩码的成本。</p>
-<h2 id="3-2-ablation-study"><a href="#3-2-ablation-study" class="headerlink" title="3.2 ablation study"></a>3.2 ablation study</h2><p><img src="/./InstaGAN/InstaGAN6.png" alt="ablation study"></p>
-
-
+<h2 id="3-2-ablation-study"><a href="#3-2-ablation-study" class="headerlink" title="3.2 ablation study"></a>3.2 ablation study</h2><p><img src="./InstaGAN/InstaGAN6.png" alt="ablation study"><br></p>
 <p>Fig.9 主要使研究作者提出的三部分功能的作用，instance mask，损失函数，mini-batch的影响，从效果上看，还是最后一张图片效果更好一些。</p>
-<p><img src="/./InstaGAN/InstaGAN7.png" alt="ablation  study on the effects of the sequential mini-batch inference/training technique "></p>
-
-
+<p><img src="./InstaGAN/InstaGAN7.png" alt="ablation  study on the effects of the sequential mini-batch inference/training technique "><br></p>
 <p>Fig.10分别表示在training和inference中使用one-step还是sequential方法，我觉得都差不多，但是对于有限的GPU是个很好的方法。</p>
 <h1 id="4-Appendix"><a href="#4-Appendix" class="headerlink" title="4. Appendix"></a>4. Appendix</h1><h2 id="4-1-architecture-details"><a href="#4-1-architecture-details" class="headerlink" title="4.1 architecture details"></a>4.1 architecture details</h2><blockquote>
 <p>PatchGAN discriminator is composed of 5 convolutional layers, including normalization and non-linearity layers. We used the first 3 convolution layers for feature extractors, and the last 2 convolution layers for classifier.</p>
 </blockquote>
 <h2 id="4-2-traning-details"><a href="#4-2-traning-details" class="headerlink" title="4.2 traning details"></a>4.2 traning details</h2><ul>
-<li>$\lambda_{cyc}&#x3D;10, \lambda_{idt}&#x3D;10, \lambda_{ctx}&#x3D;10$</li>
-<li>Adam: $\beta_1&#x3D;0.5, \beta_2&#x3D;0.999$</li>
-<li>batch_size&#x3D;4</li>
-<li>GPU &#x3D; 4</li>
+<li>$\lambda<em>{cyc}=10, \lambda</em>{idt}=10, \lambda_{ctx}=10$</li>
+<li>Adam: $\beta_1=0.5, \beta_2=0.999$</li>
+<li>batch_size=4</li>
+<li>GPU = 4</li>
 <li>learning rate: 0.0002 for G, 0.0001 for D, 前m个epoch保持不变，后n个epoch线性衰减为0.不同的数据集的m和n不同</li>
 <li>size对于不同的数据集也不同。</li>
 </ul>
-<h2 id="4-3-trend-of-translation-results"><a href="#4-3-trend-of-translation-results" class="headerlink" title="4.3 trend of translation results"></a>4.3 trend of translation results</h2><p><img src="/./InstaGAN/InstaGAN8.png" alt="trend of translation results"></p>
-
-
+<h2 id="4-3-trend-of-translation-results"><a href="#4-3-trend-of-translation-results" class="headerlink" title="4.3 trend of translation results"></a>4.3 trend of translation results</h2><p><img src="./InstaGAN/InstaGAN8.png" alt="trend of translation results"><br></p>
 <h2 id="4-4-其他"><a href="#4-4-其他" class="headerlink" title="4.4 其他"></a>4.4 其他</h2><p>我觉得这是相当于对于CycleGAN，加上了指向性生成，不再是单独地生成目标域风格的图片，而是对指定区域生成目标域风格的图片。</p>
 <p>刚刚想到一个问题，InstaGAN可以生成指定形状的图片，但是对于同一形状的不同物体，比如生成红色的裙子和黑色的裙子这样子的任务，可能不行。</p>
-<h2 id="4-5-video-translation-results"><a href="#4-5-video-translation-results" class="headerlink" title="4.5 video translation results"></a>4.5 video translation results</h2><p><img src="/./InstaGAN/InstaGAN9.png" alt="video translation results"></p>
-
-
+<h2 id="4-5-video-translation-results"><a href="#4-5-video-translation-results" class="headerlink" title="4.5 video translation results"></a>4.5 video translation results</h2><p><img src="./InstaGAN/InstaGAN9.png" alt="video translation results"><br></p>
 <p>作者使用pix2pix作为分割。</p>
 <p>感觉在视频上，裤子换成裙子后，能保持所有帧的裙子都是一样的，说明转换的稳定性很好。</p>
 <h1 id="5-code"><a href="#5-code" class="headerlink" title="5. code"></a>5. code</h1><p>看细节还是需要看代码的实现过程。</p>
-<h2 id="5-1-文件目录"><a href="#5-1-文件目录" class="headerlink" title="5.1 文件目录"></a>5.1 文件目录</h2><p><img src="/./InstaGAN/InstaGAN10.png" alt="文件目录"></p>
-
-
+<h2 id="5-1-文件目录"><a href="#5-1-文件目录" class="headerlink" title="5.1 文件目录"></a>5.1 文件目录</h2><p><img src="./InstaGAN/InstaGAN10.png" alt="文件目录"><br></p>
 <p>通过文件组织，可以发现cycleGAN尽可能地考虑了可扩展性。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">|-- LICENSE</span><br><span class="line">|-- README.md</span><br><span class="line">|-- data</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- aligned_dataset.py</span><br><span class="line">|   |-- base_data_loader.py</span><br><span class="line">|   |-- base_dataset.py</span><br><span class="line">|   |-- image_folder.py</span><br><span class="line">|   |-- single_dataset.py</span><br><span class="line">|   |-- unaligned_dataset.py</span><br><span class="line">|   `-- unaligned_seg_dataset.py</span><br><span class="line">|-- datasets</span><br><span class="line">|   |-- combine_A_and_B.py</span><br><span class="line">|   |-- download_coco.sh</span><br><span class="line">|   |-- download_cyclegan_dataset.sh</span><br><span class="line">|   |-- download_pix2pix_dataset.sh</span><br><span class="line">|   |-- generate_ccp_dataset.py</span><br><span class="line">|   |-- generate_coco_dataset.py</span><br><span class="line">|   |-- generate_mhp_dataset.py</span><br><span class="line">|   |-- make_dataset_aligned.py</span><br><span class="line">|   |-- pants2skirt_mhp</span><br><span class="line">|-- docs</span><br><span class="line">|   `-- more_results.md</span><br><span class="line">|-- environment.yml</span><br><span class="line">|-- models</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- base_model.py</span><br><span class="line">|   |-- cycle_gan_model.py</span><br><span class="line">|   |-- insta_gan_model.py</span><br><span class="line">|   |-- networks.py</span><br><span class="line">|   |-- pix2pix_model.py</span><br><span class="line">|   `-- test_model.py</span><br><span class="line">|-- options</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- base_options.py</span><br><span class="line">|   |-- test_options.py</span><br><span class="line">|   `-- train_options.py</span><br><span class="line">|-- requirements.txt</span><br><span class="line">|-- scripts</span><br><span class="line">|   |-- conda_deps.sh</span><br><span class="line">|   |-- download_cyclegan_model.sh</span><br><span class="line">|   |-- download_pix2pix_model.sh</span><br><span class="line">|   |-- install_deps.sh</span><br><span class="line">|   |-- test_before_push.py</span><br><span class="line">|   |-- test_cyclegan.sh</span><br><span class="line">|   |-- test_pix2pix.sh</span><br><span class="line">|   |-- test_single.sh</span><br><span class="line">|   |-- train_cyclegan.sh</span><br><span class="line">|   `-- train_pix2pix.sh</span><br><span class="line">|-- test.py</span><br><span class="line">|-- train.py</span><br><span class="line">`-- util</span><br><span class="line">    |-- __init__.py</span><br><span class="line">    |-- get_data.py</span><br><span class="line">    |-- html.py</span><br><span class="line">    |-- image_pool.py</span><br><span class="line">    |-- util.py</span><br><span class="line">    `-- visualizer.py</span><br></pre></td></tr></table></figure>
-
 <h2 id="5-2-seg"><a href="#5-2-seg" class="headerlink" title="5.2 seg"></a>5.2 seg</h2><p>从下面的代码可以看出，需要读取固定数量的instance的segmentation。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># self.max_instances = 20</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_segs</span>(<span class="params">self, seg_path, seed</span>):</span><br><span class="line">  segs = <span class="built_in">list</span>()</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.max_instances):</span><br><span class="line">    path = seg_path.replace(<span class="string">&#x27;.png&#x27;</span>, <span class="string">&#x27;_&#123;&#125;.png&#x27;</span>.<span class="built_in">format</span>(i))</span><br><span class="line">    <span class="keyword">if</span> os.path.isfile(path):</span><br><span class="line">      seg = Image.<span class="built_in">open</span>(path).convert(<span class="string">&#x27;L&#x27;</span>)</span><br><span class="line">      seg = self.fixed_transform(seg, seed)</span><br><span class="line">      segs.append(seg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      segs.append(-torch.ones(segs[<span class="number">0</span>].size()))</span><br><span class="line">  <span class="keyword">return</span> torch.cat(segs)</span><br></pre></td></tr></table></figure>
-
-<p><strong>备注</strong>: 原始图片transforms之后,0<del>1变成了-1</del>1; 分割图片transforms之后-1表示背景,取值-1~1,这也是为什么补充的时候用-1补充的原因.</p>
+<p><strong>备注</strong>: 原始图片transforms之后,0~1变成了-1~1; 分割图片transforms之后-1表示背景,取值-1~1,这也是为什么补充的时候用-1补充的原因.</p>
 <h2 id="5-3-generator"><a href="#5-3-generator" class="headerlink" title="5.3 generator"></a>5.3 generator</h2><blockquote>
 <p>ResNet generator is composed of downsampling blocks, residual blocks, and upsampling blocks. We used downsampling blocks and residual blocks for encoders, and used upsampling blocks for generators.</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ResnetSetGenerator</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, input_nc=<span class="number">3</span>, output_nc=<span class="number">3</span>, ngf=<span class="number">64</span>, norm_layer=nn.InstanceNorm2d, use_dropout=<span class="literal">False</span>, n_blocks=<span class="number">9</span>, padding_type=<span class="string">&#x27;reflect&#x27;</span></span>):</span><br><span class="line">        <span class="keyword">assert</span> (n_blocks &gt;= <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">super</span>(ResnetSetGenerator, self).__init__()</span><br><span class="line">        self.input_nc = input_nc</span><br><span class="line">        self.output_nc = output_nc</span><br><span class="line">        self.ngf = ngf</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(norm_layer) == functools.partial:</span><br><span class="line">            use_bias = norm_layer.func == nn.InstanceNorm2d</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            use_bias = norm_layer == nn.InstanceNorm2d</span><br><span class="line"></span><br><span class="line">        n_downsampling = <span class="number">2</span></span><br><span class="line">        self.encoder_img = self.get_encoder(input_nc, n_downsampling, ngf, norm_layer, use_dropout, n_blocks, padding_type, use_bias)</span><br><span class="line">        self.encoder_seg = self.get_encoder(<span class="number">1</span>, n_downsampling, ngf, norm_layer, use_dropout, n_blocks, padding_type, use_bias)</span><br><span class="line">        self.decoder_img = self.get_decoder(output_nc, n_downsampling, <span class="number">2</span> * ngf, norm_layer, use_bias)  <span class="comment"># 2*ngf</span></span><br><span class="line">        self.decoder_seg = self.get_decoder(<span class="number">1</span>, n_downsampling, <span class="number">3</span> * ngf, norm_layer, use_bias)  <span class="comment"># 3*ngf</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_encoder</span>(<span class="params">self, input_nc, n_downsampling, ngf, norm_layer, use_dropout, n_blocks, padding_type, use_bias</span>):</span><br><span class="line">        model = [nn.ReflectionPad2d(<span class="number">3</span>),</span><br><span class="line">                 nn.Conv2d(input_nc, ngf, kernel_size=<span class="number">7</span>, padding=<span class="number">0</span>, bias=use_bias),</span><br><span class="line">                 norm_layer(ngf),</span><br><span class="line">                 nn.ReLU(<span class="literal">True</span>)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_downsampling):</span><br><span class="line">            mult = <span class="number">2</span> ** i</span><br><span class="line">            model += [nn.Conv2d(ngf * mult, ngf * mult * <span class="number">2</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>, bias=use_bias),</span><br><span class="line">                      norm_layer(ngf * mult * <span class="number">2</span>),</span><br><span class="line">                      nn.ReLU(<span class="literal">True</span>)]</span><br><span class="line"></span><br><span class="line">        mult = <span class="number">2</span> ** n_downsampling</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_blocks):</span><br><span class="line">            model += [ResnetBlock(ngf * mult, padding_type=padding_type, norm_layer=norm_layer, use_dropout=use_dropout, use_bias=use_bias)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*model)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_decoder</span>(<span class="params">self, output_nc, n_downsampling, ngf, norm_layer, use_bias</span>):</span><br><span class="line">        model = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_downsampling):</span><br><span class="line">            mult = <span class="number">2</span>**(n_downsampling - i)</span><br><span class="line">            model += [nn.ConvTranspose2d(ngf * mult, <span class="built_in">int</span>(ngf * mult / <span class="number">2</span>), kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>, output_padding=<span class="number">1</span>, bias=use_bias),</span><br><span class="line">                      norm_layer(<span class="built_in">int</span>(ngf * mult / <span class="number">2</span>)),</span><br><span class="line">                      nn.ReLU(<span class="literal">True</span>)]</span><br><span class="line">        model += [nn.ReflectionPad2d(<span class="number">3</span>)]</span><br><span class="line">        model += [nn.Conv2d(ngf, output_nc, kernel_size=<span class="number">7</span>, padding=<span class="number">0</span>)]</span><br><span class="line">        model += [nn.Tanh()]</span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*model)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, inp</span>):</span><br><span class="line">        <span class="comment"># split data</span></span><br><span class="line">        img = inp[:, :self.input_nc, :, :]  <span class="comment"># (B, CX, W, H)</span></span><br><span class="line">        segs = inp[:, self.input_nc:, :, :]  <span class="comment"># (B, CA, W, H)</span></span><br><span class="line">        mean = (segs + <span class="number">1</span>).mean(<span class="number">0</span>).mean(-<span class="number">1</span>).mean(-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> mean.<span class="built_in">sum</span>() == <span class="number">0</span>:</span><br><span class="line">            mean[<span class="number">0</span>] = <span class="number">1</span>  <span class="comment"># forward at least one segmentation</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># run encoder</span></span><br><span class="line">        enc_img = self.encoder_img(img)</span><br><span class="line">        enc_segs = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(segs.size(<span class="number">1</span>)): <span class="comment"># 第i个instance</span></span><br><span class="line">            <span class="keyword">if</span> mean[i] &gt; <span class="number">0</span>:  <span class="comment"># skip empty segmentation</span></span><br><span class="line">                seg = segs[:, i, :, :].unsqueeze(<span class="number">1</span>)</span><br><span class="line">                enc_segs.append(self.encoder_seg(seg))</span><br><span class="line">        enc_segs = torch.cat(enc_segs)</span><br><span class="line">        enc_segs_sum = torch.<span class="built_in">sum</span>(enc_segs, dim=<span class="number">0</span>, keepdim=<span class="literal">True</span>)  <span class="comment"># aggregated set feature</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># run decoder</span></span><br><span class="line">        feat = torch.cat([enc_img, enc_segs_sum], dim=<span class="number">1</span>)</span><br><span class="line">        out = [self.decoder_img(feat)]</span><br><span class="line">        idx = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(segs.size(<span class="number">1</span>)):</span><br><span class="line">            <span class="keyword">if</span> mean[i] &gt; <span class="number">0</span>:</span><br><span class="line">                enc_seg = enc_segs[idx].unsqueeze(<span class="number">0</span>)  <span class="comment"># (1, ngf, w, h)</span></span><br><span class="line">                idx += <span class="number">1</span>  <span class="comment"># move to next index</span></span><br><span class="line">                feat = torch.cat([enc_seg, enc_img, enc_segs_sum], dim=<span class="number">1</span>)</span><br><span class="line">                out += [self.decoder_seg(feat)]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                out += [segs[:, i, :, :].unsqueeze(<span class="number">1</span>)]  <span class="comment"># skip empty segmentation</span></span><br><span class="line">        <span class="keyword">return</span> torch.cat(out, dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h2 id="5-4-Discriminator"><a href="#5-4-Discriminator" class="headerlink" title="5.4 Discriminator"></a>5.4 Discriminator</h2><blockquote>
 <p>On the other hand, PatchGAN discriminator is composed of 5 convolutional layers, including normalization and non-linearity layers. We used the first 3 convolution layers for feature extractors, and the last 2 convolution layers for classifier.</p>
 <p>In addition, we observed that applying Spectral Normalization (SN) (Miyato et al., 2018) for discriminators significantly improve the performance, although we used LSGAN (Mao et al., 2017), while the original motivation of SN was to enforce Lipschitz condition to match with the theory of WGAN (Arjovsky et al., 2017; Gulrajani et al., 2017).</p>
 </blockquote>
 <ul>
-<li><input checked="" disabled="" type="checkbox"> SpectralNorm 这个是怎么运行的？ <a target="_blank" rel="noopener" href="http://www.twistedwg.com/2018/10/13/SNGAN.html">http://www.twistedwg.com/2018/10/13/SNGAN.html</a></li>
+<li>[x] SpectralNorm 这个是怎么运行的？ <a target="_blank" rel="noopener" href="http://www.twistedwg.com/2018/10/13/SNGAN.html">http://www.twistedwg.com/2018/10/13/SNGAN.html</a></li>
 </ul>
 <p>虽然还是没有太搞懂其原理，但大致清楚了，是求矩阵的谱范数，因为难以求解，便用迭代的方式计算u、v。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define spectral normalization layer</span></span><br><span class="line"><span class="comment"># Code from Christian Cosgrove&#x27;s repository</span></span><br><span class="line"><span class="comment"># https://github.com/christiancosgrove/pytorch-spectral-normalization-gan/blob/master/spectral_normalization.py</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">l2normalize</span>(<span class="params">v, eps=<span class="number">1e-12</span></span>):</span><br><span class="line">    <span class="keyword">return</span> v / (v.norm() + eps)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SpectralNorm</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, module, name=<span class="string">&#x27;weight&#x27;</span>, power_iterations=<span class="number">1</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(SpectralNorm, self).__init__()</span><br><span class="line">        self.module = module</span><br><span class="line">        self.name = name</span><br><span class="line">        self.power_iterations = power_iterations</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self._made_params():</span><br><span class="line">            self._make_params()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_update_u_v</span>(<span class="params">self</span>):</span><br><span class="line">        u = <span class="built_in">getattr</span>(self.module, self.name + <span class="string">&quot;_u&quot;</span>)</span><br><span class="line">        v = <span class="built_in">getattr</span>(self.module, self.name + <span class="string">&quot;_v&quot;</span>)</span><br><span class="line">        w = <span class="built_in">getattr</span>(self.module, self.name + <span class="string">&quot;_bar&quot;</span>)</span><br><span class="line"></span><br><span class="line">        height = w.data.shape[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(self.power_iterations):</span><br><span class="line">            v.data = l2normalize(torch.mv(torch.t(w.view(height, -<span class="number">1</span>).data), u.data))</span><br><span class="line">            u.data = l2normalize(torch.mv(w.view(height, -<span class="number">1</span>).data, v.data))</span><br><span class="line"></span><br><span class="line">        sigma = u.dot(w.view(height, -<span class="number">1</span>).mv(v))</span><br><span class="line">        <span class="built_in">setattr</span>(self.module, self.name, w / sigma.expand_as(w))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_made_params</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            u = <span class="built_in">getattr</span>(self.module, self.name + <span class="string">&quot;_u&quot;</span>)</span><br><span class="line">            v = <span class="built_in">getattr</span>(self.module, self.name + <span class="string">&quot;_v&quot;</span>)</span><br><span class="line">            w = <span class="built_in">getattr</span>(self.module, self.name + <span class="string">&quot;_bar&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_make_params</span>(<span class="params">self</span>):</span><br><span class="line">        w = <span class="built_in">getattr</span>(self.module, self.name) <span class="comment"># shape: (64,3,4,4)</span></span><br><span class="line"></span><br><span class="line">        height = w.data.shape[<span class="number">0</span>]  <span class="comment"># int 64</span></span><br><span class="line">        width = w.view(height, -<span class="number">1</span>).data.shape[<span class="number">1</span>] <span class="comment"># int 48</span></span><br><span class="line"></span><br><span class="line">        u = nn.Parameter(w.data.new(height).normal_(<span class="number">0</span>, <span class="number">1</span>), requires_grad=<span class="literal">False</span>) <span class="comment"># shape (64)</span></span><br><span class="line">        v = nn.Parameter(w.data.new(width).normal_(<span class="number">0</span>, <span class="number">1</span>), requires_grad=<span class="literal">False</span>) <span class="comment"># shape (48)</span></span><br><span class="line">        u.data = l2normalize(u.data) </span><br><span class="line">        v.data = l2normalize(v.data)</span><br><span class="line">        w_bar = nn.Parameter(w.data)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">del</span> self.module._parameters[self.name]</span><br><span class="line"></span><br><span class="line">        self.module.register_parameter(self.name + <span class="string">&quot;_u&quot;</span>, u)</span><br><span class="line">        self.module.register_parameter(self.name + <span class="string">&quot;_v&quot;</span>, v)</span><br><span class="line">        self.module.register_parameter(self.name + <span class="string">&quot;_bar&quot;</span>, w_bar)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, *args</span>):</span><br><span class="line">        self._update_u_v()</span><br><span class="line">        <span class="keyword">return</span> self.module.forward(*args)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NLayerSetDiscriminator</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, input_nc, ndf=<span class="number">64</span>, n_layers=<span class="number">3</span>, norm_layer=nn.BatchNorm2d, use_sigmoid=<span class="literal">False</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(NLayerSetDiscriminator, self).__init__()</span><br><span class="line">        self.input_nc = input_nc</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(norm_layer) == functools.partial:</span><br><span class="line">            use_bias = norm_layer.func == nn.InstanceNorm2d</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            use_bias = norm_layer == nn.InstanceNorm2d</span><br><span class="line"></span><br><span class="line">        kw = <span class="number">4</span></span><br><span class="line">        padw = <span class="number">1</span></span><br><span class="line">        self.feature_img = self.get_feature_extractor(input_nc, ndf, n_layers, kw, padw, norm_layer, use_bias)</span><br><span class="line">        self.feature_seg = self.get_feature_extractor(<span class="number">1</span>, ndf, n_layers, kw, padw, norm_layer, use_bias)</span><br><span class="line">        self.classifier = self.get_classifier(<span class="number">2</span> * ndf, n_layers, kw, padw, norm_layer, use_sigmoid)  <span class="comment"># 2*ndf</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_feature_extractor</span>(<span class="params">self, input_nc, ndf, n_layers, kw, padw, norm_layer, use_bias</span>):</span><br><span class="line">        model = [</span><br><span class="line">            <span class="comment"># Use spectral normalization</span></span><br><span class="line">            SpectralNorm(nn.Conv2d(input_nc, ndf, kernel_size=kw, stride=<span class="number">2</span>, padding=padw)),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>, <span class="literal">True</span>)</span><br><span class="line">        ]</span><br><span class="line">        nf_mult = <span class="number">1</span></span><br><span class="line">        nf_mult_prev = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n_layers):</span><br><span class="line">            nf_mult_prev = nf_mult</span><br><span class="line">            nf_mult = <span class="built_in">min</span>(<span class="number">2</span> ** n, <span class="number">8</span>)</span><br><span class="line">            model += [</span><br><span class="line">                <span class="comment"># Use spectral normalization</span></span><br><span class="line">                SpectralNorm(nn.Conv2d(ndf * nf_mult_prev, ndf * nf_mult, kernel_size=kw, stride=<span class="number">2</span>, padding=padw, bias=use_bias)),</span><br><span class="line">                norm_layer(ndf * nf_mult),</span><br><span class="line">                nn.LeakyReLU(<span class="number">0.2</span>, <span class="literal">True</span>)</span><br><span class="line">            ]</span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*model)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_classifier</span>(<span class="params">self, ndf, n_layers, kw, padw, norm_layer, use_sigmoid</span>):</span><br><span class="line">        nf_mult_prev = <span class="built_in">min</span>(<span class="number">2</span> ** (n_layers-<span class="number">1</span>), <span class="number">8</span>)</span><br><span class="line">        nf_mult = <span class="built_in">min</span>(<span class="number">2</span> ** n_layers, <span class="number">8</span>)</span><br><span class="line">        model = [</span><br><span class="line">            <span class="comment"># Use spectral normalization</span></span><br><span class="line">            SpectralNorm(nn.Conv2d(ndf * nf_mult_prev, ndf * nf_mult, kernel_size=kw, stride=<span class="number">1</span>, padding=padw)),</span><br><span class="line">            norm_layer(ndf * nf_mult),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>, <span class="literal">True</span>)</span><br><span class="line">        ]</span><br><span class="line">        <span class="comment"># Use spectral normalization</span></span><br><span class="line">        model += [SpectralNorm(nn.Conv2d(ndf * nf_mult, <span class="number">1</span>, kernel_size=kw, stride=<span class="number">1</span>, padding=padw))]</span><br><span class="line">        <span class="keyword">if</span> use_sigmoid:</span><br><span class="line">            model += [nn.Sigmoid()]</span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*model)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, inp</span>):</span><br><span class="line">        <span class="comment"># split data</span></span><br><span class="line">        img = inp[:, :self.input_nc, :, :]  <span class="comment"># (B, CX, W, H)</span></span><br><span class="line">        segs = inp[:, self.input_nc:, :, :]  <span class="comment"># (B, CA, W, H)</span></span><br><span class="line">        mean = (segs + <span class="number">1</span>).mean(<span class="number">0</span>).mean(-<span class="number">1</span>).mean(-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> mean.<span class="built_in">sum</span>() == <span class="number">0</span>:</span><br><span class="line">            mean[<span class="number">0</span>] = <span class="number">1</span>  <span class="comment"># forward at least one segmentation</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># run feature extractor</span></span><br><span class="line">        feat_img = self.feature_img(img)</span><br><span class="line">        feat_segs = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(segs.size(<span class="number">1</span>)):  <span class="comment"># 第i个instance</span></span><br><span class="line">            <span class="keyword">if</span> mean[i] &gt; <span class="number">0</span>:  <span class="comment"># skip empty segmentation</span></span><br><span class="line">                seg = segs[:, i, :, :].unsqueeze(<span class="number">1</span>)</span><br><span class="line">                feat_segs.append(self.feature_seg(seg))</span><br><span class="line">        feat_segs_sum = torch.<span class="built_in">sum</span>(torch.stack(feat_segs), dim=<span class="number">0</span>)  <span class="comment"># aggregated set feature</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># run classifier</span></span><br><span class="line">        feat = torch.cat([feat_img, feat_segs_sum], dim=<span class="number">1</span>)</span><br><span class="line">        out = self.classifier(feat)</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h2 id="5-5-model-的输入"><a href="#5-5-model-的输入" class="headerlink" title="5.5 model 的输入"></a>5.5 model 的输入</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">set_input</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">    AtoB = self.opt.direction == <span class="string">&#x27;AtoB&#x27;</span></span><br><span class="line">    self.real_A_img = <span class="built_in">input</span>[<span class="string">&#x27;A&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;B&#x27;</span>].to(self.device)</span><br><span class="line">    self.real_B_img = <span class="built_in">input</span>[<span class="string">&#x27;B&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;A&#x27;</span>].to(self.device)</span><br><span class="line">    real_A_segs = <span class="built_in">input</span>[<span class="string">&#x27;A_segs&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;B_segs&#x27;</span>]</span><br><span class="line">    real_B_segs = <span class="built_in">input</span>[<span class="string">&#x27;B_segs&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;A_segs&#x27;</span>]</span><br><span class="line">    self.real_A_segs = self.select_masks(real_A_segs).to(self.device)  <span class="comment"># shape:(1,4,240,160)</span></span><br><span class="line">    self.real_B_segs = self.select_masks(real_B_segs).to(self.device)</span><br><span class="line">    self.real_A = torch.cat([self.real_A_img, self.real_A_segs], dim=<span class="number">1</span>) <span class="comment"># shape:(1,7,240,160)</span></span><br><span class="line">    self.real_B = torch.cat([self.real_B_img, self.real_B_segs], dim=<span class="number">1</span>)</span><br><span class="line">    self.real_A_seg = self.merge_masks(self.real_A_segs)  <span class="comment"># merged mask</span></span><br><span class="line">    self.real_B_seg = self.merge_masks(self.real_B_segs)  <span class="comment"># merged mask</span></span><br><span class="line">    self.image_paths = <span class="built_in">input</span>[<span class="string">&#x27;A_paths&#x27;</span> <span class="keyword">if</span> AtoB <span class="keyword">else</span> <span class="string">&#x27;B_paths&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
 <p>前面说过，每次都生成20个mask，不足用-1补充，在输入网络时，只取面积最大的4个mask，然后对这4个进行或者从高到低排序或者随机排序。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ins_max = 4</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">select_masks_random</span>(<span class="params">self, segs_batch</span>):</span><br><span class="line">  <span class="string">&quot;&quot;&quot;Select masks in random order&quot;&quot;&quot;</span></span><br><span class="line">  ret = <span class="built_in">list</span>()</span><br><span class="line">  <span class="keyword">for</span> segs <span class="keyword">in</span> segs_batch:</span><br><span class="line">    mean = (segs + <span class="number">1</span>).mean(-<span class="number">1</span>).mean(-<span class="number">1</span>)</span><br><span class="line">    m, i = mean.topk(self.opt.ins_max)</span><br><span class="line">    num = <span class="built_in">min</span>(<span class="built_in">len</span>(mean.nonzero()), self.opt.ins_max)</span><br><span class="line">    reorder = np.concatenate((np.random.permutation(num), np.arange(num, self.opt.ins_max)))</span><br><span class="line">    ret.append(segs[i[reorder], :, :])</span><br><span class="line">  <span class="keyword">return</span> torch.stack(ret)</span><br></pre></td></tr></table></figure>
-
 <p>这里的mask的合并没有太看懂，是为了去除(-1,1)之外的数字吗？</p>
 <p>跑了代码,觉得是的,或许是担心有其他干扰因素吧,反正剩下的都是-1~1之间的数字.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">merge_masks</span>(<span class="params">self, segs</span>):</span><br><span class="line">  <span class="string">&quot;&quot;&quot;Merge masks (B, N, W, H) -&gt; (B, 1, W, H)&quot;&quot;&quot;</span></span><br><span class="line">  ret = torch.<span class="built_in">sum</span>((segs + <span class="number">1</span>)/<span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)  <span class="comment"># (B, 1, W, H)</span></span><br><span class="line">  <span class="keyword">return</span> ret.clamp(<span class="built_in">max</span>=<span class="number">1</span>, <span class="built_in">min</span>=<span class="number">0</span>) * <span class="number">2</span> - <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li><input disabled="" type="checkbox"> 这一步的意义是什么？？</li>
+<li>[ ] 这一步的意义是什么？？</li>
 </ul>
 <p>理解了，如果图片中没有instance，那么就不用进行下一步的转换了。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">self.forward_A = (self.real_A_seg_sng + <span class="number">1</span>).<span class="built_in">sum</span>() &gt; <span class="number">0</span>  <span class="comment"># check if there are remaining instances</span></span><br><span class="line">self.forward_B = (self.real_B_seg_sng + <span class="number">1</span>).<span class="built_in">sum</span>() &gt; <span class="number">0</span>  <span class="comment"># check if there are remaining instances</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><input checked="" disabled="" type="checkbox"> fake_B_mul的意义是什么？</li>
+<li>[x] fake_B_mul的意义是什么？</li>
 </ul>
 <p>因为在sequential mini-batch translation中，GAN_loss是全局的，所以每次需要把之前的fake_B_seg_sng保存起来一起计算，因此每次的临时的self.fake_B_mul，而self.fake_B_seg_list保存是mini-batch计算得到的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> self.forward_A:</span><br><span class="line">    self.real_A_sng = torch.cat([self.real_A_img_sng, self.real_A_seg_sng], dim=<span class="number">1</span>)</span><br><span class="line">    self.fake_B_sng = self.netG_A(self.real_A_sng)</span><br><span class="line">    self.rec_A_sng = self.netG_B(self.fake_B_sng)</span><br><span class="line"></span><br><span class="line">    self.fake_B_img_sng, self.fake_B_seg_sng = self.split(self.fake_B_sng)</span><br><span class="line">    self.rec_A_img_sng, self.rec_A_seg_sng = self.split(self.rec_A_sng)</span><br><span class="line">    fake_B_seg_list = self.fake_B_seg_list + [self.fake_B_seg_sng]  <span class="comment"># not detach</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.ins_iter - idx - <span class="number">1</span>):</span><br><span class="line">        fake_B_seg_list.append(empty)</span><br><span class="line"></span><br><span class="line">    self.fake_B_seg_mul = torch.cat(fake_B_seg_list, dim=<span class="number">1</span>)</span><br><span class="line">    self.fake_B_mul = torch.cat([self.fake_B_img_sng, self.fake_B_seg_mul], dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><input checked="" disabled="" type="checkbox"> 怎么选取的背景</li>
+<li>[x] 怎么选取的背景</li>
 </ul>
 <p>只要在A中且在B中都是背景的则都算是背景，否则只要有instance的区域不为背景。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">merge_masks</span>(<span class="params">self, segs</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Merge masks (B, N, W, H) -&gt; (B, 1, W, H)&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># segs: shape(1,4,240,260)， 取值(-1~1) 训练集A中有两个instance，训练集B中有两个instance，</span></span><br><span class="line">    ret = torch.<span class="built_in">sum</span>((segs + <span class="number">1</span>)/<span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)  <span class="comment"># (B, 1, W, H)</span></span><br><span class="line">    <span class="keyword">return</span> ret.clamp(<span class="built_in">max</span>=<span class="number">1</span>, <span class="built_in">min</span>=<span class="number">0</span>) * <span class="number">2</span> - <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">merge_masks</span>(<span class="params">self, segs</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Merge masks (B, N, W, H) -&gt; (B, 1, W, H)&quot;&quot;&quot;</span></span><br><span class="line">    ret = torch.<span class="built_in">sum</span>((segs + <span class="number">1</span>)/<span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)  <span class="comment"># (B, 1, W, H)</span></span><br><span class="line">    <span class="keyword">return</span> ret.clamp(<span class="built_in">max</span>=<span class="number">1</span>, <span class="built_in">min</span>=<span class="number">0</span>) * <span class="number">2</span> - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_weight_for_ctx</span>(<span class="params">self, x, y</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Get weight for context preserving loss&quot;&quot;&quot;</span></span><br><span class="line">    z = self.merge_masks(torch.cat([x, y], dim=<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">1</span> - z) / <span class="number">2</span>  <span class="comment"># [-1,1] -&gt; [1,0]</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><input disabled="" type="checkbox"> 这里的empty的作用是什么</li>
+<li>[ ] 这里的empty的作用是什么</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">empty = -torch.ones(self.real_A_seg_sng.size()).to(self.device)</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p><input disabled="" type="checkbox"> 
-pix2pix 是怎么预测mask的，需要提前训练吗，数据集怎么提供？如果可以直接用，那么是否可以直接实现行人重识别的换人？</p>
+<li><p>[ ] pix2pix 是怎么预测mask的，需要提前训练吗，数据集怎么提供？如果可以直接用，那么是否可以直接实现行人重识别的换人？</p>
 </li>
-<li><p><input checked="" disabled="" type="checkbox"> 
-论文+代码，共4天</p>
+<li><p>[x] 论文+代码，共4天</p>
 </li>
 </ul>
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2019/01/04/InstaGAN/" data-id="cla55fgd40012wka77uht0zls" data-title="InstaGAN" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GAN/" rel="tag"># GAN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/03/deep-learning-network/" rel="next" title="deep-learning-network">
+                <i class="fa fa-chevron-left"></i> deep-learning-network
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/SyRI/" rel="prev" title="SyRI">
+                SyRI <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2019/01/14/SyRI/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          SyRI
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/01/03/deep-learning-network/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">deep-learning-network</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+  </article>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
-    </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/11/06/test-2011-11-06/">test_2011_11_06</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/23/python-100-days/">python_100_days</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/data-VOS/">data_VOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/TVOS/">TVOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="post-spread">
       
-      &copy; 2022 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-InstaGAN"><span class="nav-number">3.</span> <span class="nav-text">2. InstaGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-InstaGAN-architecture"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 InstaGAN architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Training-loss"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Training loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-sequential-mini-batch-translation"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 sequential mini-batch translation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-experimental-results"><span class="nav-number">4.</span> <span class="nav-text">3. experimental results</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-image-to-image-translation-results"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 image-to-image translation results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-ablation-study"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 ablation study</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Appendix"><span class="nav-number">5.</span> <span class="nav-text">4. Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-architecture-details"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 architecture details</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-traning-details"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 traning details</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-trend-of-translation-results"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 trend of translation results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E5%85%B6%E4%BB%96"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-video-translation-results"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 video translation results</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-code"><span class="nav-number">6.</span> <span class="nav-text">5. code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 文件目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-seg"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 seg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-generator"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 generator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-Discriminator"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 Discriminator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-model-%E7%9A%84%E8%BE%93%E5%85%A5"><span class="nav-number">6.5.</span> <span class="nav-text">5.5 model 的输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">6.6.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <nav id="mobile-nav">
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
 </body>
 </html>

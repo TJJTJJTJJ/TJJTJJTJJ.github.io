@@ -1,127 +1,381 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  <title>pytorch | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="基础知识魔术方法: P23   调试: P27   12import ipdbipdb.set_trace() 带下划线_的函数会修改Tensor本身，比如x.add_(y)和x.add(y)的区别   TensorNumpy与Tensor共享内存b &#x3D; a.numpy() # Tensor -&gt; Numpy">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="pytorch-learn chenyun," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基础知识魔术方法: P23   调试: P2712import ipdbipdb.set_trace()带下划线_的函数会修改Tensor本身，比如x.add_(y)和x.add(y)的区别   TensorNumpy与Tensor共享内存b &#x3D; a.numpy() # Tensor -&gt; Numpy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pytorch">
 <meta property="og:url" content="http://example.com/2018/08/26/pytorch-1.0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基础知识魔术方法: P23   调试: P27   12import ipdbipdb.set_trace() 带下划线_的函数会修改Tensor本身，比如x.add_(y)和x.add(y)的区别   TensorNumpy与Tensor共享内存b &#x3D; a.numpy() # Tensor -&gt; Numpy">
-<meta property="og:locale" content="en_US">
+<meta property="og:description" content="基础知识魔术方法: P23   调试: P2712import ipdbipdb.set_trace()带下划线_的函数会修改Tensor本身，比如x.add_(y)和x.add(y)的区别   TensorNumpy与Tensor共享内存b &#x3D; a.numpy() # Tensor -&gt; Numpy">
+<meta property="og:locale">
 <meta property="article:published_time" content="2018-08-26T13:38:25.000Z">
 <meta property="article:modified_time" content="2018-12-10T07:17:42.361Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="pytorch-learn chenyun">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2018/08/26/pytorch-1.0/"/>
+
+
+
+
+
+  <title>pytorch | Hexo</title>
   
+
+
+
+
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-pytorch-1.0" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2018/08/26/pytorch-1.0/" class="article-date">
-  <time class="dt-published" datetime="2018-08-26T13:38:25.000Z" itemprop="datePublished">2018-08-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/pytorch/">pytorch</a>
+        <p class="site-subtitle"></p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      pytorch
-    </h1>
+</div>
+
+<nav class="site-nav">
   
 
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            something
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/26/pytorch-1.0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pytorch</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T21:38:25+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pytorch/" itemprop="url" rel="index">
+                    <span itemprop="name">pytorch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>魔术方法: P23  </p>
-<p>调试: P27  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import ipdb</span><br><span class="line">ipdb.set_trace()</span><br></pre></td></tr></table></figure>
-<p>带下划线_的函数会修改Tensor本身，比如x.add_(y)和x.add(y)的区别  </p>
-<h2 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h2><p>Numpy与Tensor共享内存<br>b &#x3D; a.numpy() # Tensor -&gt; Numpy    </p>
-<span id="more"></span>
-<p>a &#x3D; t.from_numpy(a)# Numpy -&gt; Tensor<br>x &#x3D; x.cuda()<br>tensor的操作:torch.function,tensor.function.<br>普通索引共享内存<br>高级索引不共享内存<br>线性代数函数 P70<br>自动广播原则: unsqueese(view),expand(expand_as)<br>tensor&#x3D;Tensor+Storage<br>持久化和加载: t.save(a,’a.pth’) b&#x3D;t.load(‘a.pth’) P77<br>%timeit -n 10</p>
+<p>调试: P27<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import ipdb</span><br><span class="line">ipdb.set_trace()</span><br></pre></td></tr></table></figure><br>带下划线_的函数会修改Tensor本身，比如x.add_(y)和x.add(y)的区别  </p>
+<h2 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h2><p>Numpy与Tensor共享内存<br>b = a.numpy() # Tensor -&gt; Numpy<br><span id="more"></span><br>a = t.from_numpy(a)# Numpy -&gt; Tensor<br>x = x.cuda()<br>tensor的操作:torch.function,tensor.function.<br>普通索引共享内存<br>高级索引不共享内存<br>线性代数函数 P70<br>自动广播原则: unsqueese(view),expand(expand_as)<br>tensor=Tensor+Storage<br>持久化和加载: t.save(a,’a.pth’) b=t.load(‘a.pth’) P77<br>%timeit -n 10</p>
 <hr>
-<h2 id="Variable和autograd"><a href="#Variable和autograd" class="headerlink" title="Variable和autograd"></a>Variable和autograd</h2><p>from torch.autograd import Variable<br>三个属性<br>data: 对应Tensor<br>grad: 梯度，和data大小一样，也是Variable<br>grad_fn: 指向Function对象,用于构建计算图。用户创建对应叶子节点,grad_fn&#x3D;None.记录的是它什么操作的输出。<br>Variable的构造函数的关键字参数:requires_grad(bool):是否需要求导; volatile(bool):True表示之上的计算图都不会求导</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = Variable(t.ones(2,2),requires_grad = True)</span><br><span class="line">y = x.sum()</span><br><span class="line">y.grad_fn</span><br><span class="line">y.backward()</span><br><span class="line">x.grad</span><br><span class="line">x.grad.data.zero_() # 反向传播清零</span><br></pre></td></tr></table></figure>
-<p>variable.backward(grad_variable&#x3D;None, retain_graph&#x3D;None, create_graph&#x3D;None)<br>假设用户输入的数据是真实的不需要求导的。<br>数值在前向传导过程成会保存成buffer,计算梯度之后自动清空。多次反向求导可以使用关键字参数retain_graph&#x3D;True<br>retain_graph&#x3D;True 实现多次反向传播？？？？</p>
-<p>反向传播过程中非叶子节点的导数在计算完之后就会清空，y&#x3D;x*w,z&#x3D;y.sum() 其中y.grad会清空。其对应的方法有两种，P92，t.autograd.grad(z,y)和hook<br>扩展Autograd Function：P95 自己实现前向和反向</p>
+<h2 id="Variable和autograd"><a href="#Variable和autograd" class="headerlink" title="Variable和autograd"></a>Variable和autograd</h2><p>from torch.autograd import Variable<br>三个属性<br>data: 对应Tensor<br>grad: 梯度，和data大小一样，也是Variable<br>grad_fn: 指向Function对象,用于构建计算图。用户创建对应叶子节点,grad_fn=None.记录的是它什么操作的输出。<br>Variable的构造函数的关键字参数:requires_grad(bool):是否需要求导; volatile(bool):True表示之上的计算图都不会求导<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = Variable(t.ones(2,2),requires_grad = True)</span><br><span class="line">y = x.sum()</span><br><span class="line">y.grad_fn</span><br><span class="line">y.backward()</span><br><span class="line">x.grad</span><br><span class="line">x.grad.data.zero_() # 反向传播清零</span><br></pre></td></tr></table></figure><br>variable.backward(grad_variable=None, retain_graph=None, create_graph=None)<br>假设用户输入的数据是真实的不需要求导的。<br>数值在前向传导过程成会保存成buffer,计算梯度之后自动清空。多次反向求导可以使用关键字参数retain_graph=True<br>retain_graph=True 实现多次反向传播？？？？</p>
+<p>反向传播过程中非叶子节点的导数在计算完之后就会清空，y=x*w,z=y.sum() 其中y.grad会清空。其对应的方法有两种，P92，t.autograd.grad(z,y)和hook<br>扩展Autograd Function：P95 自己实现前向和反向</p>
 <hr>
 <h2 id="nn-Module"><a href="#nn-Module" class="headerlink" title="nn.Module"></a>nn.Module</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import torch.nn as nn</span><br><span class="line">import torch.nn.functional as F</span><br><span class="line">class Net(nn.Module):</span><br><span class="line">    def \_\_init\_\_():</span><br><span class="line">		super(Net,self).__init__()</span><br><span class="line">		\# 有参数的层的定义</span><br><span class="line">	def forward(self,x):</span><br><span class="line"></span><br><span class="line">net = Net()</span><br><span class="line">print(net)</span><br><span class="line">list(net.parameters())</span><br><span class="line">for name,paramenters in net.named_parameters():</span><br><span class="line">	print(name,&#x27;:&#x27;,parameters.size())</span><br><span class="line"></span><br><span class="line">out = net(input)</span><br><span class="line">net.zero_grad()</span><br><span class="line">out.backwad(Variable(t.ones(1,10)))</span><br><span class="line">&gt; ???</span><br></pre></td></tr></table></figure>
-<p>nn.Sequential()<br>nn.ModuleList()<br>nn.ParameterList()<br>在优化器中为各层分别设置学习率<br>nn.functional对应nn.Module<br>参数初始化:<br>nn.Conv2d: nSamples<em>nChannels</em>Height*Widh<br>单样本: input.unsqueeze(0)<br>model.train()<br>model.eval()<br>前向或者后向注册钩子函数，P125，可以查看中间层。<br>获取网络的模块属性：getattr(module)P128<br>保存模型：t.save(net.state_dict(), ‘net.pth’)<br>加载模型：net2&#x3D;Net() net2.load_state_dict(t.load(‘net.pth’))<br>多个GPU并行操作</p>
+<p>nn.Sequential()<br>nn.ModuleList()<br>nn.ParameterList()<br>在优化器中为各层分别设置学习率<br>nn.functional对应nn.Module<br>参数初始化:<br>nn.Conv2d: nSamples<em>nChannels</em>Height*Widh<br>单样本: input.unsqueeze(0)<br>model.train()<br>model.eval()<br>前向或者后向注册钩子函数，P125，可以查看中间层。<br>获取网络的模块属性：getattr(module)P128<br>保存模型：t.save(net.state_dict(), ‘net.pth’)<br>加载模型：net2=Net() net2.load_state_dict(t.load(‘net.pth’))<br>多个GPU并行操作</p>
 <hr>
 <h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">output = net(input)</span><br><span class="line">target = Variable(t.arrange(0,10))</span><br><span class="line">criterion = nn.MSELoss()</span><br><span class="line">loss = criterion(output, target)</span><br><span class="line">loss</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.zero_grad()</span><br><span class="line">print(net.con1.bias.grad)</span><br><span class="line">loss.backward()</span><br><span class="line">print(net.conv1.bias.grad)</span><br></pre></td></tr></table></figure>
-
 <h2 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">learning_rate=0.01</span><br><span class="line">for f in net.parameters():</span><br><span class="line">　　f.data.sub_(f.grad.data*leaning_data)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import torch.optim as optim</span><br><span class="line"># 优化器</span><br><span class="line">optimizer = optim.SGD(net.parameters(), lr=0.01)</span><br><span class="line"># 训练过程中 梯度清零</span><br><span class="line">optimizer.zero_grad() # 等效于 net.zero_grad()</span><br><span class="line"># 损失函数</span><br><span class="line">output=net(input)</span><br><span class="line">loss = criterion(output, target)</span><br><span class="line"># 反向传播</span><br><span class="line">loss.backward()</span><br><span class="line"># 更新参数</span><br><span class="line">optimizer.step()</span><br></pre></td></tr></table></figure>
-
 <h2 id="CIFAR-10分类"><a href="#CIFAR-10分类" class="headerlink" title="CIFAR-10分类"></a>CIFAR-10分类</h2><ol>
 <li>数据预处理:transform,trainset,trainloader,testset,testloader </li>
 <li>定义网络:Net(nn.Module),super(Net,self).<strong>init</strong>(),forward()</li>
@@ -130,26 +384,26 @@
 <li>输入数据</li>
 <li>梯度清零</li>
 <li>前向传播+反向传播</li>
-<li>更新参数</li>
+<li>更新参数  </li>
 </ol>
 </li>
 </ol>
 <hr>
-<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>自定义的数据集需要继承Dataset类，并实现两个Python魔术方法<br>__getitem__:返回一个样本。obj[index]&#x3D;obj.<strong>getitem</strong>(index)<br>__len__:返回样本数量。<br>transform&#x3D;T.Compose()<br>trans&#x3D;T.Lambda(lambda img:img.rotate(randonm()*360))<br>ImageFolder(root,transform,target_transform,loader)P139<br>self.class_to_idx了解label和文件夹名的映射关系<br>DataLoader()定义shuffle等P142<br>取样:P146<br>工具包:torchvision  P147</p>
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>自定义的数据集需要继承Dataset类，并实现两个Python魔术方法<br>__getitem<strong>:返回一个样本。obj[index]=obj.</strong>getitem<strong>(index)<br>__len</strong>:返回样本数量。<br>transform=T.Compose()<br>trans=T.Lambda(lambda img:img.rotate(randonm()*360))<br>ImageFolder(root,transform,target_transform,loader)P139<br>self.class_to_idx了解label和文件夹名的映射关系<br>DataLoader()定义shuffle等P142<br>取样:P146<br>工具包:torchvision  P147</p>
 <ul>
 <li>models:训练好模型</li>
 <li>dataset:数据集加载</li>
-<li>transforms:数据预处理操作，主要针对Tensor和PIL Image对象的操作</li>
+<li>transforms:数据预处理操作，主要针对Tensor和PIL Image对象的操作    </li>
 </ul>
 <p>make_grid和save_img<br>可视化工具 Tensorboard和visdom<br>tensor_board和TensorboardX<br>visdom:env pane</p>
-<p>%env LS_COLORS&#x3D;None<br>!tree –charset ascii data&#x2F;dogcat<br>Tensor–numpy:np.array(Tensor) torch.Tensor(np.darray)<br>PIL.image–numpy:np.asarray(PIL.image) image.fromarray(numpy.ndarray)<br>PIL.image–Tensor:trans &#x3D; transforms.Compose([transforms.ToTensor()]) tens &#x3D; trans(img)  ToPILImage()  </p>
-<h2 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h2><p>P158<br>with t.cuda.device(1):<br>t.cuda.set_device(1)<br>export CUDA_VISIVLE_DEVICES&#x3D;1<br>b &#x3D; t.load(‘a.pth’)<br>c &#x3D; t.load(‘a.pth’,map_location&#x3D;lamdba storage, loc: storage)<br>d &#x3D; t.load(‘a.pth’,map_location&#x3D;{‘cuda:1’:’cuda:0’})<br>Module和Optimizer: state_dict  </p>
-<h2 id="Dog-vs-Cat"><a href="#Dog-vs-Cat" class="headerlink" title="Dog.vs.Cat"></a>Dog.vs.Cat</h2><p>checkpoints&#x2F; 中间模型<br>data&#x2F;</p>
+<p>%env LS_COLORS=None<br>!tree —charset ascii data/dogcat<br>Tensor—numpy:np.array(Tensor) torch.Tensor(np.darray)<br>PIL.image—numpy:np.asarray(PIL.image) image.fromarray(numpy.ndarray)<br>PIL.image—Tensor:trans = transforms.Compose([transforms.ToTensor()]) tens = trans(img)  ToPILImage()  </p>
+<h2 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h2><p>P158<br>with t.cuda.device(1):<br>t.cuda.set_device(1)<br>export CUDA_VISIVLE_DEVICES=1<br>b = t.load(‘a.pth’)<br>c = t.load(‘a.pth’,map_location=lamdba storage, loc: storage)<br>d = t.load(‘a.pth’,map_location={‘cuda:1’:’cuda:0’})<br>Module和Optimizer: state_dict  </p>
+<h2 id="Dog-vs-Cat"><a href="#Dog-vs-Cat" class="headerlink" title="Dog.vs.Cat"></a>Dog.vs.Cat</h2><p>checkpoints/ 中间模型<br>data/</p>
 <ul>
 <li>__init__.py  </li>
 <li>dataset.py  </li>
 <li><ul>
-<li>def <strong>init</strong>(self,root,transform&#x3D;None, train&#x3D;True, test&#x3D;False):</li>
+<li>def <strong>init</strong>(self,root,transform=None, train=True, test=False):</li>
 </ul>
 </li>
 <li><ul>
@@ -160,11 +414,11 @@
 <li>def <strong>len</strong>(self):</li>
 </ul>
 </li>
-<li>get_data.sh<br>models&#x2F;</li>
+<li>get_data.sh<br>models/</li>
 <li>__init__.py</li>
 <li>AlexNet.py</li>
 <li>BasicModule.py</li>
-<li>ResNet34.py<br>utils&#x2F;</li>
+<li>ResNet34.py<br>utils/</li>
 <li>__init__.py</li>
 <li>visualize.py<br>config.py<br>main.py<br>requirements.txt<br>README.md</li>
 </ul>
@@ -176,13 +430,12 @@
 <li>def help():</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;main&#x27;</span>:</span><br><span class="line">    <span class="keyword">import</span> fire</span><br><span class="line">    fire.Fire()</span><br></pre></td></tr></table></figure>
-
 <h2 id="pytorch-中文文档"><a href="#pytorch-中文文档" class="headerlink" title="pytorch 中文文档"></a>pytorch 中文文档</h2><p><a target="_blank" rel="noopener" href="https://pytorch-cn.readthedocs.io/zh/latest/package_references/functional/">https://pytorch-cn.readthedocs.io/zh/latest/package_references/functional/</a></p>
 <h1 id="PyTorch实战指南-第六章-Dog-VS-Cat"><a href="#PyTorch实战指南-第六章-Dog-VS-Cat" class="headerlink" title="PyTorch实战指南 第六章  Dog.VS.Cat"></a>PyTorch实战指南 第六章  Dog.VS.Cat</h1><p>这是根据深度学习框架：PyTorch入门与实践这本书的第六章写的代码，是关于猫狗识别的，在这个过程中，一边看，一边写，刚开始是运行作者已经写好的代码，后来自己在jupyter上进行复制的复现，发现import无法导入ipynb文件，在使用了Ipynb_importer.py之后可以实现同一文件内导入ipynb模块，如果是在其他文件中进行导入，会有点费事，以下会记录Ipynb_importer.py的用法。因为费事，自己开始开始使用pycharm+jupyter的方式，直接自己根据作者提供的源码进行编写，在编写的过程中接受作者的思想。用pycharm的不方便的地方是无法直接运行测试，所以采取的是对自己不熟悉的模块或者方法，用jupyter进行测试，而直接编写则是pycharm。但是感觉pycharm还是没有那么好用，可能是自己用的少。我是按照data、model、util、main+config、requirement的顺序编写的。在编写函数的过程中，因为刚开始不理解各个模块是怎么组织起来的，所以都是从简单的开始，所以函数的位置和作者的不一样，其中对于model.save和model.load、vis.plot和vis.log的封装让我感觉很有意思，刚开始是编写的时候只能直接打上问号，因为不懂这么编写的意义，但在编写主函数main的时候才感觉到了这种编写的好处，基本把模型训练和对模型、结果的处理完全分离开，避免了耦合性很强的后果。</p>
 <hr>
-<h2 id="Ipynb-importer-py"><a href="#Ipynb-importer-py" class="headerlink" title="Ipynb_importer.py"></a>Ipynb_importer.py</h2><p>我通过几次测试发现，import Ipynb_importer 只需要放在你的当前要运行的文件中即可，然后在其他文件下的__init__.py 中导入所有的当前文件夹中的Module，就像这样<br>&#x2F;first&#x2F;second&#x2F;models&#x2F;<br>—–<strong>init</strong>.py<br>————- None<br>—–BasicModule.ipynb<br>—–AlexNet.ipynb<br>———-from models.BasicModule import BasicModule</p>
-<p>&#x2F;first&#x2F;main.py<br>import Ipynb_importer<br>from models import AlexNet    </p>
-<p>之所以在AlexNet中写models.BasicModule是因为直接导入BasicModule会报错，我根据__dict__的输出发现有问题，这一点和<a target="_blank" rel="noopener" href="https://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Importing%20Notebooks.html">官网</a>介绍的有一点区别，我没有实现官网说明的跨文件夹导入。因为如果改文件夹导入的话，models.BasicModule要接着换成相应的名字，与我预想的不一致，我预想的是不管在哪里导入，已经导入的应该不受影响才对。</p>
+<h2 id="Ipynb-importer-py"><a href="#Ipynb-importer-py" class="headerlink" title="Ipynb_importer.py"></a>Ipynb_importer.py</h2><p>我通过几次测试发现，import Ipynb<em>importer 只需要放在你的当前要运行的文件中即可，然后在其他文件下的<strong>init</strong>.py 中导入所有的当前文件夹中的Module，就像这样<br>/first/second/models/<br>——-<em>_init</em></em>.py<br>——————- None<br>——-BasicModule.ipynb<br>——-AlexNet.ipynb<br>—————from models.BasicModule import BasicModule</p>
+<p>/first/main.py<br>import Ipynb_importer<br>from models import AlexNet    </p>
+<p>之所以在AlexNet中写models.BasicModule是因为直接导入BasicModule会报错，我根据<strong>dict</strong>的输出发现有问题，这一点和<a target="_blank" rel="noopener" href="https://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Importing%20Notebooks.html">官网</a>介绍的有一点区别，我没有实现官网说明的跨文件夹导入。因为如果改文件夹导入的话，models.BasicModule要接着换成相应的名字，与我预想的不一致，我预想的是不管在哪里导入，已经导入的应该不受影响才对。</p>
 <hr>
 <h2 id="ipynb-py-sh"><a href="#ipynb-py-sh" class="headerlink" title="ipynb-py.sh"></a>ipynb-py.sh</h2><p>之后发现了这个神器，可以把ipynb转化成.py，还是挺好用的，转化之后也没问题。</p>
 <hr>
@@ -193,171 +446,399 @@
 <p>这次实验一共用了三天才完全搞懂，可以说其中涉及到的函数的用法基本都明白了。<br>本意是记录自己，不过如果有任何问题，欢迎交流。     </p>
 <hr>
 <h1 id="PyTorch实战指南-第七章-DCGAN"><a href="#PyTorch实战指南-第七章-DCGAN" class="headerlink" title="PyTorch实战指南 第七章 DCGAN"></a>PyTorch实战指南 第七章 DCGAN</h1><p>这一次实现的也比较慢，用了小三天才做完，现在记录一下其中学到的几个东西。</p>
-<h2 id="file"><a href="#file" class="headerlink" title="__file__:"></a>__file__:</h2><p>用来获取模块所在路径 可能是一个相对路径，可能是一个绝对路径，<br>如果当前文件包含在sys.path里面，那么，__file__返回一个相对路径！<br>也可以认为获取模块的名字<br>最后的落脚点一定是XX&#x2F;XX.py<br>类没有这个属性</p>
+<h2 id="file"><a href="#file" class="headerlink" title="__file__:"></a>__file__:</h2><p>用来获取模块所在路径 可能是一个相对路径，可能是一个绝对路径，<br>如果当前文件包含在sys.path里面，那么，__file__返回一个相对路径！<br>也可以认为获取模块的名字<br>最后的落脚点一定是XX/XX.py<br>类没有这个属性</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> numpy</span><br><span class="line">In [<span class="number">3</span>]: numpy.__file__                                                                                                 </span><br><span class="line">Out[<span class="number">3</span>]: <span class="string">&#x27;F:\\Programs\\Anaconda3\\lib\\site-packages\\numpy\\__init__.py&#x27;</span></span><br><span class="line">In [<span class="number">6</span>]: numpy.random.__file__</span><br><span class="line">Out[<span class="number">6</span>]: <span class="string">&#x27;F:\\Programs\\Anaconda3\\lib\\site-packages\\numpy\\random\\__init__.py&#x27;</span></span><br><span class="line"></span><br><span class="line">$ python test.py <span class="comment">##print(__file__)</span></span><br><span class="line">test.py</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="name"><a href="#name" class="headerlink" title="__name__:"></a>__name__:</h2><p>__name__就是标识模块的名字的一个系统变量。这里分两种情况：假如当前模块是主模块（也就是调用其他模块的模块），那么此模块名字就是__main__，通过if判断这样就可以执行“__mian__:”后面的主函数内容；假如此模块是被import的，则此模块名字为文件名字（不加后面的.py），通过if判断这样就会跳过“__main__:”后面的内容。<br>这个模块可以是文件夹的名字，可以是类的名字，可以是__mian__”,XX的形式。<br>可以用于获取当前文件的文件名<br>通过上面方式，python就可以分清楚哪些是主函数，进入主函数执行；并且可以调用其他模块的各个函数等等。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># test.py</span><br><span class="line">## print(__file__)</span><br><span class="line">## print(__name__)</span><br><span class="line"># test2.py</span><br><span class="line">## import test</span><br><span class="line">## print(__file__)</span><br><span class="line">## print(__name__)</span><br><span class="line">H:\GitHub\pytorch_learn\Chapter7\test.py</span><br><span class="line">test</span><br><span class="line">test2.py</span><br><span class="line">__main__</span><br><span class="line"></span><br><span class="line">## from test import ccc</span><br><span class="line">## print(ccc.__name__)</span><br><span class="line">## print(__file__)</span><br><span class="line">## print(__name__)</span><br><span class="line">ccc</span><br><span class="line">test2.py</span><br><span class="line">__main__</span><br></pre></td></tr></table></figure>
-<h2 id="type"><a href="#type" class="headerlink" title="type():"></a>type():</h2><p>返回对象的类型<br>如果是module,则返回module<br>如果是类的实例，则返回类的名称，这个名称以XXX.XXX的形式返回，从import的第一个开始算起。<br>常用于判断数据类型，在pytorch中，用于返回模型名称，这个用法很巧妙，相当于返回了子类的类型名字<br>我觉得没有理解作者是怎么用的。在父类里的type(self) 返回的是子类的类名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">In [1]: import numpy</span><br><span class="line"></span><br><span class="line">In [2]: type(numpy)</span><br><span class="line">Out[2]: module</span><br><span class="line"></span><br><span class="line">In [3]: a = numpy.array(1)</span><br><span class="line"></span><br><span class="line">In [4]: type(a)</span><br><span class="line">Out[4]: numpy.ndarray</span><br><span class="line"></span><br><span class="line">In [5]: type(numpy.array)</span><br><span class="line">Out[5]: builtin_function_or_method</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class A:</span><br><span class="line">    pass</span><br><span class="line">  </span><br><span class="line">class B(A):</span><br><span class="line">    pass</span><br><span class="line">  </span><br><span class="line">isinstance(A(), A)    # returns True</span><br><span class="line">type(A()) == A        # returns True</span><br><span class="line">isinstance(B(), A)    # returns True</span><br><span class="line">type(B()) == A        # returns False</span><br><span class="line"></span><br><span class="line">class A(object):</span><br><span class="line">	def __init__(self):</span><br><span class="line">		print(type(self))</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line">	def __init__(self):</span><br><span class="line">		super(B,self).__init__()</span><br><span class="line">		print(type(self))</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">import test</span><br><span class="line">test.B()</span><br><span class="line"></span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt; </span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="class"><a href="#class" class="headerlink" title="__class__:"></a>__class__:</h2><p>和type类似</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">	def __init__(self):</span><br><span class="line">		print(type(self))</span><br><span class="line">		print(self.__class__)</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line">	def __init__(self):</span><br><span class="line">		super(B,self).__init__()</span><br><span class="line">		print(type(self))</span><br><span class="line">		print(self.__class__)</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="获取config源码"><a href="#获取config源码" class="headerlink" title="获取config源码"></a>获取config源码</h2><p>打印参数，方便输入参数<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/inspect.html">inspect.getsource</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> inspect <span class="keyword">import</span> getsource</span><br><span class="line">source = getsource(opt.__class__)</span><br><span class="line"><span class="built_in">print</span>(source)</span><br></pre></td></tr></table></figure>
+<h2 id="name"><a href="#name" class="headerlink" title="__name__:"></a>__name__:</h2><p>__name__就是标识模块的名字的一个系统变量。这里分两种情况：假如当前模块是主模块（也就是调用其他模块的模块），那么此模块名字就是__main__，通过if判断这样就可以执行“__mian__:”后面的主函数内容；假如此模块是被import的，则此模块名字为文件名字（不加后面的.py），通过if判断这样就会跳过“__main__:”后面的内容。<br>这个模块可以是文件夹的名字，可以是类的名字，可以是__mian__”,XX的形式。<br>可以用于获取当前文件的文件名<br>通过上面方式，python就可以分清楚哪些是主函数，进入主函数执行；并且可以调用其他模块的各个函数等等。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># test.py</span><br><span class="line">## print(__file__)</span><br><span class="line">## print(__name__)</span><br><span class="line"># test2.py</span><br><span class="line">## import test</span><br><span class="line">## print(__file__)</span><br><span class="line">## print(__name__)</span><br><span class="line">H:\GitHub\pytorch_learn\Chapter7\test.py</span><br><span class="line">test</span><br><span class="line">test2.py</span><br><span class="line">__main__</span><br><span class="line"></span><br><span class="line">## from test import ccc</span><br><span class="line">## print(ccc.__name__)</span><br><span class="line">## print(__file__)</span><br><span class="line">## print(__name__)</span><br><span class="line">ccc</span><br><span class="line">test2.py</span><br><span class="line">__main__</span><br></pre></td></tr></table></figure></p>
+<h2 id="type"><a href="#type" class="headerlink" title="type():"></a>type():</h2><p>返回对象的类型<br>如果是module,则返回module<br>如果是类的实例，则返回类的名称，这个名称以XXX.XXX的形式返回，从import的第一个开始算起。<br>常用于判断数据类型，在pytorch中，用于返回模型名称，这个用法很巧妙，相当于返回了子类的类型名字<br>我觉得没有理解作者是怎么用的。在父类里的type(self) 返回的是子类的类名<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">In [1]: import numpy</span><br><span class="line"></span><br><span class="line">In [2]: type(numpy)</span><br><span class="line">Out[2]: module</span><br><span class="line"></span><br><span class="line">In [3]: a = numpy.array(1)</span><br><span class="line"></span><br><span class="line">In [4]: type(a)</span><br><span class="line">Out[4]: numpy.ndarray</span><br><span class="line"></span><br><span class="line">In [5]: type(numpy.array)</span><br><span class="line">Out[5]: builtin_function_or_method</span><br></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class A:</span><br><span class="line">    pass</span><br><span class="line">  </span><br><span class="line">class B(A):</span><br><span class="line">    pass</span><br><span class="line">  </span><br><span class="line">isinstance(A(), A)    # returns True</span><br><span class="line">type(A()) == A        # returns True</span><br><span class="line">isinstance(B(), A)    # returns True</span><br><span class="line">type(B()) == A        # returns False</span><br><span class="line"></span><br><span class="line">class A(object):</span><br><span class="line">	def __init__(self):</span><br><span class="line">		print(type(self))</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line">	def __init__(self):</span><br><span class="line">		super(B,self).__init__()</span><br><span class="line">		print(type(self))</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">import test</span><br><span class="line">test.B()</span><br><span class="line"></span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt; </span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h2 id="class"><a href="#class" class="headerlink" title="__class__:"></a>__class__:</h2><p>和type类似<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">	def __init__(self):</span><br><span class="line">		print(type(self))</span><br><span class="line">		print(self.__class__)</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line">	def __init__(self):</span><br><span class="line">		super(B,self).__init__()</span><br><span class="line">		print(type(self))</span><br><span class="line">		print(self.__class__)</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br><span class="line">&lt;class &#x27;test.B&#x27;&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="获取config源码"><a href="#获取config源码" class="headerlink" title="获取config源码"></a>获取config源码</h2><p>打印参数，方便输入参数<br><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/inspect.html">inspect.getsource</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> inspect <span class="keyword">import</span> getsource</span><br><span class="line">source = getsource(opt.__class__)</span><br><span class="line"><span class="built_in">print</span>(source)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2018/08/26/pytorch-1.0/" data-id="cla55fge6009gwka7c9ipanth" data-title="pytorch" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pytorch-learn-chenyun/" rel="tag"># pytorch-learn chenyun</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/26/Cmd%20Markdown/" rel="next" title="Cmd Markdown">
+                <i class="fa fa-chevron-left"></i> Cmd Markdown
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/04/deconv/" rel="prev" title="deconv\dilated conv">
+                deconv\dilated conv <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2018/09/04/deconv/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          deconv\dilated conv
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/08/26/Cmd%20Markdown/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Cmd Markdown</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+  </article>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
-    </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/11/06/test-2011-11-06/">test_2011_11_06</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/23/python-100-days/">python_100_days</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/data-VOS/">data_VOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/TVOS/">TVOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="post-spread">
       
-      &copy; 2022 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensor"><span class="nav-number">1.1.</span> <span class="nav-text">Tensor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable%E5%92%8Cautograd"><span class="nav-number">1.2.</span> <span class="nav-text">Variable和autograd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nn-Module"><span class="nav-number">1.3.</span> <span class="nav-text">nn.Module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">1.5.</span> <span class="nav-text">优化器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CIFAR-10%E5%88%86%E7%B1%BB"><span class="nav-number">1.6.</span> <span class="nav-text">CIFAR-10分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">1.7.</span> <span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GPU"><span class="nav-number">1.8.</span> <span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dog-vs-Cat"><span class="nav-number">1.9.</span> <span class="nav-text">Dog.vs.Cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pytorch-%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3"><span class="nav-number">1.10.</span> <span class="nav-text">pytorch 中文文档</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyTorch%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%85%AD%E7%AB%A0-Dog-VS-Cat"><span class="nav-number">2.</span> <span class="nav-text">PyTorch实战指南 第六章  Dog.VS.Cat</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ipynb-importer-py"><span class="nav-number">2.1.</span> <span class="nav-text">Ipynb_importer.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ipynb-py-sh"><span class="nav-number">2.2.</span> <span class="nav-text">ipynb-py.sh</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyTorch%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E7%AC%AC%E4%B8%83%E7%AB%A0-DCGAN"><span class="nav-number">3.</span> <span class="nav-text">PyTorch实战指南 第七章 DCGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#file"><span class="nav-number">3.1.</span> <span class="nav-text">__file__:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#name"><span class="nav-number">3.2.</span> <span class="nav-text">__name__:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#type"><span class="nav-number">3.3.</span> <span class="nav-text">type():</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class"><span class="nav-number">3.4.</span> <span class="nav-text">__class__:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96config%E6%BA%90%E7%A0%81"><span class="nav-number">3.5.</span> <span class="nav-text">获取config源码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <nav id="mobile-nav">
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
 </body>
 </html>

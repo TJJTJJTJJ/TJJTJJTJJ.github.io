@@ -1,117 +1,378 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  <title>DIMN | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="1. 前言 paper: CVPR2019_Generalizable Person Re-identification by Domain-Invariant Mapping Network code: 暂无">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="meta-learning,few-shot learning,cross-domain person re-id," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 前言 paper: CVPR2019_Generalizable Person Re-identification by Domain-Invariant Mapping Network code: 暂无">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DIMN">
 <meta property="og:url" content="http://example.com/2019/06/03/DIMN/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="1. 前言 paper: CVPR2019_Generalizable Person Re-identification by Domain-Invariant Mapping Network code: 暂无">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale">
 <meta property="article:published_time" content="2019-06-03T08:16:17.000Z">
 <meta property="article:modified_time" content="2019-06-14T08:22:04.756Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="meta-learning">
 <meta property="article:tag" content="few-shot learning">
 <meta property="article:tag" content="cross-domain person re-id">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2019/06/03/DIMN/"/>
+
+
+
+
+
+  <title>DIMN | Hexo</title>
   
+
+
+
+
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-DIMN" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2019/06/03/DIMN/" class="article-date">
-  <time class="dt-published" datetime="2019-06-03T08:16:17.000Z" itemprop="datePublished">2019-06-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/person-re-id/">person re-id</a>
+        <p class="site-subtitle"></p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      DIMN
-    </h1>
+</div>
+
+<nav class="site-nav">
   
 
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            something
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/06/03/DIMN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DIMN</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-03T16:16:17+08:00">
+                2019-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/person-re-id/" itemprop="url" rel="index">
+                    <span itemprop="name">person re-id</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><ul>
 <li>paper: <a target="_blank" rel="noopener" href="http://www.eecs.qmul.ac.uk/~js327/Doc/Publication/2019/cvpr2019_dimn.pdf">CVPR2019_Generalizable Person Re-identification by Domain-Invariant Mapping Network</a></li>
 <li>code: 暂无</li>
 </ul>
 <span id="more"></span>
-
 <p>这篇文章和 <a target="_blank" rel="noopener" href="https://tjjtjjtjj.github.io/2019/05/06/ECN/#more">ECN</a> 那篇有相似的地方：Memory 记录所有的特征，并把这些记录的特征直接当做分类器使用，我觉得这样的使用应该有更合理的解释，不同点在于使用 Memory 的具体方式不同，我暂时觉得这里面还有东西可以挖。我记得我之前读过一篇 也是用 Memory 用于分类的论文，那篇直接把已知的和未知的特征都放在 memory 中，更简单巧妙。</p>
 <p>该论文首次提到 <strong>meta-learning, few-shot learning</strong>，我简单查了查。人工智能的理论进展呈现：</p>
 <blockquote>
-<p>Artificial Intelligence–&gt;Machine Learning–&gt;Deep Learning–&gt;Deep Reinforcement Learning–&gt;Deep Meta Learning</p>
+<p>Artificial Intelligence—&gt;Machine Learning—&gt;Deep Learning—&gt;Deep Reinforcement Learning—&gt;Deep Meta Learning</p>
 </blockquote>
 <p>深度学习可以在特定的 task 上得到一个很好的模型，但是在其他 task 上效果就会很差，是否可以理解成过拟合呢？应该和过拟合不是一个角度，过拟合指得的是训练集和测试集不可能同时达到各自的最优解，但是 meta learning 更偏向于当出现一个新的少量的样本的时候，不需要巨量的训练，原始数据训练得到的模型作为先验知识，有助于学习新的样本，有点 <a target="_blank" rel="noopener" href="https://tjjtjjtjj.github.io/2019/05/29/FUNIT/#more">FUNIt</a> 的味道，又有点像之前看过的一篇 <a target="_blank" rel="noopener" href="https://tjjtjjtjj.github.io/2019/03/27/One-Example-reID/#more">TIP2019 Progressive Learning for Person Re-Identification with One Example</a>，暂时还说不上来这种感觉。郑哲东那个团队是直接 meta-learing 过来的思路吗？不得而知了。</p>
 <p>举个例子：分类器可以很好地区分在各种环境下的猫狗之类的动物，这个时候给一张站着的老虎图片用于二次训练，使得二次训练后的分类器既能对于分猫狗的性能不下降，又对各种环境下的老虎图片也有相同的区分能力。如果直接从头开始训练，训练集为一张老虎+各种环境下的猫狗，显然对于老虎的区分能力很弱。</p>
@@ -133,7 +394,7 @@
 <p>其他资料: <a target="_blank" rel="noopener" href="https://www.zhihu.com/topic/20140823/hot">https://www.zhihu.com/topic/20140823/hot</a></p>
 <p>三个趋势: 自动驾驶，强化学习，元学习</p>
 <p>作者 <a target="_blank" rel="noopener" href="http://www.eecs.qmul.ac.uk/~js327/#RESOURCE">Jifei Song</a>，博三，敦煌玛丽女王大学的 <a target="_blank" rel="noopener" href="http://sketchx.eecs.qmul.ac.uk/people/">SketchX 实验室</a>，16年 BMVC，17年 ICCV，18年 CPVR，19年 CVPR，大佬发文章都白送的吗，刚不过刚不过。</p>
-<h2 id="2-Introduction"><a href="#2-Introduction" class="headerlink" title="2. Introduction"></a>2. Introduction</h2><p>作者希望可以在 a set of source domains 上一次训练，直接直接应用到 unseen dataset 上，称之为 **Domain-Invariant Mapping Network (DIMN)**，遵循 meta-learning pipeline amd sample a subset of source domain training tasks(identities) during each training episode。</p>
+<h2 id="2-Introduction"><a href="#2-Introduction" class="headerlink" title="2. Introduction"></a>2. Introduction</h2><p>作者希望可以在 a set of source domains 上一次训练，直接直接应用到 unseen dataset 上，称之为 <strong>Domain-Invariant Mapping Network (DIMN)</strong>，遵循 meta-learning pipeline amd sample a subset of source domain training tasks(identities) during each training episode。</p>
 <p>现有的 cross domain person Re-ID 可以分为 unsupervised domain adaptation (UDA)，domain generalization(DG)(few-shot meta learning)。</p>
 <blockquote>
 <p>However, existing DG methods [20, 34, 23, 39] assume that the source and target domain have the same label space; whilst existing metalearning models [49, 49, 10, 35, 40] assume a fixed number of classes for target domains and are trained specifically for that number using source data.</p>
@@ -148,53 +409,44 @@
 </ol>
 <p>感觉这个目标定的要比 ECN 更高一些。</p>
 <p>作者在实际实验的时候使用5个 datasets 作为 source domains，另外4个 datasets 作为 target domains，实验结果不是很全，比如没有做只有一个 dataset 的 source domain 的效果。所以不能完全排除因为扩大数据集而造成的性能提高。但是根据现有的使用过 memory 的论文，我觉得还是可信的。</p>
-<h2 id="3-Methodology"><a href="#3-Methodology" class="headerlink" title="3. Methodology"></a>3. Methodology</h2><p>背景：已知有标签的 M 个 datasets(domains), $D_1, D_2,…, D_M$，每个 domain 有自己的 label space，希望在这些数据集上训练得到的模型直接应用到新的 domain&#x2F;dataset 得到好的效果，而不需要更新模型。</p>
-
+<h2 id="3-Methodology"><a href="#3-Methodology" class="headerlink" title="3. Methodology"></a>3. Methodology</h2><p>背景：已知有标签的 M 个 datasets(domains), $D_1, D_2,…, D_M$，每个 domain 有自己的 label space，希望在这些数据集上训练得到的模型直接应用到新的 domain/dataset 得到好的效果，而不需要更新模型。</p>
 
 <p>The network:</p>
 <ul>
 <li>the encoding subnets: $g_{\phi}$</li>
-<li>mapping subnets: gallery image embedding–&gt;classifier’s weight vector</li>
+<li>mapping subnets: gallery image embedding—&gt;classifier’s weight vector</li>
 <li>memory bank: store all classifiers in training domains</li>
 </ul>
 <p><strong>Encoding Subnet</strong>(最基本的分类损失): MobilenetV2，这个也是 (MobilenetV2，另外一篇 distill 也是) 。假设在融合后的 $M$ 个数据集中一共有 $C$ 个行人，每个 mini-batch 中取 $C_b$ 个行人，对于每个行人 $l_i$，取两张图片，分别设置为 gallery $\tilde{x}_i$ 和 probe $x_i$，所以在每个 batch 中有 $2C_b$ 个行人图片，组成 $2C_b$ pairs(两张图片可以调过来)。</p>
 <p>最基本的分类损失：</p>
-<p>$$L_{id}&#x3D;\sum_{i&#x3D;1}^{C_b} Cross_Entropy(l_i, Softmax(f_{\theta}(g_{\phi}(x_i)))$$</p>
-<p>其中 $x_i$ 表示输入图片，$l_i$ 表示标签，$g_{\phi}$ 表示 encoding subnet，得到的是 D 维特征向量，$f_{\theta}$表示分类器，$\theta \in R^{D\times C}$</p>
+<script type="math/tex; mode=display">L_{id}=\sum_{i=1}^{C_b} Cross\_Entropy(l_i, Softmax(f_{\theta}(g_{\phi}(x_i)))</script><p>其中 $x<em>i$ 表示输入图片，$l_i$ 表示标签，$g</em>{\phi}$ 表示 encoding subnet，得到的是 D 维特征向量，$f_{\theta}$表示分类器，$\theta \in R^{D\times C}$</p>
 <p><strong>Mapping Subnet</strong>：相对于传统的分类权重 $\theta_{\cdot,j}$ 作为模型参数的一部分，作者直接生成分类权重 identity classifier weight vector：</p>
-<p>$$\hat{\theta}<em>{\cdot,j}&#x3D;h_w(g</em>{\phi}(\tilde{x}_i))$$</p>
-<p>其中 mapping subnet $h_w$ 可以理解成 hyper-network(不懂，难道为其他网络生成参数就是 hyper-network)，这里可以使用简单的 multi-layer perception (MLP)。</p>
+<script type="math/tex; mode=display">\hat{\theta}_{\cdot,j}=h_w(g_{\phi}(\tilde{x}_i))</script><p>其中 mapping subnet $h_w$ 可以理解成 hyper-network(不懂，难道为其他网络生成参数就是 hyper-network)，这里可以使用简单的 multi-layer perception (MLP)。</p>
 <p>对于给定的 gallery image $\tilde{x}<em>j$ and probe image $x_i$，得到 $\hat{\theta}</em>{\cdot,j}$，进而得到 logit vector $p$:</p>
-<p>$$p_j&#x3D;h_w(g_{\phi}(\tilde{x}_ j))\cdot g_{\phi}(x_i)$$</p>
-<p>然后对 $p_j$ 进行softmax，这是表示对于 probe image $x_i$, 所有的 gallery images $\tilde{x}_j$ 根据相似度进行排序，亦或者可以理解成 gallery images 为基本分类向量，判断 probe image 属于哪类，真值为如果 probe image 和 gallery image 是同一类，设为1，否则设为0，根据之前写的 mini-batch 的取法，只有一个为1，剩下都为0，可以理解成基本的分类损失。</p>
+<script type="math/tex; mode=display">p_j=h_w(g_{\phi}(\tilde{x}_ j))\cdot g_{\phi}(x_i)</script><p>然后对 $p_j$ 进行softmax，这是表示对于 probe image $x_i$, 所有的 gallery images $\tilde{x}_j$ 根据相似度进行排序，亦或者可以理解成 gallery images 为基本分类向量，判断 probe image 属于哪类，真值为如果 probe image 和 gallery image 是同一类，设为1，否则设为0，根据之前写的 mini-batch 的取法，只有一个为1，剩下都为0，可以理解成基本的分类损失。</p>
 <p>这里 logit vector $p$ 有两种写法，一种是 $p\in R^C$，表示 probe image 属于哪类，优点是具有 discriminative power，一种是 $p\in R^{C_b}$，表示 probe image 与 mini-batch 的哪张相似，优点是容易收敛训练。为了兼顾 scalability and discriminativity，引入 memory bank.</p>
-<p><strong>Memory Bank</strong>：Memory bank is a weight matrix$W\in R^{D\times C}$。每个 mini-batch 的 gallery branch 中，有 $C_b$ 个不同 id 的样本，$[ \tilde{x}_1, \tilde{x}<em>2,…, \tilde{x}</em>{C _b}]$，经过 encoding subnet $g <em>{\phi}$ and the mapping subnet $h_w$，得到 $C_b$ 个 predicted weight vector $\lbrace \hat{\theta}</em>{\cdot, j}, j&#x3D;[ 1,2,…, C_b] \rbrace$，即 $\hat{\theta}\in R^{D\times C_b}$.</p>
+<p><strong>Memory Bank</strong>：Memory bank is a weight matrix$W\in R^{D\times C}$。每个 mini-batch 的 gallery branch 中，有 $C<em>b$ 个不同 id 的样本，$[ \tilde{x}_1, \tilde{x}_2,…, \tilde{x}</em>{C <em>b}]$，经过 encoding subnet $g </em>{\phi}$ and the mapping subnet $h<em>w$，得到 $C_b$ 个 predicted weight vector $\lbrace \hat{\theta}</em>{\cdot, j}, j=[ 1,2,…, C_b] \rbrace$，即 $\hat{\theta}\in R^{D\times C_b}$.</p>
 <p>然后根据 id 更新 $W$，这里的更新还蛮奇怪的，和 ECN 的更新不一样。</p>
-<p>先得到 $\hat{W}$: 复制 $W$，$\hat{W} \gets W$，再复制 $\hat{\theta}$，$\hat{W}_ {\cdot, L(j)} \gets \hat{\theta}_{\cdot, j}, \forall j\in [ 1,2,…,C_b]$($L(j)$ 表示第 $j$ 张图片的 id)，</p>
+<p>先得到 $\hat{W}$: 复制 $W$，$\hat{W} \gets W$，再复制 $\hat{\theta}$，$\hat{W}<em> {\cdot, L(j)} \gets \hat{\theta}</em>{\cdot, j}, \forall j\in [ 1,2,…,C_b]$($L(j)$ 表示第 $j$ 张图片的 id)，</p>
 <p>然后用类似 ECN 那样，用分类损失</p>
-<p>$$L_{mat}&#x3D;\sum_{i&#x3D;1}^{C_b} Cross_Entropy(y_i, Softmax(\hat{W}g_{\phi}(x_i)))$$</p>
-<p>与 ECN 不同地是，第一，ECN 没有真值，所以只能自己像自己，DIMN 有真值，第二，ECN 用的是未更新的 memory，DIMN 用的是半旧半新的 memory。</p>
+<script type="math/tex; mode=display">L_{mat}=\sum_{i=1}^{C_b} Cross\_Entropy(y_i, Softmax(\hat{W}g_{\phi}(x_i)))</script><p>与 ECN 不同地是，第一，ECN 没有真值，所以只能自己像自己，DIMN 有真值，第二，ECN 用的是未更新的 memory，DIMN 用的是半旧半新的 memory。</p>
 <p>最后更新:</p>
-<p>$$W\gets (1-\alpha)W+\alpha \hat{W}$$</p>
-<p>作者发现有两个 trick 可以帮助稳定训练：对 $W$ 进行二范约束；$W$ 更新前后变化比较小。</p>
-<p>$$L_{reg}&#x3D;\sum_{i&#x3D;1}^{C_b} \parallel W_{\cdot, L(j)} - \hat{\theta}_{\cdot, j} \parallel_2^2 $$</p>
-<p>Question: 对 $L_{reg}$ 的出现表示存疑，感觉出现的很勉强</p>
-<p><strong>Training Objective</strong>: 三元组损失，对于 $x_i$，$\tilde{x}_i$ 为正样本，其他的 $\hat{W} <em>{\cdot, j’}| <em>{j’\not &#x3D; i}$ 为负样本，得到 $p&#x3D;h_w(g</em>{\phi}(\tilde{x_i}))\cdot g</em>{\phi}(x_i)$，$n&#x3D;\hat{W} _{\cdot, j’}\cdot g <em>{\phi}(x_i)|</em>{j’\not &#x3D; i}$，归一化为 $S(x_i, \tilde{x}_i)$, $S(x_i, \tilde{x}_j’| _{j’\not &#x3D; i})$，从而有</p>
-<p>$$L_{tri}&#x3D;\sum_{i&#x3D;1}^{C_b} \max (0, \triangle - \max S(x_i, \tilde{x}_j’| _{j’\not &#x3D; i}) + S(x_i, \tilde{x}_i)$$</p>
-<p><strong>Overall</strong>：</p>
-<p>$$L_{full}&#x3D;L_{id}+\lambda_1 L_{mat} +\lambda_2 L_{reg} + \lambda_3 L_{tri}$$</p>
-<p><strong>备注 ECN</strong>:</p>
+<script type="math/tex; mode=display">W\gets (1-\alpha)W+\alpha \hat{W}</script><p>作者发现有两个 trick 可以帮助稳定训练：对 $W$ 进行二范约束；$W$ 更新前后变化比较小。</p>
+<script type="math/tex; mode=display">L_{reg}=\sum_{i=1}^{C_b} \parallel W_{\cdot, L(j)} - \hat{\theta}_{\cdot, j} \parallel_2^2</script><p>Question: 对 $L_{reg}$ 的出现表示存疑，感觉出现的很勉强</p>
+<p><strong>Training Objective</strong>: 三元组损失，对于 $x<em>i$，$\tilde{x}_i$ 为正样本，其他的 $\hat{W} </em>{\cdot, j’}| <em>{j’\not = i}$ 为负样本，得到 $p=h_w(g</em>{\phi}(\tilde{x<em>i}))\cdot g</em>{\phi}(x<em>i)$，$n=\hat{W} </em>{\cdot, j’}\cdot g <em>{\phi}(x_i)|</em>{j’\not = i}$，归一化为 $S(x<em>i, \tilde{x}_i)$, $S(x_i, \tilde{x}_j’| </em>{j’\not = i})$，从而有</p>
+<script type="math/tex; mode=display">L_{tri}=\sum_{i=1}^{C_b} \max (0, \triangle - \max S(x_i, \tilde{x}_j'| _{j'\not = i}) + S(x_i, \tilde{x}_i)</script><p><strong>Overall</strong>：</p>
+<script type="math/tex; mode=display">L_{full}=L_{id}+\lambda_1 L_{mat} +\lambda_2 L_{reg} + \lambda_3 L_{tri}</script><p><strong>备注 ECN</strong>:</p>
 <ol>
 <li>memory 的使用：ECN 先计算损失后更新， DIMN 半更新计算损失后全更新</li>
 <li>损失函数: ECN 使用 memory 进行了两次分类损失和一次假标签分类损失，DIMN 使用 memory 进行了一次分类损失和一次三元组损失。</li>
 <li>memory 的输入: ECN 中 memory 和基本分类损失用的是同一张图片，DIMN 中 memory 和基本分类损失用的不是同一张图片</li>
 <li>memory 的特征：ECN 中直接共享网络提取到的，DIMN 又经过了一次 mapping subnet.</li>
 </ol>
-<p><strong>Model Testing</strong>: 上述的损失函数可以学习到 encoding subnet $g_{\phi}(\cdot)$ and mapping subnet $h_w(\cdot)$，在测试阶段，给定 query image $x_i$ and gallery image $\tilde{x}<em>j$，两张图片的相似度定义为 $h_w(g</em>{\phi}(\tilde{x}_j))\cdot g _{\phi}(x_i)$.</p>
+<p><strong>Model Testing</strong>: 上述的损失函数可以学习到 encoding subnet $g<em>{\phi}(\cdot)$ and mapping subnet $h_w(\cdot)$，在测试阶段，给定 query image $x_i$ and gallery image $\tilde{x}_j$，两张图片的相似度定义为 $h_w(g</em>{\phi}(\tilde{x}<em>j))\cdot g </em>{\phi}(x_i)$.</p>
 <p>备注：</p>
 <ol>
 <li>DIMN 是一个 DG method 而不是一个 one-shot learning，因为只在 source domain 上训练</li>
-<li>传统的 deep ReID 的相似度计算是 $g_{\phi}(\tilde{x}_j)\cdot g _{\phi}(x_i)$</li>
+<li>传统的 deep ReID 的相似度计算是 $g<em>{\phi}(\tilde{x}_j)\cdot g </em>{\phi}(x_i)$</li>
 </ol>
 <h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><h3 id="4-1-Datasets-and-Settings"><a href="#4-1-Datasets-and-Settings" class="headerlink" title="4.1 Datasets and Settings"></a>4.1 Datasets and Settings</h3><p><strong>A Large-Scale ReID benchmark</strong>:</p>
 <ul>
@@ -202,171 +454,428 @@
 <li>test datasets: VIPeR, PRID, GRID, i-LIDS</li>
 </ul>
 
-
 <p><strong>Implementation Details</strong>:</p>
 <ul>
 <li>encoding subnet: MobileNetV2, output: 1792</li>
 <li>mapping subnet: a single fully-connected layer</li>
-<li>running average parameter $\alpha&#x3D;0.5$</li>
-<li>triplet loss margin $\triangle&#x3D;0.8$</li>
-<li>weight of loss $\lambda_1&#x3D;\lambda_3&#x3D;1, \lambda_2&#x3D;0.01$</li>
+<li>running average parameter $\alpha=0.5$</li>
+<li>triplet loss margin $\triangle=0.8$</li>
+<li>weight of loss $\lambda_1=\lambda_3=1, \lambda_2=0.01$</li>
 </ul>
 <h3 id="4-3-Ablation-Study"><a href="#4-3-Ablation-Study" class="headerlink" title="4.3 Ablation Study"></a>4.3 Ablation Study</h3>
-
 <p><strong>Question</strong>: 直接使用 memory 进行分类损失和使用 fc 进行分类损失有区别吗？前向计算过程是一样的，memory 的权重等同于 fc 的权重。反向求导过程不一样，memory 使用 running average 并进行二范归一化进行更新，fc 的权重使用链式求导进行更新，memory 和 fc 的 feature 反向求导也是一样的公式。也就是说两种唯一的不同在于权重的更新方式，memory 更新时其权重是固定的，fc 更新时其权重是变化的，memory 更新时会进行二范归一化，fc 更新时没有这个操作。这些区别足以产生这么大的影响吗？可能更需要其他理论上的支持</p>
 <p>从 ablation study 上看，缺失每一个对最终结果的影响都不大。</p>
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2019/06/03/DIMN/" data-id="cla55fgcy000awka737f6hk29" data-title="DIMN" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/meta-learning/" rel="tag"># meta-learning</a>
+          
+            <a href="/tags/few-shot-learning/" rel="tag"># few-shot learning</a>
+          
+            <a href="/tags/cross-domain-person-re-id/" rel="tag"># cross-domain person re-id</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/30/ArcFace/" rel="next" title="ArcFace">
+                <i class="fa fa-chevron-left"></i> ArcFace
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/10/OIM/" rel="prev" title="OIM">
+                OIM <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2019/06/10/OIM/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          OIM
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/05/30/ArcFace/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">ArcFace</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+  </article>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
-    </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/11/06/test-2011-11-06/">test_2011_11_06</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/23/python-100-days/">python_100_days</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/data-VOS/">data_VOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/TVOS/">TVOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="post-spread">
       
-      &copy; 2022 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Introduction"><span class="nav-number">2.</span> <span class="nav-text">2. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Methodology"><span class="nav-number">3.</span> <span class="nav-text">3. Methodology</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Experiments"><span class="nav-number">4.</span> <span class="nav-text">4. Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Datasets-and-Settings"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Datasets and Settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-Ablation-Study"><span class="nav-number">4.2.</span> <span class="nav-text">4.3 Ablation Study</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <nav id="mobile-nav">
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
 </body>
 </html>

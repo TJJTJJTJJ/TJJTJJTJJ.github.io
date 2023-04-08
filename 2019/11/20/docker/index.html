@@ -1,117 +1,378 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  <title>docker | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="参考资料  尚硅谷 笔记完整版(转载) https:&#x2F;&#x2F;docker.com https:&#x2F;&#x2F;docker-cn.com https:&#x2F;&#x2F;hub.docker.com&#x2F; 阿里云">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,容器," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="参考资料  尚硅谷 笔记完整版(转载) https:&#x2F;&#x2F;docker.com https:&#x2F;&#x2F;docker-cn.com https:&#x2F;&#x2F;hub.docker.com&#x2F; 阿里云">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker">
 <meta property="og:url" content="http://example.com/2019/11/20/docker/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="参考资料  尚硅谷 笔记完整版(转载) https:&#x2F;&#x2F;docker.com https:&#x2F;&#x2F;docker-cn.com https:&#x2F;&#x2F;hub.docker.com&#x2F; 阿里云">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale">
 <meta property="article:published_time" content="2019-11-20T07:46:58.000Z">
 <meta property="article:modified_time" content="2020-02-20T02:12:00.237Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="容器">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2019/11/20/docker/"/>
+
+
+
+
+
+  <title>docker | Hexo</title>
   
+
+
+
+
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-docker" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2019/11/20/docker/" class="article-date">
-  <time class="dt-published" datetime="2019-11-20T07:46:58.000Z" itemprop="datePublished">2019-11-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a>
+        <p class="site-subtitle"></p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      docker
-    </h1>
+</div>
+
+<nav class="site-nav">
   
 
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            something
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/11/20/docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">docker</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-20T15:46:58+08:00">
+                2019-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%B9%E5%99%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">容器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <p>参考资料</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av27122140?p=1">尚硅谷</a></li>
 <li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1FLcOpjpJTJlP36lzD-kfWA#list/path=%2F">笔记完整版(转载)</a></li>
-<li><a target="_blank" rel="noopener" href="https://docker.com/">https://docker.com</a></li>
-<li><a target="_blank" rel="noopener" href="https://docker-cn.com/">https://docker-cn.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://docker.com">https://docker.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://docker-cn.com">https://docker-cn.com</a></li>
 <li><a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a></li>
-<li><a target="_blank" rel="noopener" href="http://dev.aliyun.com/">阿里云</a></li>
+<li><a target="_blank" rel="noopener" href="http://dev.aliyun.com">阿里云</a></li>
 </ul>
 <span id="more"></span>
-
 <h1 id="1-Docker-的简介"><a href="#1-Docker-的简介" class="headerlink" title="1. Docker 的简介"></a>1. Docker 的简介</h1>
 <p>开发和运维的环境与配置不同，相同的代码可能跑不起来。<br>或者说之前开发交给运维的是代码，现在开发交给运维的是代码及其相关的环境配置数据等全家桶。</p>
 <p>镜像(image)即应用：运行文档，配置环境，运行环境，运行依赖包，内核，操作系统<br>容器(container)：每个容器内运行一个应用，<br>仓库(repository)：每个仓库存放某一类镜像</p>
@@ -121,7 +382,6 @@
 <li>容器的应用进程直接运行于宿主的内核，没有自己的内核，也没有硬件虚拟</li>
 <li>每个容器之间相互隔离，且每个容器有自己的文件系统，容器之间进程互相不会影响</li>
 </ul>
-
 
 
 <h1 id="2-Docker-安装"><a href="#2-Docker-安装" class="headerlink" title="2. Docker 安装"></a>2. Docker 安装</h1><h2 id="2-1-虚拟机安装"><a href="#2-1-虚拟机安装" class="headerlink" title="2.1 虚拟机安装:"></a>2.1 虚拟机安装:</h2><ul>
@@ -138,23 +398,17 @@
 <li><a target="_blank" rel="noopener" href="https://docs.docker.com/install/linux/docker-ce/centos">https://docs.docker.com/install/linux/docker-ce/centos</a></li>
 </ul>
 
-
 <p>测试hello-world：docker_host就是本地的主机，hello-world是docker-hub中自带的一个镜像，从 Registry 中获取 hello-world 镜像到本地，并在本地运行一个容器实例</p>
 <p><strong>安装docker后每次运行都输入sudo</strong>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sudo</span> groupadd docker    <span class="comment">#添加docker用户组</span></span><br><span class="line"><span class="variable">$sudo</span> gpasswd -a <span class="variable">$USER</span> docker    <span class="comment">#将登陆用户加入到docker用户组中</span></span><br><span class="line"><span class="variable">$newgrp</span> docker    <span class="comment">#更新用户组</span></span><br><span class="line"><span class="comment"># 生效：重启docker或者用户退出重登录</span></span><br><span class="line">sudo service docker restart</span><br><span class="line">当前用户退出重新登录</span><br><span class="line"></span><br><span class="line"><span class="comment"># Error loading config file:/home/user/.docker/config.json - stat /home/user/.docker/config.json: permission denied</span></span><br><span class="line">sudo <span class="built_in">chown</span> <span class="string">&quot;<span class="variable">$USER</span>&quot;</span>:<span class="string">&quot;<span class="variable">$USER</span>&quot;</span> /home/<span class="string">&quot;<span class="variable">$USER</span>&quot;</span>/.docker -R</span><br><span class="line">sudo <span class="built_in">chmod</span> g+rwx <span class="string">&quot;/home/<span class="variable">$USER</span>/.docker&quot;</span> -R</span><br></pre></td></tr></table></figure>
-
 <h2 id="配置阿里云加速"><a href="#配置阿里云加速" class="headerlink" title="配置阿里云加速"></a>配置阿里云加速</h2><p>镜像加速器</p>
 <p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/repositories">https://cr.console.aliyun.com/cn-hangzhou/instances/repositories</a></p>
 <p>可以使用 docker info 命令，查看 registry Mirrors 是否是注册的镜像</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br><span class="line">Registry Mirrors:</span><br><span class="line">  https://uignadd2.mirror.aliyuncs.com/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h1 id="docker-命令"><a href="#docker-命令" class="headerlink" title="docker 命令"></a>docker 命令</h1><h2 id="docker-run"><a href="#docker-run" class="headerlink" title="docker run"></a>docker run</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker build</span><br><span class="line">docker pull</span><br><span class="line">docker run</span><br><span class="line"></span><br><span class="line">docker images</span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-
 <p>docker 客户端 run (容器)之后，依次从 docker 主机(docker 主线程 Docker_daemon) 的本地镜像(images)、registry寻找对应的镜像</p>
 
-
 <h2 id="docker常用命令"><a href="#docker常用命令" class="headerlink" title="docker常用命令"></a>docker常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker.service <span class="comment"># 启动docker服务</span></span><br><span class="line">docker info</span><br><span class="line">docker run hello-world</span><br><span class="line">service docker restart</span><br><span class="line">ps -ef | grep docker</span><br><span class="line">docker version</span><br><span class="line">docker --<span class="built_in">help</span></span><br><span class="line"><span class="comment">## 镜像命令</span></span><br><span class="line">docker images <span class="comment"># 本地镜像</span></span><br><span class="line">docker search tomcat</span><br><span class="line">docker pull tomcat</span><br><span class="line">docker pull tomcat:latest</span><br><span class="line">docker rmi tomcat</span><br><span class="line"><span class="comment"># 离线镜像</span></span><br><span class="line">docker save image &gt; /root/image.tar <span class="comment"># 镜像转文件</span></span><br><span class="line">docker load -i /root/image.tar <span class="comment"># 文件转镜像</span></span><br><span class="line"><span class="comment">## 容器命令</span></span><br><span class="line">docker run centos <span class="comment"># 新建并启动容器</span></span><br><span class="line">docker run -it centos <span class="comment"># 交互式启动</span></span><br><span class="line">docker run -it centos /bin/bash <span class="comment"># 交互式启动</span></span><br><span class="line">docker run -d centos <span class="comment"># 守护式启动，启动并退出</span></span><br><span class="line">docker ps <span class="comment"># 查询正在运行的容器</span></span><br><span class="line">docker ps -n 2</span><br><span class="line"><span class="built_in">exit</span> / ctrl+P+Q <span class="comment"># 退出关闭/不关闭</span></span><br><span class="line">docker start 容器ID或者容器名 <span class="comment"># exited 状态的容器</span></span><br><span class="line">docker restart 容器ID或者容器名</span><br><span class="line">docker stop 容器ID或者容器名 <span class="comment"># 停止</span></span><br><span class="line">docker <span class="built_in">kill</span> 容器ID或者容器名 <span class="comment"># 停止</span></span><br><span class="line">docker <span class="built_in">rm</span> [-f] 容器ID或者容器名 <span class="comment"># 删除，重名时，也可以使用 rm</span></span><br><span class="line">docker <span class="built_in">rm</span> -f $(docker ps -q)</span><br><span class="line">docker logs -f -t -<span class="built_in">tail</span> 容器ID <span class="comment"># 查询某个容器的日志</span></span><br><span class="line">docker run -d centos /bin/bash -c <span class="string">&quot;while true;do echo hello world;sleep 2;done&quot;</span></span><br><span class="line"><span class="comment"># Docker 以 ubuntu15.10 镜像创建一个新容器，然后在容器里执行 /bin/bash -c &quot;while true;do echo hello world;sleep 2;done&quot;</span></span><br><span class="line">docker top 容器ID <span class="comment"># 容器内的进程</span></span><br><span class="line">docker inspect 容器ID或者镜像名 <span class="comment"># 查看容器内部细节 </span></span><br><span class="line">docker attach 容器ID <span class="comment"># 直接进入容器启动命令的终端，不会启动新的进程</span></span><br><span class="line">docker <span class="built_in">exec</span> -t 容器ID /bin/bash <span class="comment"># 在容器内打开新的终端，并且可以启动新的进程</span></span><br><span class="line">docker <span class="built_in">exec</span> -t 容器ID <span class="built_in">ls</span> <span class="comment"># 将命令传递给容器并将结果返回到宿主机的终端(以开启新进程的方式)，达到隔空取物的效果</span></span><br><span class="line"><span class="comment"># docker attach 只能进入容器，并且退出容器后容器停止</span></span><br><span class="line"><span class="comment"># docker exec 可以实现直接将命令传入容器执行返回结果，也可以进入容器，并且退出后容器依然存活，因为有旧的进程</span></span><br><span class="line">docker <span class="built_in">cp</span> 容器ID:容器内路径 目的主机路径 <span class="comment"># 容器文件拷贝到主机</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="docker-底层原理"><a href="#docker-底层原理" class="headerlink" title="docker 底层原理"></a>docker 底层原理</h2><p>docker 是C-S结构的系统，Docker守护进程运行在主机上，然后通过Socket连接从客户端访问，守护进程从客户端接受命令并管理运行在主机上的容器，而容器是运行时环境，即集装箱。</p>
 <p>Docker比VM快：不需要 Hypervisor实现硬件资源虚拟化，不需要重新加载操作系统</p>
 <p>镜像是分层的，所以每个镜像都会涉及到其他的镜像，比如 pull tomcat 的时候，不仅仅会下载tomcat，也会下载其他好多的镜像。</p>
@@ -162,281 +416,522 @@
 <h1 id="Docker镜像"><a href="#Docker镜像" class="headerlink" title="Docker镜像"></a>Docker镜像</h1><h2 id="镜像简介"><a href="#镜像简介" class="headerlink" title="镜像简介"></a>镜像简介</h2><p>关键词：分层，UnionFS，共享资源</p>
 <p>镜像是一种轻量级、可执行的独立软件包，用来打包软件运行环境和基于运行环境开发的软件。</p>
 <p>是 UnionFS (联合文件系统)，支持对文件系统的修改作为一次提交来一层层的提交(不懂)。即Docker是一层层的文件系统组成。</p>
-<p>镜像加载原理：bootfs(bootloader, kernal)–&gt;rootfs<br>镜像的最底层是bootfs，开机加载bootfs，加载之后内核都在内存中，然后卸载bootfs<br>镜像的OS很小：所以对于镜像的OS，rootfs可以很小，只需要包括最基本的命令、工具等，并且底层直接使用Host的kernal<br>tomcat比较大：因为从底层到高层分别是 kernal–centos–jdk8–tomcat</p>
+<p>镜像加载原理：bootfs(bootloader, kernal)—&gt;rootfs<br>镜像的最底层是bootfs，开机加载bootfs，加载之后内核都在内存中，然后卸载bootfs<br>镜像的OS很小：所以对于镜像的OS，rootfs可以很小，只需要包括最基本的命令、工具等，并且底层直接使用Host的kernal<br>tomcat比较大：因为从底层到高层分别是 kernal—centos—jdk8—tomcat</p>
 <p>分层的优点：共享资源，简单来说，会有多个镜像基于同一个base镜像构建而来，只需要启动一个base镜像，就可以为所有容器服务，或者说多个镜像的共同部分也只需要启动一次，这是依赖于镜像的不可读性质，或者理解成相同依赖包只需要下载一次。这样就形成了镜像之间共享，容器之间独立的局面。</p>
 <h2 id="镜像commit"><a href="#镜像commit" class="headerlink" title="镜像commit"></a>镜像commit</h2><p>docker commit 提交容器副本使之成为一个新的镜像</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br><span class="line">docker images tomcat</span><br><span class="line">docker run -it -p <span class="number">8080</span>:<span class="number">8080</span> tomcat <span class="comment"># 主机端口:docker容器端口 -P 随机分配</span></span><br><span class="line">docker <span class="built_in">exec</span> -t 容器ID</span><br><span class="line"><span class="comment"># 删除docs</span></span><br><span class="line">docker commit -a <span class="string">&quot;zzyy&quot;</span> -m <span class="string">&quot;tomcat without docs&quot;</span> 容器ID atguigu/mytomcat:<span class="number">1.2</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="Docker容器-数据卷"><a href="#Docker容器-数据卷" class="headerlink" title="Docker容器 数据卷"></a>Docker容器 数据卷</h1><p>数据卷的目的：将容器产生的数据持久化</p>
 <p>数据卷可以在容器之间共享或者重用数据<br>卷中的更改可以直接生效<br>数据卷中的更改不会包含在镜像的更新中<br>数据卷的生命周期一直持续到没有容器使用它为止</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一种方法：-v</span></span><br><span class="line"><span class="comment"># 需要在容器创建的时候就加入数据卷</span></span><br><span class="line">docker run -it -v /宿主机绝对路径:/容器内目录 镜像名</span><br><span class="line">docker run -it -v /HostDataVolume:/dataVolume centos</span><br><span class="line"><span class="comment"># 这里可以简单理解成一个软连接</span></span><br><span class="line"><span class="comment"># 对宿主机的目录下的修改等同于对容器对应目录下的修改：增删改</span></span><br><span class="line"><span class="comment"># 反之，对容器对应目录下的修改等同于对宿主机的目录下的修改：增删改</span></span><br><span class="line"><span class="comment"># 容器关闭之后主机对数据卷的操作在容器再次启动后会直接生效</span></span><br><span class="line">docker run -it -v /HostDataVolume:/dataVolume:ro centos</span><br></pre></td></tr></table></figure>
-
-<p>Dockerfile<br>可以简单理解成镜像的源码或者配置文件或者描述文件<br>images–DokerFile     hello.java–hello.class</p>
+<p>Dockerfile<br>可以简单理解成镜像的源码或者配置文件或者描述文件<br>images—DokerFile     hello.java—hello.class</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第二种方法：Dockerfile, VOLUME</span></span><br><span class="line"><span class="comment"># 1.宿主机根目录下创建 mydocker 文件夹</span></span><br><span class="line"><span class="built_in">mkdir</span> mydocker</span><br><span class="line"><span class="built_in">cd</span> mydocker</span><br><span class="line">vim Dockerfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.Dockerfile中使用VOLUME指令给镜像添加一个或者多个数据卷</span></span><br><span class="line"><span class="comment"># volume test</span></span><br><span class="line">FROM centos</span><br><span class="line">VOLUME [<span class="string">&quot;/dataVolumeContainer1&quot;</span>,<span class="string">&quot;/dataVolumeContainer2&quot;</span>]</span><br><span class="line">CMD <span class="built_in">echo</span> <span class="string">&quot;finished&quot;</span></span><br><span class="line">CMD /bin/bash</span><br><span class="line"></span><br><span class="line">VOLUME[<span class="string">&quot;/dataVolumeContainer1&quot;</span>,<span class="string">&quot;/dataVolumeContainer2&quot;</span>,<span class="string">&quot;/dataVolumeContainer3&quot;</span>] <span class="comment"># 为镜像添加多个数据卷</span></span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line">docker run -it -v /host1:/dataVolumeContainer1 -v /host2:/dataVolumeContainer2 centos /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.build生成镜像</span></span><br><span class="line">docker build -f /mydocker/Dockerfile -t zzyy/centos .</span><br><span class="line"><span class="comment"># 关于最后的 . ，一种解释是镜像上下文</span></span><br><span class="line"><span class="comment"># https://blog.csdn.net/Michaelwubo/article/details/82385332</span></span><br><span class="line">Sending build context to Docker daemon  2.048kB</span><br><span class="line">Step 1/4 : FROM centos</span><br><span class="line"> ---&gt; 0f3e07c0138f</span><br><span class="line">Step 2/4 : VOLUME [<span class="string">&quot;/dataVolumeContainer1&quot;</span>,<span class="string">&quot;/dataVolumeContainer2&quot;</span>]</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 60eece724d99</span><br><span class="line">Removing intermediate container 60eece724d99</span><br><span class="line"> ---&gt; 6628dbbcafdc</span><br><span class="line">Step 3/4 : CMD <span class="built_in">echo</span> <span class="string">&quot;finished&quot;</span></span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 5942462d32f5</span><br><span class="line">Removing intermediate container 5942462d32f5</span><br><span class="line"> ---&gt; 12c8dd40b04e</span><br><span class="line">Step 4/4 : CMD /bin/bash</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 4b4fc0fae3ee</span><br><span class="line">Removing intermediate container 4b4fc0fae3ee</span><br><span class="line"> ---&gt; 6dccc6a1e127</span><br><span class="line">Successfully built 6dccc6a1e127</span><br><span class="line">Successfully tagged zzyy/centos:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.验证</span></span><br><span class="line">docker run -it zzyy/centos /bin/bash</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line"><span class="comment"># 容器内的数据卷位置</span></span><br><span class="line">/dataVolumeContainer1</span><br><span class="line">/dataVolumeContainer2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5.主机的数据卷位置</span></span><br><span class="line"><span class="comment"># 主机执行</span></span><br><span class="line">docker ps</span><br><span class="line">docker inspect container ID</span><br><span class="line"><span class="comment"># 此时会发现宿主机会有默认的数据卷位置</span></span><br></pre></td></tr></table></figure>
-
-<p>tips：Docker挂载主机目录 Docker 访问出现 cannot open directory:Permission denied<br>解决方法：在挂载目录后加 –privileged&#x3D;true</p>
+<p>tips：Docker挂载主机目录 Docker 访问出现 cannot open directory:Permission denied<br>解决方法：在挂载目录后加 —privileged=true</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /HostDataVolume:/dataVolume centos --privileged=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
 <h1 id="Docker-数据卷容器"><a href="#Docker-数据卷容器" class="headerlink" title="Docker 数据卷容器"></a>Docker 数据卷容器</h1><p>数据卷容器：实现容器间的传递共享</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--volumes-from</span><br></pre></td></tr></table></figure>
-
 <p>数据卷容器：命名的容器挂载数据卷，其他容器通过挂载这个(父容器)实现数据共享，挂载数据卷的容器，称之为数据卷容器。</p>
-<p>以上一步建立的 zzyy&#x2F;centos 为例，此时 zzyy&#x2F;centos 已经自带容器 &#x2F;dataVolumeContainer1 &#x2F;dataVolumeContainer2，运行容器 dc01&#x2F;dc02&#x2F;dc03，目的是dc02 dc03中的数据来自dc01</p>
+<p>以上一步建立的 zzyy/centos 为例，此时 zzyy/centos 已经自带容器 /dataVolumeContainer1 /dataVolumeContainer2，运行容器 dc01/dc02/dc03，目的是dc02 dc03中的数据来自dc01</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一步：启动容器 dc01</span></span><br><span class="line">docker run -it --name dc01 zzyy/centos</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">dataVolumeContainer1</span><br><span class="line">dataVolumeContainer2</span><br><span class="line"><span class="built_in">cd</span> dataVolumeContainer2</span><br><span class="line"><span class="built_in">touch</span> dc01_add.txt</span><br><span class="line">ctrl+P+Q <span class="comment"># 退出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二步：容器 dc02 继承自容器 dc01</span></span><br><span class="line">docker run -it --name dc02 --volumes-from dc01 zzyy/centos</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">dataVolumeContainer1</span><br><span class="line">dataVolumeContainer2</span><br><span class="line"><span class="built_in">cd</span> dataVolumeContainer2</span><br><span class="line"><span class="comment"># 容器dc01中的数据在dc02中出现</span></span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">dc01_add.txt</span><br><span class="line"><span class="built_in">touch</span> dc02_add.txt</span><br><span class="line">ctrl+P+Q <span class="comment"># 退出</span></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第三步：容器 dc03 继承容器 dc01</span></span><br><span class="line">docker run -it --name dc03 --volumes-from dc01 zzyy/centos</span><br><span class="line"><span class="built_in">cd</span> dataVolumeContainer2</span><br><span class="line"><span class="comment"># 此时 dc03 中出现了 dc01 dc02 中的数据</span></span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">dc01_add.txt</span><br><span class="line">dc02_add.txt</span><br><span class="line"><span class="built_in">touch</span> dc03_add.txt</span><br><span class="line">ctrl+P+Q <span class="comment"># 退出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第四步：进入容器 dc01</span></span><br><span class="line">docker attach dc01</span><br><span class="line"><span class="built_in">cd</span> dataVolumeContainer2</span><br><span class="line"><span class="comment"># 会发现dc01,dc02,dc03中对数据卷的操作都会出现</span></span><br><span class="line"><span class="comment"># 或者认为 dc01, dc02, dc03 实现了文件夹共享</span></span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">dc01_add.txt</span><br><span class="line">dc02_add.txt</span><br><span class="line">dc03_add.txt</span><br><span class="line"><span class="comment"># 可以发现三个容器对应的宿主机目录是一样的</span></span><br><span class="line">docker inspect dc01</span><br><span class="line">dcoker inspect dc02</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第五步：删除dc01，dc02和dc03的共享性不受影响</span></span><br><span class="line"><span class="comment"># 容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止</span></span><br><span class="line">docker <span class="built_in">rm</span> -f dc01</span><br><span class="line">docker attach dc02</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">dc01_add.txt</span><br><span class="line">dc02_add.txt</span><br><span class="line">dc03_add.txt</span><br><span class="line"><span class="built_in">touch</span> dc02_update.txt</span><br><span class="line">ctrl+P+Q</span><br><span class="line">docker attach dc03</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">dc01_add.txt</span><br><span class="line">dc02_add.txt</span><br><span class="line">dc03_add.txt</span><br><span class="line">dc02_update.txt</span><br></pre></td></tr></table></figure>
-
 <h1 id="Dockerfile-解析"><a href="#Dockerfile-解析" class="headerlink" title="Dockerfile 解析"></a>Dockerfile 解析</h1><p>构建三步骤：<br>手动编写 Dockerfile文件<br>docker build，获得镜像<br>docker run</p>
 <p>Dockerfile是用来构建Docker镜像的构建文件，是由一系列命令和参数构成的脚本。</p>
 <h2 id="Dockerfile-内容解析"><a href="#Dockerfile-内容解析" class="headerlink" title="Dockerfile 内容解析"></a>Dockerfile 内容解析</h2><p>规则：<br>每条保留字指令必须大写且必须跟随至少一个参数<br>指令从上到下顺序执行<br># 表示注释<br>每条指令都会创建一个新的镜像层，并对镜像进行提交</p>
 <p>执行过程:<br>docker从基础镜像运行一个容器<br>执行一个指令并对容器进行修改<br>执行类似docker commit的操作提交一个新的镜像层<br>docker再基于刚刚提交的镜像运行一个新容器<br>再次执行下一个指令直到全部指令执行完成</p>
-<p>Dockerfile面向开发，Docker镜像面向交互，Docker容器涉及部署与运维<br>Dockerfile–build–&gt;Docker image–run–&gt;Docker容器</p>
+<p>Dockerfile面向开发，Docker镜像面向交互，Docker容器涉及部署与运维<br>Dockerfile—build—&gt;Docker image—run—&gt;Docker容器</p>
 
-
-<h2 id="Dockerfile体系结构"><a href="#Dockerfile体系结构" class="headerlink" title="Dockerfile体系结构"></a>Dockerfile体系结构</h2><table>
+<h2 id="Dockerfile体系结构"><a href="#Dockerfile体系结构" class="headerlink" title="Dockerfile体系结构"></a>Dockerfile体系结构</h2><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">关键字</th>
-<th align="center">作用</th>
+<th style="text-align:center">关键字</th>
+<th style="text-align:center">作用</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">FROM</td>
-<td align="center">基础镜像</td>
+<tbody>
+<tr>
+<td style="text-align:center">FROM</td>
+<td style="text-align:center">基础镜像</td>
 </tr>
 <tr>
-<td align="center">MAINTAINER</td>
-<td align="center">镜像维护者的姓名和邮箱</td>
+<td style="text-align:center">MAINTAINER</td>
+<td style="text-align:center">镜像维护者的姓名和邮箱</td>
 </tr>
 <tr>
-<td align="center">RUN</td>
-<td align="center">容器构建时需要运行的命令</td>
+<td style="text-align:center">RUN</td>
+<td style="text-align:center">容器构建时需要运行的命令</td>
 </tr>
 <tr>
-<td align="center">EXPOSE</td>
-<td align="center">当前容器对外暴露的端口</td>
+<td style="text-align:center">EXPOSE</td>
+<td style="text-align:center">当前容器对外暴露的端口</td>
 </tr>
 <tr>
-<td align="center">WORKDIR</td>
-<td align="center">指定当创建容器后，终端默认登录的进来工作目录</td>
+<td style="text-align:center">WORKDIR</td>
+<td style="text-align:center">指定当创建容器后，终端默认登录的进来工作目录</td>
 </tr>
 <tr>
-<td align="center">ENV</td>
-<td align="center">构建镜像过程中设置环境变量，可用于后续的RUN指令之类的</td>
+<td style="text-align:center">ENV</td>
+<td style="text-align:center">构建镜像过程中设置环境变量，可用于后续的RUN指令之类的</td>
 </tr>
 <tr>
-<td align="center">ADD</td>
-<td align="center">拷贝+解压：将宿主机目录下的文件拷贝到镜像并且自动处理URL和解压tar压缩包</td>
+<td style="text-align:center">ADD</td>
+<td style="text-align:center">拷贝+解压：将宿主机目录下的文件拷贝到镜像并且自动处理URL和解压tar压缩包</td>
 </tr>
 <tr>
-<td align="center">COPY</td>
-<td align="center">拷贝文件和目录到镜像中</td>
+<td style="text-align:center">COPY</td>
+<td style="text-align:center">拷贝文件和目录到镜像中</td>
 </tr>
 <tr>
-<td align="center">COPY src dest</td>
-<td align="center">COPY [“src”,”dest”]</td>
+<td style="text-align:center">COPY src dest</td>
+<td style="text-align:center">COPY [“src”,”dest”]</td>
 </tr>
 <tr>
-<td align="center">VOLUME</td>
-<td align="center">容器数据卷，保存数据和持久化</td>
+<td style="text-align:center">VOLUME</td>
+<td style="text-align:center">容器数据卷，保存数据和持久化</td>
 </tr>
 <tr>
-<td align="center">CMD</td>
-<td align="center">指定容器启动时要运行的命令，Dockerfile可以执行多个CMD指令，但是只有最后一个生效，并且CMD指令会被docker run后面的参数替换</td>
+<td style="text-align:center">CMD</td>
+<td style="text-align:center">指定容器启动时要运行的命令，Dockerfile可以执行多个CMD指令，但是只有最后一个生效，并且CMD指令会被docker run后面的参数替换</td>
 </tr>
 <tr>
-<td align="center">ENTRYPOINT</td>
-<td align="center">指定容器启动时允许的命令，多个都可以生效，并且docker run后面的命令会追加到ENTRYPOINT后</td>
+<td style="text-align:center">ENTRYPOINT</td>
+<td style="text-align:center">指定容器启动时允许的命令，多个都可以生效，并且docker run后面的命令会追加到ENTRYPOINT后</td>
 </tr>
 <tr>
-<td align="center">ONBUILD</td>
-<td align="center">当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发</td>
+<td style="text-align:center">ONBUILD</td>
+<td style="text-align:center">当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="Dockerfile-案例-自定义镜像mycentos"><a href="#Dockerfile-案例-自定义镜像mycentos" class="headerlink" title="Dockerfile 案例-自定义镜像mycentos"></a>Dockerfile 案例-自定义镜像mycentos</h2><p>base镜像：scratch</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">docker run -it centos /bin/bash</span><br><span class="line"><span class="comment"># 默认路径 /</span></span><br><span class="line"><span class="built_in">pwd</span></span><br><span class="line">/</span><br><span class="line"><span class="comment"># 会发现精简版的centos不支持 ifconfig和vim</span></span><br><span class="line">[root@68e65a06005a /]<span class="comment"># ifconfig</span></span><br><span class="line">bash: ifconfig: <span class="built_in">command</span> not found</span><br><span class="line">[root@68e65a06005a /]<span class="comment"># vim abc.txt</span></span><br><span class="line">bash: vim: <span class="built_in">command</span> not found</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义centos，改变登录后的默认路径，支持vim和ifconfig</span></span><br><span class="line"><span class="comment"># 1.编写</span></span><br><span class="line"><span class="built_in">touch</span> Dockerfile</span><br><span class="line"></span><br><span class="line">FROM centos</span><br><span class="line"></span><br><span class="line">ENV MYPATH /tmp</span><br><span class="line">WORKDIR <span class="variable">$MYPATH</span></span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line">RUN yum -y install net-tools</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line">CMD <span class="built_in">echo</span> <span class="variable">$MYPATH</span></span><br><span class="line">CMD <span class="built_in">echo</span> <span class="string">&quot;success......ok&quot;</span></span><br><span class="line">CMD /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.构建</span></span><br><span class="line">docker build -f /mydocker/Dockerfile2 -t mycentos:1.3 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.运行</span></span><br><span class="line">docker run -it mycentos:1.3</span><br><span class="line"><span class="built_in">pwd</span></span><br><span class="line">vim abc</span><br><span class="line">ifconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.列出镜像的变更历史</span></span><br><span class="line">docker <span class="built_in">history</span> mycentos:1.3</span><br></pre></td></tr></table></figure>
-
 <h2 id="docker案例-CMD命令和ENTRYPOINT命令"><a href="#docker案例-CMD命令和ENTRYPOINT命令" class="headerlink" title="docker案例-CMD命令和ENTRYPOINT命令"></a>docker案例-CMD命令和ENTRYPOINT命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CMD</span></span><br><span class="line"><span class="comment"># 正常启动 tomcat</span></span><br><span class="line">docker run -it -p 8080:8080 tomcat</span><br><span class="line"><span class="comment"># CMD命令会被 docker run 后面的参数替换</span></span><br><span class="line">docker run -it -p 8080:8080 tomcat <span class="built_in">ls</span> <span class="comment"># 无法启动</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ENTRYPOINT</span></span><br><span class="line"><span class="built_in">touch</span> Dockerfile3</span><br><span class="line"></span><br><span class="line">FROM centos</span><br><span class="line">RUN yum install -y curl</span><br><span class="line">CMD [<span class="string">&quot;curl&quot;</span>, <span class="string">&quot;-s&quot;</span>, <span class="string">&quot;http://www.baidu.com&quot;</span>]</span><br><span class="line"></span><br><span class="line">docker run -it mybaidu <span class="comment"># 可以正常执行</span></span><br><span class="line">docker run -it mybaidu -i <span class="comment"># 报错，因为-i会代替CMD [&quot;curl&quot;, &quot;-s&quot;, &quot;http://www.baidu.com&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">touch</span> Dockerfile4</span><br><span class="line"></span><br><span class="line">FROM centos</span><br><span class="line">RUN yum install -y curl</span><br><span class="line">ENTRYPOINT [<span class="string">&quot;curl&quot;</span>, <span class="string">&quot;-s&quot;</span>, <span class="string">&quot;http://www.baidu.com&quot;</span>]</span><br><span class="line"></span><br><span class="line">docker run -it mybaidu <span class="comment"># 可以正常执行</span></span><br><span class="line">docker run -it mybaidu -i <span class="comment"># 可以正常执行</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="docker案例-ONBUILD命令案例"><a href="#docker案例-ONBUILD命令案例" class="headerlink" title="docker案例-ONBUILD命令案例"></a>docker案例-ONBUILD命令案例</h2><p>ONBUILD: 当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 宿主机</span></span><br><span class="line"><span class="built_in">touch</span> Dockerfile5</span><br><span class="line">vi Dockerfile4</span><br><span class="line"></span><br><span class="line">FROM centos</span><br><span class="line">RUN yum -y install curl</span><br><span class="line">ENTRYPOINT [<span class="string">&quot;curl&quot;</span>, <span class="string">&quot;-s&quot;</span>, <span class="string">&quot;http://www.baidu.com&quot;</span> ]</span><br><span class="line">ONBUILD RUN <span class="built_in">echo</span> <span class="string">&quot;I am the father&quot;</span></span><br><span class="line"></span><br><span class="line">docker build -f /mydocker/Dockerfile5 -t mybaidu_father .</span><br><span class="line"></span><br><span class="line"><span class="built_in">touch</span> Dockerfile6</span><br><span class="line"></span><br><span class="line">FROM mybaidu_father</span><br><span class="line">RUN yum -y install curl</span><br><span class="line">ENTRYPOINT [<span class="string">&quot;curl&quot;</span>, <span class="string">&quot;-s&quot;</span>, <span class="string">&quot;http://www.baidu.com&quot;</span> ]</span><br><span class="line"></span><br><span class="line">docker build -f /mydocker/Dockerfile6 -t mybaidu_son .</span><br><span class="line"><span class="comment"># 控制台打印出</span></span><br><span class="line">Step 1/3 : FROM mybaidu_father</span><br><span class="line"><span class="comment"># Executing 1 build trigger</span></span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 28b9a68efde1</span><br><span class="line">I am the father</span><br><span class="line">Removing intermediate container 28b9a68efde1</span><br><span class="line"> ---&gt; d35c7f097a70</span><br></pre></td></tr></table></figure>
-
 <h2 id="docker案例-自定义tomcat9"><a href="#docker案例-自定义tomcat9" class="headerlink" title="docker案例-自定义tomcat9"></a>docker案例-自定义tomcat9</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 建立目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /root/mydockerfile/tomcat9</span><br><span class="line"><span class="built_in">cd</span> /root/mydockerfile/tomcat9</span><br><span class="line"><span class="comment"># 2. 建立文件</span></span><br><span class="line"><span class="built_in">touch</span> c.txt</span><br><span class="line"><span class="comment"># 3. 将jdk和tomcat文件拷贝到目录./tomcat9</span></span><br><span class="line">apache-tomcat-9.0.8.tar.gz, jdk-8u171-linux-x64.tar.gz 下载链接见下面</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">apache-tomcat-9.0.8.tar.gz  c.txt  jdk-8u171-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 编写Dockerfile</span></span><br><span class="line"></span><br><span class="line">FROM centos</span><br><span class="line">MAINTAINER tjj&lt;tianjiajie1881090@163.com&gt;</span><br><span class="line"><span class="comment"># 宿主机的c.txt 拷贝到容器的/usr/local下</span></span><br><span class="line">COPY c.txt /usr/local/cincontainer.txt</span><br><span class="line"><span class="comment"># 拷贝jdk和tomcat包</span></span><br><span class="line">ADD jdk-8u171-linux-x64.tar.gz /usr/local</span><br><span class="line">ADD apache-tomcat-9.0.8.tar.gz /usr/local</span><br><span class="line">RUN yum -y install vim</span><br><span class="line">ENV MYPATH /usr/local</span><br><span class="line">WORKDIR <span class="variable">$MYPATH</span></span><br><span class="line"><span class="comment"># 配置java和tomcat的环境变量</span></span><br><span class="line">ENV JAVA_HOME /usr/local/jdk1.8.0_171</span><br><span class="line">ENV CLASSPATH <span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line">ENV CATALINA_HOME /usr/local/apache-tomcat-9.0.8</span><br><span class="line">ENV CATALINA_BASE /usr/local/apache-tomcat-9.0.8</span><br><span class="line">ENV PATH <span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$CATALINA_HOME</span>/lib:<span class="variable">$CATALINA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line">EXPOSE 8080</span><br><span class="line"><span class="comment"># 启动时运行tomcat</span></span><br><span class="line"><span class="comment"># ENTRYPOINT [&quot;/usr/local/apache-tomcat-9.0.8/bin/startup.sh&quot;]</span></span><br><span class="line"><span class="comment"># CMD [&quot;/usr/local/apache-tomcat-9.0.8/bin/catalina.sh&quot;, &quot;run&quot;]</span></span><br><span class="line">CMD /usr/local/apache-tomcat-9.0.8/bin/startup.sh &amp;&amp; <span class="built_in">tail</span> -F /usr/local/apache-tomcat-9.0.8/bin/catalina.out</span><br><span class="line"><span class="comment"># tail -F 实时查看日志</span></span><br><span class="line"><span class="comment"># ?? 后期貌似没有看到 tail 的作用</span></span><br><span class="line"><span class="comment"># 5. build</span></span><br><span class="line">docker build -f Dockerfile -t zzyytomcat9 .</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">docker build -t zzyytomcat9 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. run</span></span><br><span class="line">docker run -d -p 9090:8080 --name mytom9 -v /root/mydockerfile/tomcat9/test:/usr/local/apache-tomcat-9.0.8/webapps/test -v /root/mydockerfile/tomcat9/tomcat9logs:/usr/local/apache-tomcat-9.0.8/logs --privileged=<span class="literal">true</span> zzyytomcat9</span><br><span class="line"></span><br><span class="line"><span class="comment"># 7. 检查</span></span><br><span class="line">localhost:9090</span><br><span class="line">docker <span class="built_in">exec</span> myt9 <span class="built_in">ls</span> -l</span><br><span class="line"></span><br><span class="line">apache-tomcat-9.0.8</span><br><span class="line">bin</span><br><span class="line">cincontainer.txt <span class="comment"># c.txt</span></span><br><span class="line">etc</span><br><span class="line">games</span><br><span class="line">include</span><br><span class="line">jdk1.8.0_171</span><br><span class="line">lib</span><br><span class="line">lib64</span><br><span class="line">libexec</span><br><span class="line">sbin</span><br><span class="line">share</span><br><span class="line">src</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8. 发布演示</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 8.1 web.xml</span></span><br><span class="line"><span class="built_in">cd</span> /root/mydockerfile/tomcat9/test</span><br><span class="line"><span class="built_in">mkdir</span> WEB-INF</span><br><span class="line"><span class="built_in">cd</span> WEB-INF</span><br><span class="line">vim web.xml</span><br><span class="line"></span><br><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="line">&lt;web-app xmins:xsi=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="line"> xmins=<span class="string">&quot;http://java.sun.com/xml/ns/javaee&quot;</span></span><br><span class="line"> xsi:schemaLocation=<span class="string">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</span></span><br><span class="line"> <span class="built_in">id</span>=<span class="string">&quot;WebApp_ID&quot;</span> version=<span class="string">&quot;2.5&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line"> &lt;display-name&gt;<span class="built_in">test</span>&lt;/display-name&gt;</span><br><span class="line"></span><br><span class="line"> &lt;/web-app&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8.2 a.jsp</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">vim a.jsp</span><br><span class="line"></span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span> pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html PUBLIC <span class="string">&quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/html4/loose.dtd&quot;</span>&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;<span class="built_in">head</span>&gt;</span><br><span class="line">   &lt;meta http-equiv=<span class="string">&quot;Content-Type&quot;</span> content=<span class="string">&quot;text/html; charset=UTF-8&quot;</span>&gt;</span><br><span class="line">   &lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">   ----------welcome---------</span><br><span class="line">   &lt;%=<span class="string">&quot;I am in docker tomcat self&quot;</span>%&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;% System.out.println(<span class="string">&quot;===========docker tomcat self&quot;</span>);%&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># ls</span></span><br><span class="line">a.jsp  WEB-INF</span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># docker exec mytom9 ls -l /usr/local/apache-tomcat-9.0.8/webapps/test</span></span><br><span class="line">total 4</span><br><span class="line">drwxr-xr-x. 2 root root  21 Dec  4 07:48 WEB-INF</span><br><span class="line">-rw-r--r--. 1 root root 496 Dec  4 07:57 a.jsp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8.3 验证 a.jsp 以及宿主机的修改会直接反映到容器中</span></span><br><span class="line">docker restart mytom9</span><br><span class="line"></span><br><span class="line"><span class="comment"># 服务器访问 localhost:9090  localhost:9090/test/a.jsp</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改宿主机的 a.jsp</span></span><br><span class="line">vim a.jsp</span><br><span class="line"></span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span> pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html PUBLIC <span class="string">&quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/html4/loose.dtd&quot;</span>&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;<span class="built_in">head</span>&gt;</span><br><span class="line">   &lt;meta http-equiv=<span class="string">&quot;Content-Type&quot;</span> content=<span class="string">&quot;text/html; charset=UTF-8&quot;</span>&gt;</span><br><span class="line">   &lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">   ----------welcome---------&lt;br&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;%=<span class="string">&quot;I am in docker tomcat self 3333333&quot;</span>%&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;% System.out.println(<span class="string">&quot;===========docker tomcat self&quot;</span>);%&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 立即刷新浏览器 localhost:9090/test/a.jsp，可以发现宿主机的修改可以直接反映到容器中</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 8.4 日志</span></span><br><span class="line"><span class="built_in">cd</span> /root/mydockerfile/tomcat9</span><br><span class="line"><span class="built_in">cd</span> ./tomcat9/logs</span><br><span class="line"><span class="built_in">cat</span> catalina.out</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p><a target="_blank" rel="noopener" href="http://archive.apache.org/dist/tomcat/tomcat-9/v9.0.8/bin/">apache-tomcat-9.0.8.tar.gz</a><br><a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html">jdk-8u171-linux-x64.tar.gz</a><br><a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/java/jdk">jdk-8u171-linux-x64.tar.gz 华为云</a></p>
 <p>总结：</p>
 
-
 <h1 id="Docker-常用安装"><a href="#Docker-常用安装" class="headerlink" title="Docker 常用安装"></a>Docker 常用安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker search</span><br><span class="line">docker pull</span><br><span class="line">docker images</span><br><span class="line">docker run</span><br><span class="line">docker <span class="built_in">kill</span></span><br><span class="line">docker <span class="built_in">rm</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="Docker-mysql"><a href="#Docker-mysql" class="headerlink" title="Docker mysql"></a>Docker mysql</h2><p>在Docker中安装mysql，用外部的机器(宿主机(centos),主机(windows))进行控制，并且docker操作mysql进行数据备份</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">docker search mysql</span><br><span class="line">docker pull mysql:5.6</span><br><span class="line">docker images</span><br><span class="line">docker run -p 3306:3306 --name mysql -v /root/mysql/conf:/etc/mysql/conf.d -v /root/mysql/logs:/logs -v /root/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用mysql镜像</span></span><br><span class="line">docker <span class="built_in">exec</span> -it mysql /bin/bash</span><br><span class="line">mysql -uroot -p</span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">+--------------------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line">create database db01;</span><br><span class="line">use db01;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; create table t_book(<span class="built_in">id</span> int not null primary key, bookName varchar(20));</span><br><span class="line">mysql&gt; show tables;</span><br><span class="line">mysql&gt; insert into t_book values(1, <span class="string">&#x27;java&#x27;</span>);</span><br><span class="line">mysql&gt; select * from t_book;</span><br><span class="line">+----+----------+</span><br><span class="line">| <span class="built_in">id</span> | bookName |</span><br><span class="line">+----+----------+</span><br><span class="line">|  1 | java     |</span><br><span class="line">+----+----------+</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在外机的win10通过宿主机(虚拟机)的端口访问docker中的mysql</span></span><br><span class="line"><span class="comment"># 使用 Navicat 客户端，ip是 ens33/enp之类的</span></span><br><span class="line"><span class="comment"># 在 Navicat 中，对 db01中的t_book 表新加项 2 oracle</span></span><br><span class="line"><span class="comment"># 可以发现，在Navicat中可以直接对docker中的数据库进行修改</span></span><br><span class="line">mysql&gt; select * from t_book;</span><br><span class="line">+----+----------+</span><br><span class="line">| <span class="built_in">id</span> | bookName |</span><br><span class="line">+----+----------+</span><br><span class="line">|  1 | java     |</span><br><span class="line">|  2 | oracle   |</span><br><span class="line">+----+----------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker控制docker中的mysql备份到宿主机</span></span><br><span class="line">docker <span class="built_in">exec</span> mysql sh -c <span class="string">&#x27;exec mysqldump --all-databases -uroot -p&quot;123456&quot; &#x27;</span> &gt; /root/test1/all-databases.sql</span><br><span class="line"><span class="comment"># 命令解析</span></span><br><span class="line"><span class="comment"># sh -c &#x27;exec mysqldump --all-databases -uroot -p&quot;123456&quot; &#x27; 在容器内执行</span></span><br><span class="line"><span class="comment"># &gt; /root/all-databases.sql 是指docker exec 的输出重定向</span></span><br><span class="line"><span class="comment"># 可以简单理解成</span></span><br><span class="line"><span class="comment"># docker exec mysql ls &gt; test1.txt</span></span><br><span class="line"><span class="comment"># docker exec mysql sh -c &#x27;exec mysqldump --all-databases -uroot -p&quot;123456&quot; &#x27; # 该命令会把数据库的内容显示到终端上</span></span><br><span class="line"><span class="comment"># docker exec mysql sh -c &#x27;mysqldump --all-databases -uroot -p&quot;123456&quot; &#x27; &gt; /root/test1/all-databases.sql # 该命令也可以实现 docker控制docker中的mysql备份到宿主机</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="docker-Redis"><a href="#docker-Redis" class="headerlink" title="docker Redis"></a>docker Redis</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">docker search redis</span><br><span class="line">docker pull redis:3.2</span><br><span class="line">docker run -p 6379:6379 -v /root/myredis/data:/data -v /root/myredis/conf/redis.conf:/usr/local/etc/redis/redis.conf -d --name myredis redis:3.2 redis-server /usr/local/etc/redis/redis.conf --appendonly <span class="built_in">yes</span></span><br><span class="line">vim /root/myredis/conf/redis.conf/redis.conf</span><br><span class="line"><span class="comment"># 内容见 [笔记完整版(转载)](https://pan.baidu.com/s/1FLcOpjpJTJlP36lzD-kfWA#list/path=%2F)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 redis-cli 连接</span></span><br><span class="line">[root@localhost ~]<span class="comment"># docker exec -it myredis redis-cli</span></span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k1 v1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k2 v2</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k3 v3</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; SHUTDOWN</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试持久化文件生成</span></span><br><span class="line"><span class="comment"># 宿主机</span></span><br><span class="line"><span class="built_in">cd</span> /root/myredis/data</span><br><span class="line"><span class="built_in">cat</span> appendonly.aof</span><br></pre></td></tr></table></figure>
-
 <h1 id="本地镜像发布到阿里云"><a href="#本地镜像发布到阿里云" class="headerlink" title="本地镜像发布到阿里云"></a>本地镜像发布到阿里云</h1><p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/repositories">阿里云镜像服务控制台</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push</span><br></pre></td></tr></table></figure>
 
-
-
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以 mycentos:1.3 为例</span></span><br><span class="line">docker run -it mycentos:1.3</span><br><span class="line">ctrl+P+Q</span><br><span class="line">docker commit -a zzyy -m <span class="string">&quot;new mycentos with vim and ifconfig&quot;</span> 容器ID mycentos:1.4</span><br><span class="line">docker images</span><br><span class="line"><span class="comment"># 上阿里云新建镜像仓库</span></span><br><span class="line">$ sudo docker login --username=15652211016 registry.cn-hangzhou.aliyuncs.com</span><br><span class="line">sudo docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/tianjiajie/mycentos:1.4.1</span><br><span class="line">sudo docker push registry.cn-hangzhou.aliyuncs.com/tianjiajie/mycentos:1.4.1</span><br><span class="line"><span class="comment"># 2019 阿里的hub搜索放在了镜像中心下面</span></span><br><span class="line"><span class="comment"># 删除本机 mycentos</span></span><br><span class="line">docker rmi -f registry.cn-hangzhou.aliyuncs.com/tianjiajie/mycentos:1.4.1</span><br><span class="line"><span class="comment"># pull 公网地址</span></span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com/tianjiajie/mycentos:1.4.1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h1 id="docker-GPU"><a href="#docker-GPU" class="headerlink" title="docker-GPU"></a>docker-GPU</h1><p>需要使用 <a target="_blank" rel="noopener" href="https://github.com/NVIDIA/nvidia-docker">nvidia-docker</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动 CUDA9.0 的镜像是OK的，并且容器内部自身有cuda-9.0</span></span><br><span class="line">root@zbp-PowerEdge-T630:~<span class="comment"># docker run --gpus all nvidia/cuda:9.0-base nvidia-smi</span></span><br></pre></td></tr></table></figure>
-
 <p>docker运行pytorch，依赖于宿主机的驱动版本。</p>
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2019/11/20/docker/" data-id="cla55fgdh003dwka77fmfbmcw" data-title="docker" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag"># 容器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/10/object-detection/" rel="next" title="object detection">
+                <i class="fa fa-chevron-left"></i> object detection
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/06/Linux/" rel="prev" title="Linux">
+                Linux <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2019/12/06/Linux/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Linux
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/10/10/object-detection/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">object detection</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+  </article>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
-    </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/11/06/test-2011-11-06/">test_2011_11_06</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/23/python-100-days/">python_100_days</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/data-VOS/">data_VOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/TVOS/">TVOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="post-spread">
       
-      &copy; 2022 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Docker-%E7%9A%84%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1. Docker 的简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Docker-%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">2. Docker 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 虚拟机安装:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Docker-%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Docker 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E5%8A%A0%E9%80%9F"><span class="nav-number">2.3.</span> <span class="nav-text">配置阿里云加速</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">docker 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-run"><span class="nav-number">3.1.</span> <span class="nav-text">docker run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.2.</span> <span class="nav-text">docker常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="nav-number">3.3.</span> <span class="nav-text">docker 底层原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker%E9%95%9C%E5%83%8F"><span class="nav-number">4.</span> <span class="nav-text">Docker镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E7%AE%80%E4%BB%8B"><span class="nav-number">4.1.</span> <span class="nav-text">镜像简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E5%83%8Fcommit"><span class="nav-number">4.2.</span> <span class="nav-text">镜像commit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker%E5%AE%B9%E5%99%A8-%E6%95%B0%E6%8D%AE%E5%8D%B7"><span class="nav-number">5.</span> <span class="nav-text">Docker容器 数据卷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-%E6%95%B0%E6%8D%AE%E5%8D%B7%E5%AE%B9%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">Docker 数据卷容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dockerfile-%E8%A7%A3%E6%9E%90"><span class="nav-number">7.</span> <span class="nav-text">Dockerfile 解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile-%E5%86%85%E5%AE%B9%E8%A7%A3%E6%9E%90"><span class="nav-number">7.1.</span> <span class="nav-text">Dockerfile 内容解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">7.2.</span> <span class="nav-text">Dockerfile体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile-%E6%A1%88%E4%BE%8B-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8Fmycentos"><span class="nav-number">7.3.</span> <span class="nav-text">Dockerfile 案例-自定义镜像mycentos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E6%A1%88%E4%BE%8B-CMD%E5%91%BD%E4%BB%A4%E5%92%8CENTRYPOINT%E5%91%BD%E4%BB%A4"><span class="nav-number">7.4.</span> <span class="nav-text">docker案例-CMD命令和ENTRYPOINT命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E6%A1%88%E4%BE%8B-ONBUILD%E5%91%BD%E4%BB%A4%E6%A1%88%E4%BE%8B"><span class="nav-number">7.5.</span> <span class="nav-text">docker案例-ONBUILD命令案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E6%A1%88%E4%BE%8B-%E8%87%AA%E5%AE%9A%E4%B9%89tomcat9"><span class="nav-number">7.6.</span> <span class="nav-text">docker案例-自定义tomcat9</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-%E5%B8%B8%E7%94%A8%E5%AE%89%E8%A3%85"><span class="nav-number">8.</span> <span class="nav-text">Docker 常用安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-mysql"><span class="nav-number">8.1.</span> <span class="nav-text">Docker mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-Redis"><span class="nav-number">8.2.</span> <span class="nav-text">docker Redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F%E5%8F%91%E5%B8%83%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91"><span class="nav-number">9.</span> <span class="nav-text">本地镜像发布到阿里云</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-GPU"><span class="nav-number">10.</span> <span class="nav-text">docker-GPU</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <nav id="mobile-nav">
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
 </body>
 </html>

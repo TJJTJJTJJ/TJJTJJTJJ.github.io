@@ -1,104 +1,366 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  <title>MAR | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="0. 前言 paper: CVPR2019 Unsupervised Person Re-identification by Soft Multilabel Learning code: pytorch 参考链接: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Thinker-pcw&#x2F;p&#x2F;10807681.html  出发点 Multi-label 很强，效果的确好，就是论文看得有点头晕，有些公">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="person re-id," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0. 前言 paper: CVPR2019 Unsupervised Person Re-identification by Soft Multilabel Learning code: pytorch 参考链接: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Thinker-pcw&#x2F;p&#x2F;10807681.html  出发点 Multi-label 很强，效果的确好，就是论文看得有点头晕，有些公">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MAR">
 <meta property="og:url" content="http://example.com/2019/05/13/MAR/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言 paper: CVPR2019 Unsupervised Person Re-identification by Soft Multilabel Learning code: pytorch 参考链接: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Thinker-pcw&#x2F;p&#x2F;10807681.html  出发点 Multi-label 很强，效果的确好，就是论文看得有点头晕，有些公">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale">
 <meta property="article:published_time" content="2019-05-13T03:29:27.000Z">
 <meta property="article:modified_time" content="2019-05-15T10:48:41.828Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="person re-id">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2019/05/13/MAR/"/>
+
+
+
+
+
+  <title>MAR | Hexo</title>
   
+
+
+
+
+
+
+
+
 <meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-MAR" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2019/05/13/MAR/" class="article-date">
-  <time class="dt-published" datetime="2019-05-13T03:29:27.000Z" itemprop="datePublished">2019-05-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/deep-learning/">deep learning</a>
+        <p class="site-subtitle"></p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      MAR
-    </h1>
+</div>
+
+<nav class="site-nav">
   
 
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            something
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/13/MAR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MAR</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-13T11:29:27+08:00">
+                2019-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">deep learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="e-content article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
 <li>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1903.06325v2">CVPR2019 Unsupervised Person Re-identification by Soft Multilabel Learning</a></li>
@@ -108,7 +370,6 @@
 <p>出发点 Multi-label 很强，效果的确好，就是论文看得有点头晕，有些公式自己之前从来没见过，并且有些公式的出发点没有实验证明。</p>
 <p>这篇论文是腾讯的，今年腾讯优图实验室25篇、腾讯AILab33篇共计55篇论文被 CVPR 2019 录取。</p>
 <span id="more"></span>
-
 <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>这是篇跨数据集的行人重识别，source 是 MSMT，target 是 Market 和 Duke。</p>
 <p>作者针对跨数据集行人重识别没有标签问题，提出四个工作：</p>
 <ol>
@@ -117,8 +378,6 @@
 <li>cross-view consistent soft multi-label learning</li>
 <li>reference agent learning</li>
 </ol>
-
-
 
 
 <ol>
@@ -134,89 +393,88 @@
 <li>本论文中的 auxiliary dataset 等价于 source dataset</li>
 <li>agent 是一个单独的 classx2048 维的数据，代码中是直接调用的 fc.weight。</li>
 </ul>
-<h2 id="2-Deep-Soft-Multilabel-Reference-Learning"><a href="#2-Deep-Soft-Multilabel-Reference-Learning" class="headerlink" title="2. Deep Soft Multilabel Reference Learning"></a>2. Deep Soft Multilabel Reference Learning</h2><h3 id="2-1-Problem-formulation-and-Overview"><a href="#2-1-Problem-formulation-and-Overview" class="headerlink" title="2.1 Problem formulation and Overview"></a>2.1 Problem formulation and Overview</h3><table>
+<h2 id="2-Deep-Soft-Multilabel-Reference-Learning"><a href="#2-Deep-Soft-Multilabel-Reference-Learning" class="headerlink" title="2. Deep Soft Multilabel Reference Learning"></a>2. Deep Soft Multilabel Reference Learning</h2><h3 id="2-1-Problem-formulation-and-Overview"><a href="#2-1-Problem-formulation-and-Overview" class="headerlink" title="2.1 Problem formulation and Overview"></a>2.1 Problem formulation and Overview</h3><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="left">符号</th>
-<th align="left">含义</th>
+<th style="text-align:left">符号</th>
+<th style="text-align:left">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">$X&#x3D;\lbrace x_i \rbrace_{i&#x3D;1}^{N_u}$</td>
-<td align="left">没有标签的数据集，$N_u$张图片</td>
+<tbody>
+<tr>
+<td style="text-align:left">$X=\lbrace x<em>i \rbrace</em>{i=1}^{N_u}$</td>
+<td style="text-align:left">没有标签的数据集，$N_u$张图片</td>
 </tr>
 <tr>
-<td align="left">$Z&#x3D;\lbrace z_i, w_i \rbrace_{i&#x3D;1}^{N_a}, \text{where }w_i&#x3D;1,2,…, N_p$</td>
-<td align="left">有标签的数据集 auxiliary，$z_i$表示图片，$w_i$表示 label，$N_a$ 张图片，$N_p$个人，有标签数据集和无标签数据集人物没有重叠</td>
+<td style="text-align:left">$Z=\lbrace z<em>i, w_i \rbrace</em>{i=1}^{N_a}, \text{where }w_i=1,2,…, N_p$</td>
+<td style="text-align:left">有标签的数据集 auxiliary，$z_i$表示图片，$w_i$表示 label，$N_a$ 张图片，$N_p$个人，有标签数据集和无标签数据集人物没有重叠</td>
 </tr>
 <tr>
-<td align="left">$f(\cdot)$</td>
-<td align="left">discriminative deep feature embedding，应该是特征提取模型，即 $f(x)$，满足 $\parallel f(\cdot) \parallel_2&#x3D;1$</td>
+<td style="text-align:left">$f(\cdot)$</td>
+<td style="text-align:left">discriminative deep feature embedding，应该是特征提取模型，即 $f(x)$，满足 $\parallel f(\cdot) \parallel_2=1$</td>
 </tr>
 <tr>
-<td align="left">$\lbrace a_i \rbrace_{i&#x3D;1}^{N_p}$</td>
-<td align="left">reference person feature, $\parallel a_i \parallel_2&#x3D;1$</td>
+<td style="text-align:left">$\lbrace a<em>i \rbrace</em>{i=1}^{N_p}$</td>
+<td style="text-align:left">reference person feature, $\parallel a_i \parallel_2=1$</td>
 </tr>
 <tr>
-<td align="left">$y&#x3D;l(f(x),\lbrace a_i \rbrace_{i&#x3D;1}^{N_p})\in R^{N_p}$</td>
-<td align="left">soft multilabel function $l(\cdot)$, where $y&#x3D;(y^{(1)}, y^{(2)}, …, y^{(N_p)})$, $\sum_i^{N_p} y^{(i)}&#x3D;1, y^{(i)}\in [0, 1]$</td>
+<td style="text-align:left">$y=l(f(x),\lbrace a<em>i \rbrace</em>{i=1}^{N_p})\in R^{N_p}$</td>
+<td style="text-align:left">soft multilabel function $l(\cdot)$, where $y=(y^{(1)}, y^{(2)}, …, y^{(N_p)})$, $\sum_i^{N_p} y^{(i)}=1, y^{(i)}\in [0, 1]$</td>
 </tr>
-</tbody></table>
-<p>一共有两个内容需要学习: $f(\cdot)$, $\lbrace a_i \rbrace_{i&#x3D;1}^{N_p}$</p>
+</tbody>
+</table>
+</div>
+<p>一共有两个内容需要学习: $f(\cdot)$, $\lbrace a<em>i \rbrace</em>{i=1}^{N_p}$</p>
 <h3 id="2-2-Soft-multilabel-guided-hard-negative-mining"><a href="#2-2-Soft-multilabel-guided-hard-negative-mining" class="headerlink" title="2.2 Soft multilabel-guided hard negative mining"></a>2.2 Soft multilabel-guided hard negative mining</h3><p>大哥，你的上下标能不能提前说清楚啊[捂脸]，算了算了，腾讯的，惹不起惹不起。</p>
 
-
-<p><strong>定义</strong> soft multilabel function:<br>$$ y^{(k)}&#x3D;l(f(x),\lbrace a_i \rbrace_{i&#x3D;1}^{N_p})^{(k)}&#x3D;\frac{\exp(a_k^Tf(x))}{\sum_i \exp(a_i^Tf(x))}$$</p>
-<p>也就是说，用 $f(x)$ 去依次点乘 $a_k$， 然后用一个 softmax。</p>
+<p><strong>定义</strong> soft multilabel function:</p>
+<script type="math/tex; mode=display">y^{(k)}=l(f(x),\lbrace a_i \rbrace_{i=1}^{N_p})^{(k)}=\frac{\exp(a_k^Tf(x))}{\sum_i \exp(a_i^Tf(x))}</script><p>也就是说，用 $f(x)$ 去依次点乘 $a_k$， 然后用一个 softmax。</p>
 <p>按照这个公式来说的话，是在特征空间上做的操作，有点类似 ECN 中的预测概率，越相似，值越大，而不是通过分类器预测概率。</p>
 <p>代码中有温度T。</p>
 <p><strong>假设</strong>：如果一对样本 $x_i, x_j$ 有很高的特征相似性, 即 $f(x_i)^Tf(x_j)$，称之为相似样本。如果这对相似样本的其他特性也相似，则大概率为一对正样本，如果其他特性不相似，则大概率为一个难负样本 hard negative pair。</p>
 <p>注：这里并没有实验证明一对 hard negative pair 的其他特性（主要指下文提到的 soft multilabel agreement）大概率不相似。所以表示存疑其假设的正确性。又想了想，在难采样三元组损失中，hard negative pair 就是指特征相似但是 label 不同的样本，positive pair 指 label 相同的样本的，easy positive pair 指 label 相同特征相似的样本，hard positive pair 指 label 相同特征不相似的样本，这样的话可以把 soft multilabel 看成样本的 label 的话，也是可以说得通的。</p>
-<p><strong>引理1：其他特性的相似性</strong>：作者选用 soft multilabel 作为其他特性，soft multilabel agreement $A(\cdot, \cdot)$ 表示作为其他特性的相似性。定义为<br>$$A(y_i,y_j)&#x3D;y_i \land y_j&#x3D;\sum_k \min(y_i^{(k)},y_j^{(k)})&#x3D;1-\frac{\parallel y_i-y_j \parallel_1}{2} \in [0,1]$$</p>
-<p>越相似，值越大。最后一个等号通过画图很容易求得，就不解释了。Question: 这里的相似性定义成了向量之间的一范，没有定义成熟悉的点积，暂时不知道原因。</p>
-<p><strong>引理2： hard negative pair</strong>：对于无标签数据集 $X$ 的所有样本对 $M&#x3D;N_u\times (N_u-1)&#x2F;2$，设置比例 $p$，取 $pM$ 个特征最相似的样本对，即 $\hat{M}&#x3D;\lbrace (i,j)|f(x_i)^T f(x_j)\ge S\rbrace, \parallel \hat{M} \parallel&#x3D;pM$, 其中 $S$ 表示 $pM$ 个特征最相似样本对的阈值，动态变化，不是很重要的，重要的是取 $pM$个样本对。然后根据 label 的相似性将这些样本对划分为 positive set $P$ and hard negative set $N$，即<br>$$P&#x3D;\lbrace (i,j)|f(x_i)^T f(x_j)\ge S, A(y_i, y_j)\ge T \rbrace$$<br>$$N&#x3D;\lbrace (k,l)|f(x_k)^T f(x_l)\ge S, A(y_k, y_l)&lt; T \rbrace$$<br>其中 $T$ 表示 soft multilabel agreement 的阈值。会更新。</p>
-<p><strong>loss</strong>：soft Multilabel-guided Discriminative embedding Learning:<br>$$L_{MDL}&#x3D;-\log \frac{\bar{P}}{\bar{P}+\bar{N}}$$<br>where,<br>$$\bar{P}&#x3D;\frac{1}{|P|}\sum_{(i,j)\in P}\exp(-\parallel f(x_i)-f(x_j) \parallel_2^2)$$<br>$$\bar{N}&#x3D;\frac{1}{|N|}\sum_{(k,l)\in N}\exp(-\parallel f(x_k)-f(x_l) \parallel_2^2)$$</p>
-<p>so,<br>$$\begin{aligned}<br>L_{MDL}&amp;&#x3D;-\log \frac{\bar{P}}{\bar{P}+\bar{N}} \<br>       &amp;&#x3D;-\log \frac{\frac{1}{|P|}\sum_{(i,j)\in P}\exp(-\parallel f(x_i)-f(x_j) \parallel_2^2)}{\frac{1}{|P|}\sum_{(i,j)\in P}\exp(-\parallel f(x_i)-f(x_j) \parallel_2^2)+\frac{1}{|N|}\sum_{(k,l)\in N}\exp(-\parallel f(x_k)-f(x_l) \parallel_2^2)}<br>\end{aligned}$$</p>
-<p>Question: 这是个啥公式啊，都没有见过类似的公式，作者也没有给出解释。</p>
-<p>此时固定 agent $\lbrace a_i \rbrace_{i&#x3D;1}^{N_p}$ ，学习 $f(\cdot)$.</p>
-<p>实际训练时，$M&#x3D;M_{batch}&#x3D;N_{batch}\times (N_{batch}-1)&#x2F;2$</p>
+<p><strong>引理1：其他特性的相似性</strong>：作者选用 soft multilabel 作为其他特性，soft multilabel agreement $A(\cdot, \cdot)$ 表示作为其他特性的相似性。定义为</p>
+<script type="math/tex; mode=display">A(y_i,y_j)=y_i \land y_j=\sum_k \min(y_i^{(k)},y_j^{(k)})=1-\frac{\parallel y_i-y_j \parallel_1}{2} \in [0,1]</script><p>越相似，值越大。最后一个等号通过画图很容易求得，就不解释了。Question: 这里的相似性定义成了向量之间的一范，没有定义成熟悉的点积，暂时不知道原因。</p>
+<p><strong>引理2： hard negative pair</strong>：对于无标签数据集 $X$ 的所有样本对 $M=N_u\times (N_u-1)/2$，设置比例 $p$，取 $pM$ 个特征最相似的样本对，即 $\hat{M}=\lbrace (i,j)|f(x_i)^T f(x_j)\ge S\rbrace, \parallel \hat{M} \parallel=pM$, 其中 $S$ 表示 $pM$ 个特征最相似样本对的阈值，动态变化，不是很重要的，重要的是取 $pM$个样本对。然后根据 label 的相似性将这些样本对划分为 positive set $P$ and hard negative set $N$，即</p>
+<script type="math/tex; mode=display">P=\lbrace (i,j)|f(x_i)^T f(x_j)\ge S, A(y_i, y_j)\ge T \rbrace</script><script type="math/tex; mode=display">N=\lbrace (k,l)|f(x_k)^T f(x_l)\ge S, A(y_k, y_l)< T \rbrace</script><p>其中 $T$ 表示 soft multilabel agreement 的阈值。会更新。</p>
+<p><strong>loss</strong>：soft Multilabel-guided Discriminative embedding Learning:</p>
+<script type="math/tex; mode=display">L_{MDL}=-\log \frac{\bar{P}}{\bar{P}+\bar{N}}</script><p>where,</p>
+<script type="math/tex; mode=display">\bar{P}=\frac{1}{|P|}\sum_{(i,j)\in P}\exp(-\parallel f(x_i)-f(x_j) \parallel_2^2)</script><script type="math/tex; mode=display">\bar{N}=\frac{1}{|N|}\sum_{(k,l)\in N}\exp(-\parallel f(x_k)-f(x_l) \parallel_2^2)</script><p>so,</p>
+<script type="math/tex; mode=display">\begin{aligned}
+L_{MDL}&=-\log \frac{\bar{P}}{\bar{P}+\bar{N}} \\
+       &=-\log \frac{\frac{1}{|P|}\sum_{(i,j)\in P}\exp(-\parallel f(x_i)-f(x_j) \parallel_2^2)}{\frac{1}{|P|}\sum_{(i,j)\in P}\exp(-\parallel f(x_i)-f(x_j) \parallel_2^2)+\frac{1}{|N|}\sum_{(k,l)\in N}\exp(-\parallel f(x_k)-f(x_l) \parallel_2^2)}
+\end{aligned}</script><p>Question: 这是个啥公式啊，都没有见过类似的公式，作者也没有给出解释。</p>
+<p>此时固定 agent $\lbrace a<em>i \rbrace</em>{i=1}^{N_p}$ ，学习 $f(\cdot)$.</p>
+<p>实际训练时，$M=M<em>{batch}=N</em>{batch}\times (N_{batch}-1)/2$</p>
 <h3 id="2-3-Cross-view-consistent-soft-multilabel-learning"><a href="#2-3-Cross-view-consistent-soft-multilabel-learning" class="headerlink" title="2.3 Cross-view consistent soft multilabel learning"></a>2.3 Cross-view consistent soft multilabel learning</h3><p>因为行人重识别要求跨摄像头识别，所以考虑到行人的分布应该与摄像头无关。</p>
-<p><strong>Loss</strong>:<br>$$L_{CML}&#x3D;\sum_v d(P_v(y), P(y))^2$$<br>其中，$P(y)$ 表示数据集 $X$ 的 soft multilabel 分布，$P_v(y)$ 表示数据集 $X$ 在摄像头 $v$ 的 soft multilabel 分布，$d(\cdot, \cdot)$ 表示分布的距离，可以是 KL divergence 或者 <a target="_blank" rel="noopener" href="https://blog.csdn.net/yzxnuaa/article/details/79725014">Wasserstein distance</a>.因为实际观察到服从 log-normal 分布，所以采取 simplified 2-Wasserstein distance。<br>$$L_{CML}&#x3D;\sum_v \parallel \mu_v-\mu \parallel_2^2 + \parallel \sigma_v-\sigma\parallel_2^2$$<br>其中，$\mu&#x2F;\sigma$表示总体数据集的 log-soft multilabel 的均值和方差，$\mu_v&#x2F;\sigma_v$表示总体数据集在摄像头$v$的 log-soft multilabel 的均值和方差.<br>Question: 这个公式又是咋推出来的，这是妥妥地写出来也看不懂系列。</p>
-<p>此时固定 agent $\lbrace a_i \rbrace_{i&#x3D;1}^{N_p}$ ，学习 $f(\cdot)$.</p>
+<p><strong>Loss</strong>:</p>
+<script type="math/tex; mode=display">L_{CML}=\sum_v d(P_v(y), P(y))^2</script><p>其中，$P(y)$ 表示数据集 $X$ 的 soft multilabel 分布，$P_v(y)$ 表示数据集 $X$ 在摄像头 $v$ 的 soft multilabel 分布，$d(\cdot, \cdot)$ 表示分布的距离，可以是 KL divergence 或者 <a target="_blank" rel="noopener" href="https://blog.csdn.net/yzxnuaa/article/details/79725014">Wasserstein distance</a>.因为实际观察到服从 log-normal 分布，所以采取 simplified 2-Wasserstein distance。</p>
+<script type="math/tex; mode=display">L_{CML}=\sum_v \parallel \mu_v-\mu \parallel_2^2 + \parallel \sigma_v-\sigma\parallel_2^2</script><p>其中，$\mu/\sigma$表示总体数据集的 log-soft multilabel 的均值和方差，$\mu_v/\sigma_v$表示总体数据集在摄像头$v$的 log-soft multilabel 的均值和方差.<br>Question: 这个公式又是咋推出来的，这是妥妥地写出来也看不懂系列。</p>
+<p>此时固定 agent $\lbrace a<em>i \rbrace</em>{i=1}^{N_p}$ ，学习 $f(\cdot)$.</p>
 <h3 id="2-4-Reference-agent-Learning"><a href="#2-4-Reference-agent-Learning" class="headerlink" title="2.4 Reference agent Learning"></a>2.4 Reference agent Learning</h3><p>考虑到 referentce agent 需要与 soft multilabel function $l(\cdot, \cdot)$ 有关，因此得到损失函数</p>
-<p>$$L_{AL}&#x3D;\sum_k -\log l(f(z_k), {a_i})^{(w_k)}&#x3D;\sum_k -\log \frac{\exp(a_{w_k}^T f(z_k))}{\sum_j \exp(a_j^T f(z_k))} $$</p>
-<p>其中，$z_k$ 表示有标签数据集 $Z$ 中标签为 $w_k$ 的第 $k$ 张图片。</p>
+<script type="math/tex; mode=display">L_{AL}=\sum_k -\log l(f(z_k), {a_i})^{(w_k)}=\sum_k -\log \frac{\exp(a_{w_k}^T f(z_k))}{\sum_j \exp(a_j^T f(z_k))}</script><p>其中，$z_k$ 表示有标签数据集 $Z$ 中标签为 $w_k$ 的第 $k$ 张图片。</p>
 <p>这里可以理解成 $z_k$ 的预测概率和真实概率的交叉熵损失。这个损失函数不仅训练 $a_i$ 更接近第i个人的所有图片的特征，也训练 feature embedding $f$，使 $l(\cdot, \cdot)$ 得到的标签更具有表示同一个人的能力，符合 soft multilabel-guided hard negative mining 的假设：特征相似，但是 soft multilabel 不相似的为 hard negative mining。</p>
 <p>这个公式更新的是 $f$ 和 agent $a_i$.</p>
 <p>注：该论文中的公式其实按照从广义的定义到实际的应用的具体化过程，所以刚开始才会感觉有点乱，公式里面的字符也会一变再变，其实是从理论的公式到具体化实际代码的过程。</p>
-<p><strong>Joint embedding learning for reference comparability</strong>: 为了更好地提高 soft multilabel function 表示无标签数据集图片的正确性，提出 Joint embedding learning for reference comparability，为了修正 domain shift，利用无标签数据集 $f(x)$ 和 $a_i$ 肯定不是一对，提出 loss:<br>$$L_{RJ}&#x3D;\sum_i \sum_{j\in M_i} \sum_{k:w_k&#x3D;i}[m-\parallel a_i-f(x_j) \parallel_2^2]_+ + \parallel a_i-f(z_k) \parallel_2^2$$<br>其中，其目的是为了保证$a_i$所表示的有标签数据集中的同一id的图片和$a_i$特征相似，$a_i$和所有无标签数据集中的图片特征都不相似。 $M_i&#x3D;\lbrace j| \parallel a_i-f(x_j) \parallel_2^2 &lt; m \rbrace$，表示对第 $i$ 个 agent $a_i$ 而言，特征最为相似 ($\parallel a_i-f(x_j) \parallel_2^2&#x3D;2(1-a_i^Tf(x_j))$, 越相似，值越小) 的无标签数据集中的图片，按照作者推荐的论文 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1704.06369">44:Normface: l2 hypersphere embedding for face verification</a>，建议 $m&#x3D;1$。</p>
-<p>此时固定 agent $\lbrace a_i \rbrace_{i&#x3D;1}^{N_p}$ ，学习 $f(\cdot)$.</p>
-<p>对 $L_{RJ}$ 根据代码再次做出解释，$L_{RJ}$ 的目的是学习更好的特征提取器 $f$，使有标签数据集提取出的特征与同类别的 agent 的特征相似，与不同类别的agent不相似，无标签数据集提取出的特征与 agent 都不相似，有点三元组损失的意思。此时的 $a_i$ 是常量，不进行反向求导的。其二，对于任意一个 agent $a_i$，有标签数据集中，label 等于 $i$ 的图片视为正样本，其他图片视为负样本，对于无标签数据集，则直接视为 $a_i$ 的负样本。具体来说，就是对每一张有标签数据集的图片，$a_{label}$ 为正， 其余 $a_i$ 为负，对于每一张无标签数据集的图片，$a_i$ 都为负。</p>
-<p>所以总的 reference agent learning loss为:<br>$$L_{RAL}&#x3D;L_{AL}+\beta L_{RJ}$$</p>
-<h3 id="2-5-1-Model-training-and-testing"><a href="#2-5-1-Model-training-and-testing" class="headerlink" title="2.5.1 Model training and testing"></a>2.5.1 Model training and testing</h3><p>$$L_{MAR}&#x3D;L_{MDL}+\lambda_1 L_{CML}+\lambda_2 L_{RAL}$$</p>
-<h2 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3. Experiments"></a>3. Experiments</h2><p>MSMT17 为辅助数据集， Market-1501、Duke 为无标签数据集。</p>
-
-
+<p><strong>Joint embedding learning for reference comparability</strong>: 为了更好地提高 soft multilabel function 表示无标签数据集图片的正确性，提出 Joint embedding learning for reference comparability，为了修正 domain shift，利用无标签数据集 $f(x)$ 和 $a_i$ 肯定不是一对，提出 loss:</p>
+<script type="math/tex; mode=display">L_{RJ}=\sum_i \sum_{j\in M_i} \sum_{k:w_k=i}[m-\parallel a_i-f(x_j) \parallel_2^2]_+ + \parallel a_i-f(z_k) \parallel_2^2</script><p>其中，其目的是为了保证$a_i$所表示的有标签数据集中的同一id的图片和$a_i$特征相似，$a_i$和所有无标签数据集中的图片特征都不相似。 $M_i=\lbrace j| \parallel a_i-f(x_j) \parallel_2^2 &lt; m \rbrace$，表示对第 $i$ 个 agent $a_i$ 而言，特征最为相似 ($\parallel a_i-f(x_j) \parallel_2^2=2(1-a_i^Tf(x_j))$, 越相似，值越小) 的无标签数据集中的图片，按照作者推荐的论文 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1704.06369">44:Normface: l2 hypersphere embedding for face verification</a>，建议 $m=1$。</p>
+<p>此时固定 agent $\lbrace a<em>i \rbrace</em>{i=1}^{N_p}$ ，学习 $f(\cdot)$.</p>
+<p>对 $L<em>{RJ}$ 根据代码再次做出解释，$L</em>{RJ}$ 的目的是学习更好的特征提取器 $f$，使有标签数据集提取出的特征与同类别的 agent 的特征相似，与不同类别的agent不相似，无标签数据集提取出的特征与 agent 都不相似，有点三元组损失的意思。此时的 $a<em>i$ 是常量，不进行反向求导的。其二，对于任意一个 agent $a_i$，有标签数据集中，label 等于 $i$ 的图片视为正样本，其他图片视为负样本，对于无标签数据集，则直接视为 $a_i$ 的负样本。具体来说，就是对每一张有标签数据集的图片，$a</em>{label}$ 为正， 其余 $a_i$ 为负，对于每一张无标签数据集的图片，$a_i$ 都为负。</p>
+<p>所以总的 reference agent learning loss为:</p>
+<script type="math/tex; mode=display">L_{RAL}=L_{AL}+\beta L_{RJ}</script><h3 id="2-5-1-Model-training-and-testing"><a href="#2-5-1-Model-training-and-testing" class="headerlink" title="2.5.1 Model training and testing"></a>2.5.1 Model training and testing</h3><script type="math/tex; mode=display">L_{MAR}=L_{MDL}+\lambda_1 L_{CML}+\lambda_2 L_{RAL}</script><h2 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3. Experiments"></a>3. Experiments</h2><p>MSMT17 为辅助数据集， Market-1501、Duke 为无标签数据集。</p>
 
 
 <p>备注: 论文中的 agent 其实并不是之前以为通过图片输入模型得到的特征求出来的，而是 ResNet-50 的 fc.weight(classx2048) ，也就是分类器的分类向量。和 ECN 论文中的使用方法有很大的不同吧。在 ECN 中，使用的就是图片输入模型得到的特征，可能是因为 ECN 中一张图片对应一个特征，而本论文中是多个图片对应一个特征。</p>
 <h2 id="4-code"><a href="#4-code" class="headerlink" title="4. code"></a>4. code</h2><h3 id="4-1-Logger"><a href="#4-1-Logger" class="headerlink" title="4.1 Logger"></a>4.1 Logger</h3><p>两种logger</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一种：定义简单，使用繁琐</span></span><br><span class="line"><span class="comment"># 定义</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">time_string</span>():</span><br><span class="line">    ISOTIMEFORMAT = <span class="string">&#x27;%Y-%m-%d %X&#x27;</span></span><br><span class="line">    string = <span class="string">&#x27;[&#123;&#125;]&#x27;</span>.<span class="built_in">format</span>(time.strftime(ISOTIMEFORMAT, time.localtime(time.time())))</span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Logger</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, save_path</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(save_path):</span><br><span class="line">            os.makedirs(save_path)</span><br><span class="line">        self.file = <span class="built_in">open</span>(os.path.join(save_path, <span class="string">&#x27;log_&#123;&#125;.txt&#x27;</span>.<span class="built_in">format</span>(time_string())), <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">        self.print_log(<span class="string">&quot;python version : &#123;&#125;&quot;</span>.<span class="built_in">format</span>(sys.version.replace(<span class="string">&#x27;\n&#x27;</span>, <span class="string">&#x27; &#x27;</span>)))</span><br><span class="line">        self.print_log(<span class="string">&quot;torch  version : &#123;&#125;&quot;</span>.<span class="built_in">format</span>(torch.__version__))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">print_log</span>(<span class="params">self, string</span>):</span><br><span class="line">        self.file.write(<span class="string">&quot;&#123;&#125;\n&quot;</span>.<span class="built_in">format</span>(string))</span><br><span class="line">        self.file.flush()</span><br><span class="line">        <span class="built_in">print</span>(string)</span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">logger = Logger(args.save_path)</span><br><span class="line">logger.print_log(<span class="string">&quot;=&gt; loading checkpoint &#x27;&#123;&#125;&#x27;&quot;</span>.<span class="built_in">format</span>(load_path))</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第二种，定义繁琐，使用简单，重定向</span></span><br><span class="line"><span class="comment"># 推荐用这种</span></span><br><span class="line"><span class="comment"># 定义</span></span><br><span class="line"><span class="comment"># .\logging.py</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> errno</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mkdir_if_missing</span>(<span class="params">dir_path</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        os.makedirs(dir_path)</span><br><span class="line">    <span class="keyword">except</span> OSError <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">if</span> e.errno != errno.EEXIST:</span><br><span class="line">            <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Logger</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, fpath=<span class="literal">None</span></span>):</span><br><span class="line">        self.console = sys.stdout</span><br><span class="line">        self.file = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> fpath <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            mkdir_if_missing(os.path.dirname(fpath))</span><br><span class="line">            self.file = <span class="built_in">open</span>(fpath, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__del__</span>(<span class="params">self</span>):</span><br><span class="line">        self.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__enter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__exit__</span>(<span class="params">self, *args</span>):</span><br><span class="line">        self.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">write</span>(<span class="params">self, msg</span>):</span><br><span class="line">        self.console.write(msg)</span><br><span class="line">        <span class="keyword">if</span> self.file <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.file.write(msg)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">flush</span>(<span class="params">self</span>):</span><br><span class="line">        self.console.flush()</span><br><span class="line">        <span class="keyword">if</span> self.file <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.file.flush()</span><br><span class="line">            os.fsync(self.file.fileno())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">close</span>(<span class="params">self</span>):</span><br><span class="line">        self.console.close()</span><br><span class="line">        <span class="keyword">if</span> self.file <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.file.close()</span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os.path <span class="keyword">as</span> osp</span><br><span class="line">sys.stdout = Logger(osp.join(args.logs_dir, <span class="string">&#x27;log.txt&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(args)</span><br></pre></td></tr></table></figure>
-
 <h3 id="4-2-model"><a href="#4-2-model" class="headerlink" title="4.2 model"></a>4.2 model</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ResNet</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="comment"># 3x384x128</span></span><br><span class="line">        x = self.conv1(x)</span><br><span class="line">        x = self.bn1(x)</span><br><span class="line">        x = self.relu(x)</span><br><span class="line">        x = self.maxpool(x)</span><br><span class="line"></span><br><span class="line">        x = self.layer1(x)</span><br><span class="line">        x = self.layer2(x)</span><br><span class="line">        x = self.layer3(x)</span><br><span class="line">        feature_maps = self.layer4(x)</span><br><span class="line">        <span class="comment"># 2048x12x4</span></span><br><span class="line">        x = self.avgpool(feature_maps)</span><br><span class="line">        x = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># bx2048</span></span><br><span class="line">        <span class="comment"># renorm 使每一行的向量的2范进行了截断处理</span></span><br><span class="line">        <span class="comment"># 使之变成[0,1e-5]，再线性变成[0,1]</span></span><br><span class="line">        <span class="comment"># 这里的renorm可以暂时理解成进行了二范处理，</span></span><br><span class="line">        feature = x.renorm(<span class="number">2</span>, <span class="number">0</span>, <span class="number">1e-5</span>).mul(<span class="number">1e5</span>)</span><br><span class="line">        <span class="comment"># bx2048</span></span><br><span class="line">        w = self.fc.weight</span><br><span class="line">        <span class="comment"># 注: 这个self.fc.weight(classx2048)就是论文中的agent</span></span><br><span class="line">        ww = w.renorm(<span class="number">2</span>, <span class="number">0</span>, <span class="number">1e-5</span>).mul(<span class="number">1e5</span>)</span><br><span class="line">        sim = feature.mm(ww.t())</span><br><span class="line">        <span class="comment"># sim: bxclass</span></span><br><span class="line">        <span class="comment"># feature(f): bx2048, sim(y): bxclass, feature_maps: 2048x12x4</span></span><br><span class="line">        <span class="keyword">return</span> feature, sim, feature_maps</span><br></pre></td></tr></table></figure>
-
 <h3 id="4-3-optim"><a href="#4-3-optim" class="headerlink" title="4.3 optim"></a>4.3 optim</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bn_params, other_params = partition_params(self.net, <span class="string">&#x27;bn&#x27;</span>)</span><br><span class="line">self.optimizer = torch.optim.SGD([&#123;<span class="string">&#x27;params&#x27;</span>: bn_params, <span class="string">&#x27;weight_decay&#x27;</span>: <span class="number">0</span>&#125;,</span><br><span class="line">                                  &#123;<span class="string">&#x27;params&#x27;</span>: other_params&#125;], lr=args.lr, momentum=<span class="number">0.9</span>, weight_decay=args.wd)</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-4-trainer-x2F-init-losses"><a href="#4-4-trainer-x2F-init-losses" class="headerlink" title="4.4 trainer&#x2F;init_losses"></a>4.4 trainer&#x2F;init_losses</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ReidTrainer</span>(<span class="title class_ inherited__">Trainer</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, args, logger</span>):</span><br><span class="line">        self.al_loss = nn.CrossEntropyLoss().cuda()</span><br><span class="line">        self.rj_loss = JointLoss(args.margin).cuda()</span><br><span class="line">        self.cml_loss = MultilabelLoss(args.batch_size).cuda()  <span class="comment"># L_CML</span></span><br><span class="line">        self.mdl_loss = DiscriminativeLoss(args.mining_ratio).cuda() <span class="comment"># L_MDL</span></span><br><span class="line">        self.net = resnet50(pretrained=<span class="literal">False</span>, num_classes=self.args.num_classes)</span><br><span class="line">        self.multilabel_memory = torch.zeros(N_target_samples, <span class="number">4101</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_losses</span>(<span class="params">self, target_loader</span>):</span><br><span class="line">        self.logger.print_log(<span class="string">&#x27;initializing centers/threshold ...&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(self.args.ml_path):</span><br><span class="line">            (multilabels, views, pairwise_agreements) = torch.load(self.args.ml_path)</span><br><span class="line">            self.logger.print_log(<span class="string">&#x27;loaded ml from &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(self.args.ml_path))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.logger.print_log(<span class="string">&#x27;not found &#123;&#125;. computing ml...&#x27;</span>.<span class="built_in">format</span>(self.args.ml_path))</span><br><span class="line">            sim, _, views = extract_features(target_loader, self.net, index_feature=<span class="number">1</span>, return_numpy=<span class="literal">False</span>)</span><br><span class="line">            <span class="comment"># sim: bxclass, views: bx1</span></span><br><span class="line">            multilabels = F.softmax(sim * self.args.scala_ce, dim=<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># multilabels: bxclass 这里应该对于soft multilabel funtion得到的结果y^&#123;(k)&#125;</span></span><br><span class="line">            <span class="comment"># Question: sim*self.args.scala_ce 是什么意思</span></span><br><span class="line">            ml_np = multilabels.cpu().numpy()</span><br><span class="line">            pairwise_agreements = <span class="number">1</span> - pdist(ml_np, <span class="string">&#x27;minkowski&#x27;</span>, p=<span class="number">1</span>)/<span class="number">2</span></span><br><span class="line">            <span class="comment"># pairwise_agreements: soft multilabel agreement A(.,.) 公式2</span></span><br><span class="line">        log_multilabels = torch.log(multilabels)</span><br><span class="line">        self.cml_loss.init_centers(log_multilabels, views)</span><br><span class="line">        self.logger.print_log(<span class="string">&#x27;initializing centers done.&#x27;</span>)</span><br><span class="line">        self.mdl_loss.init_threshold(pairwise_agreements)</span><br><span class="line">        self.logger.print_log(<span class="string">&#x27;initializing threshold done.&#x27;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">train_epoch</span>(<span class="params">self, source_loader, target_loader, epoch</span>):</span><br><span class="line">        self.lr_scheduler.step()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.cml_loss.initialized <span class="keyword">or</span> <span class="keyword">not</span> self.mdl_loss.initialized:</span><br><span class="line">            self.init_losses(target_loader)</span><br><span class="line">        batch_time_meter = AverageMeter()</span><br><span class="line">        stats = (<span class="string">&#x27;loss_source&#x27;</span>, <span class="string">&#x27;loss_st&#x27;</span>, <span class="string">&#x27;loss_ml&#x27;</span>, <span class="string">&#x27;loss_target&#x27;</span>, <span class="string">&#x27;loss_total&#x27;</span>)</span><br><span class="line">        meters_trn = &#123;stat: AverageMeter() <span class="keyword">for</span> stat <span class="keyword">in</span> stats&#125;</span><br><span class="line">        self.train()</span><br><span class="line"></span><br><span class="line">        end = time.time()</span><br><span class="line">        target_iter = <span class="built_in">iter</span>(target_loader)</span><br><span class="line">        <span class="keyword">for</span> i, source_tuple <span class="keyword">in</span> <span class="built_in">enumerate</span>(source_loader):</span><br><span class="line">            imgs = source_tuple[<span class="number">0</span>].cuda()</span><br><span class="line">            labels = source_tuple[<span class="number">1</span>].cuda()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                target_tuple = <span class="built_in">next</span>(target_iter)</span><br><span class="line">            <span class="keyword">except</span> StopIteration:</span><br><span class="line">                target_iter = <span class="built_in">iter</span>(target_loader)</span><br><span class="line">                target_tuple = <span class="built_in">next</span>(target_iter)</span><br><span class="line">            imgs_target = target_tuple[<span class="number">0</span>].cuda()</span><br><span class="line">            labels_target = target_tuple[<span class="number">1</span>].cuda()</span><br><span class="line">            views_target = target_tuple[<span class="number">2</span>].cuda()</span><br><span class="line">            idx_target = target_tuple[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">            features, similarity, _ = self.net(imgs)</span><br><span class="line">            features_target, similarity_target, _ = self.net(imgs_target)</span><br><span class="line">            <span class="comment"># features: bx2048, similarity: bxclass</span></span><br><span class="line">            scores = similarity * self.args.scala_ce</span><br><span class="line">            loss_source = self.al_loss(scores, labels) <span class="comment"># 公式7，同时训练 agent 和 f()</span></span><br><span class="line">            agents = self.net.module.fc.weight.renorm(<span class="number">2</span>, <span class="number">0</span>, <span class="number">1e-5</span>).mul(<span class="number">1e5</span>)</span><br><span class="line">            <span class="comment"># features: bx2048, agents: classx2048, labels: bx1, similarity: bxclass</span></span><br><span class="line">            loss_st = self.rj_loss(features, agents.detach(), labels, similarity.detach(), features_target, similarity_target.detach())</span><br><span class="line">            multilabels = F.softmax(features_target.mm(agents.detach().t_()*self.args.scala_ce), dim=<span class="number">1</span>)</span><br><span class="line">            loss_ml = self.cml_loss(torch.log(multilabels), views_target)</span><br><span class="line">            <span class="keyword">if</span> epoch &lt; <span class="number">1</span>:</span><br><span class="line">                loss_target = torch.Tensor([<span class="number">0</span>]).cuda()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                multilabels_cpu = multilabels.detach().cpu()</span><br><span class="line">                is_init_batch = self.initialized[idx_target]</span><br><span class="line">                initialized_idx = idx_target[is_init_batch]</span><br><span class="line">                uninitialized_idx = idx_target[~is_init_batch]</span><br><span class="line">                self.multilabel_memory[uninitialized_idx] = multilabels_cpu[~is_init_batch]</span><br><span class="line">                self.initialized[uninitialized_idx] = <span class="number">1</span></span><br><span class="line">                self.multilabel_memory[initialized_idx] = <span class="number">0.9</span> * self.multilabel_memory[initialized_idx] \</span><br><span class="line">                                                          + <span class="number">0.1</span> * multilabels_cpu[is_init_batch]</span><br><span class="line">                loss_target = self.mdl_loss(features_target, self.multilabel_memory[idx_target], labels_target)</span><br><span class="line"></span><br><span class="line">            self.optimizer.zero_grad()</span><br><span class="line">            loss_total = loss_target + self.args.lamb_1 * loss_ml + self.args.lamb_2 * \</span><br><span class="line">                         (loss_source + self.args.beta * loss_st)</span><br><span class="line">            loss_total.backward()</span><br><span class="line">            self.optimizer.step()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> stats:</span><br><span class="line">                v = <span class="built_in">locals</span>()[k]</span><br><span class="line">                meters_trn[k].update(v.item(), self.args.batch_size)</span><br><span class="line"></span><br><span class="line">            batch_time_meter.update(time.time() - end)</span><br><span class="line">            freq = self.args.batch_size / batch_time_meter.avg</span><br><span class="line">            end = time.time()</span><br><span class="line">            <span class="keyword">if</span> i % self.args.print_freq == <span class="number">0</span>:</span><br><span class="line">                self.logger.print_log(<span class="string">&#x27;  Iter: [&#123;:03d&#125;/&#123;:03d&#125;]   Freq &#123;:.1f&#125;   &#x27;</span>.<span class="built_in">format</span>(</span><br><span class="line">                    i, <span class="built_in">len</span>(source_loader), freq) + create_stat_string(meters_trn) + time_string())</span><br><span class="line"></span><br><span class="line">        save_checkpoint(self, epoch, os.path.join(self.args.save_path, <span class="string">&quot;checkpoints.pth&quot;</span>))</span><br><span class="line">        <span class="keyword">return</span> meters_trn </span><br></pre></td></tr></table></figure>
-
+<h3 id="4-4-trainer-init-losses"><a href="#4-4-trainer-init-losses" class="headerlink" title="4.4 trainer/init_losses"></a>4.4 trainer/init_losses</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ReidTrainer</span>(<span class="title class_ inherited__">Trainer</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, args, logger</span>):</span><br><span class="line">        self.al_loss = nn.CrossEntropyLoss().cuda()</span><br><span class="line">        self.rj_loss = JointLoss(args.margin).cuda()</span><br><span class="line">        self.cml_loss = MultilabelLoss(args.batch_size).cuda()  <span class="comment"># L_CML</span></span><br><span class="line">        self.mdl_loss = DiscriminativeLoss(args.mining_ratio).cuda() <span class="comment"># L_MDL</span></span><br><span class="line">        self.net = resnet50(pretrained=<span class="literal">False</span>, num_classes=self.args.num_classes)</span><br><span class="line">        self.multilabel_memory = torch.zeros(N_target_samples, <span class="number">4101</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_losses</span>(<span class="params">self, target_loader</span>):</span><br><span class="line">        self.logger.print_log(<span class="string">&#x27;initializing centers/threshold ...&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(self.args.ml_path):</span><br><span class="line">            (multilabels, views, pairwise_agreements) = torch.load(self.args.ml_path)</span><br><span class="line">            self.logger.print_log(<span class="string">&#x27;loaded ml from &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(self.args.ml_path))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.logger.print_log(<span class="string">&#x27;not found &#123;&#125;. computing ml...&#x27;</span>.<span class="built_in">format</span>(self.args.ml_path))</span><br><span class="line">            sim, _, views = extract_features(target_loader, self.net, index_feature=<span class="number">1</span>, return_numpy=<span class="literal">False</span>)</span><br><span class="line">            <span class="comment"># sim: bxclass, views: bx1</span></span><br><span class="line">            multilabels = F.softmax(sim * self.args.scala_ce, dim=<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># multilabels: bxclass 这里应该对于soft multilabel funtion得到的结果y^&#123;(k)&#125;</span></span><br><span class="line">            <span class="comment"># Question: sim*self.args.scala_ce 是什么意思</span></span><br><span class="line">            ml_np = multilabels.cpu().numpy()</span><br><span class="line">            pairwise_agreements = <span class="number">1</span> - pdist(ml_np, <span class="string">&#x27;minkowski&#x27;</span>, p=<span class="number">1</span>)/<span class="number">2</span></span><br><span class="line">            <span class="comment"># pairwise_agreements: soft multilabel agreement A(.,.) 公式2</span></span><br><span class="line">        log_multilabels = torch.log(multilabels)</span><br><span class="line">        self.cml_loss.init_centers(log_multilabels, views)</span><br><span class="line">        self.logger.print_log(<span class="string">&#x27;initializing centers done.&#x27;</span>)</span><br><span class="line">        self.mdl_loss.init_threshold(pairwise_agreements)</span><br><span class="line">        self.logger.print_log(<span class="string">&#x27;initializing threshold done.&#x27;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">train_epoch</span>(<span class="params">self, source_loader, target_loader, epoch</span>):</span><br><span class="line">        self.lr_scheduler.step()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.cml_loss.initialized <span class="keyword">or</span> <span class="keyword">not</span> self.mdl_loss.initialized:</span><br><span class="line">            self.init_losses(target_loader)</span><br><span class="line">        batch_time_meter = AverageMeter()</span><br><span class="line">        stats = (<span class="string">&#x27;loss_source&#x27;</span>, <span class="string">&#x27;loss_st&#x27;</span>, <span class="string">&#x27;loss_ml&#x27;</span>, <span class="string">&#x27;loss_target&#x27;</span>, <span class="string">&#x27;loss_total&#x27;</span>)</span><br><span class="line">        meters_trn = &#123;stat: AverageMeter() <span class="keyword">for</span> stat <span class="keyword">in</span> stats&#125;</span><br><span class="line">        self.train()</span><br><span class="line"></span><br><span class="line">        end = time.time()</span><br><span class="line">        target_iter = <span class="built_in">iter</span>(target_loader)</span><br><span class="line">        <span class="keyword">for</span> i, source_tuple <span class="keyword">in</span> <span class="built_in">enumerate</span>(source_loader):</span><br><span class="line">            imgs = source_tuple[<span class="number">0</span>].cuda()</span><br><span class="line">            labels = source_tuple[<span class="number">1</span>].cuda()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                target_tuple = <span class="built_in">next</span>(target_iter)</span><br><span class="line">            <span class="keyword">except</span> StopIteration:</span><br><span class="line">                target_iter = <span class="built_in">iter</span>(target_loader)</span><br><span class="line">                target_tuple = <span class="built_in">next</span>(target_iter)</span><br><span class="line">            imgs_target = target_tuple[<span class="number">0</span>].cuda()</span><br><span class="line">            labels_target = target_tuple[<span class="number">1</span>].cuda()</span><br><span class="line">            views_target = target_tuple[<span class="number">2</span>].cuda()</span><br><span class="line">            idx_target = target_tuple[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">            features, similarity, _ = self.net(imgs)</span><br><span class="line">            features_target, similarity_target, _ = self.net(imgs_target)</span><br><span class="line">            <span class="comment"># features: bx2048, similarity: bxclass</span></span><br><span class="line">            scores = similarity * self.args.scala_ce</span><br><span class="line">            loss_source = self.al_loss(scores, labels) <span class="comment"># 公式7，同时训练 agent 和 f()</span></span><br><span class="line">            agents = self.net.module.fc.weight.renorm(<span class="number">2</span>, <span class="number">0</span>, <span class="number">1e-5</span>).mul(<span class="number">1e5</span>)</span><br><span class="line">            <span class="comment"># features: bx2048, agents: classx2048, labels: bx1, similarity: bxclass</span></span><br><span class="line">            loss_st = self.rj_loss(features, agents.detach(), labels, similarity.detach(), features_target, similarity_target.detach())</span><br><span class="line">            multilabels = F.softmax(features_target.mm(agents.detach().t_()*self.args.scala_ce), dim=<span class="number">1</span>)</span><br><span class="line">            loss_ml = self.cml_loss(torch.log(multilabels), views_target)</span><br><span class="line">            <span class="keyword">if</span> epoch &lt; <span class="number">1</span>:</span><br><span class="line">                loss_target = torch.Tensor([<span class="number">0</span>]).cuda()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                multilabels_cpu = multilabels.detach().cpu()</span><br><span class="line">                is_init_batch = self.initialized[idx_target]</span><br><span class="line">                initialized_idx = idx_target[is_init_batch]</span><br><span class="line">                uninitialized_idx = idx_target[~is_init_batch]</span><br><span class="line">                self.multilabel_memory[uninitialized_idx] = multilabels_cpu[~is_init_batch]</span><br><span class="line">                self.initialized[uninitialized_idx] = <span class="number">1</span></span><br><span class="line">                self.multilabel_memory[initialized_idx] = <span class="number">0.9</span> * self.multilabel_memory[initialized_idx] \</span><br><span class="line">                                                          + <span class="number">0.1</span> * multilabels_cpu[is_init_batch]</span><br><span class="line">                loss_target = self.mdl_loss(features_target, self.multilabel_memory[idx_target], labels_target)</span><br><span class="line"></span><br><span class="line">            self.optimizer.zero_grad()</span><br><span class="line">            loss_total = loss_target + self.args.lamb_1 * loss_ml + self.args.lamb_2 * \</span><br><span class="line">                         (loss_source + self.args.beta * loss_st)</span><br><span class="line">            loss_total.backward()</span><br><span class="line">            self.optimizer.step()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> stats:</span><br><span class="line">                v = <span class="built_in">locals</span>()[k]</span><br><span class="line">                meters_trn[k].update(v.item(), self.args.batch_size)</span><br><span class="line"></span><br><span class="line">            batch_time_meter.update(time.time() - end)</span><br><span class="line">            freq = self.args.batch_size / batch_time_meter.avg</span><br><span class="line">            end = time.time()</span><br><span class="line">            <span class="keyword">if</span> i % self.args.print_freq == <span class="number">0</span>:</span><br><span class="line">                self.logger.print_log(<span class="string">&#x27;  Iter: [&#123;:03d&#125;/&#123;:03d&#125;]   Freq &#123;:.1f&#125;   &#x27;</span>.<span class="built_in">format</span>(</span><br><span class="line">                    i, <span class="built_in">len</span>(source_loader), freq) + create_stat_string(meters_trn) + time_string())</span><br><span class="line"></span><br><span class="line">        save_checkpoint(self, epoch, os.path.join(self.args.save_path, <span class="string">&quot;checkpoints.pth&quot;</span>))</span><br><span class="line">        <span class="keyword">return</span> meters_trn </span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># L_CML 公式6</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MultilabelLoss</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, batch_size, use_std=<span class="literal">True</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(MultilabelLoss, self).__init__()</span><br><span class="line">        self.use_std = use_std</span><br><span class="line">        self.moment = batch_size / <span class="number">10000</span></span><br><span class="line">        self.initialized = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_centers</span>(<span class="params">self, log_multilabels, views</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param log_multilabels: shape=(N, n_class)</span></span><br><span class="line"><span class="string">        :param views: (N,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        # 用于初始化全局的均值和方差</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        univiews = torch.unique(views)</span><br><span class="line">        mean_ml = []</span><br><span class="line">        std_ml = []</span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> univiews:</span><br><span class="line">            ml_in_v = log_multilabels[views == v]</span><br><span class="line">            mean = ml_in_v.mean(dim=<span class="number">0</span>)</span><br><span class="line">            std = ml_in_v.std(dim=<span class="number">0</span>)</span><br><span class="line">            mean_ml.append(mean)</span><br><span class="line">            std_ml.append(std)</span><br><span class="line">        center_mean = torch.mean(torch.stack(mean_ml), dim=<span class="number">0</span>)</span><br><span class="line">        center_std = torch.mean(torch.stack(std_ml), dim=<span class="number">0</span>)</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;center_mean&#x27;</span>, center_mean)</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;center_std&#x27;</span>, center_std)</span><br><span class="line">        self.initialized = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_update_centers</span>(<span class="params">self, log_multilabels, views</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param log_multilabels: shape=(BS, n_class)</span></span><br><span class="line"><span class="string">        :param views: shape=(BS,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        univiews = torch.unique(views)</span><br><span class="line">        means = []</span><br><span class="line">        stds = []</span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> univiews:</span><br><span class="line">            ml_in_v = log_multilabels[views == v]</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(ml_in_v) == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            mean = ml_in_v.mean(dim=<span class="number">0</span>)</span><br><span class="line">            means.append(mean)</span><br><span class="line">            <span class="keyword">if</span> self.use_std:</span><br><span class="line">                std = ml_in_v.std(dim=<span class="number">0</span>)</span><br><span class="line">                stds.append(std)</span><br><span class="line">        new_mean = torch.mean(torch.stack(means), dim=<span class="number">0</span>)</span><br><span class="line">        self.center_mean = self.center_mean * (<span class="number">1</span> - self.moment) + new_mean * self.moment</span><br><span class="line">        <span class="keyword">if</span> self.use_std:</span><br><span class="line">            new_std = torch.mean(torch.stack(stds), dim=<span class="number">0</span>)</span><br><span class="line">            self.center_std = self.center_std * (<span class="number">1</span> - self.moment) + new_std * self.moment</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, log_multilabels, views</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param log_multilabels: shape=(BS, n_class)</span></span><br><span class="line"><span class="string">        :param views: shape=(BS,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self._update_centers(log_multilabels.detach(), views)</span><br><span class="line"></span><br><span class="line">        univiews = torch.unique(views)</span><br><span class="line">        loss_terms = []</span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> univiews:</span><br><span class="line">            ml_in_v = log_multilabels[views == v]</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(ml_in_v) == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            mean = ml_in_v.mean(dim=<span class="number">0</span>)</span><br><span class="line">            loss_mean = (mean - self.center_mean).<span class="built_in">pow</span>(<span class="number">2</span>).<span class="built_in">sum</span>()</span><br><span class="line">            loss_terms.append(loss_mean)</span><br><span class="line">            <span class="keyword">if</span> self.use_std:</span><br><span class="line">                std = ml_in_v.std(dim=<span class="number">0</span>)</span><br><span class="line">                loss_std = (std - self.center_std).<span class="built_in">pow</span>(<span class="number">2</span>).<span class="built_in">sum</span>()</span><br><span class="line">                loss_terms.append(loss_std)</span><br><span class="line">        loss_total = torch.mean(torch.stack(loss_terms))</span><br><span class="line">        <span class="keyword">return</span> loss_total</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># L_MDL 公式4</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DiscriminativeLoss</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, mining_ratio=<span class="number">0.001</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(DiscriminativeLoss, self).__init__()</span><br><span class="line">        self.mining_ratio = mining_ratio</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;n_pos_pairs&#x27;</span>, torch.Tensor([<span class="number">0</span>]))</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;rate_TP&#x27;</span>, torch.Tensor([<span class="number">0</span>]))</span><br><span class="line">        self.moment = <span class="number">0.1</span></span><br><span class="line">        self.initialized = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_threshold</span>(<span class="params">self, pairwise_agreements</span>):</span><br><span class="line">        <span class="comment"># Question：论文中还有一个限制条件，f(x_i)f(x_j)&gt;S，代码只考虑了A(y_i, y_j)</span></span><br><span class="line">        pos = <span class="built_in">int</span>(<span class="built_in">len</span>(pairwise_agreements) * self.mining_ratio)</span><br><span class="line">        sorted_agreements = np.sort(pairwise_agreements)</span><br><span class="line">        t = sorted_agreements[-pos]</span><br><span class="line">        self.register_buffer(<span class="string">&#x27;threshold&#x27;</span>, torch.Tensor([t]).cuda())</span><br><span class="line">        self.initialized = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, features, multilabels, labels</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param features: shape=(BS, dim)</span></span><br><span class="line"><span class="string">        :param multilabels: (BS, n_class)</span></span><br><span class="line"><span class="string">        :param labels: (BS,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        P, N = self._partition_sets(features.detach(), multilabels, labels)</span><br><span class="line">        <span class="keyword">if</span> P <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            pos_exponant = torch.Tensor([<span class="number">1</span>]).cuda()</span><br><span class="line">            num = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sdist_pos_pairs = []</span><br><span class="line">            <span class="keyword">for</span> (i, j) <span class="keyword">in</span> <span class="built_in">zip</span>(P[<span class="number">0</span>], P[<span class="number">1</span>]):</span><br><span class="line">                sdist_pos_pair = (features[i] - features[j]).<span class="built_in">pow</span>(<span class="number">2</span>).<span class="built_in">sum</span>()</span><br><span class="line">                sdist_pos_pairs.append(sdist_pos_pair)</span><br><span class="line">            pos_exponant = torch.exp(- torch.stack(sdist_pos_pairs)).mean()</span><br><span class="line">            num = -torch.log(pos_exponant)</span><br><span class="line">        <span class="keyword">if</span> N <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            neg_exponant = torch.Tensor([<span class="number">0.5</span>]).cuda()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sdist_neg_pairs = []</span><br><span class="line">            <span class="keyword">for</span> (i, j) <span class="keyword">in</span> <span class="built_in">zip</span>(N[<span class="number">0</span>], N[<span class="number">1</span>]):</span><br><span class="line">                sdist_neg_pair = (features[i] - features[j]).<span class="built_in">pow</span>(<span class="number">2</span>).<span class="built_in">sum</span>()</span><br><span class="line">                sdist_neg_pairs.append(sdist_neg_pair)</span><br><span class="line">            neg_exponant = torch.exp(- torch.stack(sdist_neg_pairs)).mean()</span><br><span class="line">        den = torch.log(pos_exponant + neg_exponant)</span><br><span class="line">        loss = num + den</span><br><span class="line">        <span class="keyword">return</span> loss</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_partition_sets</span>(<span class="params">self, features, multilabels, labels</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        partition the batch into confident positive, hard negative and others</span></span><br><span class="line"><span class="string">        :param features: shape=(BS, dim)</span></span><br><span class="line"><span class="string">        :param multilabels: shape=(BS, n_class)</span></span><br><span class="line"><span class="string">        :param labels: shape=(BS,)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        P: positive pair set. tuple of 2 np.array i and j.</span></span><br><span class="line"><span class="string">            i contains smaller indices and j larger indices in the batch.</span></span><br><span class="line"><span class="string">            if P is None, no positive pair found in this batch.</span></span><br><span class="line"><span class="string">        N: negative pair set. similar to P, but will never be None.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        f_np = features.cpu().numpy()</span><br><span class="line">        ml_np = multilabels.cpu().numpy()</span><br><span class="line">        p_dist = pdist(f_np)</span><br><span class="line">        p_agree = <span class="number">1</span> - pdist(ml_np, <span class="string">&#x27;minkowski&#x27;</span>, p=<span class="number">1</span>) / <span class="number">2</span></span><br><span class="line">        sorting_idx = np.argsort(p_dist)</span><br><span class="line">        n_similar = <span class="built_in">int</span>(<span class="built_in">len</span>(p_dist) * self.mining_ratio)</span><br><span class="line">        similar_idx = sorting_idx[:n_similar]</span><br><span class="line">        is_positive = p_agree[similar_idx] &gt; self.threshold.item()</span><br><span class="line">        pos_idx = similar_idx[is_positive]</span><br><span class="line">        neg_idx = similar_idx[~is_positive]</span><br><span class="line">        P = dist_idx_to_pair_idx(<span class="built_in">len</span>(f_np), pos_idx)</span><br><span class="line">        N = dist_idx_to_pair_idx(<span class="built_in">len</span>(f_np), neg_idx)</span><br><span class="line">        self._update_threshold(p_agree)</span><br><span class="line">        self._update_buffers(P, labels)</span><br><span class="line">        <span class="keyword">return</span> P, N</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_update_threshold</span>(<span class="params">self, pairwise_agreements</span>):</span><br><span class="line">        pos = <span class="built_in">int</span>(<span class="built_in">len</span>(pairwise_agreements) * self.mining_ratio)</span><br><span class="line">        sorted_agreements = np.sort(pairwise_agreements)</span><br><span class="line">        t = torch.Tensor([sorted_agreements[-pos]]).cuda()</span><br><span class="line">        self.threshold = self.threshold * (<span class="number">1</span> - self.moment) + t * self.moment</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_update_buffers</span>(<span class="params">self, P, labels</span>):</span><br><span class="line">        <span class="keyword">if</span> P <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            self.n_pos_pairs = <span class="number">0.9</span> * self.n_pos_pairs</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        n_pos_pairs = <span class="built_in">len</span>(P[<span class="number">0</span>])</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> (i, j) <span class="keyword">in</span> <span class="built_in">zip</span>(P[<span class="number">0</span>], P[<span class="number">1</span>]):</span><br><span class="line">            count += labels[i] == labels[j]</span><br><span class="line">        rate_TP = <span class="built_in">float</span>(count) / n_pos_pairs</span><br><span class="line">        self.n_pos_pairs = <span class="number">0.9</span> * self.n_pos_pairs + <span class="number">0.1</span> * n_pos_pairs</span><br><span class="line">        self.rate_TP = <span class="number">0.9</span> * self.rate_TP + <span class="number">0.1</span> * rate_TP</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># L_RJ 公式 8</span></span><br><span class="line"><span class="comment"># 与公式8略有不同</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">JointLoss</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, margin=<span class="number">1</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(JointLoss, self).__init__()</span><br><span class="line">        self.margin = margin</span><br><span class="line">        self.sim_margin = <span class="number">1</span> - margin / <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, features, agents, labels, similarity, features_target, similarity_target</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param features: shape=(BS/2, dim)</span></span><br><span class="line"><span class="string">        :param agents: shape=(n_class, dim)</span></span><br><span class="line"><span class="string">        :param labels: shape=(BS/2,)</span></span><br><span class="line"><span class="string">        :param features_target: shape=(BS/2, n_class)</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        loss_terms = []</span><br><span class="line">        arange = torch.arange(<span class="built_in">len</span>(agents)).cuda()</span><br><span class="line">        zero = torch.Tensor([<span class="number">0</span>]).cuda()</span><br><span class="line">        <span class="keyword">for</span> (f, l, s) <span class="keyword">in</span> <span class="built_in">zip</span>(features, labels, similarity):</span><br><span class="line">            loss_pos = (f - agents[l]).<span class="built_in">pow</span>(<span class="number">2</span>).<span class="built_in">sum</span>() <span class="comment"># 公式8的最后一项，a_i-f(z_k)</span></span><br><span class="line">            loss_terms.append(loss_pos)</span><br><span class="line">            neg_idx = arange != l</span><br><span class="line">            <span class="comment"># 从agent中选出与当前图片特征相似度高于阈值，但不是同一类的的agent</span></span><br><span class="line">            hard_agent_idx = neg_idx &amp; (s &gt; self.sim_margin) <span class="comment"># 越相似，值越大</span></span><br><span class="line">            <span class="keyword">if</span> torch.<span class="built_in">any</span>(hard_agent_idx):</span><br><span class="line">                hard_neg_sdist = (f - agents[hard_agent_idx]).<span class="built_in">pow</span>(<span class="number">2</span>).<span class="built_in">sum</span>(dim=<span class="number">1</span>)</span><br><span class="line">                loss_neg = torch.<span class="built_in">max</span>(zero, self.margin - hard_neg_sdist).mean()</span><br><span class="line">                loss_terms.append(loss_neg)</span><br><span class="line">        <span class="keyword">for</span> (f, s) <span class="keyword">in</span> <span class="built_in">zip</span>(features_target, similarity_target):</span><br><span class="line">            hard_agent_idx = s &gt; self.sim_margin</span><br><span class="line">            <span class="keyword">if</span> torch.<span class="built_in">any</span>(hard_agent_idx):</span><br><span class="line">                hard_neg_sdist = (f - agents[hard_agent_idx]).<span class="built_in">pow</span>(<span class="number">2</span>).<span class="built_in">sum</span>(dim=<span class="number">1</span>)</span><br><span class="line">                loss_neg = torch.<span class="built_in">max</span>(zero, self.margin - hard_neg_sdist).mean()</span><br><span class="line">                loss_terms.append(loss_neg)</span><br><span class="line">        loss_total = torch.mean(torch.stack(loss_terms))</span><br><span class="line">        <span class="keyword">return</span> loss_total</span><br></pre></td></tr></table></figure>
-
 <p>根据代码，重新明确两个定义:</p>
 <ul>
 <li>similarity 指的是图片的 feature1 和 agent 的 feature2 的特征相似性: feature1*feature2</li>
@@ -226,155 +484,410 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2019/05/13/MAR/" data-id="cla55fgd50019wka7buct9wpi" data-title="MAR" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/person-re-id/" rel="tag"># person re-id</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/10/residual-attention_and_CBAM_GCNet/" rel="next" title="residual_attention">
+                <i class="fa fa-chevron-left"></i> residual_attention
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/17/BNNeck/" rel="prev" title="BNNeck">
+                BNNeck <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2019/05/17/BNNeck/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          BNNeck
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/05/10/residual-attention_and_CBAM_GCNet/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">residual_attention</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+  </article>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/408/">408</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/408/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/DeepLearning/">DeepLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GAN/">GAN</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GPU/">GPU</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VOS/">VOS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/attention/">attention</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/cuda/">cuda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning/">deep-learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/face-recognition/">face recognition</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github-markdown/">github-markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ind1/">ind1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/object-detection/">object detection</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/paper/">paper</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-re-id/">person re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/person-reid/">person-reid</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/preson-re-id/">preson re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/pytorch/">pytorch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-ID/">re-ID</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/re-id/">re-id</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/segmentation/">segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/semantice-segmentation/">semantice segmentation</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorboard/">tensorboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tensorflow/">tensorflow</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/">unsupervised video object segmentation</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/unsupervised-video-object-segmentation/VOS/">VOS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/408/">408</a></li></ul></li></ul>
-    </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/408/" rel="tag">408</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMC/" rel="tag">CMC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CNN/" rel="tag">CNN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grad-CAM/" rel="tag">Grad-CAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RotationNet/" rel="tag">RotationNet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SE/" rel="tag">SE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPGAN/" rel="tag">SPGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VOS/" rel="tag">VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/a/" rel="tag">a</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/attention/" rel="tag">attention</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/b/" rel="tag">b</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/" rel="tag">cross domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain-person-re-id/" rel="tag">cross-domain person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cycleGAN/" rel="tag">cycleGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data/" rel="tag">data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/data-VOS/" rel="tag">data_VOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/" rel="tag">deep-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-adaption/" rel="tag">domain adaption</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/domain-guided-distillation/" rel="tag">domain guided distillation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/driver/" rel="tag">driver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-recognition/" rel="tag">face recognition</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/face-synthesis/" rel="tag">face synthesis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/few-shot-learning/" rel="tag">few-shot learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mask-and-colour/" rel="tag">mask and colour</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta-learning/" rel="tag">meta-learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-domain/" rel="tag">multi-domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neural-style-transfer/" rel="tag">neural style transfer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-detection/" rel="tag">object detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/one-example/" rel="tag">one_example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/paper/" rel="tag">paper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-id/" rel="tag">person re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-re-identification/" rel="tag">person re-identification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/person-reid/" rel="tag">person-reid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-picture/" rel="tag">python,picture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch-learn-chenyun/" rel="tag">pytorch-learn chenyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-ID/" rel="tag">re-ID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re-id/" rel="tag">re-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segmentation/" rel="tag">segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantice-segmentation/" rel="tag">semantice segmentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharelatex/" rel="tag">sharelatex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/softmax/" rel="tag">softmax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/starGAN/" rel="tag">starGAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorboard/" rel="tag">tensorboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transfer-learning/" rel="tag">transfer learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" rel="tag">卷积\反卷积 空洞卷积</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">计算机操作系统</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/408/" style="font-size: 15px;">408</a> <a href="/tags/CMC/" style="font-size: 10px;">CMC</a> <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Grad-CAM/" style="font-size: 10px;">Grad-CAM</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/RotationNet/" style="font-size: 10px;">RotationNet</a> <a href="/tags/SE/" style="font-size: 10px;">SE</a> <a href="/tags/SPGAN/" style="font-size: 10px;">SPGAN</a> <a href="/tags/VOS/" style="font-size: 10px;">VOS</a> <a href="/tags/a/" style="font-size: 10px;">a</a> <a href="/tags/attention/" style="font-size: 13.33px;">attention</a> <a href="/tags/b/" style="font-size: 10px;">b</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross domain</a> <a href="/tags/cross-domain-person-re-id/" style="font-size: 10px;">cross-domain person re-id</a> <a href="/tags/cuda/" style="font-size: 11.67px;">cuda</a> <a href="/tags/cudnn/" style="font-size: 10px;">cudnn</a> <a href="/tags/cycleGAN/" style="font-size: 10px;">cycleGAN</a> <a href="/tags/data/" style="font-size: 10px;">data</a> <a href="/tags/data-VOS/" style="font-size: 10px;">data_VOS</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep-learning</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/domain-adaption/" style="font-size: 10px;">domain adaption</a> <a href="/tags/domain-guided-distillation/" style="font-size: 10px;">domain guided distillation</a> <a href="/tags/driver/" style="font-size: 10px;">driver</a> <a href="/tags/face-recognition/" style="font-size: 10px;">face recognition</a> <a href="/tags/face-synthesis/" style="font-size: 10px;">face synthesis</a> <a href="/tags/few-shot/" style="font-size: 10px;">few-shot</a> <a href="/tags/few-shot-learning/" style="font-size: 10px;">few-shot learning</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 11.67px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/markdown/" style="font-size: 11.67px;">markdown</a> <a href="/tags/mask-and-colour/" style="font-size: 10px;">mask and colour</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/mathjax/" style="font-size: 10px;">mathjax</a> <a href="/tags/memory/" style="font-size: 11.67px;">memory</a> <a href="/tags/meta-learning/" style="font-size: 10px;">meta-learning</a> <a href="/tags/multi-domain/" style="font-size: 10px;">multi-domain</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/neural-style-transfer/" style="font-size: 10px;">neural style transfer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/numpy/" style="font-size: 11.67px;">numpy</a> <a href="/tags/object-detection/" style="font-size: 10px;">object detection</a> <a href="/tags/one-example/" style="font-size: 10px;">one_example</a> <a href="/tags/paper/" style="font-size: 15px;">paper</a> <a href="/tags/person-re-id/" style="font-size: 18.33px;">person re-id</a> <a href="/tags/person-re-identification/" style="font-size: 10px;">person re-identification</a> <a href="/tags/person-reid/" style="font-size: 11.67px;">person-reid</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-picture/" style="font-size: 10px;">python,picture</a> <a href="/tags/pytorch/" style="font-size: 16.67px;">pytorch</a> <a href="/tags/pytorch-learn-chenyun/" style="font-size: 10px;">pytorch-learn chenyun</a> <a href="/tags/re-ID/" style="font-size: 10px;">re-ID</a> <a href="/tags/re-id/" style="font-size: 11.67px;">re-id</a> <a href="/tags/segmentation/" style="font-size: 10px;">segmentation</a> <a href="/tags/semantice-segmentation/" style="font-size: 10px;">semantice segmentation</a> <a href="/tags/sharelatex/" style="font-size: 10px;">sharelatex</a> <a href="/tags/softmax/" style="font-size: 10px;">softmax</a> <a href="/tags/starGAN/" style="font-size: 10px;">starGAN</a> <a href="/tags/tensorboard/" style="font-size: 10px;">tensorboard</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/transfer-learning/" style="font-size: 10px;">transfer learning</a> <a href="/tags/%E5%8D%B7%E7%A7%AF-%E5%8F%8D%E5%8D%B7%E7%A7%AF-%E7%A9%BA%E6%B4%9E%E5%8D%B7%E7%A7%AF/" style="font-size: 10px;">卷积\反卷积 空洞卷积</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 10px;">容器</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">计算机操作系统</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/11/06/test-2011-11-06/">test_2011_11_06</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/23/python-100-days/">python_100_days</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/data-VOS/">data_VOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/TVOS/">TVOS</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/22/computer_system/">计算机组成原理</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="post-spread">
       
-      &copy; 2022 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Deep-Soft-Multilabel-Reference-Learning"><span class="nav-number">3.</span> <span class="nav-text">2. Deep Soft Multilabel Reference Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Problem-formulation-and-Overview"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Problem formulation and Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Soft-multilabel-guided-hard-negative-mining"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Soft multilabel-guided hard negative mining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Cross-view-consistent-soft-multilabel-learning"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Cross-view consistent soft multilabel learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Reference-agent-Learning"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Reference agent Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-Model-training-and-testing"><span class="nav-number">3.5.</span> <span class="nav-text">2.5.1 Model training and testing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Experiments"><span class="nav-number">4.</span> <span class="nav-text">3. Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-code"><span class="nav-number">5.</span> <span class="nav-text">4. code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Logger"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Logger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-model"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-optim"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 optim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-trainer-init-losses"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 trainer&#x2F;init_losses</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <nav id="mobile-nav">
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
 </body>
 </html>
