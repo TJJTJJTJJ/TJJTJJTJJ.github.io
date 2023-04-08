@@ -1,135 +1,58 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="paper,RotationNet," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="1. RotationNet-paper">
+  <meta name="description" content="1. RotationNet-paper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RotationNet-paper">
 <meta property="og:url" content="http://example.com/2018/12/11/RotationNet-paper/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="1. RotationNet-paper">
-<meta property="og:locale">
-<meta property="og:image" content="http://example.com/2018/12/11/RotationNet-paper/RotationNet-paper/RotationNet.png">
-<meta property="og:image" content="http://example.com/2018/12/11/RotationNet-paper/RotationNet-paper/RotationNet1.png">
-<meta property="og:image" content="http://example.com/2018/12/11/RotationNet-paper/RotationNet-paper/RotationNet2.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2018/12/11/RotationNet-paper/RotationNet.png">
+<meta property="og:image" content="http://example.com/2018/12/11/RotationNet-paper/12/11/RotationNet-paper/RotationNet.png">
+<meta property="og:image" content="http://example.com/2018/12/11/RotationNet-paper/RotationNet1.png">
+<meta property="og:image" content="http://example.com/2018/12/11/RotationNet-paper/12/11/RotationNet-paper/RotationNet1.png">
+<meta property="og:image" content="http://example.com/2018/12/11/RotationNet-paper/RotationNet2.png">
+<meta property="og:image" content="http://example.com/2018/12/11/RotationNet-paper/12/11/RotationNet-paper/RotationNet2.png">
 <meta property="article:published_time" content="2018-12-11T08:18:45.000Z">
 <meta property="article:modified_time" content="2018-12-13T06:26:35.932Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="paper">
 <meta property="article:tag" content="RotationNet">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2018/12/11/RotationNet-paper/RotationNet-paper/RotationNet.png">
+<meta name="twitter:image" content="http://example.com/2018/12/11/RotationNet-paper/RotationNet.png">
+
+<link rel="canonical" href="http://example.com/2018/12/11/RotationNet-paper/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://example.com/2018/12/11/RotationNet-paper/"/>
-
-
-
-
 
   <title>RotationNet-paper | Hexo</title>
   
@@ -139,232 +62,169 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-something">
-          <a href="/something" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            something
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/11/RotationNet-paper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="TianJiajie">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">RotationNet-paper</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          RotationNet-paper
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T16:18:45+08:00">
-                2018-12-11
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper/" itemprop="url" rel="index">
-                    <span itemprop="name">paper</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-12-11 16:18:45" itemprop="dateCreated datePublished" datetime="2018-12-11T16:18:45+08:00">2018-12-11</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-13 14:26:35" itemprop="dateModified" datetime="2018-12-13T14:26:35+08:00">2018-12-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h1 id="1-RotationNet-paper"><a href="#1-RotationNet-paper" class="headerlink" title="1. RotationNet-paper"></a>1. RotationNet-paper</h1><span id="more"></span>
@@ -378,16 +238,16 @@
 <h2 id="1-1-出发点"><a href="#1-1-出发点" class="headerlink" title="1.1 出发点"></a>1.1 出发点</h2><p>作者不仅想要预测出图片的类别label，还想预测出图片的view-points.</p>
 <p>我觉得作者的创新点在于对view的状态顺序编码成view-rotation，限定了view的取值空间，使预测的结果变成了哪种view-rotaion的view准确率高。</p>
 <p>因为在一般情况下，想到的是直接预测view，而不是view-rotation.</p>
-<h2 id="1-2-网络架构"><a href="#1-2-网络架构" class="headerlink" title="1.2 网络架构"></a>1.2 网络架构</h2><p><img src="./RotationNet-paper/RotationNet.png" alt="RotationNet的网络架构"><br></p>
+<h2 id="1-2-网络架构"><a href="#1-2-网络架构" class="headerlink" title="1.2 网络架构"></a>1.2 网络架构</h2><p><img src="/2018/12/11/RotationNet-paper/RotationNet.png" alt="RotationNet的网络架构"><br><img src="/2018/12/11/RotationNet-paper/12/11/RotationNet-paper/RotationNet.png" class title="RotationNet的网络架构"></p>
 <h3 id="1-2-1-训练过程："><a href="#1-2-1-训练过程：" class="headerlink" title="1.2.1 训练过程："></a>1.2.1 训练过程：</h3><p>以MIRO数据集、case=3为例，nview=160，vcand=(16, 160),view-rotation=16，num-classes=12.</p>
 <p>这里的view-roration，我的理解是view的排列方式，但是还是不太顺。</p>
 <p>输入的图片个数batch-size必须是nview的倍数，以输入一个样本的160个角度的图片为例，即batch-size=160，nsamp=1，不影响后续的分析，因为每个样本没有任何关系。</p>
 <p>输出是output=batch-size x ((num_classes+1) * nview)= 160 x (13 x 160). 可以理解成对每一个图片，输出网络架构的一行，可以理解成160张图片在160个view下属于13个类的概率。</p>
-<p><img src="./RotationNet-paper/RotationNet1.png" alt="模型的输出"><br></p>
+<p><img src="/2018/12/11/RotationNet-paper/RotationNet1.png" alt="模型的输出"><br><img src="/2018/12/11/RotationNet-paper/12/11/RotationNet-paper/RotationNet1.png" class title="模型的输出"></p>
 <p>预测view rotation: 利用下面的预测view公式，求log并相减得到output- = (160x160) x 12 x 1，可以理解成一个矩阵： (160x160) x 12，每行表示当前图片当前view下的属于各类的概率，第一个160行表示第一张图片在160个view下的概率分布，第二个160行表示第二张图片在160个view下的概率分布。scores = (16 x 12 x 1)。scores可以理解成当前view-rotation下这160张图片一起属于各类的概率。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">output = model(input_var)</span><br><span class="line">num_classes = <span class="built_in">int</span>( output.size( <span class="number">1</span> ) / nview ) - <span class="number">1</span></span><br><span class="line">output = output.view( -<span class="number">1</span>, num_classes + <span class="number">1</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># compute scores and decide target labels</span></span><br><span class="line">output_ = torch.nn.functional.log_softmax( output )</span><br><span class="line">output_ = output_[ :, :-<span class="number">1</span> ] - torch.t( output_[ :, -<span class="number">1</span> ].repeat( <span class="number">1</span>, output_.size(<span class="number">1</span>)-<span class="number">1</span> ).view( output_.size(<span class="number">1</span>)-<span class="number">1</span>, -<span class="number">1</span> ) )</span><br><span class="line">output_ = output_.view( -<span class="number">1</span>, nview * nview, num_classes )</span><br><span class="line">output_ = output_.data.cpu().numpy()</span><br><span class="line">output_ = output_.transpose( <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span> )</span><br><span class="line"></span><br><span class="line">scores = np.zeros( ( vcand.shape[ <span class="number">0</span> ], num_classes, nsamp ) )</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(vcand.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(vcand.shape[<span class="number">1</span>]):</span><br><span class="line">        scores[ j ] = scores[ j ] + output_[ vcand[ j ][ k ] * nview + k ]</span><br></pre></td></tr></table></figure>
 <p>生成动态真值target-：已知这160张图片的真值target[ n * nview ]，假设是第3类，j-max表示第j-max个view-rotation下，预测为第3类的概率最大，继而生成动态真值target-=(target.size(0) x nview)=160 x 160=25600，可以理解成160张图片在160个view下的真值，在j-max个view-rotation对应的view设置为类别3，其余的设置为13.</p>
-<p><img src="./RotationNet-paper/RotationNet2.png" alt="生成动态真值"><br></p>
+<p><img src="/2018/12/11/RotationNet-paper/RotationNet2.png" alt="生成动态真值"><br><img src="/2018/12/11/RotationNet-paper/12/11/RotationNet-paper/RotationNet2.png" class title="生成动态真值"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">target_ = torch.LongTensor( target.size(<span class="number">0</span>) * nview )</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>( nsamp ):</span><br><span class="line">    j_max = np.argmax( scores[ :, target[ n * nview ], n ] )</span><br><span class="line">    <span class="comment"># assign target labels</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(vcand.shape[<span class="number">1</span>]):</span><br><span class="line">        target_[ n * nview * nview + vcand[ j_max ][ k ] * nview + k ] = target[ n * nview ]</span><br></pre></td></tr></table></figure>
 <h3 id="1-2-2-验证过程"><a href="#1-2-2-验证过程" class="headerlink" title="1.2.2 验证过程"></a>1.2.2 验证过程</h3><p>与训练类似，可以得到output- = (160x160) x 12 x 1，可以理解成一个矩阵： (160x160) x 12，每行表示当前图片当前view下的属于各类的概率，第一个160行表示第一张图片在160个view下的概率分布，第二个160行表示第二张图片在160个view下的概率分布。scores = (16 x 12 x 1)。scores可以理解成每个view-rotation下这160张图片一起属于各类的概率。</p>
 <p>j-max表示在第j-max个view-rotation下，scores可以找到最大概率。</p>
@@ -402,259 +262,179 @@
 </blockquote>
 <p>根据作者的回复，不难理解，给定的测试图片是需要预先知道测试图片序列的相对位置的。</p>
 <h2 id="1-3-预测公式"><a href="#1-3-预测公式" class="headerlink" title="1.3 预测公式"></a>1.3 预测公式</h2><script type="math/tex; mode=display">\max_{(v_i)\_{i=1}^M}\prod_{i=1}^M(\log p_{v_{i},y}^{(i)}-\log p_{v_{i},N+1}^{(i)})</script>
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/paper/" rel="tag"># paper</a>
-          
-            <a href="/tags/RotationNet/" rel="tag"># RotationNet</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/12/10/pytorch-2.0/" rel="next" title="pytorch-2.0">
-                <i class="fa fa-chevron-left"></i> pytorch-2.0
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/paper/" rel="tag"># paper</a>
+              <a href="/tags/RotationNet/" rel="tag"># RotationNet</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/14/Grad-CAM/" rel="prev" title="Grad-CAM">
-                Grad-CAM <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/10/pytorch-2.0/" rel="prev" title="pytorch-2.0">
+      <i class="fa fa-chevron-left"></i> pytorch-2.0
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/14/Grad-CAM/" rel="next" title="Grad-CAM">
+      Grad-CAM <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">76</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">73</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-RotationNet-paper"><span class="nav-number">1.</span> <span class="nav-text">1. RotationNet-paper</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%87%BA%E5%8F%91%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 出发点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 训练过程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-%E9%AA%8C%E8%AF%81%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 验证过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 测试过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E9%A2%84%E6%B5%8B%E5%85%AC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 预测公式</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-RotationNet-paper"><span class="nav-number">1.</span> <span class="nav-text">1. RotationNet-paper</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%87%BA%E5%8F%91%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 出发点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 训练过程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-%E9%AA%8C%E8%AF%81%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 验证过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 测试过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E9%A2%84%E6%B5%8B%E5%85%AC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 预测公式</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">TianJiajie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -672,142 +452,65 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
 
 
 
   
 
   
+      
 
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
         }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
         }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-
-  
+    
 
   
 

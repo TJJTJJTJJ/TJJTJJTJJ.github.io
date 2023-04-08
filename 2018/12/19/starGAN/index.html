@@ -1,140 +1,68 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="GAN,starGAN," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="0. 前言因为在person-reid论文HHL中涉及到了starGAN，所以做一个StarGAN的阅读记录，并比较与CycleGAN的区别。 StarGAN Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation Yunjey Choi, Minje Choi, Munyoung Ki">
+  <meta name="description" content="0. 前言因为在person-reid论文HHL中涉及到了starGAN，所以做一个StarGAN的阅读记录，并比较与CycleGAN的区别。 StarGAN Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation Yunjey Choi, Minje Choi, Munyoung Ki">
 <meta property="og:type" content="article">
 <meta property="og:title" content="starGAN">
 <meta property="og:url" content="http://example.com/2018/12/19/starGAN/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言因为在person-reid论文HHL中涉及到了starGAN，所以做一个StarGAN的阅读记录，并比较与CycleGAN的区别。 StarGAN Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation Yunjey Choi, Minje Choi, Munyoung Ki">
-<meta property="og:locale">
-<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN/starGAN1.png">
-<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN/starGAN2.png">
-<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN/starGAN3.png">
-<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN/starGAN5.png">
-<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN/starGAN6.png">
-<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN/starGAN7.png">
-<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN/starGAN4.png">
-<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN/starGAN8.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN1.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/12/19/starGAN/starGAN1.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN2.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/12/19/starGAN/starGAN2.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN3.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/12/19/starGAN/starGAN3.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN5.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/12/19/starGAN/starGAN5.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN6.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/12/19/starGAN/starGAN6.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN7.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/12/19/starGAN/starGAN7.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN4.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/12/19/starGAN/starGAN4.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/starGAN8.png">
+<meta property="og:image" content="http://example.com/2018/12/19/starGAN/12/19/starGAN/starGAN8.png">
 <meta property="article:published_time" content="2018-12-19T01:44:59.000Z">
 <meta property="article:modified_time" content="2018-12-23T15:11:34.619Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="GAN">
 <meta property="article:tag" content="starGAN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2018/12/19/starGAN/starGAN/starGAN1.png">
+<meta name="twitter:image" content="http://example.com/2018/12/19/starGAN/starGAN1.png">
+
+<link rel="canonical" href="http://example.com/2018/12/19/starGAN/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://example.com/2018/12/19/starGAN/"/>
-
-
-
-
 
   <title>starGAN | Hexo</title>
   
@@ -144,232 +72,169 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-something">
-          <a href="/something" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            something
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/19/starGAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="TianJiajie">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">starGAN</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          starGAN
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T09:44:59+08:00">
-                2018-12-19
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper/" itemprop="url" rel="index">
-                    <span itemprop="name">paper</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-12-19 09:44:59" itemprop="dateCreated datePublished" datetime="2018-12-19T09:44:59+08:00">2018-12-19</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-23 23:11:34" itemprop="dateModified" datetime="2018-12-23T23:11:34+08:00">2018-12-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h1 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h1><p>因为在person-reid论文<a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_ECCV_2018/papers/Zhun_Zhong_Generalizing_A_Person_ECCV_2018_paper.pdf">HHL</a>中涉及到了starGAN，所以做一个StarGAN的阅读记录，并比较与CycleGAN的区别。</p>
@@ -380,16 +245,16 @@
 <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>解决多域之间图像转换一对多的问题，本文主要针对人脸进行改变。</p>
 <p><strong>关键词</strong>：multi-domain image-image translation</p>
 <p><strong>效果</strong>：转换效果如图所示</p>
-<p><img src="./starGAN/starGAN1.png" alt="转换效果"><br></p>
+<p><img src="/2018/12/19/starGAN/starGAN1.png" alt="转换效果"><br><img src="/2018/12/19/starGAN/12/19/starGAN/starGAN1.png" class title="转换效果"></p>
 <p><strong>网络模型</strong>：CycleGAN和StarGAN模型对比</p>
 <p>starGAN有一个生成器G，两个判别器。</p>
-<p><img src="./starGAN/starGAN2.png" alt="CycleGAN和StarGAN模型对比"><br></p>
+<p><img src="/2018/12/19/starGAN/starGAN2.png" alt="CycleGAN和StarGAN模型对比"><br><img src="/2018/12/19/starGAN/12/19/starGAN/starGAN2.png" class title="CycleGAN和StarGAN模型对比"></p>
 <p><strong>备注</strong>：</p>
 <p>multi-domain：单数据集的不同属性作为了一个domain</p>
 <p>multi-datasets：不同数据集的不同属性</p>
 <p>starGAN 分为multi-domain和multi-dataset两种。</p>
 <h1 id="2-Star-Generative-Adversarial-Networks"><a href="#2-Star-Generative-Adversarial-Networks" class="headerlink" title="2. Star Generative Adversarial Networks"></a>2. Star Generative Adversarial Networks</h1><h2 id="2-1-Multi-Domain-Image-to-Image-Translation"><a href="#2-1-Multi-Domain-Image-to-Image-Translation" class="headerlink" title="2.1  Multi-Domain Image-to-Image Translation"></a>2.1  Multi-Domain Image-to-Image Translation</h2><p><strong>starGAN</strong>: starGAN的训练模型</p>
-<p><img src="./starGAN/starGAN3.png" alt="starGAN in mutli domain"><br></p>
+<p><img src="/2018/12/19/starGAN/starGAN3.png" alt="starGAN in mutli domain"><br><img src="/2018/12/19/starGAN/12/19/starGAN/starGAN3.png" class title="starGAN in mutli domain"></p>
 <blockquote>
 <p>To achieve this, we train G to translate an input image x into an output image y conditioned on the target domain label c, <strong>G(x; c) -&gt; y</strong>. We randomly generate the target domain label c so that G learns to flexibly translate the input image. We also introduce an auxiliary classifier [22] that allows a single discriminator to control multiple domains. That is, our discriminator produces probability distributions over both sources and domain labels, <strong>D:x-&gt;{$D<em>{src}$(x); $D</em>{cls}$(x)}</strong></p>
 </blockquote>
@@ -438,7 +303,7 @@
 </blockquote>
 <p><strong>Reconstruction Loss</strong>: (共有)重构损失</p>
 <script type="math/tex; mode=display">L_{rec}=E_{x,c,c'}[\parallel x-G(G(x,c),c') \parallel _1]  \tag{4}</script><p><strong>Full Objective</strong>: 共有</p>
-<script type="math/tex; mode=display">L_D=-L_{adv}+\lambda_{cls} L_{cls}^r</script><script type="math/tex; mode=display">L_G=L_{adv}+\lambda_{cls} L_{cls}^f+\lambda_{rec}L_{rec} \tag{5}</script><script type="math/tex; mode=display">\lambda_{cls}=1, \lambda_{rec}=10</script><h2 id="2-2-Training-with-Multiple-Datasets"><a href="#2-2-Training-with-Multiple-Datasets" class="headerlink" title="2.2. Training with Multiple Datasets"></a>2.2. Training with Multiple Datasets</h2><p><img src="./starGAN/starGAN5.png" alt="starGAN in multi datasets"><br></p>
+<script type="math/tex; mode=display">L_D=-L_{adv}+\lambda_{cls} L_{cls}^r</script><script type="math/tex; mode=display">L_G=L_{adv}+\lambda_{cls} L_{cls}^f+\lambda_{rec}L_{rec} \tag{5}</script><script type="math/tex; mode=display">\lambda_{cls}=1, \lambda_{rec}=10</script><h2 id="2-2-Training-with-Multiple-Datasets"><a href="#2-2-Training-with-Multiple-Datasets" class="headerlink" title="2.2. Training with Multiple Datasets"></a>2.2. Training with Multiple Datasets</h2><p><img src="/2018/12/19/starGAN/starGAN5.png" alt="starGAN in multi datasets"><br><img src="/2018/12/19/starGAN/12/19/starGAN/starGAN5.png" class title="starGAN in multi datasets"></p>
 <p>StarGAN也适用于多数据集间的转换，上述过程中的重构损失要求数据集之间的标签一致(？？？)。针对这个问题，作者引入Mask Vector.</p>
 <p><strong>Mask Vector</strong>: 修改真值。</p>
 <script type="math/tex; mode=display">\tilde{c} = [c_1, ..., c_n, m]</script><blockquote>
@@ -448,11 +313,11 @@
 <h1 id="3-Implementation"><a href="#3-Implementation" class="headerlink" title="3. Implementation"></a>3. Implementation</h1><p><strong>Improved GAN training</strong>: 为了稳定训练过程，替代方程1.</p>
 <script type="math/tex; mode=display">L_{adv}=E_x[log D_{src}(x)]-E_{x,c}[log (D_{src}(G(x,c)))]-\lambda_{gp}E_{\hat{x}}[(\parallel \nabla_{\hat{x}}  D_{src}(\hat{x}) \parallel_2-1)^2] \tag{6}</script><script type="math/tex; mode=display">\lambda_{gp}=10</script><p><strong>Network Architecture</strong>: 类似CycleGAN。</p>
 <p>G: Leaky ReLU: 0.01</p>
-<p><img src="./starGAN/starGAN6.png" alt="G"><br></p>
+<p><img src="/2018/12/19/starGAN/starGAN6.png" alt="G"><br><img src="/2018/12/19/starGAN/12/19/starGAN/starGAN6.png" class title="G"></p>
 <p>D: PatchGAN</p>
 <p>现在网络架构可以看到的是作者使用的不是70x70的patchGAN，通过patchGAN的论文，也没有看到这种结构。</p>
-<p><img src="./starGAN/starGAN7.png" alt="D"><br></p>
-<h1 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h1><h2 id="4-1-Baseline-Models"><a href="#4-1-Baseline-Models" class="headerlink" title="4.1 Baseline Models"></a>4.1 Baseline Models</h2><p><img src="./starGAN/starGAN4.png" alt="baseline models"><br></p>
+<p><img src="/2018/12/19/starGAN/starGAN7.png" alt="D"><br><img src="/2018/12/19/starGAN/12/19/starGAN/starGAN7.png" class></p>
+<h1 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h1><h2 id="4-1-Baseline-Models"><a href="#4-1-Baseline-Models" class="headerlink" title="4.1 Baseline Models"></a>4.1 Baseline Models</h2><p><img src="/2018/12/19/starGAN/starGAN4.png" alt="baseline models"><br><img src="/2018/12/19/starGAN/12/19/starGAN/starGAN4.png" class title="baseline models"></p>
 <p>通过结果可以看出，在Gender这个属性，ICGAN的转换效果要更好一些，但是损失了ID信息。</p>
 <h2 id="4-2-Training"><a href="#4-2-Training" class="headerlink" title="4.2 Training"></a>4.2 Training</h2><ul>
 <li>Adam: $\beta_1=0.5, \beta_2=0.999$</li>
@@ -470,7 +335,7 @@
 <li>当训练集是多数据集的多domain时，label的维度是c+c2+2，因为有mask，同样需要广播成图片大小，一起输入网络</li>
 </ul>
 <p><strong>Discriminator</strong>:<br>判别器Discriminator，有个疑问是关于是感受野和计算损失的。</p>
-<p><img src="./starGAN/starGAN8.png" alt="感受野"><br></p>
+<p><img src="/2018/12/19/starGAN/starGAN8.png" alt="感受野"><br><img src="/2018/12/19/starGAN/12/19/starGAN/starGAN8.png" class title="感受野"></p>
 <p>下面会提及到计算损失的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ResidualBlock</span>(nn.Module):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Residual Block with instance normalization.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, dim_in, dim_out</span>):</span><br><span class="line">        <span class="built_in">super</span>(ResidualBlock, self).__init__()</span><br><span class="line">        self.main = nn.Sequential(</span><br><span class="line">            nn.Conv2d(dim_in, dim_out, kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.InstanceNorm2d(dim_out, affine=<span class="literal">True</span>, track_running_stats=<span class="literal">True</span>),</span><br><span class="line">            nn.ReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(dim_out, dim_out, kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>, bias=<span class="literal">False</span>),</span><br><span class="line">            nn.InstanceNorm2d(dim_out, affine=<span class="literal">True</span>, track_running_stats=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">return</span> x + self.main(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Generator</span>(nn.Module):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Generator network.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, conv_dim=<span class="number">64</span>, c_dim=<span class="number">5</span>, repeat_num=<span class="number">6</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(Generator, self).__init__()</span><br><span class="line"></span><br><span class="line">        layers = []</span><br><span class="line">        layers.append(nn.Conv2d(<span class="number">3</span>+c_dim, conv_dim, kernel_size=<span class="number">7</span>, stride=<span class="number">1</span>, padding=<span class="number">3</span>, bias=<span class="literal">False</span>))</span><br><span class="line">        layers.append(nn.InstanceNorm2d(conv_dim, affine=<span class="literal">True</span>, track_running_stats=<span class="literal">True</span>))</span><br><span class="line">        layers.append(nn.ReLU(inplace=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Down-sampling layers.</span></span><br><span class="line">        curr_dim = conv_dim</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line">            layers.append(nn.Conv2d(curr_dim, curr_dim*<span class="number">2</span>, kernel_size=<span class="number">4</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>, bias=<span class="literal">False</span>))</span><br><span class="line">            layers.append(nn.InstanceNorm2d(curr_dim*<span class="number">2</span>, affine=<span class="literal">True</span>, track_running_stats=<span class="literal">True</span>))</span><br><span class="line">            layers.append(nn.ReLU(inplace=<span class="literal">True</span>))</span><br><span class="line">            curr_dim = curr_dim * <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Bottleneck layers.</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(repeat_num):</span><br><span class="line">            layers.append(ResidualBlock(dim_in=curr_dim, dim_out=curr_dim))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Up-sampling layers.</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line">            layers.append(nn.ConvTranspose2d(curr_dim, curr_dim//<span class="number">2</span>, kernel_size=<span class="number">4</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>, bias=<span class="literal">False</span>))</span><br><span class="line">            layers.append(nn.InstanceNorm2d(curr_dim//<span class="number">2</span>, affine=<span class="literal">True</span>, track_running_stats=<span class="literal">True</span>))</span><br><span class="line">            layers.append(nn.ReLU(inplace=<span class="literal">True</span>))</span><br><span class="line">            curr_dim = curr_dim // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        layers.append(nn.Conv2d(curr_dim, <span class="number">3</span>, kernel_size=<span class="number">7</span>, stride=<span class="number">1</span>, padding=<span class="number">3</span>, bias=<span class="literal">False</span>))</span><br><span class="line">        layers.append(nn.Tanh())</span><br><span class="line">        self.main = nn.Sequential(*layers)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x, c</span>):</span><br><span class="line">        <span class="comment"># Replicate spatially and concatenate domain information.</span></span><br><span class="line">        <span class="comment"># c: N*c_dim</span></span><br><span class="line">        <span class="comment"># 生成器直接将目标域c在通道维度进行拼接</span></span><br><span class="line">        c = c.view(c.size(<span class="number">0</span>), c.size(<span class="number">1</span>), <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        c = c.repeat(<span class="number">1</span>, <span class="number">1</span>, x.size(<span class="number">2</span>), x.size(<span class="number">3</span>))</span><br><span class="line">        x = torch.cat([x, c], dim=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> self.main(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Discriminator</span>(nn.Module):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Discriminator network with PatchGAN.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, image_size=<span class="number">128</span>, conv_dim=<span class="number">64</span>, c_dim=<span class="number">5</span>, repeat_num=<span class="number">6</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(Discriminator, self).__init__()</span><br><span class="line">        layers = []</span><br><span class="line">        layers.append(nn.Conv2d(<span class="number">3</span>, conv_dim, kernel_size=<span class="number">4</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>))</span><br><span class="line">        layers.append(nn.LeakyReLU(<span class="number">0.01</span>))</span><br><span class="line"></span><br><span class="line">        curr_dim = conv_dim</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, repeat_num):</span><br><span class="line">            layers.append(nn.Conv2d(curr_dim, curr_dim*<span class="number">2</span>, kernel_size=<span class="number">4</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>))</span><br><span class="line">            layers.append(nn.LeakyReLU(<span class="number">0.01</span>))</span><br><span class="line">            curr_dim = curr_dim * <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        kernel_size = <span class="built_in">int</span>(image_size / np.power(<span class="number">2</span>, repeat_num))</span><br><span class="line">        self.main = nn.Sequential(*layers)</span><br><span class="line">        self.conv1 = nn.Conv2d(curr_dim, <span class="number">1</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.conv2 = nn.Conv2d(curr_dim, c_dim, kernel_size=kernel_size, bias=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        h = self.main(x)</span><br><span class="line">        <span class="comment"># True or False</span></span><br><span class="line">        out_src = self.conv1(h)</span><br><span class="line">        <span class="comment"># classes onehot</span></span><br><span class="line">        out_cls = self.conv2(h)</span><br><span class="line">        <span class="keyword">return</span> out_src, out_cls.view(out_cls.size(<span class="number">0</span>), out_cls.size(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
 <h2 id="5-2-input"><a href="#5-2-input" class="headerlink" title="5.2 input"></a>5.2 input</h2><p>对于任一张图片，其target label是随机取其他图片的label，而没有刻意去指定</p>
@@ -513,259 +378,179 @@
 <h1 id="6-其他"><a href="#6-其他" class="headerlink" title="6. 其他"></a>6. 其他</h1><p>通过代码,我们可以猜出,对于starGAN,每一个domain都是一个二值属性,这些属性可以是互相排斥的,例如头发颜色,可以是不互相排斥的,并且这里和CycleGAN还是有一些区别的,CycleGAN的domain是数据集,source domain 和 target domain是风马牛不相及的,source domain和target domain有自己的风格,例如map数据集,是没有真值的,有的只是深度网络提取出的特征和70*70patchGAN.但是starGAN中,生成的图片和原始图片是一个数据集的,并且这两张图片不是要求风格一样,感觉这能应用到person-reid中也是神奇.</p>
 <p>在图片真假的分类损失中，之前的GAN都是使用True和False来表示，这次换了一个新公式直接mean，还有点难理解。</p>
 
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/GAN/" rel="tag"># GAN</a>
-          
-            <a href="/tags/starGAN/" rel="tag"># starGAN</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/12/17/CASN/" rel="next" title="CASN">
-                <i class="fa fa-chevron-left"></i> CASN
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GAN/" rel="tag"># GAN</a>
+              <a href="/tags/starGAN/" rel="tag"># starGAN</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/26/GPU/" rel="prev" title="GPU">
-                GPU <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/17/CASN/" rel="prev" title="CASN">
+      <i class="fa fa-chevron-left"></i> CASN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/26/GPU/" rel="next" title="GPU">
+      GPU <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">76</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">73</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Star-Generative-Adversarial-Networks"><span class="nav-number">3.</span> <span class="nav-text">2. Star Generative Adversarial Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Multi-Domain-Image-to-Image-Translation"><span class="nav-number">3.1.</span> <span class="nav-text">2.1  Multi-Domain Image-to-Image Translation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Training-with-Multiple-Datasets"><span class="nav-number">3.2.</span> <span class="nav-text">2.2. Training with Multiple Datasets</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Implementation"><span class="nav-number">4.</span> <span class="nav-text">3. Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Experiments"><span class="nav-number">5.</span> <span class="nav-text">4. Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Baseline-Models"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Baseline Models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Training"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 Training</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Results"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 Results</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E4%BB%A3%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">5. 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Model-G-and-D"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 Model: G and D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-input"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-train-G-and-D"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 train G and D</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-train-D"><span class="nav-number">6.3.1.</span> <span class="nav-text">5.3.1 train D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-train-G"><span class="nav-number">6.3.2.</span> <span class="nav-text">5.3.2 train G</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-val"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 val</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-%E5%A4%9A%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">6.5.</span> <span class="nav-text">5.5 多数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-1-input"><span class="nav-number">6.5.1.</span> <span class="nav-text">5.5.1 input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-2-train-D-and-G"><span class="nav-number">6.5.2.</span> <span class="nav-text">5.5.2 train D and G</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-3-val-and-test"><span class="nav-number">6.5.3.</span> <span class="nav-text">5.5.3 val and test</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%85%B6%E4%BB%96"><span class="nav-number">7.</span> <span class="nav-text">6. 其他</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Star-Generative-Adversarial-Networks"><span class="nav-number">3.</span> <span class="nav-text">2. Star Generative Adversarial Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Multi-Domain-Image-to-Image-Translation"><span class="nav-number">3.1.</span> <span class="nav-text">2.1  Multi-Domain Image-to-Image Translation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Training-with-Multiple-Datasets"><span class="nav-number">3.2.</span> <span class="nav-text">2.2. Training with Multiple Datasets</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Implementation"><span class="nav-number">4.</span> <span class="nav-text">3. Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Experiments"><span class="nav-number">5.</span> <span class="nav-text">4. Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Baseline-Models"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Baseline Models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Training"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 Training</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Results"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 Results</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E4%BB%A3%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">5. 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Model-G-and-D"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 Model: G and D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-input"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-train-G-and-D"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 train G and D</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-train-D"><span class="nav-number">6.3.1.</span> <span class="nav-text">5.3.1 train D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-train-G"><span class="nav-number">6.3.2.</span> <span class="nav-text">5.3.2 train G</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-val"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 val</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-%E5%A4%9A%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">6.5.</span> <span class="nav-text">5.5 多数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-1-input"><span class="nav-number">6.5.1.</span> <span class="nav-text">5.5.1 input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-2-train-D-and-G"><span class="nav-number">6.5.2.</span> <span class="nav-text">5.5.2 train D and G</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-3-val-and-test"><span class="nav-number">6.5.3.</span> <span class="nav-text">5.5.3 val and test</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%85%B6%E4%BB%96"><span class="nav-number">7.</span> <span class="nav-text">6. 其他</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">TianJiajie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -783,142 +568,65 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
 
 
 
   
 
   
+      
 
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
         }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
         }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-
-  
+    
 
   
 

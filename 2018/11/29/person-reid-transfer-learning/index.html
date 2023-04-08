@@ -1,159 +1,104 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="person-reid,transfer learning," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="transfer learning">
+  <meta name="description" content="transfer learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="person-reid-transfer-learning">
 <meta property="og:url" content="http://example.com/2018/11/29/person-reid-transfer-learning/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="transfer learning">
-<meta property="og:locale">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/transfer/transfer.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/ARN/ARN.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/HHL/HHL.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/HHL/HHL2.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/HHL/HHL3.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/HHL/HHL4.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/HHL/HHL5.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/SPGAN/SPGAN1.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/SPGAN/SPGAN3.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/SPGAN/SPGAN2.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/SPGAN/SPGAN4.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/SPGAN/SPGAN8.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/SPGAN/SPGAN5.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/SPGAN/SPGAN6.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/SPGAN/SPGAN7.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/person-reid-transfer-learning/SPGAN9.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/PTGAN/PTGAN.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/DCGAN+CNN/DCGAN+CNN.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/DCGAN+CNN/DCGAN+CNN2.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/MMFA/MMFA.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/MMFA/MMFA2.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/MMFA/MMFA3.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/TJ-AIDL/TJ-AIDL.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/TJ-AIDL/TJ-AIDL2.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/TJ-AIDL/TJ-AIDL3.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/TJ-AIDL/TJ-AIDL4.png">
-<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/TJ-AIDL/TJ-AIDL5.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/transfer/transfer.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/transfer.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/ARN/ARN.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/ARN.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/HHL/HHL.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/HHL/HHL2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/HHL/HHL3.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL3.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/HHL/HHL4.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL4.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/HHL/HHL5.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL5.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN1.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN1.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN3.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN3.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN4.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN4.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN8.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN8.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN5.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN5.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN6.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN6.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN7.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN7.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/SPGAN9.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN9.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/PTGAN/PTGAN.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/PTGAN.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/DCGAN+CNN/DCGAN+CNN.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/DCGAN+CNN.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/DCGAN+CNN/DCGAN+CNN2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/DCGAN+CNN2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/MMFA/MMFA.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/MMFA.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/MMFA/MMFA2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/MMFA2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/MMFA/MMFA3.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/MMFA3.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/TJ-AIDL.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/TJ-AIDL2.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL3.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL4.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL5.png">
+<meta property="og:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/TJ-AIDL5.png">
 <meta property="article:published_time" content="2018-11-29T15:29:52.000Z">
 <meta property="article:modified_time" content="2018-12-17T07:54:53.982Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="person-reid">
 <meta property="article:tag" content="transfer learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/pic/transfer/transfer.png">
+<meta name="twitter:image" content="http://example.com/2018/11/29/person-reid-transfer-learning/transfer/transfer.png">
+
+<link rel="canonical" href="http://example.com/2018/11/29/person-reid-transfer-learning/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://example.com/2018/11/29/person-reid-transfer-learning/"/>
-
-
-
-
 
   <title>person-reid-transfer-learning | Hexo</title>
   
@@ -163,224 +108,164 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-something">
-          <a href="/something" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            something
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/29/person-reid-transfer-learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="TianJiajie">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">person-reid-transfer-learning</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          person-reid-transfer-learning
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-29T23:29:52+08:00">
-                2018-11-29
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ind1/" itemprop="url" rel="index">
-                    <span itemprop="name">ind1</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-11-29 23:29:52" itemprop="dateCreated datePublished" datetime="2018-11-29T23:29:52+08:00">2018-11-29</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:54:53" itemprop="dateModified" datetime="2018-12-17T15:54:53+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ind1/" itemprop="url" rel="index"><span itemprop="name">ind1</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -388,22 +273,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <h1 id="transfer-learning"><a href="#transfer-learning" class="headerlink" title="transfer learning"></a>transfer learning</h1><span id="more"></span>
 <p>这个博客主要是因为最近看了几篇关于无监督迁移学习在行人重识别领域的论文，发现隔了几天，自己对论文就忘记得差不多了，所以对论文的关键内容做个简单记录。</p>
 <p>参考链接: <a target="_blank" rel="noopener" href="https://github.com/layumi/DukeMTMC-reID_evaluation/blob/master/State-of-the-art/README.md">Transfer Learning</a></p>
 <p>因为在某些情况下，图片或者公式无法正常显示，所以，我基本会同步到我的博客<br><a target="_blank" rel="noopener" href="https://tjjtjjtjj.github.io/2018/11/29/person-reid-transfer-learning/#more">https://tjjtjjtjj.github.io/2018/11/29/person-reid-transfer-learning/#more</a></p>
 <p>现有方法在transfer learning方向的性能对比</p>
-<p><img src="./pic/transfer/transfer.png" alt="transfer learning"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/transfer/transfer.png" alt="transfer learning"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/transfer.png" class title="transfer learning"></p>
 <hr>
 <h2 id="1-ARN"><a href="#1-ARN" class="headerlink" title="1. ARN"></a>1. ARN</h2><p><a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w6/Li_Adaptation_and_Re-Identification_CVPR_2018_paper.pdf">Adaptation and Re-Identification Network: An Unsupervised Deep Transfer Learning Approach to Person Re-Identification</a></p>
 <p>Yu-Jhe Li, Fu-En Yang, Yen-Cheng Liu, Yu-Ying Yeh, Xiaofei Du, and Yu-Chiang Frank Wang, CVPR 2018 Workshop</p>
 <p>这篇论文主要分离了数据集的特有特征和行人特征，从而使不同数据集的行人特征投射到统一特征空间中。</p>
 <p>作者是台湾人，没有公布代码。有其他人复现了<a target="_blank" rel="noopener" href="https://github.com/huanghoujing/ARN">代码</a>，但是效果很差。</p>
 <p>我下一步也会尝试复现一下。</p>
-<h3 id="1-1-网络架构"><a href="#1-1-网络架构" class="headerlink" title="1.1 网络架构"></a>1.1 网络架构</h3><p><img src="./pic/ARN/ARN.png" alt="ARN的网络架构"><br></p>
+<h3 id="1-1-网络架构"><a href="#1-1-网络架构" class="headerlink" title="1.1 网络架构"></a>1.1 网络架构</h3><p><img src="/2018/11/29/person-reid-transfer-learning/ARN/ARN.png" alt="ARN的网络架构"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/ARN.png" class title="ARN的网络架构"></p>
 <p>根据作者的描述，</p>
 <ul>
 <li>$E_I$是resnet50的前四个layer,输入是3X256X256,输出$X^s$是2048X7X7</li>
@@ -566,7 +448,7 @@
 </ol>
 <p>数据集之间的三元组损失有把不同数据集的行人特征映射到同一特征空间的效果。</p>
 <p>创新点在于使用straGAN和复杂的三元组损失。</p>
-<h3 id="2-1-网络架构"><a href="#2-1-网络架构" class="headerlink" title="2.1 网络架构"></a>2.1 网络架构</h3><p><img src="./pic/HHL/HHL.png" alt="HHL的网络架构"><br></p>
+<h3 id="2-1-网络架构"><a href="#2-1-网络架构" class="headerlink" title="2.1 网络架构"></a>2.1 网络架构</h3><p><img src="/2018/11/29/person-reid-transfer-learning/HHL/HHL.png" alt="HHL的网络架构"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL.png" class title="HHL的网络架构"></p>
 <p>网络的简要介绍</p>
 <ul>
 <li>CNN是resnet50，网络包括两个分支，一个计算源数据集的分类损失，一个计算相似度学习的triplet损失。</li>
@@ -632,7 +514,7 @@
 </table>
 </div>
 <h4 id="2-3-2-sample方法"><a href="#2-3-2-sample方法" class="headerlink" title="2.3.2 sample方法"></a>2.3.2 sample方法</h4><p>对于目标域的取样方法，对比了三种方法的性能，分别是随机取样、聚类取样、有监督取样，通过下图可以看出，这三种方法的性能是一样的，最后，作者给的代码是随机取样。</p>
-<p><img src="./pic/HHL/HHL2.png" alt="sample"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/HHL/HHL2.png" alt="sample"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL2.png" class title="sample"></p>
 <h3 id="2-4-实验设置"><a href="#2-4-实验设置" class="headerlink" title="2.4 实验设置"></a>2.4 实验设置</h3><h4 id="2-4-1-Camera-style-transfer-model：StarGAN"><a href="#2-4-1-Camera-style-transfer-model：StarGAN" class="headerlink" title="2.4.1 Camera style transfer model：StarGAN"></a>2.4.1 Camera style transfer model：StarGAN</h4><p>使用StarGAN进行对于摄像头风格转化。</p>
 <ul>
 <li>2 conv + 6 residual + 2 transposed</li>
@@ -655,9 +537,9 @@
 <li>triplet loss的权重$\beta$</li>
 <li>一个batch中目标域上$n_t$的个数</li>
 </ul>
-<h4 id="2-5-1-参数的设置-beta"><a href="#2-5-1-参数的设置-beta" class="headerlink" title="2.5.1 参数的设置$\beta$"></a>2.5.1 参数的设置$\beta$</h4><p><img src="./pic/HHL/HHL3.png" alt="$\beta$参数的设置"><br></p>
+<h4 id="2-5-1-参数的设置-beta"><a href="#2-5-1-参数的设置-beta" class="headerlink" title="2.5.1 参数的设置$\beta$"></a>2.5.1 参数的设置$\beta$</h4><p><img src="/2018/11/29/person-reid-transfer-learning/HHL/HHL3.png" alt="$\beta$参数的设置"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL3.png" class title="$\beta$参数的设置"></p>
 <p>$\beta$应该设置成0.4-0.8</p>
-<h4 id="2-5-2-参数的设置-n-t"><a href="#2-5-2-参数的设置-n-t" class="headerlink" title="2.5.2 参数的设置$n_t$"></a>2.5.2 参数的设置$n_t$</h4><p><img src="./pic/HHL/HHL4.png" alt="$n_t$参数的设置"><br></p>
+<h4 id="2-5-2-参数的设置-n-t"><a href="#2-5-2-参数的设置-n-t" class="headerlink" title="2.5.2 参数的设置$n_t$"></a>2.5.2 参数的设置$n_t$</h4><p><img src="/2018/11/29/person-reid-transfer-learning/HHL/HHL4.png" alt="$n_t$参数的设置"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL4.png" class title="$n_t$参数的设置"></p>
 <p>$n_t$在当前设置(源域上对于IDE为128，对于tripletloss是64)下，应该$n_t&gt;16$</p>
 <p>通过上述参数的设置，结合自己实验时的错误，不妨这么理解，在固定mini-batch=128的情况下</p>
 <ul>
@@ -665,7 +547,7 @@
 <li>然后引入目标域的triplet_loss，并且要先考虑只有目标域的性能，再考虑结合的性能，每次都需要重新考虑$\beta$和batch的大小</li>
 <li>这么一想，这篇论文做的实验还是很多的。</li>
 </ul>
-<h3 id="2-6-实验结果"><a href="#2-6-实验结果" class="headerlink" title="2.6 实验结果"></a>2.6 实验结果</h3><p><img src="./pic/HHL/HHL5.png" alt="实验结果"><br></p>
+<h3 id="2-6-实验结果"><a href="#2-6-实验结果" class="headerlink" title="2.6 实验结果"></a>2.6 实验结果</h3><p><img src="/2018/11/29/person-reid-transfer-learning/HHL/HHL5.png" alt="实验结果"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/HHL5.png" class title="实验结果"></p>
 <p>通过结果我们看出来，其实提升的效果主要来源于$L_C$，说明预训练的模型对于目标域不同摄像头的图片鲁棒性很差。</p>
 <p>是否说明预训练的模型只学习到了源数据集的跨摄像头的不变行人特征，而对于目标域的摄像头下的不同风格很敏感，而对目标域的同一摄像头下的行人特征很鲁棒。</p>
 <p>$L_T$的提升效果很小是否可以说明目标数据集与源数据集的行人特征空间本身就已经很好地重合了，假如tripl_loss真得具有将不同数据集的行人特征映射到同一特征空间的效果的话。</p>
@@ -692,11 +574,11 @@
 <p>自己对代码的分析<a target="_blank" rel="noopener" href="https://tjjtjjtjj.github.io/2018/11/19/cycleGAN/#more">https://tjjtjjtjj.github.io/2018/11/19/cycleGAN/#more</a></p>
 <h3 id="3-1-前言"><a href="#3-1-前言" class="headerlink" title="3.1 前言"></a>3.1 前言</h3><p>一般的无监督迁移方法都是假设源域和目标域上有相同ID的图片，不太适用于跨数据集的行人重识别。</p>
 <h3 id="3-2-网络架构"><a href="#3-2-网络架构" class="headerlink" title="3.2 网络架构"></a>3.2 网络架构</h3><p>GAN网络</p>
-<p><img src="./pic/SPGAN/SPGAN1.png" alt="SPGAN"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN1.png" alt="SPGAN"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN1.png" class title="SPGAN"></p>
 <p>LMP网络</p>
-<p><img src="./pic/SPGAN/SPGAN3.png" alt="LMP"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN3.png" alt="LMP"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN3.png" class title="LMP"></p>
 <p>行人重识别整体网络</p>
-<p><img src="./pic/SPGAN/SPGAN2.png" alt="SPGAN"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN2.png" alt="SPGAN"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN2.png" class title="SPGAN"></p>
 <p>网络的简要介绍</p>
 <ul>
 <li>整理网络由两部分组成，第一部分是SPGAN，第二部分是常见的行人重识别网络的修改版LMP，重点是第一部分。</li>
@@ -728,18 +610,18 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">metric_net</span>(<span class="params">img, scope, df_dim=<span class="number">64</span>, reuse=<span class="literal">False</span>, train=<span class="literal">True</span></span>):</span><br><span class="line"></span><br><span class="line">    bn = functools.partial(slim.batch_norm, scale=<span class="literal">True</span>, is_training=train,</span><br><span class="line">                           decay=<span class="number">0.9</span>, epsilon=<span class="number">1e-5</span>, updates_collections=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(scope + <span class="string">&#x27;_discriminator&#x27;</span>, reuse=reuse):</span><br><span class="line">        h0 = lrelu(conv(img, df_dim, <span class="number">4</span>, <span class="number">2</span>, scope=<span class="string">&#x27;h0_conv&#x27;</span>))    <span class="comment"># h0 is (128 x 128 x df_dim)</span></span><br><span class="line">        pool1 = Mpool(h0, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">&#x27;VALID&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        h1 = lrelu(conv(pool1, df_dim * <span class="number">2</span>, <span class="number">4</span>, <span class="number">2</span>, scope=<span class="string">&#x27;h1_conv&#x27;</span>))  <span class="comment"># h1 is (32 x 32 x df_dim*2)</span></span><br><span class="line">        pool2 = Mpool(h1, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">&#x27;VALID&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        h2 = lrelu(conv(pool2, df_dim * <span class="number">4</span>, <span class="number">4</span>, <span class="number">2</span>, scope=<span class="string">&#x27;h2_conv&#x27;</span>))  <span class="comment"># h2 is (8 x 8 x df_dim*4)</span></span><br><span class="line">        pool3 = Mpool(h2, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">&#x27;VALID&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        h3 = lrelu(conv(pool3, df_dim * <span class="number">8</span>, <span class="number">4</span>, <span class="number">2</span>, scope=<span class="string">&#x27;h3_conv&#x27;</span>))  <span class="comment"># h3 is (2 x 2 x df_dim*4)</span></span><br><span class="line">        pool4 = Mpool(h3, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">&#x27;VALID&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        shape = pool4.get_shape()</span><br><span class="line">        flatten_shape = shape[<span class="number">1</span>].value * shape[<span class="number">2</span>].value * shape[<span class="number">3</span>].value</span><br><span class="line">        h3_reshape = tf.reshape(pool4, [-<span class="number">1</span>, flatten_shape], name = <span class="string">&#x27;h3_reshape&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        fc1 = lrelu(FC(h3_reshape, df_dim*<span class="number">2</span>, scope=<span class="string">&#x27;fc1&#x27;</span>))</span><br><span class="line">        dropout_fc1 = slim.dropout(fc1, <span class="number">0.5</span>, scope=<span class="string">&#x27;dropout_fc1&#x27;</span>)  </span><br><span class="line">        net = FC(dropout_fc1, df_dim, scope=<span class="string">&#x27;fc2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#print_activations(net)</span></span><br><span class="line">        <span class="comment">#print_activations(pool4)</span></span><br><span class="line">        <span class="keyword">return</span> net</span><br></pre></td></tr></table></figure>
 <h4 id="3-4-2-LMP"><a href="#3-4-2-LMP" class="headerlink" title="3.4.2 LMP"></a>3.4.2 LMP</h4><p>batch_size=16, total_epoch=50, SGD, momentum=0.9, gamma=0.1, lr_ini=0.001, decay to 0.0001 after 40 epochs.</p>
 <p>这部分的设置和IDE基本类似。</p>
-<h3 id="3-5-对比实验"><a href="#3-5-对比实验" class="headerlink" title="3.5 对比实验"></a>3.5 对比实验</h3><h4 id="模块的对比实验"><a href="#模块的对比实验" class="headerlink" title="模块的对比实验"></a>模块的对比实验</h4><p><img src="./pic/SPGAN/SPGAN4.png" alt="对比实验"><br></p>
-<p><img src="./pic/SPGAN/SPGAN8.png" alt="生成效果"><br></p>
+<h3 id="3-5-对比实验"><a href="#3-5-对比实验" class="headerlink" title="3.5 对比实验"></a>3.5 对比实验</h3><h4 id="模块的对比实验"><a href="#模块的对比实验" class="headerlink" title="模块的对比实验"></a>模块的对比实验</h4><p><img src="/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN4.png" alt="对比实验"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN4.png" class title="对比实验"></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN8.png" alt="生成效果"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN8.png" class title="生成效果"></p>
 <p>通过对比实验可以看到，以mAP为指标，CycleGAN增加了3个点，SiaNet(m=2)增加了3个点，LMP增加了4个点。说明作者尝试的3个模块都在一定程度上起到了作用。但是个人感觉还是差点什么。比如，为什么会有效？</p>
 <p>假设目标都是为了使源域与目标域的行人特征映射到同一特征空间。这里的CycleGAN做到了这一点。LMP可以认为是加在哪里都有效的一种方式。那SiaNet其实更像是在保证生成的图片不仅要保留源图片的内容，更要保留源图片的行人特征。这种保留是以一种隐空间的形式在保存，而不是明显的分类损失这样子。</p>
 <p>$\lambda_3 $对比实验</p>
-<p><img src="./pic/SPGAN/SPGAN5.png" alt="$\lambda_3 $对比实验"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN5.png" alt="$\lambda_3 $对比实验"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN5.png" class title="$\lambda_3 $对比实验"></p>
 <p>pool 和 part的对比实验</p>
-<p><img src="./pic/SPGAN/SPGAN6.png" alt="pool 和 part的对比实验"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN6.png" alt="pool 和 part的对比实验"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN6.png" class title="pool 和 part的对比实验"></p>
 <p>也就是说，pool的方式和parts的取法是实验得到的，不是凭空想出来的。</p>
 <p>通过上述实验超参数的设置对比实验，与HHL论文比较，都是固定其他，变化一个参数，然后选取最优的参数，是基于局部最优就是全局最优的思想。感觉到作者的实验做得很足。</p>
 <p>不同base model的对比实验</p>
-<p><img src="./pic/SPGAN/SPGAN7.png" alt="不同base model的对比实验"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/SPGAN/SPGAN7.png" alt="不同base model的对比实验"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN7.png" class title="不同base model的对比实验"></p>
 <h3 id="附录-1"><a href="#附录-1" class="headerlink" title="附录"></a>附录</h3><h4 id="IDE-and-IDE"><a href="#IDE-and-IDE" class="headerlink" title="IDE and $IDE^+$"></a>IDE and $IDE^+$</h4><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1604.02531.pdf">IDE</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/zhunzhong07/IDE-baseline-Market-1501">https://github.com/zhunzhong07/IDE-baseline-Market-1501</a></p>
 <blockquote>
@@ -753,7 +635,7 @@
 <p>区别在于训练时bn层是否更新：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># model.model = resnet50(layer4)+avgpool+Linear(2048,512)+bn1d(512)+LeakReLU(0.1)+Dropout(0.5)</span></span><br><span class="line"><span class="comment"># model.classifier = Linear(512, num_class)</span></span><br><span class="line"><span class="comment"># IDE</span></span><br><span class="line"><span class="keyword">for</span> phase <span class="keyword">in</span> [<span class="string">&#x27;train&#x27;</span>, <span class="string">&#x27;val&#x27;</span>]:</span><br><span class="line">    <span class="keyword">if</span> phase == <span class="string">&#x27;train&#x27;</span>:</span><br><span class="line">        scheduler.step()</span><br><span class="line">        model.train(<span class="literal">True</span>)  <span class="comment"># Set model to training mode</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        model.train(<span class="literal">False</span>)  <span class="comment"># Set model to evaluate mode</span></span><br><span class="line"><span class="comment"># IDE+</span></span><br><span class="line"><span class="keyword">for</span> phase <span class="keyword">in</span> [<span class="string">&#x27;train&#x27;</span>, <span class="string">&#x27;val&#x27;</span>]:</span><br><span class="line">    <span class="keyword">if</span> phase == <span class="string">&#x27;train&#x27;</span>:</span><br><span class="line">        scheduler.step()</span><br><span class="line">        model.<span class="built_in">eval</span>()  <span class="comment"># Fix BN of ResNet50</span></span><br><span class="line">        model.model.fc.train(<span class="literal">True</span>)</span><br><span class="line">        model.classifier.train(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        model.train(<span class="literal">False</span>)  <span class="comment"># Set model to evaluate mode</span></span><br></pre></td></tr></table></figure>
 <h5 id="新增-2018-12-17"><a href="#新增-2018-12-17" class="headerlink" title="新增 2018-12-17"></a>新增 2018-12-17</h5><p>参考论文: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.07487">Re-Identification with Consistent Attentive Siamese Networks</a></p>
-<p>IDE的网络架构<br><img src="./person-reid-transfer-learning/SPGAN9.png" alt="IDE的网络架构"><br></p>
+<p>IDE的网络架构<br><img src="/2018/11/29/person-reid-transfer-learning/SPGAN9.png" alt="IDE的网络架构"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/SPGAN9.png" class title="IDE的网络架构"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一般情况下，cut_at_pooling=False，num_features=256, has_embedding为true</span></span><br><span class="line"><span class="comment"># 一般情况下，新增了feat、feat_bn、relu、drop、classifier</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ResNet</span>(nn.Module):</span><br><span class="line">    __factory = &#123;</span><br><span class="line">        <span class="number">18</span>: torchvision.models.resnet18,</span><br><span class="line">        <span class="number">34</span>: torchvision.models.resnet34,</span><br><span class="line">        <span class="number">50</span>: torchvision.models.resnet50,</span><br><span class="line">        <span class="number">101</span>: torchvision.models.resnet101,</span><br><span class="line">        <span class="number">152</span>: torchvision.models.resnet152,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, depth, pretrained=<span class="literal">True</span>, cut_at_pooling=<span class="literal">False</span>,</span></span><br><span class="line"><span class="params">                 num_features=<span class="number">0</span>, norm=<span class="literal">False</span>, dropout=<span class="number">0</span>, num_classes=<span class="number">0</span>, triplet_features=<span class="number">0</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(ResNet, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.depth = depth</span><br><span class="line">        self.pretrained = pretrained</span><br><span class="line">        self.cut_at_pooling = cut_at_pooling</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Construct base (pretrained) resnet</span></span><br><span class="line">        <span class="keyword">if</span> depth <span class="keyword">not</span> <span class="keyword">in</span> ResNet.__factory:</span><br><span class="line">            <span class="keyword">raise</span> KeyError(<span class="string">&quot;Unsupported depth:&quot;</span>, depth)</span><br><span class="line">        self.base = ResNet.__factory[depth](pretrained=pretrained)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.cut_at_pooling:</span><br><span class="line">            self.num_features = num_features</span><br><span class="line">            self.norm = norm</span><br><span class="line">            self.dropout = dropout</span><br><span class="line">            self.has_embedding = num_features &gt; <span class="number">0</span></span><br><span class="line">            self.num_classes = num_classes</span><br><span class="line">            self.triplet_features = triplet_features</span><br><span class="line">            out_planes = self.base.fc.in_features</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Append new layers</span></span><br><span class="line">            <span class="keyword">if</span> self.has_embedding:</span><br><span class="line">                self.feat = nn.Linear(out_planes, self.num_features)</span><br><span class="line">                self.feat_bn = nn.BatchNorm1d(self.num_features)</span><br><span class="line">                init.kaiming_normal_(self.feat.weight, mode=<span class="string">&#x27;fan_out&#x27;</span>)</span><br><span class="line">                init.constant_(self.feat.bias, <span class="number">0</span>)</span><br><span class="line">                init.constant_(self.feat_bn.weight, <span class="number">1</span>)</span><br><span class="line">                init.constant_(self.feat_bn.bias, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># Change the num_features to CNN output channels</span></span><br><span class="line">                self.num_features = out_planes</span><br><span class="line">            <span class="keyword">if</span> self.dropout &gt; <span class="number">0</span>:</span><br><span class="line">                self.drop = nn.Dropout(self.dropout)</span><br><span class="line">            <span class="keyword">if</span> self.num_classes &gt; <span class="number">0</span>:</span><br><span class="line">                self.classifier = nn.Linear(self.num_features, self.num_classes)</span><br><span class="line">                init.normal_(self.classifier.weight, std=<span class="number">0.001</span>)</span><br><span class="line">                init.constant_(self.classifier.bias, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> self.triplet_features &gt; <span class="number">0</span>:</span><br><span class="line">                self.triplet = nn.Linear(self.num_features, self.triplet_features)</span><br><span class="line">                init.normal_(self.triplet.weight, std=<span class="number">0.001</span>)</span><br><span class="line">                init.constant_(self.triplet.bias, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.pretrained:</span><br><span class="line">            self.reset_params()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x, output_feature=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">for</span> name, module <span class="keyword">in</span> self.base._modules.items():</span><br><span class="line">            <span class="keyword">if</span> name == <span class="string">&#x27;avgpool&#x27;</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            x = module(x)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.cut_at_pooling:</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">        x = F.avg_pool2d(x, x.size()[<span class="number">2</span>:])</span><br><span class="line">        x = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> output_feature == <span class="string">&#x27;pool5&#x27;</span>:</span><br><span class="line">            x = F.normalize(x)</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line">        <span class="keyword">if</span> self.has_embedding:</span><br><span class="line">            x = self.feat(x)</span><br><span class="line">            x = self.feat_bn(x)</span><br><span class="line">        <span class="keyword">if</span> self.norm:</span><br><span class="line">            x = F.normalize(x)</span><br><span class="line">        <span class="keyword">elif</span> self.has_embedding:</span><br><span class="line">            x = F.relu(x)</span><br><span class="line">        <span class="comment"># triplet feature</span></span><br><span class="line">        <span class="keyword">if</span> self.triplet_features &gt; <span class="number">0</span>:</span><br><span class="line">            x_triplet = self.triplet(x)</span><br><span class="line">        <span class="keyword">if</span> self.dropout &gt; <span class="number">0</span>:</span><br><span class="line">            x = self.drop(x)</span><br><span class="line">        <span class="keyword">if</span> self.num_classes &gt; <span class="number">0</span>:</span><br><span class="line">            x_class = self.classifier(x)</span><br><span class="line">        <span class="comment"># two outputs</span></span><br><span class="line">        <span class="keyword">if</span> self.triplet_features &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> x_class, x_triplet</span><br><span class="line">        <span class="keyword">return</span> x_class</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reset_params</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> self.modules():</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(m, nn.Conv2d):</span><br><span class="line">                init.kaiming_normal(m.weight, mode=<span class="string">&#x27;fan_out&#x27;</span>)</span><br><span class="line">                <span class="keyword">if</span> m.bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    init.constant(m.bias, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">elif</span> <span class="built_in">isinstance</span>(m, nn.BatchNorm2d):</span><br><span class="line">                init.constant(m.weight, <span class="number">1</span>)</span><br><span class="line">                init.constant(m.bias, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">elif</span> <span class="built_in">isinstance</span>(m, nn.Linear):</span><br><span class="line">                init.normal(m.weight, std=<span class="number">0.001</span>)</span><br><span class="line">                <span class="keyword">if</span> m.bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    init.constant(m.bias, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h4 id="Caffe-and-pytorch"><a href="#Caffe-and-pytorch" class="headerlink" title="Caffe and pytorch"></a>Caffe and pytorch</h4><p><a target="_blank" rel="noopener" href="https://github.com/Simon4Yan/Learning-via-Translation/issues/1">Caffe和pytorch中的bn层的计算方式不一样。</a></p>
 <p>在caffe中，bn层在训练时是eval状态，也是只使用Imagenet的mean和variance</p>
@@ -773,16 +655,16 @@
 <p>这篇论文对Cycle-GAN进行了改进，保留ID信息的损失函数如下：</p>
 <script type="math/tex; mode=display">L_{ID}=E_{a \sim p_{data}(a)} [||(G(a)-a) \odot M(a)||_2] + E_{b \sim p_{data}(b)} [||(F(b)-b) \odot M(b)||_2]</script><p>其中，$M(b)$表示使用PSPNet分割后的结果。</p>
 <p>转化效果如下图所示</p>
-<p><img src="./pic/PTGAN/PTGAN.png" alt="PTGAN的转化效果"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/PTGAN/PTGAN.png" alt="PTGAN的转化效果"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/PTGAN.png" class title="PTGAN的转化效果"></p>
 <p>这里的Cycle-Gan生成图片的效果和SPGAN生成的效果还是有一些区别的，不是很理解。</p>
 <p>其他的不是本次的重点，不做介绍。</p>
 <h3 id="4-2-DCGAN-CNN"><a href="#4-2-DCGAN-CNN" class="headerlink" title="4.2 DCGAN+CNN"></a>4.2 DCGAN+CNN</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1701.07717.pdf">Unlabeled Samples Generated by GAN Improve the Person Re-Identification Baseline in Vitro</a></p>
 <p>Zhedong Zheng Liang Zheng Yi Yang</p>
 <p>这篇论文主要是利用DCGAN生成新的数据集进行数据集扩充。</p>
 <p>网络架构如图所示：</p>
-<p><img src="./pic/DCGAN+CNN/DCGAN+CNN.png" alt="DCGAN+CNN的网络结构"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/DCGAN+CNN/DCGAN+CNN.png" alt="DCGAN+CNN的网络结构"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/DCGAN+CNN.png" class title="DCGAN+CNN的网络结构"></p>
 <p>生成效果图</p>
-<p><img src="./pic/DCGAN+CNN/DCGAN+CNN2.png" alt="生成效果图"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/DCGAN+CNN/DCGAN+CNN2.png" alt="生成效果图"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/DCGAN+CNN2.png" class title="生成效果图"></p>
 <p>生成图片的标签LSRO</p>
 <script type="math/tex; mode=display">q_{LSR}=\begin{cases} \frac{\epsilon}{K},&k\neq y\\\\
                         1-\epsilon+\frac{\epsilon}{K},&k=y \end{cases}</script><script type="math/tex; mode=display">l_{LSR}=-(1-\epsilon)log(p(y))-\frac{\epsilon}{K}\sum_{k=1}^{K}log(p(k))</script><script type="math/tex; mode=display">q_{LSRO}=\frac{1}{K}</script><script type="math/tex; mode=display">l_{LSRO}=-(1-Z)log(p(y))-\frac{Z}{K}\sum_{k=1}^Klog(p(k))</script><p>其中，真实图片的Z=0，生成图片的Z=1.</p>
@@ -794,7 +676,7 @@
 <li>考虑了属性</li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a529975125/article/details/81176029">MMD的参考代码</a></p>
-<h3 id="5-2-网络架构"><a href="#5-2-网络架构" class="headerlink" title="5.2 网络架构"></a>5.2 网络架构</h3><p><img src="./pic/MMFA/MMFA.png" alt="MMFA的网络架构"><br></p>
+<h3 id="5-2-网络架构"><a href="#5-2-网络架构" class="headerlink" title="5.2 网络架构"></a>5.2 网络架构</h3><p><img src="/2018/11/29/person-reid-transfer-learning/MMFA/MMFA.png" alt="MMFA的网络架构"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/MMFA.png" class title="MMFA的网络架构"></p>
 <p>网络架构的说明:</p>
 <ul>
 <li>每一个batch中包括$n_s$张源域图片，$n_t$张目标域图片。batch=32</li>
@@ -817,8 +699,8 @@
          +\frac{1}{(n_T)^2}\sum_{i=1}^{n_T}\sum_{i'=1}^{n_T}k(h_{T,i}^{attr_m}, h_{T,i'}^{attr_m})\\\\
          -\frac{2}{n_S\cdot n_T}\sum_{i=1}^{n_S}\sum_{j=1}^{n_T}k(h_{S,i}^{attr_m}, h_{T,j}^{attr_m})  ]</script><script type="math/tex; mode=display">k(h_{S,i}^{attr_m}, h_{T,j}^{attr_m})=exp(-\frac{1}{2\alpha}\parallel  h_{S,i}^{attr_m} - h_{T,j}^{attr_m}\parallel ^2)</script><script type="math/tex; mode=display">\alpha=1,5,10</script><p>Mid-level Deep Feature Adaptation</p>
 <script type="math/tex; mode=display">L_{MDAL}=MMD(H_S,H_T)^2</script><p>Overall loss</p>
-<script type="math/tex; mode=display">L_{all}=L_{id}+\lambda_1 L_{attr}+\lambda_2 L_{AAL}+\lambda_3 L_{MDAL}</script><script type="math/tex; mode=display">\lambda_1=0.1,\lambda_2=1,\lambda_3=1</script><h3 id="5-4-实验分析"><a href="#5-4-实验分析" class="headerlink" title="5.4 实验分析"></a>5.4 实验分析</h3><h4 id="5-4-1-实验结果"><a href="#5-4-1-实验结果" class="headerlink" title="5.4.1 实验结果"></a>5.4.1 实验结果</h4><p><img src="./pic/MMFA/MMFA2.png" alt="实验结果"><br></p>
-<h3 id="5-4-2-实验模块"><a href="#5-4-2-实验模块" class="headerlink" title="5.4.2 实验模块"></a>5.4.2 实验模块</h3><p>实验模块对比实验结果<br><img src="./pic/MMFA/MMFA3.png" alt="实验模块对比实验结果"><br></p>
+<script type="math/tex; mode=display">L_{all}=L_{id}+\lambda_1 L_{attr}+\lambda_2 L_{AAL}+\lambda_3 L_{MDAL}</script><script type="math/tex; mode=display">\lambda_1=0.1,\lambda_2=1,\lambda_3=1</script><h3 id="5-4-实验分析"><a href="#5-4-实验分析" class="headerlink" title="5.4 实验分析"></a>5.4 实验分析</h3><h4 id="5-4-1-实验结果"><a href="#5-4-1-实验结果" class="headerlink" title="5.4.1 实验结果"></a>5.4.1 实验结果</h4><p><img src="/2018/11/29/person-reid-transfer-learning/MMFA/MMFA2.png" alt="实验结果"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/MMFA2.png" class title="实验结果"></p>
+<h3 id="5-4-2-实验模块"><a href="#5-4-2-实验模块" class="headerlink" title="5.4.2 实验模块"></a>5.4.2 实验模块</h3><p>实验模块对比实验结果<br><img src="/2018/11/29/person-reid-transfer-learning/MMFA/MMFA3.png" alt="实验模块对比实验结果"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/MMFA3.png" class title="实验模块对比实验结果"></p>
 <h3 id="5-5-附录"><a href="#5-5-附录" class="headerlink" title="5.5 附录"></a>5.5 附录</h3><p>通过实验结果可以看出，在MMFA模型中，ID+Mid-level Deep Feature Adaptation的贡献最大。</p>
 <p>下一步可以尝试考虑Mid-level Deep Feature Adaptation。</p>
 <p>作者把avg pool 换成max pool。</p>
@@ -829,9 +711,9 @@
 <li>根据属性和id的关系，提出了Identity Inferred Attribute Space。</li>
 </ul>
 <h3 id="6-2-网络架构"><a href="#6-2-网络架构" class="headerlink" title="6.2 网络架构"></a>6.2 网络架构</h3><p>Attribute-Identity Transferable Joint Learning</p>
-<p><img src="./pic/TJ-AIDL/TJ-AIDL.png" alt="TJ-AIDL的网络架构 "><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL.png" alt="TJ-AIDL的网络架构 "><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/TJ-AIDL.png" class title="TJ-AIDL的网络架构"></p>
 <p>Unsupervised Target Domain Adaptation</p>
-<p><img src="./pic/TJ-AIDL/TJ-AIDL2.png" alt="IJ-AIDL的部分网络架构详解"><br></p>
+<p><img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL2.png" alt="IJ-AIDL的部分网络架构详解"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/TJ-AIDL2.png" class title="IJ-AIDL的部分网络架构详解"></p>
 <p>网络架构的简要说明：</p>
 <ul>
 <li>(a) Identity Branch</li>
@@ -860,270 +742,190 @@
 <script type="math/tex; mode=display">L_{id}=-\frac{1}{n_{bs}}\sum_{i=1}^{n_{bs}}log(p_{id}(I_i^S,y_i^S)) \tag{1}</script><p>Attribute Branch(b) sigmoid</p>
 <script type="math/tex; mode=display">L_{att}=-\frac{1}{n_{bs}}\sum_{i=1}^{n_{bs}}\sum_{j=1}^{m}(a_{i,j}log(p_{att}(I_i,j))+(1-a_{i,j})log(1-p_{att}(I_i,j))) \tag{2}</script><p>Identity Inferred Attribute (IIA) space (c)</p>
 <script type="math/tex; mode=display">L_{rec}=\parallel x_{id}-f_{IIA}(x_{id}) \parallel ^2 \tag{3}</script><script type="math/tex; mode=display">L_{ID-transfer}=\parallel e_{IIA}-\tilde{p}\_{att} \parallel ^2 \tag{4}</script><script type="math/tex; mode=display">L_{att,IIA}=-\frac{1}{n_{bs}}\sum_{i=1}^{n_{bs}}\sum_{j=1}^{m}(a_{i,j}log(p_{IIA}(I_i,j))+(1-a_{i,j})log(1-p_{IIA}(I_i,j))) \tag{5}</script><script type="math/tex; mode=display">L_{IIA}=L_{att,IIA}+\lambda_1 L_{rec}+\lambda_2 L_{ID-transfer} \tag{6}</script><script type="math/tex; mode=display">\lambda_1=10, \lambda_2=10</script><p>Impact of IIA on Identity and Attribute Branches</p>
-<script type="math/tex; mode=display">L_{att-total}=L_{att}+\lambda_2 L_{ID-transfer} \tag{7}</script><h3 id="6-4-训练与部署流程"><a href="#6-4-训练与部署流程" class="headerlink" title="6.4 训练与部署流程"></a>6.4 训练与部署流程</h3><p><img src="./pic/TJ-AIDL/TJ-AIDL3.png" alt="IJ-AIDL的训练与部署流程"><br></p>
-<h3 id="6-5-模块分析"><a href="#6-5-模块分析" class="headerlink" title="6.5 模块分析"></a>6.5 模块分析</h3><h4 id="6-5-1-ID和Attribute模块分析"><a href="#6-5-1-ID和Attribute模块分析" class="headerlink" title="6.5.1 ID和Attribute模块分析"></a>6.5.1 ID和Attribute模块分析</h4><p><img src="./pic/TJ-AIDL/TJ-AIDL4.png" alt="IJ-AIDL的ID和Attribute模块分析"><br></p>
+<script type="math/tex; mode=display">L_{att-total}=L_{att}+\lambda_2 L_{ID-transfer} \tag{7}</script><h3 id="6-4-训练与部署流程"><a href="#6-4-训练与部署流程" class="headerlink" title="6.4 训练与部署流程"></a>6.4 训练与部署流程</h3><p><img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL3.png" alt="IJ-AIDL的训练与部署流程"><br></p>
+<h3 id="6-5-模块分析"><a href="#6-5-模块分析" class="headerlink" title="6.5 模块分析"></a>6.5 模块分析</h3><h4 id="6-5-1-ID和Attribute模块分析"><a href="#6-5-1-ID和Attribute模块分析" class="headerlink" title="6.5.1 ID和Attribute模块分析"></a>6.5.1 ID和Attribute模块分析</h4><p><img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL4.png" alt="IJ-AIDL的ID和Attribute模块分析"><br></p>
 <p>通过ID only的mAP和HHL的baseline，可以看出MobileNet和Resnet50对mAP的影响不受很大。</p>
 <p>另外，可以看出，依然是ID占据了很大比重。</p>
-<h4 id="6-5-2-Adapation的作用"><a href="#6-5-2-Adapation的作用" class="headerlink" title="6.5.2 Adapation的作用"></a>6.5.2 Adapation的作用</h4><p><img src="./pic/TJ-AIDL/TJ-AIDL5.png" alt="IJ-AIDL的Adapation的作用"><br></p>
+<h4 id="6-5-2-Adapation的作用"><a href="#6-5-2-Adapation的作用" class="headerlink" title="6.5.2 Adapation的作用"></a>6.5.2 Adapation的作用</h4><p><img src="/2018/11/29/person-reid-transfer-learning/TJ-AIDL/TJ-AIDL5.png" alt="IJ-AIDL的Adapation的作用"><br><img src="/2018/11/29/person-reid-transfer-learning/11/29/person-reid-transfer-learning/TJ-AIDL5.png" class title="IJ-AIDL的Adapation的作用"></p>
 <p>从表格中可以看出，Adaptation的作用很小。说明，预训练的模型已经很好地能保持属性的一致性，即不同角度得到的属性是一样的。</p>
 <h3 id="6-6-补充"><a href="#6-6-补充" class="headerlink" title="6.6 补充"></a>6.6 补充</h3><p>还是难以理解作者这么做的出发点，感觉有点凭空就设计出这么多损失函数，可能是哪里还缺点什么东西。</p>
 <p>训练更新的时候方程(7)的出现原因是什么？更新(6)的时候应该就已经对attr进行了影响吧？</p>
 <p>在step(II)中，是怎么更新方程(6)的。</p>
 <p>Identity Inferred Attribute Space的合理性是怎么体现的？</p>
 
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/person-reid/" rel="tag"># person-reid</a>
-          
-            <a href="/tags/transfer-learning/" rel="tag"># transfer learning</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/11/19/cycleGAN/" rel="next" title="cycleGAN">
-                <i class="fa fa-chevron-left"></i> cycleGAN
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/person-reid/" rel="tag"># person-reid</a>
+              <a href="/tags/transfer-learning/" rel="tag"># transfer learning</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/03/markdown-math/" rel="prev" title="markdown-math">
-                markdown-math <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/19/cycleGAN/" rel="prev" title="cycleGAN">
+      <i class="fa fa-chevron-left"></i> cycleGAN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/03/markdown-math/" rel="next" title="markdown-math">
+      markdown-math <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">76</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">73</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#transfer-learning"><span class="nav-number">1.</span> <span class="nav-text">transfer learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ARN"><span class="nav-number">1.1.</span> <span class="nav-text">1. ARN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 模块分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-%E5%8D%8A%E7%9B%91%E7%9D%A3-L-rec"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">1.3.1 半监督$ L_{rec} $</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-%E7%9B%91%E7%9D%A3-L-rec-L-class-%E5%92%8C-L-ctrs"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">1.3.2 监督$ L{rec} $, $ L{class} $和$ L_{ctrs} $</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-%E6%97%A0%E7%9B%91%E7%9D%A3-L-rec-E-T-%E5%92%8C-E-S"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">1.3.3 无监督$ L_{rec} $, $ E_T $和$ E_S $</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HHL"><span class="nav-number">1.2.</span> <span class="nav-text">2. HHL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 模块分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-starGAN"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">2.3.1 starGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-sample%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2.3.2 sample方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 实验设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-Camera-style-transfer-model%EF%BC%9AStarGAN"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">2.4.1 Camera style transfer model：StarGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-Re-ID-model-training"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2.4.2 Re-ID model training</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E8%B6%85%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 超参数设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-1-%E5%8F%82%E6%95%B0%E7%9A%84%E8%AE%BE%E7%BD%AE-beta"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">2.5.1 参数的设置$\beta$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-2-%E5%8F%82%E6%95%B0%E7%9A%84%E8%AE%BE%E7%BD%AE-n-t"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">2.5.2 参数的设置$n_t$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 实验结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">1.2.7.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#triplet-loss"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">triplet_loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.2.7.2.</span> <span class="nav-text">下一步工作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-SPGAN"><span class="nav-number">1.3.</span> <span class="nav-text">3. SPGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-CycleGAN"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">3.3.1 CycleGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-SPGAN"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">3.3.2 SPGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-%E8%A1%8C%E4%BA%BA%E9%87%8D%E8%AF%86%E5%88%AB%E7%BD%91%E7%BB%9C"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">3.3.3 行人重识别网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 实验设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-1-SPGAN"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">3.4.1 SPGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-2-LMP"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">3.4.2 LMP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%AF%B9%E6%AF%94%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 对比实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AF%B9%E6%AF%94%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">模块的对比实验</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84%E5%BD%95-1"><span class="nav-number">1.3.6.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDE-and-IDE"><span class="nav-number">1.3.6.1.</span> <span class="nav-text">IDE and $IDE^+$</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-2018-12-17"><span class="nav-number">1.3.6.1.1.</span> <span class="nav-text">新增 2018-12-17</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Caffe-and-pytorch"><span class="nav-number">1.3.6.2.</span> <span class="nav-text">Caffe and pytorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%96%91%E6%83%91"><span class="nav-number">1.3.6.3.</span> <span class="nav-text">疑惑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%B7%A5%E4%BD%9C-1"><span class="nav-number">1.3.7.</span> <span class="nav-text">下一步工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%9F%BA%E4%BA%8EGAN%E7%9A%84%E7%B1%BB%E4%BC%BC%E8%AE%BA%E6%96%87"><span class="nav-number">1.4.</span> <span class="nav-text">4. 基于GAN的类似论文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-PTGAN"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 PTGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-DCGAN-CNN"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 DCGAN+CNN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-MMFA"><span class="nav-number">1.5.</span> <span class="nav-text">5. MMFA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E5%AE%9E%E9%AA%8C%E5%88%86%E6%9E%90"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.4 实验分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-1-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">5.4.1 实验结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-2-%E5%AE%9E%E9%AA%8C%E6%A8%A1%E5%9D%97"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.4.2 实验模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-%E9%99%84%E5%BD%95"><span class="nav-number">1.5.6.</span> <span class="nav-text">5.5 附录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-TJ-AIDL"><span class="nav-number">1.6.</span> <span class="nav-text">6. TJ-AIDL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3 损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-%E8%AE%AD%E7%BB%83%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4 训练与部署流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5 模块分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-1-ID%E5%92%8CAttribute%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="nav-number">1.6.5.1.</span> <span class="nav-text">6.5.1 ID和Attribute模块分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-2-Adapation%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.6.5.2.</span> <span class="nav-text">6.5.2 Adapation的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-%E8%A1%A5%E5%85%85"><span class="nav-number">1.6.6.</span> <span class="nav-text">6.6 补充</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#transfer-learning"><span class="nav-number">1.</span> <span class="nav-text">transfer learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ARN"><span class="nav-number">1.1.</span> <span class="nav-text">1. ARN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 模块分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-%E5%8D%8A%E7%9B%91%E7%9D%A3-L-rec"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">1.3.1 半监督$ L_{rec} $</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-%E7%9B%91%E7%9D%A3-L-rec-L-class-%E5%92%8C-L-ctrs"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">1.3.2 监督$ L{rec} $, $ L{class} $和$ L_{ctrs} $</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-%E6%97%A0%E7%9B%91%E7%9D%A3-L-rec-E-T-%E5%92%8C-E-S"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">1.3.3 无监督$ L_{rec} $, $ E_T $和$ E_S $</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HHL"><span class="nav-number">1.2.</span> <span class="nav-text">2. HHL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 模块分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-starGAN"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">2.3.1 starGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-sample%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2.3.2 sample方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 实验设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-Camera-style-transfer-model%EF%BC%9AStarGAN"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">2.4.1 Camera style transfer model：StarGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-Re-ID-model-training"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2.4.2 Re-ID model training</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E8%B6%85%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 超参数设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-1-%E5%8F%82%E6%95%B0%E7%9A%84%E8%AE%BE%E7%BD%AE-beta"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">2.5.1 参数的设置$\beta$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-2-%E5%8F%82%E6%95%B0%E7%9A%84%E8%AE%BE%E7%BD%AE-n-t"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">2.5.2 参数的设置$n_t$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 实验结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">1.2.7.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#triplet-loss"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">triplet_loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.2.7.2.</span> <span class="nav-text">下一步工作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-SPGAN"><span class="nav-number">1.3.</span> <span class="nav-text">3. SPGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-CycleGAN"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">3.3.1 CycleGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-SPGAN"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">3.3.2 SPGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-%E8%A1%8C%E4%BA%BA%E9%87%8D%E8%AF%86%E5%88%AB%E7%BD%91%E7%BB%9C"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">3.3.3 行人重识别网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 实验设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-1-SPGAN"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">3.4.1 SPGAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-2-LMP"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">3.4.2 LMP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%AF%B9%E6%AF%94%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 对比实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AF%B9%E6%AF%94%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">模块的对比实验</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84%E5%BD%95-1"><span class="nav-number">1.3.6.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDE-and-IDE"><span class="nav-number">1.3.6.1.</span> <span class="nav-text">IDE and $IDE^+$</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-2018-12-17"><span class="nav-number">1.3.6.1.1.</span> <span class="nav-text">新增 2018-12-17</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Caffe-and-pytorch"><span class="nav-number">1.3.6.2.</span> <span class="nav-text">Caffe and pytorch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%96%91%E6%83%91"><span class="nav-number">1.3.6.3.</span> <span class="nav-text">疑惑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%B7%A5%E4%BD%9C-1"><span class="nav-number">1.3.7.</span> <span class="nav-text">下一步工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%9F%BA%E4%BA%8EGAN%E7%9A%84%E7%B1%BB%E4%BC%BC%E8%AE%BA%E6%96%87"><span class="nav-number">1.4.</span> <span class="nav-text">4. 基于GAN的类似论文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-PTGAN"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 PTGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-DCGAN-CNN"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 DCGAN+CNN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-MMFA"><span class="nav-number">1.5.</span> <span class="nav-text">5. MMFA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E5%AE%9E%E9%AA%8C%E5%88%86%E6%9E%90"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.4 实验分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-1-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">5.4.1 实验结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-2-%E5%AE%9E%E9%AA%8C%E6%A8%A1%E5%9D%97"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.4.2 实验模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-%E9%99%84%E5%BD%95"><span class="nav-number">1.5.6.</span> <span class="nav-text">5.5 附录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-TJ-AIDL"><span class="nav-number">1.6.</span> <span class="nav-text">6. TJ-AIDL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3 损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-%E8%AE%AD%E7%BB%83%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4 训练与部署流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5 模块分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-1-ID%E5%92%8CAttribute%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="nav-number">1.6.5.1.</span> <span class="nav-text">6.5.1 ID和Attribute模块分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-2-Adapation%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.6.5.2.</span> <span class="nav-text">6.5.2 Adapation的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-%E8%A1%A5%E5%85%85"><span class="nav-number">1.6.6.</span> <span class="nav-text">6.6 补充</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">TianJiajie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -1141,142 +943,65 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
 
 
 
   
 
   
+      
 
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
         }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
         }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-
-  
+    
 
   
 

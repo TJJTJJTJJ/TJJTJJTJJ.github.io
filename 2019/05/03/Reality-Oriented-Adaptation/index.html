@@ -1,131 +1,60 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="semantice segmentation,domain guided distillation," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="0. 前言0.0 前言这篇文章主要解决的问题是：当语义分割网络在合成数据集(有标签)上训练好，在真实数据集(没有标签)上性能下降比较多。作者认为有两个原因：对合成数据过拟合，合成数据与真实数据存在分布差异。(好吧，我认为这两是一个原因)。作者提出target guided distillation 和 spatial-aware adaptation 来改进性能，效果还挺好的。我主要看target">
+  <meta name="description" content="0. 前言0.0 前言这篇文章主要解决的问题是：当语义分割网络在合成数据集(有标签)上训练好，在真实数据集(没有标签)上性能下降比较多。作者认为有两个原因：对合成数据过拟合，合成数据与真实数据存在分布差异。(好吧，我认为这两是一个原因)。作者提出target guided distillation 和 spatial-aware adaptation 来改进性能，效果还挺好的。我主要看target">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Reality Oriented Adaptation">
 <meta property="og:url" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言0.0 前言这篇文章主要解决的问题是：当语义分割网络在合成数据集(有标签)上训练好，在真实数据集(没有标签)上性能下降比较多。作者认为有两个原因：对合成数据过拟合，合成数据与真实数据存在分布差异。(好吧，我认为这两是一个原因)。作者提出target guided distillation 和 spatial-aware adaptation 来改进性能，效果还挺好的。我主要看target">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/HydraPlus.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/ROAD_Net.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/target_guided_distillation.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/spatial_aware_adaptation.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/results.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/td.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/spt.png">
+<meta property="og:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/domain_classifier.png">
 <meta property="article:published_time" content="2019-05-03T07:52:58.000Z">
 <meta property="article:modified_time" content="2019-05-04T08:18:41.523Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="semantice segmentation">
 <meta property="article:tag" content="domain guided distillation">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/HydraPlus.png">
+
+<link rel="canonical" href="http://example.com/2019/05/03/Reality-Oriented-Adaptation/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://example.com/2019/05/03/Reality-Oriented-Adaptation/"/>
-
-
-
-
 
   <title>Reality Oriented Adaptation | Hexo</title>
   
@@ -135,232 +64,169 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-something">
-          <a href="/something" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            something
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/03/Reality-Oriented-Adaptation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="TianJiajie">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Reality Oriented Adaptation</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          Reality Oriented Adaptation
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T15:52:58+08:00">
-                2019-05-03
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/semantice-segmentation/" itemprop="url" rel="index">
-                    <span itemprop="name">semantice segmentation</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2019-05-03 15:52:58" itemprop="dateCreated datePublished" datetime="2019-05-03T15:52:58+08:00">2019-05-03</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-05-04 16:18:41" itemprop="dateModified" datetime="2019-05-04T16:18:41+08:00">2019-05-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/semantice-segmentation/" itemprop="url" rel="index"><span itemprop="name">semantice segmentation</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><h3 id="0-0-前言"><a href="#0-0-前言" class="headerlink" title="0.0 前言"></a>0.0 前言</h3><p>这篇文章主要解决的问题是：当语义分割网络在合成数据集(有标签)上训练好，在真实数据集(没有标签)上性能下降比较多。作者认为有两个原因：对合成数据过拟合，合成数据与真实数据存在分布差异。(好吧，我认为这两是一个原因)。作者提出target guided distillation 和 spatial-aware adaptation 来改进性能，效果还挺好的。我主要看target guided distillaiton。</p>
@@ -374,7 +240,7 @@
 <li>paper: <a target="_blank" rel="noopener" href="http://openaccess.thecvf.com/content_ICCV_2017/papers/Liu_HydraPlus-Net_Attentive_Deep_ICCV_2017_paper.pdf">ICCV2017: HydraPlus-Net: Attentive Deep Features for Pedestrian Analysis</a></li>
 <li>code: <a target="_blank" rel="noopener" href="https://github.com/xh-liu/HydraPlus-Net">caffe</a></li>
 </ul>
-
+<img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/HydraPlus.png" class title="HydraPlus network">
 <p>其主要创新点在于：</p>
 <ul>
 <li>attention不仅可以用于本block，也可以用于其他block</li>
@@ -386,15 +252,15 @@
 <li>real style orientation &amp; target guided distillation: 为了避免过拟合合成数据集，使用 distillation 使 model 的输出和预训练的模型的输出一致，注意，这里 distillation 针对的是真实数据集，而不是合成数据集，这种方法称为 target guided distillation.</li>
 <li>real distribution orientation &amp; spatial-aware adaptation &amp; domain classifier: 因为合成数据集和真实数据集的分布不一致，提出 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">DANN</a> 也就是 domain classifier，其实类似GAN的D，来使得合成数据集和真实数据集的特征分布一致。主要过程就是将合成数据集和真实数据集的特征图分割成几个区域，然后判断这几个区域是不是同一个domain。</li>
 </ul>
-
-<h2 id="2-Reality-Oriented-Adaptation-Networks"><a href="#2-Reality-Oriented-Adaptation-Networks" class="headerlink" title="2. Reality Oriented Adaptation Networks"></a>2. Reality Oriented Adaptation Networks</h2><h3 id="2-1-Target-Guided-Distillation"><a href="#2-1-Target-Guided-Distillation" class="headerlink" title="2.1 Target Guided Distillation"></a>2.1 Target Guided Distillation</h3>
+<img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/ROAD_Net.png" class title="ROAD_Net">
+<h2 id="2-Reality-Oriented-Adaptation-Networks"><a href="#2-Reality-Oriented-Adaptation-Networks" class="headerlink" title="2. Reality Oriented Adaptation Networks"></a>2. Reality Oriented Adaptation Networks</h2><h3 id="2-1-Target-Guided-Distillation"><a href="#2-1-Target-Guided-Distillation" class="headerlink" title="2.1 Target Guided Distillation"></a>2.1 Target Guided Distillation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/target_guided_distillation.png" class title="illustration of target guided distillaion">
 <p>其中，pretrained model 在训练的时候不更新.</p>
 <p><strong>distillation loss</strong>：</p>
 <script type="math/tex; mode=display">L_{dist}=\frac{1}{N}\sum_{i,j}\parallel x_{i,j}-z_{i,j} \parallel _2</script><p>其中，$x<em>{i,j}, z</em>{i,j}$分别表示 segmentation model 和 pretrained model 得到的 feature map 在位置 $(i,j)$ 的值，二范是简单的欧式距离。这个损失简单粗暴，后续的实验也证明了这种方法的确要更好一些。</p>
 <p>我觉得这个是一个思路，这种 distillation 可以在一定程度上使得 segmentation model 学习到真实数据集的特征分布。</p>
 <p>当然，除了 distillation loss 用来防止过拟合，也有其他方法用来防止过拟合，比如冻结一些层然后循环，或者用 source (合成数据集) 用来进行 distillation，是 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1606.09282.pdf">learning without forgetting</a>，这篇文章也很有用，等下简单地讲下这篇文章。</p>
 <p>其实这里大有文章可做。</p>
-<h3 id="2-2-Spatial-Aware-Adaptation"><a href="#2-2-Spatial-Aware-Adaptation" class="headerlink" title="2.2 Spatial-Aware Adaptation"></a>2.2 Spatial-Aware Adaptation</h3>
+<h3 id="2-2-Spatial-Aware-Adaptation"><a href="#2-2-Spatial-Aware-Adaptation" class="headerlink" title="2.2 Spatial-Aware Adaptation"></a>2.2 Spatial-Aware Adaptation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/spatial_aware_adaptation.png" class title="spatial-aware adaptation">
 <p>假设把特征图分割成了$m=1,…,M$块，每一块的区域坐标集合表示为$(u,v)\in R<em>m$，记点(u,v)对应的特征图为$x</em>{u,v}$，记区域对应的特征图为$X<em>m^s=\{x</em>{u,v}^s | (u,v)\in R<em>m\}$和$X_m^t=\{x</em>{u,v}^t | (u,v)\in R_m\}$，定义其loss为:</p>
 <script type="math/tex; mode=display">L_{spt}=\sum_{m=1}^M L_{da}(X_m^s, X_m^t)</script><p>其中，$L_{da}$表示 domain adaptation loss，其实就是domain classifier loss,具体表示如下。</p>
 <script type="math/tex; mode=display">L_H(X^s, X^t)=\frac{1}{|X|}\sum_{x\in X} l(h(x),d)</script><p>其中$h:x\to \{0,1\}$，采用的<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">DANN</a>模型，应该是类似GAN中的D，$d\in \{0,1\}$.</p>
@@ -403,13 +269,13 @@
 <li>dst: target guided distillation</li>
 <li>spt: spatial-aware adaptation</li>
 </ul>
-
+<img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/results.png" class title="results">
 <p>通过结果可以看出，这两个创新点是有用的。</p>
-<h3 id="3-2-Analysis-on-Real-Style-Orientation"><a href="#3-2-Analysis-on-Real-Style-Orientation" class="headerlink" title="3.2 Analysis on Real Style Orientation"></a>3.2 Analysis on Real Style Orientation</h3>
-<h3 id="3-3-Analysis-on-Real-Distribution-Orientation"><a href="#3-3-Analysis-on-Real-Distribution-Orientation" class="headerlink" title="3.3 Analysis on Real Distribution Orientation"></a>3.3 Analysis on Real Distribution Orientation</h3>
+<h3 id="3-2-Analysis-on-Real-Style-Orientation"><a href="#3-2-Analysis-on-Real-Style-Orientation" class="headerlink" title="3.2 Analysis on Real Style Orientation"></a>3.2 Analysis on Real Style Orientation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/td.png" class title="target domain distillation">
+<h3 id="3-3-Analysis-on-Real-Distribution-Orientation"><a href="#3-3-Analysis-on-Real-Distribution-Orientation" class="headerlink" title="3.3 Analysis on Real Distribution Orientation"></a>3.3 Analysis on Real Distribution Orientation</h3><img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/spt.png" class title="spatial-aware adaptation">
 <h2 id="4-Others"><a href="#4-Others" class="headerlink" title="4. Others"></a>4. Others</h2><p>这里主要简单介绍下论文中提到的几篇参考文献的主要内容，并没有细读这几篇参考文献。</p>
 <h3 id="4-1-Domain-Adaptation"><a href="#4-1-Domain-Adaptation" class="headerlink" title="4.1 Domain Adaptation"></a>4.1 Domain Adaptation</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1409.7495v2.pdf">Unsupervised Domain Adaptation by Backpropagation</a></p>
-
+<img src="/2019/05/03/Reality-Oriented-Adaptation/05/03/Reality-Oriented-Adaptation/domain_classifier.png" class title="domain classifier">
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/MataFela/article/details/77827217">Domain Adaptation</a></p>
 <h3 id="4-2-Distillation"><a href="#4-2-Distillation" class="headerlink" title="4.2 Distillation"></a>4.2 Distillation</h3><script type="math/tex; mode=display">q_i=\frac{exp(z_i/T)}{\sum_j exp(z_j/T)}</script><script type="math/tex; mode=display">L(p,q)=\sum_i p_i * (-\log q_i)</script><p><a target="_blank" rel="noopener" href="https://github.com/dkozlov/awesome-knowledge-distillation">Awesome Knowledge Distillation</a>中有相关的论文和一部分实现。</p>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1606.09282.pdf">Learning without Forgetting</a></p>
@@ -423,259 +289,179 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这段代码证明了DL散度和交叉熵的反向传播是一样的</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="comment"># sample number</span></span><br><span class="line">N = <span class="number">10</span></span><br><span class="line"><span class="comment"># category number</span></span><br><span class="line">C = <span class="number">5</span></span><br><span class="line"><span class="comment"># softmax output of teacher</span></span><br><span class="line">p = torch.softmax(torch.rand(N, C), dim=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># logit output of student</span></span><br><span class="line">s = torch.rand(N, C, requires_grad=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># softmax output of student, T = 1</span></span><br><span class="line">q = torch.softmax(s, dim=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># KL Diverse</span></span><br><span class="line"><span class="comment"># this is the implementation of the author&#x27;s</span></span><br><span class="line"><span class="comment"># torch will do element mean because it is the default option</span></span><br><span class="line"><span class="comment"># kl_loss = nn.KLDivLoss()(torch.log(q), p)</span></span><br><span class="line"><span class="comment"># I think this should be the right solution</span></span><br><span class="line">kl_loss = (nn.KLDivLoss(reduction=<span class="string">&#x27;none&#x27;</span>)(torch.log(q), p)).<span class="built_in">sum</span>(dim=<span class="number">1</span>).mean()</span><br><span class="line">kl_loss.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;grad using KL DivLoss&#x27;</span></span><br><span class="line"><span class="built_in">print</span> s.grad</span><br><span class="line"><span class="comment"># clear the grad</span></span><br><span class="line">s.grad.zero_()</span><br><span class="line"><span class="comment"># bug2: should not do element wise mean operation</span></span><br><span class="line"><span class="comment"># ce_loss = torch.mean(-torch.log(q) * p)</span></span><br><span class="line">ce_loss = torch.mean(torch.<span class="built_in">sum</span>(-torch.log(q) * p, dim=<span class="number">1</span>))</span><br><span class="line">ce_loss.backward()</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;grad using ce loss&#x27;</span></span><br><span class="line"><span class="built_in">print</span> s.grad</span><br><span class="line"><span class="comment"># the real gradient of s should be `(q - p) / batch_size`</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;real grad, should be (q-p) / batch_size&#x27;</span></span><br><span class="line"><span class="built_in">print</span> (q - p) / N</span><br></pre></td></tr></table></figure>
 <p>或者也可以参考: <a target="_blank" rel="noopener" href="https://github.com/PolarisShi/distillation/blob/master/student.py">code</a></p>
 
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/semantice-segmentation/" rel="tag"># semantice segmentation</a>
-          
-            <a href="/tags/domain-guided-distillation/" rel="tag"># domain guided distillation</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/04/30/Domain-Guided-Dropout/" rel="next" title="Domain Guided Dropout">
-                <i class="fa fa-chevron-left"></i> Domain Guided Dropout
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/semantice-segmentation/" rel="tag"># semantice segmentation</a>
+              <a href="/tags/domain-guided-distillation/" rel="tag"># domain guided distillation</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/04/SE-block/" rel="prev" title="SE block">
-                SE block <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/04/30/Domain-Guided-Dropout/" rel="prev" title="Domain Guided Dropout">
+      <i class="fa fa-chevron-left"></i> Domain Guided Dropout
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/04/SE-block/" rel="next" title="SE block">
+      SE block <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">76</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">73</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">0.0 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-HydraPlus-Net"><span class="nav-number">1.2.</span> <span class="nav-text">0.1 HydraPlus-Net</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Reality-Oriented-Adaptation-Networks"><span class="nav-number">3.</span> <span class="nav-text">2. Reality Oriented Adaptation Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Target-Guided-Distillation"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Target Guided Distillation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Spatial-Aware-Adaptation"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Spatial-Aware Adaptation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Network-Overview"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Network Overview</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Experimental-Results"><span class="nav-number">4.</span> <span class="nav-text">3. Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Experimental-Results"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Experimental Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Analysis-on-Real-Style-Orientation"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Analysis on Real Style Orientation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Analysis-on-Real-Distribution-Orientation"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 Analysis on Real Distribution Orientation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Others"><span class="nav-number">5.</span> <span class="nav-text">4. Others</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Domain-Adaptation"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Domain Adaptation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Distillation"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 Distillation</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">0.0 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-HydraPlus-Net"><span class="nav-number">1.2.</span> <span class="nav-text">0.1 HydraPlus-Net</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Reality-Oriented-Adaptation-Networks"><span class="nav-number">3.</span> <span class="nav-text">2. Reality Oriented Adaptation Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Target-Guided-Distillation"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Target Guided Distillation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Spatial-Aware-Adaptation"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Spatial-Aware Adaptation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Network-Overview"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Network Overview</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Experimental-Results"><span class="nav-number">4.</span> <span class="nav-text">3. Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Experimental-Results"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Experimental Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Analysis-on-Real-Style-Orientation"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Analysis on Real Style Orientation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Analysis-on-Real-Distribution-Orientation"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 Analysis on Real Distribution Orientation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Others"><span class="nav-number">5.</span> <span class="nav-text">4. Others</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Domain-Adaptation"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Domain Adaptation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Distillation"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 Distillation</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">TianJiajie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -693,142 +479,65 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
 
 
 
   
 
   
+      
 
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
         }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
         }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-
-  
+    
 
   
 

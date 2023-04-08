@@ -1,130 +1,55 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="GAN," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="0. 前言 paper: CVPR2019_STGAN: A Unified Selective Transfer Network for Arbitrary Image Attribute Editing code: tensorflow, pytorch">
+  <meta name="description" content="0. 前言 paper: CVPR2019_STGAN: A Unified Selective Transfer Network for Arbitrary Image Attribute Editing code: tensorflow, pytorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STGAN">
 <meta property="og:url" content="http://example.com/2019/05/27/STGAN/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言 paper: CVPR2019_STGAN: A Unified Selective Transfer Network for Arbitrary Image Attribute Editing code: tensorflow, pytorch">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2019/05/27/STGAN/05/27/STGAN/AttGAN1.png">
+<meta property="og:image" content="http://example.com/2019/05/27/STGAN/05/27/STGAN/reconstruction.png">
+<meta property="og:image" content="http://example.com/2019/05/27/STGAN/05/27/STGAN/GRU1.png">
+<meta property="og:image" content="http://example.com/2019/05/27/STGAN/05/27/STGAN/ablation_study.png">
 <meta property="article:published_time" content="2019-05-27T03:03:40.000Z">
 <meta property="article:modified_time" content="2019-05-28T08:11:37.231Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="GAN">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/05/27/STGAN/05/27/STGAN/AttGAN1.png">
+
+<link rel="canonical" href="http://example.com/2019/05/27/STGAN/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://example.com/2019/05/27/STGAN/"/>
-
-
-
-
 
   <title>STGAN | Hexo</title>
   
@@ -134,232 +59,169 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-something">
-          <a href="/something" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            something
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/27/STGAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="TianJiajie">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">STGAN</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          STGAN
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-27T11:03:40+08:00">
-                2019-05-27
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GAN/" itemprop="url" rel="index">
-                    <span itemprop="name">GAN</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2019-05-27 11:03:40" itemprop="dateCreated datePublished" datetime="2019-05-27T11:03:40+08:00">2019-05-27</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-05-28 16:11:37" itemprop="dateModified" datetime="2019-05-28T16:11:37+08:00">2019-05-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GAN/" itemprop="url" rel="index"><span itemprop="name">GAN</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
@@ -390,10 +252,10 @@
 <li>z针对skip connection, 使用 <strong>selective transfer units</strong>，同时提高输入属性的影响力和图片质量</li>
 </ul>
 <h2 id="2-Proposed-Method"><a href="#2-Proposed-Method" class="headerlink" title="2. Proposed Method"></a>2. Proposed Method</h2>
-<h3 id="2-1-Limitation-of-Skip-Connection-in-AttGAN"><a href="#2-1-Limitation-of-Skip-Connection-in-AttGAN" class="headerlink" title="2.1 Limitation of Skip Connection in AttGAN"></a>2.1 Limitation of Skip Connection in AttGAN</h3>
+<h3 id="2-1-Limitation-of-Skip-Connection-in-AttGAN"><a href="#2-1-Limitation-of-Skip-Connection-in-AttGAN" class="headerlink" title="2.1 Limitation of Skip Connection in AttGAN"></a>2.1 Limitation of Skip Connection in AttGAN</h3><img src="/2019/05/27/STGAN/05/27/STGAN/AttGAN1.png" class title="AttGAN">
 <p>可以看出，增加 skip connections 有益于重建图像(图片属性和生成属性一致)(reconstruction)，但是，会生成其他属性的图片时的精度会降低(图片属性和生成属性不一致)(attribute manipulation ability)。主要原因是直接 concatenates encoder and decoder features.</p>
 <p>作者为了解决这个问题，使用 selective transfer units to adaptively transform encoder features guided by attributes to be changed.</p>
-<h3 id="2-2-Taking-Difference-Attribute-Vector-as-Input"><a href="#2-2-Taking-Difference-Attribute-Vector-as-Input" class="headerlink" title="2.2 Taking Difference Attribute Vector as Input"></a>2.2 Taking Difference Attribute Vector as Input</h3>
+<h3 id="2-2-Taking-Difference-Attribute-Vector-as-Input"><a href="#2-2-Taking-Difference-Attribute-Vector-as-Input" class="headerlink" title="2.2 Taking Difference Attribute Vector as Input"></a>2.2 Taking Difference Attribute Vector as Input</h3><img src="/2019/05/27/STGAN/05/27/STGAN/reconstruction.png" class title="reconstruction">
 <p>StarGAN and AttGAN 是把 target attribute vector $att_t$ 做为输入，作者通过观察 StarGAN and AttGAN 的重建图片，发现 attribute vector 会对重建图片有害。其实也不难理解，要想不发生变换，最好是 x0，但是 attribute vector 肯定不是0，卷积层也不可能是0，自然 attribute vector 会改变生成的图片，尤其是重建图片，因为此时是希望完全不变的，要求更高一些。</p>
 <p>作者针对 target attribute vector 的缺点提出 difference attribute vector。</p>
 <script type="math/tex; mode=display">att_{diff}=att_t-att_s</script><h3 id="2-3-Selective-Transfer-Units-STU"><a href="#2-3-Selective-Transfer-Units-STU" class="headerlink" title="2.3 Selective Transfer Units(STU)"></a>2.3 Selective Transfer Units(STU)</h3><p>作者使用修改版的 GRU 来建立 STUs 作为 skip connection.</p>
@@ -409,7 +271,7 @@ f_t^l &= (1-z^l)\circ\hat{s}^{l+1}+z^l\circ \hat{f}_t^l
 \end{aligned}</script><p>其中 $[\cdot ,\cdot]$ 表示 concatenation operation，$*T$ 表示 transposed convolution.</p>
 <p>$*$ 表示 convolution operation，$\circ$ 表示 entry-wise product，$\sigma(\cdot)$ 表示 sigmoid function.</p>
 <p>看着很像常规意义上的 LSTM 的方程，但是自己在这方面接触比较少。所以简单地记录下GRU的原始公式。</p>
-
+<img src="/2019/05/27/STGAN/05/27/STGAN/GRU1.png" class title="GRU">
 <p>两者的公式基本上是一致的，但是不太懂其原理或者可以达到的效果。另外其含义也发生了一些变化，主要是 GRU 中，$f_t^l$ 是 output of hidden state，作者把 $s^l$ 作为 output of hidden state，$f_t^l$ 作为 output of transformed encoder feature。</p>
 <p>不懂。但我觉得能提出这个，就很厉害。</p>
 <h3 id="2-4-Network-Architecture"><a href="#2-4-Network-Architecture" class="headerlink" title="2.4 Network Architecture"></a>2.4 Network Architecture</h3><p>STGAN 分为两部分: generator G and discriminator D.</p>
@@ -428,7 +290,7 @@ f_t^l &= (1-z^l)\circ\hat{s}^{l+1}+z^l\circ \hat{f}_t^l
 <p>Question: 为什么还会有第二项？</p>
 <p><strong>Model Objective</strong>:</p>
 <script type="math/tex; mode=display">\min_D L_D= -L_{D_{adv}} + \lambda_1 L_{D_{att}}</script><script type="math/tex; mode=display">\min_G L_G= -L_{G_{adv}} + \lambda_2 L_{G_{att}} + \lambda_3 L_{rec}</script><h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><p>结果很棒，在真实性和分类准确率上都要比其它的GAN好很多。</p>
-<h2 id="5-Ablation-Study"><a href="#5-Ablation-Study" class="headerlink" title="5. Ablation Study"></a>5. Ablation Study</h2>
+<h2 id="5-Ablation-Study"><a href="#5-Ablation-Study" class="headerlink" title="5. Ablation Study"></a>5. Ablation Study</h2><img src="/2019/05/27/STGAN/05/27/STGAN/ablation_study.png" class title="ablation study">
 <ul>
 <li>STGAN: original STGAN</li>
 <li>STGAN-dst: target attribute vector, not difference attribute vector</li>
@@ -443,257 +305,178 @@ f_t^l &= (1-z^l)\circ\hat{s}^{l+1}+z^l\circ \hat{f}_t^l
 <p>Question: 具体 GRU, STU 的工作机制有机会的话还是需要多了解一下。</p>
 <h2 id="6-code"><a href="#6-code" class="headerlink" title="6. code"></a>6. code</h2><p>因为最近在跑实验，所以没法具体跑论文的代码，以后再看情况把。</p>
 
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/GAN/" rel="tag"># GAN</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/05/22/Deep-CV-MIML/" rel="next" title="Deep CV-MIML">
-                <i class="fa fa-chevron-left"></i> Deep CV-MIML
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GAN/" rel="tag"># GAN</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/29/FUNIT/" rel="prev" title="FUNIT">
-                FUNIT <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/22/Deep-CV-MIML/" rel="prev" title="Deep CV-MIML">
+      <i class="fa fa-chevron-left"></i> Deep CV-MIML
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/29/FUNIT/" rel="next" title="FUNIT">
+      FUNIT <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">76</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">73</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Proposed-Method"><span class="nav-number">3.</span> <span class="nav-text">2. Proposed Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Limitation-of-Skip-Connection-in-AttGAN"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Limitation of Skip Connection in AttGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Taking-Difference-Attribute-Vector-as-Input"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Taking Difference Attribute Vector as Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Selective-Transfer-Units-STU"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Selective Transfer Units(STU)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Network-Architecture"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Network Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Loss-Functions"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 Loss Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Experiments"><span class="nav-number">4.</span> <span class="nav-text">4. Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Ablation-Study"><span class="nav-number">5.</span> <span class="nav-text">5. Ablation Study</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-code"><span class="nav-number">6.</span> <span class="nav-text">6. code</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Proposed-Method"><span class="nav-number">3.</span> <span class="nav-text">2. Proposed Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Limitation-of-Skip-Connection-in-AttGAN"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Limitation of Skip Connection in AttGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Taking-Difference-Attribute-Vector-as-Input"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Taking Difference Attribute Vector as Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Selective-Transfer-Units-STU"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Selective Transfer Units(STU)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Network-Architecture"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Network Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Loss-Functions"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 Loss Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Experiments"><span class="nav-number">4.</span> <span class="nav-text">4. Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Ablation-Study"><span class="nav-number">5.</span> <span class="nav-text">5. Ablation Study</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-code"><span class="nav-number">6.</span> <span class="nav-text">6. code</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">TianJiajie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -711,142 +494,65 @@ f_t^l &= (1-z^l)\circ\hat{s}^{l+1}+z^l\circ \hat{f}_t^l
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
 
 
 
   
 
   
+      
 
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
         }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
         }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-
-  
+    
 
   
 

@@ -1,147 +1,82 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="paper,CNN," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="Grad-CAM:Visual Explanations from Deep Networks via Gradient-based Localization">
+  <meta name="description" content="Grad-CAM:Visual Explanations from Deep Networks via Gradient-based Localization">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Grad-CAM">
 <meta property="og:url" content="http://example.com/2018/12/14/Grad-CAM/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Grad-CAM:Visual Explanations from Deep Networks via Gradient-based Localization">
-<meta property="og:locale">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Deconvolution1.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Guided-Backpropagation.jpg">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Guided-Backpropagation2.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/CAM.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/CAM2.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/GAIN1.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/GAIN2.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/GAIN3.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Grad-CAM.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Guided-Grad-CAM.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Guided-Grad-CAM2.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Guided-Grad-CAM3.png">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Guided-Grad-CAM4.jpg">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Guided-Grad-CAM5.jpg">
-<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Guided-Grad-CAM6.jpg">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Deconvolution1.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Deconvolution1.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Guided-Backpropagation.jpg">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Backpropagation.jpg">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Guided-Backpropagation2.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Backpropagation2.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/CAM.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/CAM.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/CAM2.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/CAM2.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/GAIN1.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/GAIN1.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/GAIN2.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/GAIN2.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/GAIN3.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/GAIN3.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Grad-CAM.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Guided-Grad-CAM.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Guided-Grad-CAM2.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM2.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Guided-Grad-CAM3.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM3.png">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Guided-Grad-CAM4.jpg">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM4.jpg">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Guided-Grad-CAM5.jpg">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM5.jpg">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/Guided-Grad-CAM6.jpg">
+<meta property="og:image" content="http://example.com/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM6.jpg">
 <meta property="article:published_time" content="2018-12-14T01:50:53.000Z">
 <meta property="article:modified_time" content="2018-12-20T14:37:49.738Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="paper">
 <meta property="article:tag" content="CNN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2018/12/14/Grad-CAM/Grad-CAM/Deconvolution1.png">
+<meta name="twitter:image" content="http://example.com/2018/12/14/Grad-CAM/Deconvolution1.png">
+
+<link rel="canonical" href="http://example.com/2018/12/14/Grad-CAM/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://example.com/2018/12/14/Grad-CAM/"/>
-
-
-
-
 
   <title>Grad-CAM | Hexo</title>
   
@@ -151,232 +86,169 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-something">
-          <a href="/something" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            something
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/14/Grad-CAM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="TianJiajie">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Grad-CAM</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          Grad-CAM
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T09:50:53+08:00">
-                2018-12-14
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/deep-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">deep learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-12-14 09:50:53" itemprop="dateCreated datePublished" datetime="2018-12-14T09:50:53+08:00">2018-12-14</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-20 22:37:49" itemprop="dateModified" datetime="2018-12-20T22:37:49+08:00">2018-12-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index"><span itemprop="name">deep learning</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1610.02391.pdf">Grad-CAM:Visual Explanations from Deep Networks via Gradient-based Localization</a></p>
@@ -421,19 +293,19 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Julialove102123/article/details/78292807">https://blog.csdn.net/Julialove102123/article/details/78292807</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/gm_margin/article/details/79335140">https://blog.csdn.net/gm_margin/article/details/79335140</a></li>
 </ul>
-<p><img src="./Grad-CAM/Deconvolution1.png" alt="Deconvolution的结构图"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/Deconvolution1.png" alt="Deconvolution的结构图"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Deconvolution1.png" class title="Deconvolution的结构图"></p>
 <h2 id="2-2-Guided-Backpropagation"><a href="#2-2-Guided-Backpropagation" class="headerlink" title="2.2 Guided-Backpropagation"></a>2.2 Guided-Backpropagation</h2><p><a target="_blank" rel="noopener" href="http://arxiv.org/abs/1412.6806">Guided-Backpropagation: Striving for Simplicity: The All Convolutional Net</a></p>
 <p>反向传播、反卷积和导向反向传播都是反向传播，区别在于经过 ReLU 层时对梯度的不同处理策略。在这篇<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1412.6806.pdf">论文</a>中有详细的解释。</p>
 <p>计算公式如下：</p>
-<p><img src="./Grad-CAM/Guided-Backpropagation.jpg" alt="反向传播梯度的选择"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/Guided-Backpropagation.jpg" alt="反向传播梯度的选择"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Backpropagation.jpg" class title="反向传播梯度的选择"></p>
 <p>文中提出使用 stride convolution 代替 pooling，研究这种结构的有效性。</p>
 <p>效果显示如下：</p>
-<p><img src="./Grad-CAM/Guided-Backpropagation2.png" alt="三种反向传播的效果"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/Guided-Backpropagation2.png" alt="三种反向传播的效果"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Backpropagation2.png" class title="三种反向传播的效果"></p>
 <p>可以看出 Guided-Backpropagation 主要提取对分类有效果的特征，但是与是哪类没有关系。</p>
 <h2 id="2-3-CAM"><a href="#2-3-CAM" class="headerlink" title="2.3 CAM"></a>2.3 CAM</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1512.04150">CAM: Learning Deep Features for Discriminative Localization</a></p>
 <p><strong>综述</strong>：论文重新审视了global average pooling (GAP) 的有效性，并详细阐述了GAP如何使得CNN有优异的目标定位能力。<br><strong>介绍</strong>：摒弃FC，使用GAP。<br><strong>实现</strong>：</p>
-<p><img src="./Grad-CAM/CAM.png" alt="CAM的网络结构"><br></p>
-<p><img src="./Grad-CAM/CAM2.png" alt="结果图"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/CAM.png" alt="CAM的网络结构"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/CAM.png" class title="CAM的网络结构"></p>
+<p><img src="/2018/12/14/Grad-CAM/CAM2.png" alt="结果图"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/CAM2.png" class title="结果图"></p>
 <h2 id="2-4-Grad-CAM"><a href="#2-4-Grad-CAM" class="headerlink" title="2.4 Grad-CAM"></a>2.4 Grad-CAM</h2><p>Grad-CAM 是CAM的改进版， 与 CAM 的不同点在于前者的特征加权系数是反向传播得到的，后者的特征加权系数是分类器的权重。</p>
 <p>Grad-CAM 可以加载到任意网络架构上，而不需要修改网络架构，而CAM必须使用GAP。</p>
 <p>下面会详细介绍。</p>
@@ -441,13 +313,13 @@
 <p>code: <a target="_blank" rel="noopener" href="https://github.com/alokwhitewolf/Guided-Attention-Inference-Network">https://github.com/alokwhitewolf/Guided-Attention-Inference-Network</a></p>
 <p>GAIN 是 Grad-CAM 的改进版，Grad-CAM只能可视化解释现有的网络结构的结果，却不能指导网络架构，GAIN可以指导网络修正错误，关注更正确的位置。</p>
 <p><strong>问题</strong>：在船识别的过程中，网络的关注点是水面而不是船。</p>
-<p><img src="./Grad-CAM/GAIN1.png" alt="注意力错误"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/GAIN1.png" alt="注意力错误"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/GAIN1.png" class title="注意力错误"></p>
 <p><strong>实现</strong>：通过最小化遮挡图像的物体来训练。</p>
-<p><img src="./Grad-CAM/GAIN2.png" alt="GAIN的网络架构"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/GAIN2.png" alt="GAIN的网络架构"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/GAIN2.png" class title="GAIN的网络架构"></p>
 <p>整体网络架构中，只有一个网络，两个处理流都是共享同一个网络。</p>
 <p><strong>公式</strong>：损失函数</p>
 <script type="math/tex; mode=display">w_{l,k}^c=GAP(\frac{\partial s^c}{\partial f_{l,k}})</script><script type="math/tex; mode=display">A^c=ReLU(conv(f_l, w^c))</script><script type="math/tex; mode=display">T(A^c)=\frac{1}{1+exp(-\omega(A^c-\sigma))}</script><script type="math/tex; mode=display">I^{*c}=I-(T(A^c)\odot I)</script><script type="math/tex; mode=display">L_{am}=\frac{1}{n}\sum_cs^c(I^{*c})</script><script type="math/tex; mode=display">L_{self}=L_{cl}+\alpha L_{am}</script><script type="math/tex; mode=display">\alpha=1</script><p><strong>扩展</strong>：如果有额外的监督真值，比如分割，那么可以进行扩充网络</p>
-<p><img src="./Grad-CAM/GAIN3.png" alt="扩充的网络架构"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/GAIN3.png" alt="扩充的网络架构"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/GAIN3.png" class title="扩充的网络架构"></p>
 <script type="math/tex; mode=display">L_e=\frac{1}{n}\sum_c (A^c-H^c)^2</script><script type="math/tex; mode=display">L_{ext}=L_{cl}+\alpha L_{am}+\omega L_e</script><script type="math/tex; mode=display">\alpha=1, \omega=10</script><h3 id="2-5-1-GAIN-code"><a href="#2-5-1-GAIN-code" class="headerlink" title="2.5.1 GAIN-code"></a>2.5.1 GAIN-code</h3><p><strong>第一步</strong>：训练分类网络</p>
 <p><strong>FCN</strong>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line">self.conv1_1 = L.Convolution2D(<span class="number">3</span>, <span class="number">64</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">self.conv1_2 = L.Convolution2D(<span class="number">64</span>, <span class="number">64</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">self.conv2_1 = L.Convolution2D(<span class="number">64</span>, <span class="number">128</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">self.conv2_2 = L.Convolution2D(<span class="number">128</span>, <span class="number">128</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">self.conv3_1 = L.Convolution2D(<span class="number">128</span>, <span class="number">256</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">self.conv3_2 = L.Convolution2D(<span class="number">256</span>, <span class="number">256</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">self.conv3_3 = L.Convolution2D(<span class="number">256</span>, <span class="number">256</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">self.conv4_1 = L.Convolution2D(<span class="number">256</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">self.conv4_2 = L.Convolution2D(<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">self.conv4_3 = L.Convolution2D(<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">self.conv5_1 = L.Convolution2D(<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">self.conv5_2 = L.Convolution2D(<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">self.conv5_3 = L.Convolution2D(<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">self.fc6 = L.Convolution2D(<span class="number">512</span>, <span class="number">4096</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">self.fc7 = L.Convolution2D(<span class="number">4096</span>, <span class="number">4096</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">self.score_fr = L.Convolution2D(<span class="number">4096</span>, n_class, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">segment</span>(<span class="params">self, x, t=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># conv1</span></span><br><span class="line">    self.conv1_1.pad = (<span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">    h = F.relu(self.conv1_1(x))</span><br><span class="line">    conv1_1 = h</span><br><span class="line">    h = F.relu(self.conv1_2(conv1_1))</span><br><span class="line">    conv1_2 = h</span><br><span class="line">    h = _max_pooling_2d(conv1_2)</span><br><span class="line">    pool1 = h  <span class="comment"># 1/2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># conv2</span></span><br><span class="line">    h = F.relu(self.conv2_1(pool1))</span><br><span class="line">    conv2_1 = h</span><br><span class="line">    h = F.relu(self.conv2_2(conv2_1))</span><br><span class="line">    conv2_2 = h</span><br><span class="line">    h = _max_pooling_2d(conv2_2)</span><br><span class="line">    pool2 = h  <span class="comment"># 1/4</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># conv3</span></span><br><span class="line">    h = F.relu(self.conv3_1(pool2))</span><br><span class="line">    conv3_1 = h</span><br><span class="line">    h = F.relu(self.conv3_2(conv3_1))</span><br><span class="line">    conv3_2 = h</span><br><span class="line">    h = F.relu(self.conv3_3(conv3_2))</span><br><span class="line">    conv3_3 = h</span><br><span class="line">    h = _max_pooling_2d(conv3_3)</span><br><span class="line">    pool3 = h  <span class="comment"># 1/8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># conv4</span></span><br><span class="line">    h = F.relu(self.conv4_1(pool3))</span><br><span class="line">    h = F.relu(self.conv4_2(h))</span><br><span class="line">    h = F.relu(self.conv4_3(h))</span><br><span class="line">    h = _max_pooling_2d(h)</span><br><span class="line">    pool4 = h  <span class="comment"># 1/16</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># conv5</span></span><br><span class="line">    h = F.relu(self.conv5_1(pool4))</span><br><span class="line">    h = F.relu(self.conv5_2(h))</span><br><span class="line">    h = F.relu(self.conv5_3(h))</span><br><span class="line">    h = _max_pooling_2d(h)</span><br><span class="line">    pool5 = h  <span class="comment"># 1/32</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># fc6</span></span><br><span class="line">    h = F.relu(self.fc6(pool5))</span><br><span class="line">    h = F.dropout(h, ratio=<span class="number">.5</span>)</span><br><span class="line">    fc6 = h  <span class="comment"># 1/32</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># fc7</span></span><br><span class="line">    h = F.relu(self.fc7(fc6))</span><br><span class="line">    h = F.dropout(h, ratio=<span class="number">.5</span>)</span><br><span class="line">    fc7 = h  <span class="comment"># 1/32</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># score_fr</span></span><br><span class="line">    h = self.score_fr(fc7)</span><br><span class="line">    score_fr = h  <span class="comment"># 1/32</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># score_pool3</span></span><br><span class="line">    h = self.score_pool3(pool3)</span><br><span class="line">    score_pool3 = h  <span class="comment"># 1/8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># score_pool4</span></span><br><span class="line">    h = self.score_pool4(pool4)</span><br><span class="line">    score_pool4 = h  <span class="comment"># 1/16</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># upscore2</span></span><br><span class="line">    h = self.upscore2(score_fr)</span><br><span class="line">    upscore2 = h  <span class="comment"># 1/16</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># score_pool4c</span></span><br><span class="line">    h = score_pool4[:, :,</span><br><span class="line">                    <span class="number">5</span>:<span class="number">5</span> + upscore2.shape[<span class="number">2</span>],</span><br><span class="line">                    <span class="number">5</span>:<span class="number">5</span> + upscore2.shape[<span class="number">3</span>]]</span><br><span class="line">    score_pool4c = h  <span class="comment"># 1/16</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># fuse_pool4</span></span><br><span class="line">    h = upscore2 + score_pool4c</span><br><span class="line">    fuse_pool4 = h  <span class="comment"># 1/16</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># upscore_pool4</span></span><br><span class="line">    h = self.upscore_pool4(fuse_pool4)</span><br><span class="line">    upscore_pool4 = h  <span class="comment"># 1/8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># score_pool4c</span></span><br><span class="line">    h = score_pool3[:, :,</span><br><span class="line">                    <span class="number">9</span>:<span class="number">9</span> + upscore_pool4.shape[<span class="number">2</span>],</span><br><span class="line">                    <span class="number">9</span>:<span class="number">9</span> + upscore_pool4.shape[<span class="number">3</span>]]</span><br><span class="line">    score_pool3c = h  <span class="comment"># 1/8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># fuse_pool3</span></span><br><span class="line">    h = upscore_pool4 + score_pool3c</span><br><span class="line">    fuse_pool3 = h  <span class="comment"># 1/8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># upscore8</span></span><br><span class="line">    h = self.upscore8(fuse_pool3)</span><br><span class="line">    upscore8 = h  <span class="comment"># 1/1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># score</span></span><br><span class="line">    h = upscore8[:, :, <span class="number">31</span>:<span class="number">31</span> + x.shape[<span class="number">2</span>], <span class="number">31</span>:<span class="number">31</span> + x.shape[<span class="number">3</span>]]</span><br><span class="line">    score = h  <span class="comment"># 1/1</span></span><br><span class="line">    self.score = score</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> t <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">assert</span> <span class="keyword">not</span> chainer.config.train</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    loss = F.softmax_cross_entropy(score, t, normalize=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">if</span> np.isnan(<span class="built_in">float</span>(loss.data)):</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&#x27;Loss is nan.&#x27;</span>)</span><br><span class="line">    chainer.report(&#123;<span class="string">&#x27;loss&#x27;</span>: loss&#125;, self)</span><br><span class="line">    self.conv1_1.pad = (<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
@@ -466,7 +338,7 @@
 <p>备注: $L<em>{cl}$和$L</em>{am}$完全共享网络。</p>
 <h1 id="3-Introduction"><a href="#3-Introduction" class="headerlink" title="3. Introduction"></a>3. Introduction</h1><p>可视化即应该满足高分辨率，也应该满足类别定位能力。</p>
 <p>示例图像</p>
-<p><img src="./Grad-CAM/Grad-CAM.png" alt="示例图像"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/Grad-CAM.png" alt="示例图像"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Grad-CAM.png" class title="示例图像"></p>
 <h1 id="4-Approach"><a href="#4-Approach" class="headerlink" title="4. Approach"></a>4. Approach</h1><p><strong>CAM</strong><br>在CAM中，一个全连接层替换成GAP，参见上面的CAM图，则分类任务可以表示成</p>
 <script type="math/tex; mode=display">y^c = \sum_k w_k^c \frac{1}{Z} \sum_i \sum_j A_{ij}^k</script><p>其中，$y^c$表示分类结果，$w<em>k^c$表示第k个特征图(kxhxw)对第c个类别的贡献，即全连接层的系数，$Z$表示特征图的大小，$Z=h\cdot w$，$A</em>{ij}^k$表示第k个特征图。</p>
 <p>则 CAM 的输出图表示为：</p>
@@ -474,11 +346,11 @@
 <script type="math/tex; mode=display">\alpha_k^c=\frac{1}{Z}\sum_i \sum_j \frac{\partial y^c}{\partial A_{ij}^k}</script><p>则Grad-CAM的输出图表示为：</p>
 <script type="math/tex; mode=display">L_{Grad-CAM}^c=ReLU(\sum_k \alpha_k^c A^k)</script><p>可以证明，Grad-CAM与CAM的公式是同一个公式的变形。</p>
 <p><strong>Guided Grad-CAM</strong><br>Guided Grad-CAM 是将 Grad-CAM 与 Guided Backpropagation 得到的输出图简单地点乘，从而获得类区分定位的高分辨率细节图。</p>
-<p><img src="./Grad-CAM/Guided-Grad-CAM.png" alt="Guided-Grad-CAM的网络架构"><br></p>
-<p>同时作者还分析了CNN分类错误的样本。<br><img src="./Grad-CAM/Guided-Grad-CAM2.png" alt="Guided-Grad-CAM分类错误的样本"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/Guided-Grad-CAM.png" alt="Guided-Grad-CAM的网络架构"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM.png" class title="Guided-Grad-CAM的网络架构"></p>
+<p>同时作者还分析了CNN分类错误的样本。<br><img src="/2018/12/14/Grad-CAM/Guided-Grad-CAM2.png" alt="Guided-Grad-CAM分类错误的样本"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM2.png" class title="Guided-Grad-CAM分类错误的样本"></p>
 <h1 id="5-代码"><a href="#5-代码" class="headerlink" title="5. 代码"></a>5. 代码</h1><p>对于<a target="_blank" rel="noopener" href="https://github.com/TJJTJJTJJ/pytorch-grad-cam">pytorch代码</a>进行分析</p>
 <h2 id="5-1-Grad-CAM"><a href="#5-1-Grad-CAM" class="headerlink" title="5.1 Grad-CAM"></a>5.1 Grad-CAM</h2><p><strong>计算Grad-CAM</strong>:</p>
-<p>反向传播：先计算出当前图片的分类结果output(size:1*5)(假设共5类)，选出最优分类结果，假设是第2类，然后令one-hot=[0,1,0,0,0]，求得sum-one-hot=<one-hot,output>得到一个数字，然后反向传播。</p>
+<p>反向传播：先计算出当前图片的分类结果output(size:1*5)(假设共5类)，选出最优分类结果，假设是第2类，然后令one-hot=[0,1,0,0,0]，求得sum-one-hot=<one-hot,output>得到一个数字，然后反向传播。</one-hot,output></p>
 <p>cam: (H,W), ~(0,1)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FeatureExtractor</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; Class for extracting activations and</span></span><br><span class="line"><span class="string">    registering gradients from targetted intermediate layers &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    调用方式:</span></span><br><span class="line"><span class="string">    outputs, x = FeatureExtractor(x)</span></span><br><span class="line"><span class="string">    gradients = FeatureExtractor.gradients</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, model, target_layers</span>):</span><br><span class="line">        self.model = model</span><br><span class="line">        self.target_layers = target_layers</span><br><span class="line">        self.gradients = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">save_gradient</span>(<span class="params">self, grad</span>):</span><br><span class="line">        self.gradients.append(grad)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param x: N*C*H*W, a picture</span></span><br><span class="line"><span class="string">        :return: outputs: list, activations layer output, A in equation</span></span><br><span class="line"><span class="string">                 x : feature map, feature of model output n*c*h*w</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        outputs = []</span><br><span class="line">        self.gradients = []</span><br><span class="line">        <span class="keyword">for</span> name, module <span class="keyword">in</span> self.model._modules.items():</span><br><span class="line">            x = module(x)</span><br><span class="line">            <span class="keyword">if</span> name <span class="keyword">in</span> self.target_layers:</span><br><span class="line">                x.register_hook(self.save_gradient)</span><br><span class="line">                outputs += [x]</span><br><span class="line">        <span class="keyword">return</span> outputs, x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ModelOutputs</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; Class for making a forward pass, and getting:</span></span><br><span class="line"><span class="string">    1. The network output.</span></span><br><span class="line"><span class="string">    2. Activations from intermeddiate targetted layers.</span></span><br><span class="line"><span class="string">    3. Gradients from intermeddiate targetted layers. &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    调用方式：</span></span><br><span class="line"><span class="string">    target_activations, output = ModelOutputs(x)</span></span><br><span class="line"><span class="string">    gradients = ModelOutputs.get_gradients()</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, model, target_layers</span>):</span><br><span class="line">        self.model = model</span><br><span class="line">        self.feature_extractor = FeatureExtractor(self.model.features, target_layers)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_gradients</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.feature_extractor.gradients</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param x: N*C*H*W, a picture</span></span><br><span class="line"><span class="string">        :return: target_activations: list, activations layer output, A in equation</span></span><br><span class="line"><span class="string">                 output : tensor, classification output. N*c. y in equation.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        target_activations, output = self.feature_extractor(x)</span><br><span class="line">        output = output.view(output.size(<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">        output = self.model.classifier(output)</span><br><span class="line">        <span class="keyword">return</span> target_activations, output</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GradCam</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Class for making Grad-CAM, and getting:</span></span><br><span class="line"><span class="string">    1. Grad-CAM</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    调用方式：</span></span><br><span class="line"><span class="string">    mask=GradCam(input)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, model, target_layer_names, use_cuda</span>):</span><br><span class="line">        self.model = model</span><br><span class="line">        self.model.<span class="built_in">eval</span>()</span><br><span class="line">        self.cuda = use_cuda</span><br><span class="line">        <span class="keyword">if</span> self.cuda:</span><br><span class="line">            self.model = model.cuda()</span><br><span class="line"></span><br><span class="line">        self.extractor = ModelOutputs(self.model, target_layer_names)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">        <span class="keyword">return</span> self.model(<span class="built_in">input</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, <span class="built_in">input</span>, index=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param input: N*C*H*W, a picture</span></span><br><span class="line"><span class="string">        :param index: int</span></span><br><span class="line"><span class="string">        :return: cam: N*C*H*W ~(0,1) L_&#123;Grad-CAM&#125;^c</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> self.cuda:</span><br><span class="line">            features, output = self.extractor(<span class="built_in">input</span>.cuda())</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            features, output = self.extractor(<span class="built_in">input</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> index == <span class="literal">None</span>:</span><br><span class="line">            index = np.argmax(output.cpu().data.numpy())</span><br><span class="line"></span><br><span class="line">        one_hot = np.zeros((<span class="number">1</span>, output.size()[-<span class="number">1</span>]), dtype=np.float32)</span><br><span class="line">        one_hot[<span class="number">0</span>][index] = <span class="number">1</span></span><br><span class="line">        <span class="comment"># After test, requires_grad could be False</span></span><br><span class="line">        one_hot = Variable(torch.from_numpy(one_hot), requires_grad=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">if</span> self.cuda:</span><br><span class="line">            one_hot = torch.<span class="built_in">sum</span>(one_hot.cuda() * output)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            one_hot = torch.<span class="built_in">sum</span>(one_hot * output)</span><br><span class="line"></span><br><span class="line">        self.model.features.zero_grad()</span><br><span class="line">        self.model.classifier.zero_grad()</span><br><span class="line">        <span class="comment"># After test, requires_grad could be False</span></span><br><span class="line">        one_hot.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">        grads_val = self.extractor.get_gradients()[-<span class="number">1</span>].cpu().data.numpy()</span><br><span class="line"></span><br><span class="line">        target = features[-<span class="number">1</span>]</span><br><span class="line">        target = target.cpu().data.numpy()[<span class="number">0</span>, :]</span><br><span class="line"></span><br><span class="line">        weights = np.mean(grads_val, axis=(<span class="number">2</span>, <span class="number">3</span>))[<span class="number">0</span>, :]</span><br><span class="line">        cam = np.zeros(target.shape[<span class="number">1</span>:], dtype=np.float32)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i, w <span class="keyword">in</span> <span class="built_in">enumerate</span>(weights):</span><br><span class="line">            cam += w * target[i, :, :]</span><br><span class="line"></span><br><span class="line">        cam = np.maximum(cam, <span class="number">0</span>)</span><br><span class="line">        cam = cv2.resize(cam, (<span class="number">224</span>, <span class="number">224</span>))</span><br><span class="line">        cam = cam - np.<span class="built_in">min</span>(cam)</span><br><span class="line">        cam = cam / np.<span class="built_in">max</span>(cam)</span><br><span class="line">        <span class="keyword">return</span> cam</span><br></pre></td></tr></table></figure>
 <p><strong>显示Grad-CAM</strong></p>
@@ -487,267 +359,187 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GuidedBackpropReLU</span>(<span class="title class_ inherited__">Function</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">        positive_mask = (<span class="built_in">input</span> &gt; <span class="number">0</span>).type_as(<span class="built_in">input</span>)</span><br><span class="line">        output = torch.addcmul(torch.zeros(<span class="built_in">input</span>.size()).type_as(<span class="built_in">input</span>), <span class="built_in">input</span>, positive_mask)</span><br><span class="line">        self.save_for_backward(<span class="built_in">input</span>, output)</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, grad_output</span>):</span><br><span class="line">        <span class="built_in">input</span>, output = self.saved_tensors</span><br><span class="line">        grad_input = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        positive_mask_1 = (<span class="built_in">input</span> &gt; <span class="number">0</span>).type_as(grad_output)</span><br><span class="line">        positive_mask_2 = (grad_output &gt; <span class="number">0</span>).type_as(grad_output)</span><br><span class="line">        grad_input = torch.addcmul(torch.zeros(<span class="built_in">input</span>.size()).type_as(<span class="built_in">input</span>),</span><br><span class="line">                                   torch.addcmul(torch.zeros(<span class="built_in">input</span>.size()).type_as(<span class="built_in">input</span>), grad_output,</span><br><span class="line">                                                 positive_mask_1), positive_mask_2)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> grad_input</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GuidedBackpropReLUModel</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, model, use_cuda</span>):</span><br><span class="line">        self.model = model</span><br><span class="line">        self.model.<span class="built_in">eval</span>()</span><br><span class="line">        self.cuda = use_cuda</span><br><span class="line">        <span class="keyword">if</span> self.cuda:</span><br><span class="line">            self.model = model.cuda()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># replace ReLU with GuidedBackpropReLU</span></span><br><span class="line">        <span class="keyword">for</span> idx, module <span class="keyword">in</span> self.model.features._modules.items():</span><br><span class="line">            <span class="keyword">if</span> module.__class__.__name__ == <span class="string">&#x27;ReLU&#x27;</span>:</span><br><span class="line">                self.model.features._modules[idx] = GuidedBackpropReLU()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">        <span class="keyword">return</span> self.model(<span class="built_in">input</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, <span class="built_in">input</span>, index=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">if</span> self.cuda:</span><br><span class="line">            output = self.forward(<span class="built_in">input</span>.cuda())</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            output = self.forward(<span class="built_in">input</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> index == <span class="literal">None</span>:</span><br><span class="line">            index = np.argmax(output.cpu().data.numpy())</span><br><span class="line"></span><br><span class="line">        one_hot = np.zeros((<span class="number">1</span>, output.size()[-<span class="number">1</span>]), dtype=np.float32)</span><br><span class="line">        one_hot[<span class="number">0</span>][index] = <span class="number">1</span></span><br><span class="line">        <span class="comment"># After test, requires_grad could be False</span></span><br><span class="line">        one_hot = Variable(torch.from_numpy(one_hot), requires_grad=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">if</span> self.cuda:</span><br><span class="line">            one_hot = torch.<span class="built_in">sum</span>(one_hot.cuda() * output)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            one_hot = torch.<span class="built_in">sum</span>(one_hot * output)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># self.model.features.zero_grad()</span></span><br><span class="line">        <span class="comment"># self.model.classifier.zero_grad()</span></span><br><span class="line">        one_hot.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">        output = <span class="built_in">input</span>.grad.cpu().data.numpy()</span><br><span class="line">        output = output[<span class="number">0</span>, :, :, :]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
 <h2 id="5-3-Guided-Grad-CAM"><a href="#5-3-Guided-Grad-CAM" class="headerlink" title="5.3 Guided Grad-CAM"></a>5.3 Guided Grad-CAM</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cam_mask = np.zeros(gb.shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, gb.shape[<span class="number">0</span>]):</span><br><span class="line">    cam_mask[i, :, :] = mask</span><br><span class="line"></span><br><span class="line">cam_gb = np.multiply(cam_mask, gb)</span><br><span class="line">utils.save_image(torch.from_numpy(cam_gb), <span class="string">&#x27;cam_gb.jpg&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <h1 id="6-效果显示"><a href="#6-效果显示" class="headerlink" title="6. 效果显示"></a>6. 效果显示</h1><p>原图</p>
-<p><img src="./Grad-CAM/Guided-Grad-CAM3.png" alt="原图"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/Guided-Grad-CAM3.png" alt="原图"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM3.png" class title="原图"></p>
 <p>Grad-CAM</p>
-<p><img src="./Grad-CAM/Guided-Grad-CAM4.jpg" alt="Grad-CAM"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/Guided-Grad-CAM4.jpg" alt="Grad-CAM"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM4.jpg" class title="Grad-CAM"></p>
 <p>Guided-Backpropagation</p>
-<p><img src="./Grad-CAM/Guided-Grad-CAM5.jpg" alt="Guided-Backpropagation"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/Guided-Grad-CAM5.jpg" alt="Guided-Backpropagation"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM5.jpg" class title="Guided-Backpropagation"></p>
 <p>Guided Grad-CAM</p>
-<p><img src="./Grad-CAM/Guided-Grad-CAM6.jpg" alt="Guided Grad-CAM"><br></p>
+<p><img src="/2018/12/14/Grad-CAM/Guided-Grad-CAM6.jpg" alt="Guided Grad-CAM"><br><img src="/2018/12/14/Grad-CAM/12/14/Grad-CAM/Guided-Grad-CAM6.jpg" class title="Guided Grad-CAM"></p>
 
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/paper/" rel="tag"># paper</a>
-          
-            <a href="/tags/CNN/" rel="tag"># CNN</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/12/11/RotationNet-paper/" rel="next" title="RotationNet-paper">
-                <i class="fa fa-chevron-left"></i> RotationNet-paper
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/paper/" rel="tag"># paper</a>
+              <a href="/tags/CNN/" rel="tag"># CNN</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/17/CASN/" rel="prev" title="CASN">
-                CASN <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/11/RotationNet-paper/" rel="prev" title="RotationNet-paper">
+      <i class="fa fa-chevron-left"></i> RotationNet-paper
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/17/CASN/" rel="next" title="CASN">
+      CASN <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">76</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">73</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%A3%B0%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">1. 声明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">2. 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Deconvolution"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Deconvolution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Guided-Backpropagation"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Guided-Backpropagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-CAM"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 CAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Grad-CAM"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 Grad-CAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-GAIN"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 GAIN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-GAIN-code"><span class="nav-number">2.5.1.</span> <span class="nav-text">2.5.1 GAIN-code</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Introduction"><span class="nav-number">3.</span> <span class="nav-text">3. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Approach"><span class="nav-number">4.</span> <span class="nav-text">4. Approach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E4%BB%A3%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">5. 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Grad-CAM"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 Grad-CAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-GuidedBackpropReLUModel"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 GuidedBackpropReLUModel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-Guided-Grad-CAM"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 Guided Grad-CAM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%95%88%E6%9E%9C%E6%98%BE%E7%A4%BA"><span class="nav-number">6.</span> <span class="nav-text">6. 效果显示</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%A3%B0%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">1. 声明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">2. 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Deconvolution"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Deconvolution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Guided-Backpropagation"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Guided-Backpropagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-CAM"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 CAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Grad-CAM"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 Grad-CAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-GAIN"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 GAIN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-GAIN-code"><span class="nav-number">2.5.1.</span> <span class="nav-text">2.5.1 GAIN-code</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Introduction"><span class="nav-number">3.</span> <span class="nav-text">3. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Approach"><span class="nav-number">4.</span> <span class="nav-text">4. Approach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E4%BB%A3%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">5. 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Grad-CAM"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 Grad-CAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-GuidedBackpropReLUModel"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 GuidedBackpropReLUModel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-Guided-Grad-CAM"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 Guided Grad-CAM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%95%88%E6%9E%9C%E6%98%BE%E7%A4%BA"><span class="nav-number">6.</span> <span class="nav-text">6. 效果显示</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">TianJiajie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -765,142 +557,65 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
 
 
 
   
 
   
+      
 
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
         }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
         }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-
-  
+    
 
   
 

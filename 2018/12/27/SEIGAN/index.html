@@ -1,137 +1,63 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="GAN," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="论文分享">
+  <meta name="description" content="论文分享">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SEIGAN">
 <meta property="og:url" content="http://example.com/2018/12/27/SEIGAN/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="论文分享">
-<meta property="og:locale">
-<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN1.png">
-<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN2.png">
-<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN3.png">
-<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN4.png">
-<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN5.png">
-<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN6.png">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN1.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN1.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN2.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN2.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN3.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN3.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN4.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN4.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN5.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN5.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN6.png">
+<meta property="og:image" content="http://example.com/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN6.png">
 <meta property="article:published_time" content="2018-12-27T08:57:16.000Z">
 <meta property="article:modified_time" content="2018-12-28T09:11:52.292Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="GAN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN/SEIGAN1.png">
+<meta name="twitter:image" content="http://example.com/2018/12/27/SEIGAN/SEIGAN1.png">
+
+<link rel="canonical" href="http://example.com/2018/12/27/SEIGAN/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://example.com/2018/12/27/SEIGAN/"/>
-
-
-
-
 
   <title>SEIGAN | Hexo</title>
   
@@ -141,232 +67,169 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-something">
-          <a href="/something" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            something
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/27/SEIGAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="TianJiajie">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">SEIGAN</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          SEIGAN
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T16:57:16+08:00">
-                2018-12-27
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper/" itemprop="url" rel="index">
-                    <span itemprop="name">paper</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-12-27 16:57:16" itemprop="dateCreated datePublished" datetime="2018-12-27T16:57:16+08:00">2018-12-27</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-28 17:11:52" itemprop="dateModified" datetime="2018-12-28T17:11:52+08:00">2018-12-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p>论文分享</p>
@@ -375,7 +238,7 @@
 <p>Pavel Ostyakov, Roman Suvorov, Elizaveta Logacheva1 Oleg Khomenko, Sergey I. Nikolenko</p>
 <p>一作Pavel Ostyakov是莫斯科三星AI中心的人员，在 Kaggle Cdiscount’s Image Classification Challenge 比赛中获得第一名，<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Mw2vdYv4ups">YouTube 视频</a>，github:<a target="_blank" rel="noopener" href="https://github.com/PavelOstyakov?tab=repositories">https://github.com/PavelOstyakov?tab=repositories</a>，他参加的 Kaggle 比赛多一点。</p>
 <p>论文代码还没有公布。</p>
-<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p><img src="./SEIGAN/SEIGAN1.png" alt="实验效果图"><br></p>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p><img src="/2018/12/27/SEIGAN/SEIGAN1.png" alt="实验效果图"><br><img src="/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN1.png" class title="实验效果图"></p>
 <p>要解决的问题是图像合成，一共三件事：<strong>剪切、贴图、修复</strong>。即如何把一张图片的物体剪切下来，然后贴到另一张背景图上，并且补全被剪掉的区域。</p>
 <p>并且实验证明，结果不仅合成的新图片逼真，而且分割也做得很好。</p>
 <blockquote>
@@ -396,7 +259,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">$x=<O,B_x>$</td>
+<td style="text-align:center">$x=<O,B_x>$</O,B_x></td>
 <td style="text-align:center">图片$x$，由目标$O$和背景$B_x$组成</td>
 </tr>
 <tr>
@@ -408,7 +271,7 @@
 <td style="text-align:center">背景数据集</td>
 </tr>
 <tr>
-<td style="text-align:center">$X=\{<O_x,B_x>\}_{x\in X}$</td>
+<td style="text-align:center">$X=\{<O_x,B_x>\}_{x\in X}$</O_x,B_x></td>
 <td style="text-align:center">不同物体在不同背景的图片</td>
 </tr>
 <tr>
@@ -427,10 +290,10 @@
 </table>
 </div>
 <p><strong>问题定义</strong>：</p>
-<p>对于任意一组图片$x=<O,B_x>$和$y=&lt;\emptyset,B_y&gt;$，利用模型将其变成$\hat{x}=&lt;\emptyset,\hat{B}_x&gt;$和$\hat{y}=&lt;\hat{O},\hat{B}_y&gt;$，其中$\hat{B}_x\approx B_x$，$\hat{B}_y\approx B_y$和$\hat{O}\approx O$.</p>
+<p>对于任意一组图片$x=<O,B_x>$和$y=&lt;\emptyset,B_y&gt;$，利用模型将其变成$\hat{x}=&lt;\emptyset,\hat{B}_x&gt;$和$\hat{y}=&lt;\hat{O},\hat{B}_y&gt;$，其中$\hat{B}_x\approx B_x$，$\hat{B}_y\approx B_y$和$\hat{O}\approx O$.</O,B_x></p>
 <p><strong>步骤分解</strong>：</p>
 <ul>
-<li>分割(segmentation)：预测图片$x=<O,B_x>$的分割掩码$m=Mask(x)$，并且做简单的粘贴$z=m\odot x+(1-m)\odot y$，$\odot$我的理解是对应元素的乘法。</li>
+<li>分割(segmentation)：预测图片$x=<O,B_x>$的分割掩码$m=Mask(x)$，并且做简单的粘贴$z=m\odot x+(1-m)\odot y$，$\odot$我的理解是对应元素的乘法。</O,B_x></li>
 </ul>
 <blockquote>
 <p>$\odot$ denotes componentwise multiplication;</p>
@@ -441,11 +304,11 @@
 <li><p>修复(inpainting)：对于去除目标后的图片$(1-m)\odot x$，修复成$\hat{x}=&lt;\emptyset,\hat{B}_x&gt;$</p>
 </li>
 </ul>
-<p><img src="./SEIGAN/SEIGAN2.png" alt="网络架构"><br></p>
+<p><img src="/2018/12/27/SEIGAN/SEIGAN2.png" alt="网络架构"><br><img src="/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN2.png" class title="网络架构"></p>
 <p>其中 swap network 就是 segmentation network 和 enhancement network 的组合。</p>
 <ul>
 <li>类似CycleGAN，网络架构应用两次，第一次得到$\hat{x}$和$\hat{y}$，第二次得到$\hat{\hat{x}}$和$\hat{\hat{y}}$</li>
-<li>$G_{seg}$：Fig.3.right，输入$x=<O,B_x>$，输出$m=Mask(x)$</li>
+<li>$G_{seg}$：Fig.3.right，输入$x=<O,B_x>$，输出$m=Mask(x)$</O,B_x></li>
 <li>$G_{inp}$：Fig.3.left，输入$(1-m)\odot x$，输出$\hat{x}=&lt;\emptyset,\hat{B}_x&gt;$</li>
 <li>$G_{enh}$：Fig.3.left，输入$z=m\odot x+(1-m)\odot y$和噪声，输出$\hat{y}=&lt;\hat{O},\hat{B}_y&gt;$</li>
 <li>$D_{bg}$：背景判别器，判断真背景($y$)和假背景($\hat{x}$、$\hat{\hat{y}}$)，真为1，假为0</li>
@@ -455,7 +318,7 @@
 <script type="math/tex; mode=display">l^{GAN}\_{inp}=(1-D_{bg}(\hat{x})),l^{GAN}\_{inp2}=(1-D_{bg}(\hat{\hat{y}}))</script><script type="math/tex; mode=display">l^{GAN}_{bg}=\lambda_1 l^{GAN}\_{inp} + \lambda_2 l^{GAN}\_{inp2}</script><p><strong>背景重构损失函数</strong>：</p>
 <script type="math/tex; mode=display">l^{texture}_{bg}=|Gram(VGG_1(y))-Gram(VGG_1(\hat{\hat{y}}))|</script><script type="math/tex; mode=display">l^{perc}_{bg}=|VGG_2(y)-VGG_2(\hat{\hat{y}})|</script><script type="math/tex; mode=display">l^{MAE}\_{bg}=|y-\hat{\hat{y}}|</script><script type="math/tex; mode=display">l^{rec}_{bg}=\lambda_3 l^{texture}_{bg}+\lambda_4 l^{perc}_{bg}+\lambda_5l^{MAE}_{bg}</script><p>其中，$VGG_1(y)$表示VGG19的前五层，$VGG_2(y)$表示VGG19的后五层</p>
 <p><strong>$G_{inp}$ 的网络架构</strong>:</p>
-<p><img src="./SEIGAN/SEIGAN3.png" alt="$G_{inp}$ 的网络架构"><br></p>
+<p><img src="/2018/12/27/SEIGAN/SEIGAN3.png" alt="$G_{inp}$ 的网络架构"><br><img src="/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN3.png" class title="$G_{inp}$ 的网络架构"></p>
 <p>其实没太看懂这个网络，可能还是需要有代码。</p>
 <h2 id="2-3-The-Swap-Network"><a href="#2-3-The-Swap-Network" class="headerlink" title="2.3 The Swap Network"></a>2.3 The Swap Network</h2><p>The swap network = the segmentation network + the enhancement network</p>
 <p><strong>目标重构损失函数</strong>：</p>
@@ -480,264 +343,185 @@ l=\lambda_1 l^{GAN}\_{inp} + \lambda_2 l^{GAN}\_{inp2} + \lambda_4 l^{perc}_{bg}
 <li>生成图片的主观真实性</li>
 <li>生成分割掩码的准确性</li>
 </ol>
-<p><strong>生成图片的主观真实性</strong>：<br><img src="./SEIGAN/SEIGAN4.png" alt="生成图片的主观真实性"><br></p>
+<p><strong>生成图片的主观真实性</strong>：<br><img src="/2018/12/27/SEIGAN/SEIGAN4.png" alt="生成图片的主观真实性"><br><img src="/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN4.png" class title="生成图片的主观真实性"></p>
 <p>从Fig.4.left可以简单地看出，Full的效果还是很明显的。</p>
-<p><strong>生成分割掩码的准确性</strong>：<br><img src="./SEIGAN/SEIGAN5.png" alt="生成分割掩码的准确性"><br></p>
-<p><strong>实验效果</strong>：<br><img src="./SEIGAN/SEIGAN6.png" alt="实验效果"><br></p>
+<p><strong>生成分割掩码的准确性</strong>：<br><img src="/2018/12/27/SEIGAN/SEIGAN5.png" alt="生成分割掩码的准确性"><br><img src="/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN5.png" class title="生成分割掩码的准确性"></p>
+<p><strong>实验效果</strong>：<br><img src="/2018/12/27/SEIGAN/SEIGAN6.png" alt="实验效果"><br><img src="/2018/12/27/SEIGAN/12/27/SEIGAN/SEIGAN6.png" class title="实验效果"></p>
 <h1 id="4-Future"><a href="#4-Future" class="headerlink" title="4. Future"></a>4. Future</h1><p>这个方法是否可以用在两个图片的目标对换呢？如果用在跨数据集的行人重识别上，那么是否可以将源数据集的行人粘贴在目标数据集上呢？好像有一个GAN就是类似的.</p>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.08565">Person Transfer GAN to Bridge Domain Gap for Person Re-Identification</a></p>
 
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/GAN/" rel="tag"># GAN</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/12/26/GPU/" rel="next" title="GPU">
-                <i class="fa fa-chevron-left"></i> GPU
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GAN/" rel="tag"># GAN</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/03/deep-learning-network/" rel="prev" title="deep-learning-network">
-                deep-learning-network <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/26/GPU/" rel="prev" title="GPU">
+      <i class="fa fa-chevron-left"></i> GPU
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/03/deep-learning-network/" rel="next" title="deep-learning-network">
+      deep-learning-network <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">76</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">73</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Methods"><span class="nav-number">3.</span> <span class="nav-text">2. Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Problem-Setting-and-General-Pipeline"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Problem Setting and General Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-The-inpainting-Network-G-inp"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 The inpainting Network $G_{inp}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-The-Swap-Network"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 The Swap Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Total-Loss-Funcion-Remarks-and-Network-Architectures"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Total Loss Funcion, Remarks, and Network Architectures</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Experimental-evaluation"><span class="nav-number">4.</span> <span class="nav-text">3. Experimental evaluation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Future"><span class="nav-number">5.</span> <span class="nav-text">4. Future</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Methods"><span class="nav-number">3.</span> <span class="nav-text">2. Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Problem-Setting-and-General-Pipeline"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Problem Setting and General Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-The-inpainting-Network-G-inp"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 The inpainting Network $G_{inp}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-The-Swap-Network"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 The Swap Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Total-Loss-Funcion-Remarks-and-Network-Architectures"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Total Loss Funcion, Remarks, and Network Architectures</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Experimental-evaluation"><span class="nav-number">4.</span> <span class="nav-text">3. Experimental evaluation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Future"><span class="nav-number">5.</span> <span class="nav-text">4. Future</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">TianJiajie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -755,142 +539,65 @@ l=\lambda_1 l^{GAN}\_{inp} + \lambda_2 l^{GAN}\_{inp2} + \lambda_4 l^{perc}_{bg}
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
 
 
 
   
 
   
+      
 
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
         }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
         }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-
-  
+    
 
   
 

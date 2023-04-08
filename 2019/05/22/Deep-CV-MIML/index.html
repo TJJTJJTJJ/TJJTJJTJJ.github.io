@@ -1,130 +1,56 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="person re-id," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="0. 前言 paper: CVPR2019 Weakly Supervised Person Re-Identification code:">
+  <meta name="description" content="0. 前言 paper: CVPR2019 Weakly Supervised Person Re-Identification code:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deep CV-MIML">
 <meta property="og:url" content="http://example.com/2019/05/22/Deep-CV-MIML/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="0. 前言 paper: CVPR2019 Weakly Supervised Person Re-Identification code:">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/weakly_supervised_setting.png">
+<meta property="og:image" content="http://example.com/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/intra_bag_alignment.png">
+<meta property="og:image" content="http://example.com/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/cross_view_bag_alignment.png">
+<meta property="og:image" content="http://example.com/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/ablation_study.png">
+<meta property="og:image" content="http://example.com/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/comparison.png">
 <meta property="article:published_time" content="2019-05-22T02:26:35.000Z">
 <meta property="article:modified_time" content="2019-05-25T09:17:05.233Z">
 <meta property="article:author" content="TianJiajie">
 <meta property="article:tag" content="person re-id">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/weakly_supervised_setting.png">
+
+<link rel="canonical" href="http://example.com/2019/05/22/Deep-CV-MIML/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="http://example.com/2019/05/22/Deep-CV-MIML/"/>
-
-
-
-
 
   <title>Deep CV-MIML | Hexo</title>
   
@@ -134,232 +60,169 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-something">
-          <a href="/something" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            something
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/22/Deep-CV-MIML/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="TianJiajie">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Deep CV-MIML</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          Deep CV-MIML
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T10:26:35+08:00">
-                2019-05-22
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/person-re-id/" itemprop="url" rel="index">
-                    <span itemprop="name">person re-id</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2019-05-22 10:26:35" itemprop="dateCreated datePublished" datetime="2019-05-22T10:26:35+08:00">2019-05-22</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-05-25 17:17:05" itemprop="dateModified" datetime="2019-05-25T17:17:05+08:00">2019-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/person-re-id/" itemprop="url" rel="index"><span itemprop="name">person re-id</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
@@ -375,7 +238,7 @@
 <li>intra-bag alignment</li>
 <li>cross-view bag alignment</li>
 </ul>
-
+<img src="/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/weakly_supervised_setting.png" class title="weakly supervised setting">
 <p>基本定义：</p>
 <ul>
 <li>gallery set 中的 every video clip 为一个 bag</li>
@@ -478,7 +341,7 @@
 <p>选择第 c 类后验概率最大的实例，记为 <strong>seed instance</strong> $x_{b, q_c}$，其中 $q_c$ 的定义为：</p>
 <script type="math/tex; mode=display">q_c= \mathop{argmax}_{i\in \lbrace 1,2,...,n_b \rbrace} \lbrace \tilde{y}_{b,i}^c \rbrace</script><p>然后定义 bag-level 分类损失:</p>
 <script type="math/tex; mode=display">L_g=\frac{1}{N_g}\displaystyle \sum_{X_b \in \mathcal{X}_g} \sum _{c\in \lbrace 0,...,C \rbrace} (-y_b^c\log \max \lbrace \tilde{y}_ {b,1}^c, \tilde{y}_ {b,2}^c, ..., \tilde{y}_{b,n_b}^c \rbrace )</script><p>从而得到 <strong>MIML classification loss</strong>:</p>
-<script type="math/tex; mode=display">L_C=L_p+L_g</script><h3 id="2-2-2-Intra-bag-Alignment"><a href="#2-2-2-Intra-bag-Alignment" class="headerlink" title="2.2.2 Intra-bag Alignment"></a>2.2.2 Intra-bag Alignment</h3>
+<script type="math/tex; mode=display">L_C=L_p+L_g</script><h3 id="2-2-2-Intra-bag-Alignment"><a href="#2-2-2-Intra-bag-Alignment" class="headerlink" title="2.2.2 Intra-bag Alignment"></a>2.2.2 Intra-bag Alignment</h3><img src="/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/intra_bag_alignment.png" class title="intra bag alignment">
 <p>应该是指一段视频中即一个 bag，因为行人出现在连续的帧中，所以每一帧的行人分布是差不多的，因此可以尽可能地将属于同一个人的图片聚在一起。</p>
 <p>在 gallery set 中，对于第 c 类已经找到 seed instance $x_{b, q_c}$，即对于第 c 类，这张图片比其他图片更像，从而构建一个 group 包含类似第 c 类的图片</p>
 <script type="math/tex; mode=display">G_{b,c}=\lbrace p|x_{b,p}\in \mathcal{N}_{q_c} \text{ and } \tilde{y}_{b,p}^c \ge \gamma \tilde{y} _{b,q_c}^c \rbrace</script><p>其中，$\mathcal{N}<em>{q_c}$ 表示 $x</em>{b,q_c}$ 的 K-近邻，$\gamma\in (0, 1)$，上述的公式表示这个 group 中的图片既需要满足在特征上相近，也要满足预测概率大于预定值。</p>
@@ -486,7 +349,7 @@
 <p>因此可以得到 <strong>intra-bag alignment loss</strong>:</p>
 <script type="math/tex; mode=display">L_{IA}=\frac{1}{N_{IA}} \displaystyle\sum_{X_b\in \mathcal{X}_g} \sum _{c\in \lbrace 0,...C \rbrace} \sum _{p \in G _{b,c}} y_b^c D_{KL}(\tilde{y}_{b,p}||\tilde{y} _{b,q_c})</script><script type="math/tex; mode=display">D_{KL}(\tilde{y}_{b,p}||\tilde{y} _{b,q_c})=\sum_{c\in\lbrace 0,...,C \rbrace}\tilde{y}_{b,p}^c(\log \tilde{y} _{b,p}^c -\log \tilde{y} _{b,q_c}^c)</script><p>这个是用KL散度衡量分布一致性。</p>
 <h3 id="2-2-3-Cross-view-Bag-Alignment"><a href="#2-2-3-Cross-view-Bag-Alignment" class="headerlink" title="2.2.3 Cross-view Bag Alignment"></a>2.2.3 Cross-view Bag Alignment</h3><p>intra-bag alignment and cross-view bag alignment 都是在尽量找到同一个行人的不同图片并且使这些图片得到特征相似，预测类别相似。</p>
-
+<img src="/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/cross_view_bag_alignment.png" class title="cross view bag alignment">
 <p>理论上来说，不同 view 下的同一个行人的特征应该也是相似的，因此，对每个行人引入 <strong>distribution prototype</strong>，并且同一个行人的图片特征应该近似 distribution prototype 的特征。公式定义为：第 t 个 epoch 时 第 c 类行人的 distribution prototype 为 $\hat{p}_c^t$:</p>
 <script type="math/tex; mode=display">p_c^t=\frac{1}{|V_c|} \sum_{v\in V_c} (\frac{1}{|I_{c,v}|} \sum_{i\in I_{c,v}}\tilde{y}_i )</script><script type="math/tex; mode=display">\hat{p}_c^t=\alpha \hat{p}_c^{t-1}+(1-\alpha)p_c^t</script><p>其中，$V<em>c$ 表示所有的 camera view，$I</em>{c,v}$ 表示在第 v 个 camera view 下第 c 类的所有实例，可以理解成，在 gallery set 中，每个 bag 是一段视频，视频的每一帧是一张大图片，然后从上面扣下来行人图片，即行人图片是指第几个 bag 的第几帧的第几个行人，同时 bag 还有 camera view 信息，即第几个摄像头拍的。</p>
 <p>Question: $I<em>{c,v}$ 是怎么得到的，在训练阶段， probe set 是可以具体到 instance-level label，在 gallery set 只有 bag-level label，那怎么得出属于同一类的 instance，是通过 $G</em>{b,c}$ 吗？总感觉怪怪的。</p>
@@ -499,259 +362,180 @@
 <p>这个公式来得有点突然啊，是有什么实验证明吗？</p>
 <p><strong>Cross-view Multi-label Multi-Instance learning (CV-MIML)</strong>:</p>
 <script type="math/tex; mode=display">L_{CV-MIML}=L_C+\delta (L_{IA}+L_{CA}+L{E})</script><h3 id="2-4-Implementation-Details"><a href="#2-4-Implementation-Details" class="headerlink" title="2.4 Implementation Details"></a>2.4 Implementation Details</h3><p>实现还是有点意思的，希望看到代码吧。</p>
-<h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2>
-
-      
+<h2 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h2><img src="/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/ablation_study.png" class title="ablation study">
+<img src="/2019/05/22/Deep-CV-MIML/05/22/Deep-CV-MIML/comparison.png" class title="comparison">
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/person-re-id/" rel="tag"># person re-id</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/05/17/BNNeck/" rel="next" title="BNNeck">
-                <i class="fa fa-chevron-left"></i> BNNeck
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/person-re-id/" rel="tag"># person re-id</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/27/STGAN/" rel="prev" title="STGAN">
-                STGAN <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/17/BNNeck/" rel="prev" title="BNNeck">
+      <i class="fa fa-chevron-left"></i> BNNeck
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/27/STGAN/" rel="next" title="STGAN">
+      STGAN <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">76</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">73</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-The-Proposed-Approach"><span class="nav-number">3.</span> <span class="nav-text">2. The Proposed Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Problem-Statement-and-Notation"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Problem Statement and Notation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Cross-View-MIML-for-Person-Re-id"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Cross-View MIML for Person Re-id</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Weakly-Supervised-Person-Re-id-MIML"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1 Weakly Supervised Person Re-id MIML</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Intra-bag-Alignment"><span class="nav-number">3.3.</span> <span class="nav-text">2.2.2 Intra-bag Alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-Cross-view-Bag-Alignment"><span class="nav-number">3.4.</span> <span class="nav-text">2.2.3 Cross-view Bag Alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Deep-Cross-view-MIML-Model"><span class="nav-number">3.5.</span> <span class="nav-text">2.3 Deep Cross-view MIML Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Implementation-Details"><span class="nav-number">3.6.</span> <span class="nav-text">2.4 Implementation Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Experiments"><span class="nav-number">4.</span> <span class="nav-text">4. Experiments</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-The-Proposed-Approach"><span class="nav-number">3.</span> <span class="nav-text">2. The Proposed Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Problem-Statement-and-Notation"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Problem Statement and Notation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Cross-View-MIML-for-Person-Re-id"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Cross-View MIML for Person Re-id</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Weakly-Supervised-Person-Re-id-MIML"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1 Weakly Supervised Person Re-id MIML</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Intra-bag-Alignment"><span class="nav-number">3.3.</span> <span class="nav-text">2.2.2 Intra-bag Alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-Cross-view-Bag-Alignment"><span class="nav-number">3.4.</span> <span class="nav-text">2.2.3 Cross-view Bag Alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Deep-Cross-view-MIML-Model"><span class="nav-number">3.5.</span> <span class="nav-text">2.3 Deep Cross-view MIML Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Implementation-Details"><span class="nav-number">3.6.</span> <span class="nav-text">2.4 Implementation Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Experiments"><span class="nav-number">4.</span> <span class="nav-text">4. Experiments</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">TianJiajie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TianJiajie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -769,142 +553,65 @@
 
 
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
 
 
 
   
 
   
+      
 
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
         }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
         }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-
-  
+    
 
   
 
